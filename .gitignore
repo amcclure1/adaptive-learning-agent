@@ -57,7 +57,11 @@ local-state/
 
 # Hermes-, Codex-, and MCP-local state
 .agents/
-.hermes/
+.hermes/*
+!.hermes/plugins/
+.hermes/plugins/*
+!.hermes/plugins/adaptive-learning/
+!.hermes/plugins/adaptive-learning/**
 .codex/
 mcp-tokens/
 mcp-config.local.*

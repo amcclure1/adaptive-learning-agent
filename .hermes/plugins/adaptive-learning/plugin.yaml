@@ -1,0 +1,5 @@
+name: adaptive-learning
+version: 0.1.0
+description: Thin Hermes adapter for the runtime-independent Adaptive Learning Agent core.
+author: Adaptive Learning Agent contributors
+
