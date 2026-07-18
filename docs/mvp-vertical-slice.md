@@ -159,6 +159,8 @@ A digest is required to detect in-place pack changes across a session. It is not
 ### Multiple-response scoring
 
 - Input is a non-empty array of unique option IDs.
+- An empty selection is invalid.
+- One valid selected option is a valid submission and is scored normally; it is incorrect when it does not exactly match the complete answer set.
 - Unknown or duplicate IDs are validation errors.
 - Order does not affect scoring; the stored response is a canonical lexicographically sorted JSON array.
 - Correct only when the selected set exactly equals `correct_option_ids`.
@@ -206,11 +208,13 @@ This is descriptive progress, not mastery or readiness.
 
 - At most one active session exists for the local learner.
 - `study.start` returns the existing active session when asked to start the same installed pack.
+- When no active session exists, `study.start` creates a new active session even if completed sessions exist for the same learner and pack version.
 - `study.status` discovers the active session from SQLite and reports installed packs when no session is active.
 - `study.next` returns an existing outstanding presentation before selecting another.
 - A process restart has no special recovery file: the new process reopens SQLite and the installed pack path, checks the recorded digest, and continues.
 - `study.finish` changes an active session to `completed`. Retrying it returns the completed summary.
 - `study.finish` succeeds only when every non-quarantined question has an answered presentation and no presentation is outstanding; otherwise it returns `SESSION_NOT_FINISHABLE` without mutation.
+- An unanswered presentation changed to `challenged` is resolved for finish eligibility because its question is quarantined; it does not need an attempt.
 
 ## Minimal SQLite schema
 
@@ -647,4 +651,4 @@ Retry a prior `study.submit` with the same canonical selections and confidence; 
 
 ## Definition of done
 
-Version 0.1 is complete only when AT-01 through AT-12 pass without Hermes or an LLM, the compatibility check passes through a real Hermes v0.18.2 plugin installation, a clean process restart resumes state using only SQLite and pack files, and no deferred feature has been added.
+The runtime-independent core is complete when AT-01 through AT-12 pass without Hermes or an LLM, a clean process restart resumes state using only SQLite and pack files, and no deferred feature has been added. Full version-0.1 runtime compatibility additionally requires the separately scoped Hermes v0.18.2 plugin check; that adapter work is not part of the core implementation task.
