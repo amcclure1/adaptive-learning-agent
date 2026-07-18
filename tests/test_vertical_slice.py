@@ -4,6 +4,7 @@ import ast
 import json
 import shutil
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 from typing import Any
@@ -291,6 +292,13 @@ class VerticalSliceAcceptanceTests(CoreTestCase):
         self.assertEqual(attempt["confidence"], 5)
         self.assertIsNotNone(persisted_challenge)
         self.assertEqual(installed["pack_digest"], self.call("pack.validate", source_path=str(FIXTURE_PACK))["pack_digest"])
+        with self.service.storage.read() as connection:
+            install_path = Path(connection.execute("SELECT install_path FROM installed_packs").fetchone()["install_path"])
+        lesson = install_path / "lesson.md"
+        lesson.write_text(lesson.read_text(encoding="utf-8") + "\nChanged after restart.\n", encoding="utf-8")
+        changed_status = restarted_tools.invoke("study.status", {"learner_id": learner["learner_id"]})
+        self.assertFalse(changed_status["ok"])
+        self.assertEqual(changed_status["error"]["code"], "PACK_DIGEST_MISMATCH")
 
     def test_at_09_resume_uses_only_persisted_state(self) -> None:
         _, learner, session = self.initialize()
@@ -474,11 +482,16 @@ class AdditionalCoreRequirementsTests(CoreTestCase):
     def test_source_has_no_runtime_or_network_imports(self) -> None:
         forbidden_roots = {
             "anthropic",
-            "google.generativeai",
+            "boto3",
+            "cohere",
+            "google",
             "hermes",
+            "http",
             "httpx",
+            "mistralai",
             "openai",
             "requests",
+            "smtplib",
             "socket",
             "urllib",
         }
@@ -492,6 +505,13 @@ class AdditionalCoreRequirementsTests(CoreTestCase):
                     if node.module.split(".")[0] in forbidden_roots:
                         found.add(node.module)
         self.assertEqual(found, set())
+        project = tomllib.loads((REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        self.assertEqual(project["project"]["dependencies"], [])
+
+    def test_core_contains_no_fixture_or_pilot_subject_constants(self) -> None:
+        source = "\n".join(path.read_text(encoding="utf-8").lower() for path in SOURCE_ROOT.glob("*.py"))
+        for subject_term in ("fixture-basics", "org.adaptive-learning", "sap-c02", "amateur extra"):
+            self.assertNotIn(subject_term, source)
 
     def test_tool_catalog_is_exact_and_request_envelope_is_strict(self) -> None:
         self.assertEqual(
