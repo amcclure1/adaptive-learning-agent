@@ -1,0 +1,70 @@
+Adaptive Learning Agent repository inventory
+Captured: 2026-07-18
+
+This inventory captures the clean repository at commit
+98ec8c13996b39ad1262b3c0778295fd003155f6 before the two handoff files and
+the .agents ignore rule were committed. The handoff commit necessarily follows
+this snapshot. Run `git status --short`, `git log --oneline --decorate -10`,
+and `git remote -v` for live state.
+
+git status --short
+------------------
+(clean)
+
+git log --oneline --decorate -10
+--------------------------------
+98ec8c1 (HEAD -> main) docs: add project principles and architecture decisions
+70a7e52 docs: organize initial design artifacts
+e47b98c chore: initialize open source repository
+
+repository remotes
+------------------
+(none)
+
+sorted file listing (post-handoff expected tree; .git, caches, venvs excluded)
+-----------------------------------------------------------------------------
+.editorconfig
+.gitattributes
+.gitignore
+AGENTS.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+LICENSE
+README.md
+SECURITY.md
+docs/architecture.md
+docs/current-status.md
+docs/decisions/0001-lightweight-local-first.md
+docs/decisions/0002-agent-harness-as-application.md
+docs/decisions/0003-hermes-first-runtime-independent-core.md
+docs/decisions/0004-sqlite-operational-state.md
+docs/decisions/0005-file-based-portable-subject-packs.md
+docs/decisions/0006-no-heavy-learning-platform-dependency.md
+docs/evidence-policy.md
+docs/handoffs/chatgpt-review-bundle.md
+docs/handoffs/initial-design-package.md
+docs/handoffs/repository-inventory.txt
+docs/hermes-integration.md
+docs/mvp-requirements.md
+docs/pack-format.md
+docs/product-principles.md
+docs/project-context.md
+docs/repository-tree.md
+docs/sqlite-schema.md
+docs/test-plan.md
+docs/tool-contract.md
+docs/vision.md
+packs/README.md
+packs/aws-sap-c02/README.md
+packs/template/README.md
+packs/us-amateur-extra/README.md
+pyproject.toml
+schemas/README.md
+skills/README.md
+skills/adaptive-learning/README.md
+skills/content-reviewer/README.md
+skills/subject-builder/README.md
+src/adaptive_learning/__init__.py
+tests/README.md
+user-data/.gitignore
