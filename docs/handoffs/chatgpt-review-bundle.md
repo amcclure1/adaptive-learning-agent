@@ -5,29 +5,23 @@ Prepared: 2026-07-18
 ## 1. Repository identity
 
 - Final local repository name: `adaptive-learning-agent`
+- GitHub repository: `amcclure1/adaptive-learning-agent`
 - Default branch: `main`
 - Visibility target: public
 - Description: `A lightweight, local-first, agent-native adaptive learning system with portable subject packs and evidence-aware assessment.`
-- Remote URL: not created; GitHub CLI is not installed, so authentication and name availability could not be checked safely.
-
-After installing GitHub CLI, the user can run:
-
-```powershell
-gh auth login
-gh repo create adaptive-learning-agent --public --description "A lightweight, local-first, agent-native adaptive learning system with portable subject packs and evidence-aware assessment." --source . --remote origin --push
-```
-
-If GitHub reports that the name is unavailable in the authenticated account, choose the smallest reasonable variation, substitute it in the second command, and record the final name/URL in `docs/current-status.md`.
+- Remote URL: `https://github.com/amcclure1/adaptive-learning-agent`
+- Git remote: `origin` using HTTPS
+- Publication result: public repository created and `main` pushed successfully on 2026-07-18.
 
 ## 2. Commit snapshot
 
-Repository content summarized before adding this review bundle:
+Repository content summarized before this publication-metadata update:
 
 ```text
-98ec8c13996b39ad1262b3c0778295fd003155f6
+216095bf12e400ebe36d9200b889dd8dfc7d70ff
 ```
 
-This file is necessarily added by a later handoff commit, so it cannot contain the hash of the commit that contains itself. Use `git rev-parse HEAD` for the post-bundle commit. The final task response records that resulting hash.
+The publication-metadata commit necessarily follows this snapshot, so this file cannot contain that commit's own hash. Use `git rev-parse HEAD` for live state. The final task response records the resulting hash.
 
 ## 3. Repository tree
 
@@ -130,7 +124,7 @@ No uncertain choice was turned into a Proposed ADR during establishment. Detaile
 
 ## 11. Unresolved decisions
 
-- GitHub owner, remote URL, name availability, and permanent security contact.
+- Permanent security contact and private disclosure channel.
 - Final project/package name.
 - YAML parser selection.
 - Exact scoring, mastery, scheduling, and selection rules.
@@ -161,8 +155,7 @@ No uncertain choice was turned into a Proposed ADR during establishment. Detaile
 
 ## 14. Failures and incomplete steps
 
-- GitHub repository creation and push were not completed because `gh` is not installed.
-- Repository-name availability was not checked because no authenticated GitHub account was available through `gh`.
+- No GitHub publication failure remains; repository creation, remote configuration, and initial push completed successfully.
 - External web links were reviewed where practical but not exhaustively crawled.
 - No YAML files exist yet, so there was no YAML syntax to validate.
 - Hermes integration behavior was documented but not executed or configured.

@@ -20,5 +20,10 @@ classifiers = [
 ]
 dependencies = []
 
+[project.urls]
+Documentation = "https://github.com/amcclure1/adaptive-learning-agent/tree/main/docs"
+Issues = "https://github.com/amcclure1/adaptive-learning-agent/issues"
+Repository = "https://github.com/amcclure1/adaptive-learning-agent"
+
 [tool.setuptools.packages.find]
 where = ["src"]

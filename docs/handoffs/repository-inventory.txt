@@ -1,11 +1,11 @@
 Adaptive Learning Agent repository inventory
 Captured: 2026-07-18
 
-This inventory captures the clean repository at commit
-98ec8c13996b39ad1262b3c0778295fd003155f6 before the two handoff files and
-the .agents ignore rule were committed. The handoff commit necessarily follows
-this snapshot. Run `git status --short`, `git log --oneline --decorate -10`,
-and `git remote -v` for live state.
+This inventory captures the clean, published repository at commit
+216095bf12e400ebe36d9200b889dd8dfc7d70ff before publication metadata was
+updated. The metadata commit necessarily follows this snapshot. Run
+`git status --short`, `git log --oneline --decorate -10`, and `git remote -v`
+for live state.
 
 git status --short
 ------------------
@@ -13,13 +13,15 @@ git status --short
 
 git log --oneline --decorate -10
 --------------------------------
-98ec8c1 (HEAD -> main) docs: add project principles and architecture decisions
+216095b (HEAD -> main, origin/main) docs: add repository review handoff
+98ec8c1 docs: add project principles and architecture decisions
 70a7e52 docs: organize initial design artifacts
 e47b98c chore: initialize open source repository
 
 repository remotes
 ------------------
-(none)
+origin  https://github.com/amcclure1/adaptive-learning-agent.git (fetch)
+origin  https://github.com/amcclure1/adaptive-learning-agent.git (push)
 
 sorted file listing (post-handoff expected tree; .git, caches, venvs excluded)
 -----------------------------------------------------------------------------

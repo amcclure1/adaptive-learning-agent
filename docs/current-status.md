@@ -7,6 +7,7 @@ Updated: 2026-07-18
 
 - Created the initial 11-document design package and preserved it under `docs/`.
 - Established the local Git repository and open-source governance baseline.
+- Created the public GitHub repository at `https://github.com/amcclure1/adaptive-learning-agent` and configured `main` to track `origin/main`.
 - Defined normative product principles and durable project context.
 - Added a minimal Python 3.12 package boundary with no application behavior and no runtime dependencies.
 - Reserved documented boundaries for skills, packs, schemas, tests, and ignored local user data.
@@ -38,7 +39,7 @@ Updated: 2026-07-18
 
 ## Known unresolved decisions
 
-- Permanent repository owner, GitHub remote URL, and security-reporting contact.
+- Permanent security-reporting contact and disclosure channel.
 - Whether the package name and provisional project name remain final.
 - Which YAML parser, if any, to add when pack parsing implementation is authorized.
 - Exact supported Hermes version range and tested installation paths.
