@@ -1,6 +1,3 @@
-"""Adaptive Learning Agent package boundary.
+"""Runtime-independent Adaptive Learning Agent core."""
 
-Application behavior has not yet been authorized or implemented.
-"""
-
-__version__ = "0.0.0"
+__version__ = "0.1.0"

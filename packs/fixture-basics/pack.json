@@ -1,0 +1,86 @@
+{
+  "format_version": "0.1",
+  "pack_id": "org.adaptive-learning.fixture-basics",
+  "version": "0.1.0",
+  "title": "Reliable Step-by-Step Work",
+  "lesson": "lesson.md",
+  "objectives": [
+    {
+      "id": "clear-actions",
+      "title": "Recognize clear and reproducible actions"
+    },
+    {
+      "id": "verify-results",
+      "title": "Verify results and handle ambiguity safely"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q-001",
+      "type": "single_response",
+      "objective_id": "clear-actions",
+      "prompt": "Which instruction is the most reproducible?",
+      "options": [
+        {"id": "a", "text": "Improve the file when convenient."},
+        {"id": "b", "text": "Open notes.txt, add the date on a new final line, and save it."},
+        {"id": "c", "text": "Make the notes better."}
+      ],
+      "correct_option_ids": ["b"],
+      "explanation": "Option B names the target, action, location, and completion step."
+    },
+    {
+      "id": "q-002",
+      "type": "single_response",
+      "objective_id": "verify-results",
+      "prompt": "What should follow an action in a reliable procedure?",
+      "options": [
+        {"id": "a", "text": "Assume it worked."},
+        {"id": "b", "text": "Start an unrelated task."},
+        {"id": "c", "text": "Check the observable result."}
+      ],
+      "correct_option_ids": ["c"],
+      "explanation": "An observable check confirms whether the action achieved its intended result."
+    },
+    {
+      "id": "q-003",
+      "type": "multiple_response",
+      "objective_id": "clear-actions",
+      "prompt": "Which features make a procedure reproducible?",
+      "options": [
+        {"id": "a", "text": "A named target"},
+        {"id": "b", "text": "A stable order of steps"},
+        {"id": "c", "text": "Unstated assumptions"},
+        {"id": "d", "text": "A clear action"}
+      ],
+      "correct_option_ids": ["a", "b", "d"],
+      "explanation": "Named targets, clear actions, and stable ordering support repeatability; hidden assumptions do not."
+    },
+    {
+      "id": "q-004",
+      "type": "single_response",
+      "objective_id": "clear-actions",
+      "prompt": "Why should a repeatable task keep a stable step order?",
+      "options": [
+        {"id": "a", "text": "So another person can reproduce the outcome."},
+        {"id": "b", "text": "So verification is unnecessary."},
+        {"id": "c", "text": "So ambiguous terms become precise automatically."}
+      ],
+      "correct_option_ids": ["a"],
+      "explanation": "Stable ordering makes the same process easier for another person to repeat."
+    },
+    {
+      "id": "q-005",
+      "type": "multiple_response",
+      "objective_id": "verify-results",
+      "prompt": "Which actions are appropriate when an instruction is ambiguous?",
+      "options": [
+        {"id": "a", "text": "Pause before an irreversible change."},
+        {"id": "b", "text": "Ask for clarification."},
+        {"id": "c", "text": "Invent the missing requirement."},
+        {"id": "d", "text": "Confirm the intended result."}
+      ],
+      "correct_option_ids": ["a", "b", "d"],
+      "explanation": "Pausing, clarifying, and confirming intent reduce the risk of acting on an unsafe assumption."
+    }
+  ]
+}
