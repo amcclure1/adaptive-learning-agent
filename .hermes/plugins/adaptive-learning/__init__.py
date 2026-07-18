@@ -187,4 +187,8 @@ def register(ctx: Any) -> None:
             handler=_handler(contract, operation, expected),
             description=schema["description"],
         )
-
+    ctx.register_skill(
+        "adaptive-learning",
+        _REPOSITORY_ROOT / "skills" / "adaptive-learning" / "SKILL.md",
+        "Run the deterministic fixture study workflow through the Adaptive Learning Agent tools.",
+    )

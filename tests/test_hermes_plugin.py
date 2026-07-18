@@ -27,9 +27,13 @@ def load_plugin():
 class FakeContext:
     def __init__(self) -> None:
         self.tools: dict[str, dict[str, Any]] = {}
+        self.skills: dict[str, dict[str, Any]] = {}
 
     def register_tool(self, **registration: Any) -> None:
         self.tools[registration["name"]] = registration
+
+    def register_skill(self, name: str, path: Path, description: str = "") -> None:
+        self.skills[name] = {"path": path, "description": description}
 
 
 class HermesPluginTests(unittest.TestCase):
@@ -74,6 +78,8 @@ class HermesPluginTests(unittest.TestCase):
             self.assertEqual(registration["toolset"], "adaptive_learning")
             self.assertEqual(registration["schema"]["name"], name)
             self.assertFalse(registration["schema"]["parameters"]["additionalProperties"])
+        self.assertEqual(set(self.context.skills), {"adaptive-learning"})
+        self.assertEqual(self.context.skills["adaptive-learning"]["path"].name, "SKILL.md")
 
     def test_every_handler_runs_the_fixture_flow_and_returns_json(self) -> None:
         self.assertTrue(self.call("ala_system_health")["ok"])

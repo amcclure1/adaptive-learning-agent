@@ -62,6 +62,7 @@ local-state/
 .hermes/plugins/*
 !.hermes/plugins/adaptive-learning/
 !.hermes/plugins/adaptive-learning/**
+.hermes/plugins/adaptive-learning/__pycache__/
 .codex/
 mcp-tokens/
 mcp-config.local.*
