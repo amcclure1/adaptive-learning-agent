@@ -1,25 +1,37 @@
 # Adaptive Learning Agent
 
-Adaptive Learning Agent is a lightweight, local-first, agent-native learning system. Its runtime-independent Python core now owns deterministic practice scoring, learner state, question selection, pack validation, and challenge quarantine. Hermes remains the first planned conversational runtime, but its adapter has not been implemented.
+Adaptive Learning Agent is a lightweight, local-first, agent-native learning system. Its runtime-independent Python core owns deterministic practice scoring, learner state, question selection, pack validation, and challenge quarantine. A thin project-local adapter and workflow skill are now verified with Hermes v0.18.2.
 
 ## Status
 
-**Pre-alpha — runtime-independent core version 0.1 implemented.**
+**Pre-alpha — runtime-independent core and Hermes adapter version 0.1 implemented.**
 
-The repository contains a working core, an eight-table SQLite schema, a strict JSON-plus-Markdown fixture pack, ten JSON-compatible tool operations, and automated core acceptance tests. The Hermes adapter and skills, conversational authoring, evidence workflows, scheduling, and pilot subject packs have not been implemented.
+The repository contains a working core, an eight-table SQLite schema, a strict JSON-plus-Markdown fixture pack, ten JSON-compatible operations, a Hermes v0.18.2 project plugin, one fixture workflow skill, and automated core/adapter tests. Conversational authoring, evidence workflows, scheduling, and pilot subject packs have not been implemented.
 
 > Adaptive Learning Agent is not ready for certification preparation or Amateur Radio examination preparation. The included fixture is synthetic test content, not a production learning pack.
 
 ## Run the core tests
 
-Python 3.12 or newer is required. The runtime has no third-party dependencies.
+Python 3.12 or newer is required. The learning core has no third-party runtime dependencies.
 
 ```powershell
 $env:PYTHONPATH='src'
 python -m unittest discover -s tests -v
 ```
 
-The public Python boundary is `ApplicationService` plus `ToolContract`. Tool requests and responses use JSON-compatible dictionaries; local learner state is written only to the caller-selected user-data directory.
+The public Python boundary is `ApplicationService` plus `ToolContract`. Tool requests and responses use JSON-compatible dictionaries; local learner state is written only to the caller-selected user-data directory. The suite is exercised in CI on Python 3.12, 3.13, and 3.14.
+
+## Run the isolated Hermes profile
+
+The verified development setup uses pinned Hermes v0.18.2 and the isolated `adaptive-learning-dev` profile. From this trusted repository root:
+
+```powershell
+$env:HERMES_ENABLE_PROJECT_PLUGINS='1'
+& "$env:USERPROFILE\.local\bin\hermes.exe" -p adaptive-learning-dev --skills adaptive-learning:adaptive-learning
+Remove-Item Env:HERMES_ENABLE_PROJECT_PLUGINS
+```
+
+Project plugins execute repository code. Never set the discovery environment variable globally or use this command from an untrusted checkout. See [the compatibility record](docs/hermes-compatibility-0.18.2.md) for setup, trust boundaries, exact paths, known tagged-release differences, and cleanup.
 
 ## Goals
 
@@ -75,11 +87,12 @@ Both pilots are expected to use evidence-sensitive policies. The project will no
 
 - `docs/`: vision, requirements, architecture proposals, decisions, status, and handoffs.
 - `src/adaptive_learning/`: runtime-independent pack, SQLite, learning, and tool-contract code.
-- `skills/`: reserved runtime guidance; no functional skill exists yet.
+- `.hermes/plugins/adaptive-learning/`: thin project-local Hermes v0.18.2 adapter.
+- `skills/adaptive-learning/`: minimal deterministic fixture workflow guidance.
 - `packs/fixture-basics/`: synthetic functional pack used by the core acceptance tests.
 - `packs/`: additional template and pilot-pack workspaces; no functional pilot content exists yet.
 - `schemas/`: planned standalone machine-readable contracts; schema version 1 currently lives in the core.
-- `tests/`: standard-library pack, storage, contract, and vertical-slice tests.
+- `tests/`: standard-library pack, storage, contract, vertical-slice, and direct adapter tests.
 - `user-data/`: ignored local operational state boundary.
 
 Start with [product principles](docs/product-principles.md), [current status](docs/current-status.md), and [project context](docs/project-context.md). The original design package is indexed in [the initial handoff](docs/handoffs/initial-design-package.md).

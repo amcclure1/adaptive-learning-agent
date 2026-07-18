@@ -15,3 +15,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - SQLite schema version 1 with the eight approved operational tables.
 - Ten JSON-compatible version-0.1 tool operations for learner, pack, study, and challenge workflows.
 - Synthetic `fixture-basics` pack and automated AT-01 through AT-12 core coverage.
+- Minimal GitHub Actions test matrix for Python 3.12, 3.13, and 3.14.
+- Thin project-local Hermes v0.18.2 adapter registering exactly ten `ala_*` tools.
+- Explicitly loaded `adaptive-learning` workflow skill for the fixture study flow.
+- Hermes v0.18.2 compatibility record, direct adapter coverage, restart/resume acceptance evidence, and integration handoff.
+
+### Fixed
+
+- Removed a redundant legacy license classifier that prevented installed-package builds with modern setuptools.

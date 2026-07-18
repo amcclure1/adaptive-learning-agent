@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / runtime-independent core 0.1 implemented
+Status: pre-alpha / runtime-independent core and Hermes adapter 0.1 implemented
 Updated: 2026-07-18
 
 ## Completed
@@ -16,6 +16,11 @@ Updated: 2026-07-18
 - Accepted the Hermes plugin/skill boundary and JSON-plus-Markdown pack serialization in ADRs 0007 and 0008.
 - Implemented strict pack validation, canonical digests, controlled installation, schema version 1, all ten core tools, deterministic scoring, confidence, restart, progress, and challenge quarantine.
 - Added the synthetic `fixture-basics` pack and passing automated coverage for AT-01 through AT-12 plus the required additional cases.
+- Verified installed-package tests on CPython 3.12.13, 3.13.14, and 3.14.6 and added the matching minimal GitHub Actions matrix.
+- Measured 87% core statement coverage; all AT-01 through AT-12 behaviors have direct tests.
+- Installed pinned Hermes v0.18.2 in an isolated uv tool environment and created the isolated `adaptive-learning-dev` profile with strict profile-local terminal home.
+- Implemented the project-local ten-tool Hermes adapter and minimal qualified workflow skill.
+- Completed real Codex-backed Hermes health, fixture, deterministic feedback, full process restart/fresh-conversation resume, quarantine, finish, and immutable-attempt acceptance checks.
 
 ## Existing design documents
 
@@ -24,7 +29,7 @@ Updated: 2026-07-18
 - `architecture.md`: proposed component boundaries, workflows, algorithms, and security model.
 - `evidence-policy.md`: proposed evidence modes, source classes, currency, and review gates.
 - `pack-format.md`: proposed portable pack format version 1.0.
-- `hermes-integration.md`: verified Hermes baseline and proposed thin-adapter integration.
+- `hermes-integration.md`: accepted and implemented thin-adapter integration boundary.
 - `decisions/0001-lightweight-local-first.md`: accepted umbrella architecture decision.
 - `repository-tree.md`: original proposed repository layout.
 - `sqlite-schema.md`: proposed operational schema version 1.
@@ -33,6 +38,9 @@ Updated: 2026-07-18
 - `mvp-vertical-slice.md`: accepted first implementation scope, rules, schema, tools, and twelve acceptance tests.
 - `handoffs/final-mvp-design-review.md`: final design-review decisions, deferrals, blockers, and implementation prompt.
 - `handoffs/core-implementation-0.1.md`: implemented modules, tests, manual exercise, deviations, and remaining integration work.
+- `handoffs/core-implementation-review.md`: exact core range, compatibility matrix, coverage, deviations, and audit observations.
+- `hermes-compatibility-0.18.2.md`: tagged documentation/source findings and locally verified runtime behavior.
+- `handoffs/hermes-integration-0.1.md`: installation, profile, plugin, skill, provider, acceptance, known issues, and cleanup.
 
 ## Under review
 
@@ -40,7 +48,7 @@ Updated: 2026-07-18
 - Broader YAML pack format 1.0, archives, signing, and canonicalization.
 - Post-0.1 schema normalization, migrations, generic audit/idempotency, backup, and restore.
 - Broader authoring, review, administration, and runtime-adapter tool contracts.
-- Hermes v0.18.2 plugin packaging, discovery, enablement, restart, and skill distribution, which require an actual compatibility test.
+- Global/package distribution of the currently project-local Hermes plugin and skill; v0.18.2 CLI development behavior is verified.
 - Evidence policy for the two pilot packs, including independent-review expectations.
 - Pilot-pack content licensing and source-use rules.
 
@@ -49,7 +57,7 @@ Updated: 2026-07-18
 - Permanent security-reporting contact and disclosure channel.
 - Whether the package name and provisional project name remain final.
 - Whether YAML should be added in a later pack format and which safe parser it would use.
-- Exact supported Hermes version range and tested installation paths.
+- Supported Hermes versions beyond the verified v0.18.2 CLI target and Desktop/gateway installation paths.
 - Whether an MCP adapter belongs after the in-process Hermes plugin.
 - Pack signing and reviewer identity beyond local attestations.
 - Final licensing policy for community and pilot pack content.
@@ -57,10 +65,10 @@ Updated: 2026-07-18
 
 ## Next recommended task
 
-Review the core implementation handoff and diff. After acceptance, scope the thin Hermes v0.18.2 plugin and workflow skill as a separate task; do not duplicate core behavior in that adapter.
+Review the Hermes integration handoff and compatibility record. Next work should remain within explicitly accepted scope; do not begin subject building, content review, pilot packs, mastery, or scheduling without a new decision/task.
 
 ## Implementation authorization
 
 The runtime-independent core portion of `docs/mvp-vertical-slice.md` has been implemented under explicit authorization. Focused core fixes and acceptance-test corrections may proceed within that accepted boundary.
 
-Hermes plugin and skill implementation was explicitly excluded from the core task and has not started. It requires a separately invoked implementation task and real v0.18.2 compatibility testing. No deferred feature, pilot pack, evidence workflow, YAML/archive support, mastery/scheduler, generic audit/idempotency system, backup framework, server, UI, or release publication is authorized.
+The separately authorized Hermes v0.18.2 plugin and skill task is complete for the project-local CLI development target. No deferred feature, pilot pack, evidence workflow, YAML/archive support, mastery/scheduler, generic audit/idempotency system, backup framework, server, UI, global plugin install, or release publication is authorized.

@@ -1,14 +1,14 @@
 # Hermes Integration
 
-Status: proposed for review  
-Documentation inspected: 2026-07-18  
+Status: accepted boundary implemented and verified for Hermes v0.18.2 CLI
+Documentation inspected: 2026-07-18
 Latest verified Hermes release: v0.18.2 (released 2026-07-07)
 
 ## Accepted version 0.1 boundary
 
 [ADR 0007](decisions/0007-hermes-plugin-skill-boundary.md) and [`mvp-vertical-slice.md`](mvp-vertical-slice.md) define the accepted split. The plugin registers and delegates the ten deterministic tools; the optional skill provides conversational workflow only. Neither owns scoring, selection, persistence, pack interpretation, provider configuration, or authentication.
 
-Hermes v0.18.2 is the first compatibility-test target, not a current compatibility claim. Plugin discovery, enablement, tool registration, skill loading, and CLI/Desktop restart behavior remain explicitly unverified until exercised against that tagged release.
+Hermes v0.18.2 is the verified CLI compatibility target. Project discovery, enablement, ten-tool registration, qualified skill loading, Codex-backed calls, and full CLI process restart have been exercised. Desktop and gateway behavior remain unverified. See [`hermes-compatibility-0.18.2.md`](hermes-compatibility-0.18.2.md) and [`handoffs/hermes-integration-0.1.md`](handoffs/hermes-integration-0.1.md).
 
 ## Verified Hermes baseline
 
@@ -34,9 +34,9 @@ Accepted version-0.1 project dependencies:
 - no SQLite package, because `sqlite3` is in the standard library;
 - development-only test tooling, not required for normal use.
 
-No packages or Hermes configuration are changed by these design artifacts.
+The implemented compatibility environment adds no project runtime dependency: Hermes is pinned in its own uv tool environment, and all Hermes settings/authentication are confined to the dedicated `adaptive-learning-dev` profile.
 
-## Recommended MVP integration
+## Implemented MVP integration
 
 ### 1. Thin plugin
 
@@ -111,18 +111,18 @@ A future plugin may register the broader schemas with explicit authorization/mod
 7. On duplicate, timeout, or provider retry, repeat the same operation-specific payload so the core can return the existing result.
 8. On a typed conflict, read current session state rather than guessing.
 
-## Installation sketch for later implementation
+## Verified development installation
 
-The intended reviewed flow is:
+The verified v0.18.2 CLI development flow is:
 
 1. Install Hermes using an official method.
-2. Install Adaptive Learning Agent into the Python environment visible to Hermes.
-3. Let Hermes discover the packaged plugin entry point or install a local plugin wrapper.
-4. Explicitly enable the `adaptive-learning` plugin/toolset.
-5. Install the optional workflow skill.
-6. Run a diagnostic tool call against a temporary learner and bundled fixture pack.
+2. Create the isolated `adaptive-learning-dev` profile with profile-local terminal home.
+3. Launch from the trusted repository root with `HERMES_ENABLE_PROJECT_PLUGINS=1`.
+4. Allow-list `adaptive-learning` only in that profile.
+5. Let the project plugin register its namespaced workflow skill and preload it explicitly.
+6. Run the real fixture workflow through the ten registered tools.
 
-**Not yet verified:** the exact commands for installing a local editable project into every Hermes distribution method, the project plugin discovery precedence for v0.18.2, whether a packaged entry point can bundle/activate the skill without copying it, and the precise restart behavior on Desktop versus CLI. These must be tested against the target Hermes release before implementation documentation is finalized. No speculative commands are prescribed here.
+The CLI flow, project-plugin precedence/discovery gate, qualified skill registration, and process restart are verified. Global plugin packaging, other Hermes installation methods, Desktop, and gateway behavior remain unverified. Exact commands and tagged-release limitations are recorded in `docs/hermes-compatibility-0.18.2.md`.
 
 ## Version compatibility
 

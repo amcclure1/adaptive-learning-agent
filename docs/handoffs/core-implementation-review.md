@@ -1,8 +1,8 @@
 # Core Implementation Compatibility Review
 
-Date: 2026-07-18  
-Reviewed implementation HEAD: `05b468fa5a7b3da9e87e94b98bd4b9e07060f762`  
-Commit immediately before implementation: `5a3990b74ea90aa4853c0e33f71fa29f68a36e84`  
+Date: 2026-07-18
+Reviewed implementation HEAD: `05b468fa5a7b3da9e87e94b98bd4b9e07060f762`
+Commit immediately before implementation: `5a3990b74ea90aa4853c0e33f71fa29f68a36e84`
 Exact reviewed range: `5a3990b74ea90aa4853c0e33f71fa29f68a36e84..05b468fa5a7b3da9e87e94b98bd4b9e07060f762`
 
 ## Implementation commits
@@ -80,12 +80,18 @@ All AT-01 through AT-12 behaviors have direct tests. Additional tests cover the 
 
 ## Python compatibility
 
-An unmanaged `uv 0.11.29` installation created external virtual environments and installed the built package into each. Exact commands followed this pattern:
+An unmanaged `uv 0.11.29` installation created external virtual environments and installed the built package into each. The exact PowerShell command was:
 
 ```powershell
-uv venv --clear --python 3.12 <external-venv>
-uv pip install --python <external-venv>\Scripts\python.exe .
-<external-venv>\Scripts\python.exe -m unittest discover -s tests -v
+$uv='C:\Users\amccl\AppData\Local\adaptive-learning-agent-dev\uv-bin\uv.exe'
+$base='C:\Users\amccl\AppData\Local\adaptive-learning-agent-dev\python-matrix'
+foreach ($minor in @('3.12','3.13','3.14')) {
+  $venv=Join-Path $base $minor
+  & $uv venv --clear --python $minor $venv
+  & $uv pip install --python (Join-Path $venv 'Scripts\python.exe') .
+  & (Join-Path $venv 'Scripts\python.exe') --version
+  & (Join-Path $venv 'Scripts\python.exe') -m unittest discover -s tests -v
+}
 ```
 
 Results:
@@ -107,7 +113,7 @@ python -m coverage run --source=adaptive_learning -m unittest discover -s tests
 python -m coverage report -m
 ```
 
-Overall statement coverage is **87%** (614 statements, 82 missed). Important unexecuted paths are malformed-pack variants in `pack_validation.py` (78%), malformed/unexpected request and exception branches in `tool_contract.py` (70%), invalid storage paths/configuration branches in `storage.py` (88%), and defensive/not-found branches in `application_service.py` (89%). These are primarily validation and defensive branches; every AT-01 through AT-12 behavior is covered. No tests were added merely to raise the percentage. Direct Hermes-adapter tests will separately exercise adapter argument and error behavior.
+Overall statement coverage is **87%** (614 statements, 81 missed) in the final suite. Important unexecuted paths are malformed-pack variants in `pack_validation.py` (78%), malformed/unexpected request and exception branches in `tool_contract.py` (70%), invalid storage paths/configuration branches in `storage.py` (88%), and defensive/not-found branches in `application_service.py` (89%). These are primarily validation and defensive branches; every AT-01 through AT-12 behavior is covered. No tests were added merely to raise the percentage. Direct Hermes-adapter tests exercise adapter argument and error behavior.
 
 ## Deviations from the vertical slice
 

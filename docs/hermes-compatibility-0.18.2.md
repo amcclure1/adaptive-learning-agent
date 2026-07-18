@@ -1,6 +1,6 @@
 # Hermes v0.18.2 Compatibility
 
-Date: 2026-07-18  
+Date: 2026-07-18
 Status: verified on the local Windows installation
 
 ## Version and installation
