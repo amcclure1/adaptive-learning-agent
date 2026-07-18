@@ -1,14 +1,25 @@
 # Adaptive Learning Agent
 
-Adaptive Learning Agent is a proposed lightweight, local-first, agent-native learning system. The agent harness is the conversational application; deterministic Python tools will own scoring, learner state, question selection, review scheduling, and pack validation. Hermes is the first planned runtime, while the learning core and subject-pack format remain runtime-independent.
+Adaptive Learning Agent is a lightweight, local-first, agent-native learning system. Its runtime-independent Python core now owns deterministic practice scoring, learner state, question selection, pack validation, and challenge quarantine. Hermes remains the first planned conversational runtime, but its adapter has not been implemented.
 
 ## Status
 
-**Pre-alpha — design and repository-establishment phase.**
+**Pre-alpha — runtime-independent core version 0.1 implemented.**
 
-This repository contains planning, architecture, governance, and package-boundary files only. The learning engine, Hermes adapter, skills, schemas, and pilot subject packs have not been implemented.
+The repository contains a working core, an eight-table SQLite schema, a strict JSON-plus-Markdown fixture pack, ten JSON-compatible tool operations, and automated core acceptance tests. The Hermes adapter and skills, conversational authoring, evidence workflows, scheduling, and pilot subject packs have not been implemented.
 
-> Adaptive Learning Agent is not ready for learning, certification preparation, or Amateur Radio examination preparation. It currently provides no functional assessment capability, and its proposed algorithms and pack policies remain under review.
+> Adaptive Learning Agent is not ready for certification preparation or Amateur Radio examination preparation. The included fixture is synthetic test content, not a production learning pack.
+
+## Run the core tests
+
+Python 3.12 or newer is required. The runtime has no third-party dependencies.
+
+```powershell
+$env:PYTHONPATH='src'
+python -m unittest discover -s tests -v
+```
+
+The public Python boundary is `ApplicationService` plus `ToolContract`. Tool requests and responses use JSON-compatible dictionaries; local learner state is written only to the caller-selected user-data directory.
 
 ## Goals
 
@@ -48,7 +59,7 @@ deterministic Python learning core
        |                    |
        v                    v
 local SQLite state     portable subject packs
-                       (YAML/JSON/Markdown)
+                       (JSON/Markdown in 0.1)
 ```
 
 Conversation and agent memory may shape presentation, but they are not authoritative learner state. Packs define reviewed content and evidence. Python owns state transitions and scoring. SQLite records operational learner facts.
@@ -63,18 +74,19 @@ Both pilots are expected to use evidence-sensitive policies. The project will no
 ## Repository organization
 
 - `docs/`: vision, requirements, architecture proposals, decisions, status, and handoffs.
-- `src/adaptive_learning/`: reserved minimal Python package boundary.
-- `skills/`: planned runtime guidance for learning, subject authoring, and review.
-- `packs/`: template and pilot-pack workspaces; no functional pilot content exists yet.
-- `schemas/`: planned machine-readable contracts.
-- `tests/`: planned deterministic and integration tests.
+- `src/adaptive_learning/`: runtime-independent pack, SQLite, learning, and tool-contract code.
+- `skills/`: reserved runtime guidance; no functional skill exists yet.
+- `packs/fixture-basics/`: synthetic functional pack used by the core acceptance tests.
+- `packs/`: additional template and pilot-pack workspaces; no functional pilot content exists yet.
+- `schemas/`: planned standalone machine-readable contracts; schema version 1 currently lives in the core.
+- `tests/`: standard-library pack, storage, contract, and vertical-slice tests.
 - `user-data/`: ignored local operational state boundary.
 
 Start with [product principles](docs/product-principles.md), [current status](docs/current-status.md), and [project context](docs/project-context.md). The original design package is indexed in [the initial handoff](docs/handoffs/initial-design-package.md).
 
 ## Contributing
 
-Contributions are currently welcome for review of requirements, architecture, pack policy, governance, and documentation. Implementation work is not yet authorized. See [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) before proposing changes.
+Contributions are welcome for the accepted core scope and for review of requirements, architecture, pack policy, governance, and documentation. Deferred features still require explicit design acceptance. See [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) before proposing changes.
 
 ## License
 

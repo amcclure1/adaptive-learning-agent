@@ -1,3 +1,3 @@
 # Planned Schemas
 
-Machine-readable pack and tool schemas will live here after the proposed pack format and JSON tool contract are reviewed. No schema is published yet, and the Markdown proposals must not be treated as implemented validation behavior.
+No standalone machine-readable schema is published here yet. Version-0.1 validation and the tool contract are implemented directly in the runtime-independent Python core under the accepted `docs/mvp-vertical-slice.md` specification.

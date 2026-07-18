@@ -1,3 +1,12 @@
-# Planned Tests
+# Core Tests
 
-The proposed MVP test strategy is documented in `docs/test-plan.md`. Test modules will be added only with authorized implementation. Future tests must keep time, randomness, filesystem state, network access, and model/runtime behavior controlled and explicit.
+The standard-library test suite covers strict pack validation, the exact eight-table SQLite schema, all ten JSON-compatible tools, AT-01 through AT-12, and the additional core security and retry cases in the implementation task.
+
+From the repository root in PowerShell:
+
+```powershell
+$env:PYTHONPATH='src'
+python -m unittest discover -s tests -v
+```
+
+Tests use temporary user-data directories and do not invoke Hermes, an LLM, or the network.

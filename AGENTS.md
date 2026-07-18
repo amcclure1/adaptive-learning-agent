@@ -32,4 +32,4 @@ If historical discussion conflicts with accepted ADRs or product principles, acc
 
 ## Current implementation gate
 
-The repository is in design phase. Package-boundary files may exist, but application behavior is not authorized. Before writing implementation code, confirm that `docs/current-status.md` has been changed through an explicit reviewed decision.
+The runtime-independent version-0.1 core is implemented under the accepted scope in `docs/mvp-vertical-slice.md`. Focused fixes within that scope follow `docs/current-status.md`. Hermes integration and every deferred feature still require a separately invoked, explicitly authorized implementation task.

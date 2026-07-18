@@ -54,6 +54,6 @@ Neither pilot pack currently contains functional learning content.
 
 The project is intended to be open source from its first durable repository. Original engine, adapter, schema, and skill code uses Apache License 2.0. Pack maintainers remain responsible for compatible licensing, attribution, trademarks, and source-use constraints for pack content.
 
-## Current planning status
+## Current implementation status
 
-The vision, MVP requirements, architecture, evidence policy, pack format, Hermes integration, repository tree, SQLite schema, JSON tool contract, and test plan have been drafted. The repository and governance structure are being established. Detailed algorithms and formats remain proposed unless an accepted ADR says otherwise. Implementation has not been authorized.
+The runtime-independent version-0.1 core, synthetic fixture pack, eight-table SQLite schema, ten-tool contract, and core acceptance tests are implemented. Hermes integration, functional skills, pilot packs, authoring, evidence workflows, and other deferred features remain unimplemented and require separate authorization. Detailed post-0.1 algorithms and formats remain proposed unless an accepted ADR says otherwise.
