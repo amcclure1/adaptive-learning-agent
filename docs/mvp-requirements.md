@@ -3,6 +3,14 @@
 Status: proposed for review  
 Design baseline: 2026-07-18
 
+## Version 0.1 implementation scope
+
+The accepted first implementation is the narrower slice in [`mvp-vertical-slice.md`](mvp-vertical-slice.md). Its exact fixture, JSON-plus-Markdown pack, eight-table SQLite model, ten tools, deterministic rules, restart behavior, and AT-01 through AT-12 are normative for version 0.1 and take precedence over broader requirements below.
+
+Version 0.1 implements one learner, practice mode, single- and multiple-response exact scoring, immediate feedback, confidence storage, challenge quarantine, and restart persistence. Retry safety is operation-specific; it does not implement a generic idempotency store.
+
+The following broader areas are deferred: conversational authoring; AWS and Amateur Extra packs; evidence-release workflows; YAML and archives; mastery and scheduling; generic audit/idempotency infrastructure; backup/restore; additional question types; and multi-user operation. The requirements below remain candidate post-0.1 scope unless the vertical-slice document explicitly includes them.
+
 Keywords MUST, MUST NOT, SHOULD, and MAY are normative.
 
 ## Runtime and installation
@@ -92,4 +100,3 @@ Acceptance: core tests can run with a fake clock and temporary SQLite database w
 - **Q-003** Pack validation and export MUST be reproducible on Windows, macOS, and Linux path semantics.
 - **Q-004** Each pilot pack MUST pass schema, evidence, review, install, study, and export round-trip tests.
 - **Q-005** Hermes-specific behavior MUST be documented with official Hermes sources; unverified integration assumptions MUST be labeled.
-

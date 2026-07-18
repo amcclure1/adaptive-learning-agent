@@ -4,6 +4,12 @@ Status: proposed for review
 Documentation inspected: 2026-07-18  
 Latest verified Hermes release: v0.18.2 (released 2026-07-07)
 
+## Accepted version 0.1 boundary
+
+[ADR 0007](decisions/0007-hermes-plugin-skill-boundary.md) and [`mvp-vertical-slice.md`](mvp-vertical-slice.md) define the accepted split. The plugin registers and delegates the ten deterministic tools; the optional skill provides conversational workflow only. Neither owns scoring, selection, persistence, pack interpretation, provider configuration, or authentication.
+
+Hermes v0.18.2 is the first compatibility-test target, not a current compatibility claim. Plugin discovery, enablement, tool registration, skill loading, and CLI/Desktop restart behavior remain explicitly unverified until exercised against that tagged release.
+
 ## Verified Hermes baseline
 
 The following behavior was verified against official NousResearch Hermes Agent documentation on the `main` branch and the official release page:
@@ -21,10 +27,10 @@ The following behavior was verified against official NousResearch Hermes Agent d
 
 The project's “Hermes, Python, Git, and small Python dependencies” requirement is interpreted as the Adaptive Learning Agent's direct footprint. A literal machine-level limit cannot be guaranteed because the official Hermes installer documents additional managed dependencies such as Node.js, ripgrep, and ffmpeg. Adaptive Learning Agent will not add a server, database service, JavaScript application, browser dependency, or model SDK.
 
-Proposed project dependencies:
+Accepted version-0.1 project dependencies:
 
-- Python 3.11 or newer, aligned with the official Hermes installer baseline;
-- PyYAML or another small safe YAML parser;
+- Python 3.12 or newer, matching this repository's package metadata;
+- no runtime third-party packages; version-0.1 packs use standard-library JSON and Markdown;
 - no SQLite package, because `sqlite3` is in the standard library;
 - development-only test tooling, not required for normal use.
 
@@ -36,7 +42,7 @@ No packages or Hermes configuration are changed by these design artifacts.
 
 Ship a Hermes adapter plugin named `adaptive-learning` that:
 
-- registers only the tools in `docs/tool-contract.md`;
+- registers only the ten version-0.1 tools in `docs/mvp-vertical-slice.md`;
 - groups them in an `adaptive_learning` toolset;
 - converts Hermes arguments to the common request envelope;
 - invokes the in-process application service;
@@ -53,17 +59,16 @@ Ship an optional `adaptive-learning` skill containing conversational guidance:
 - select a learner and pack before study;
 - call `study.next` rather than inventing a question;
 - never reveal answer fields before submission;
-- call `study.submit` exactly once with an idempotency key;
+- retry `study.submit` with the same selections and confidence after an uncertain response;
 - quote the tool's score and reviewed rationale faithfully;
-- distinguish study, authoring, and review modes;
-- never accept a question review on the user's behalf;
+- do not imply that deferred authoring or review workflows are available;
 - treat memory as preference context only.
 
 The skill is convenience, not authority. If it is missing or changed, tool behavior and stored state remain correct.
 
 ### 3. Runtime-neutral fallback
 
-Expose the same contract through a one-shot JSON CLI for debugging, scripting, tests, and future runtimes. The Hermes skill may document this as a recovery path, but normal Hermes use should call registered plugin tools directly so schemas, permissions, and structured results are visible.
+Exercise the same contract through direct application-service calls for debugging and tests. A one-shot JSON CLI is a reasonable later adapter but is not required by the version-0.1 proof. Normal Hermes use should call registered plugin tools directly so schemas, permissions, and structured results are visible.
 
 ## Why not MCP for the MVP
 
@@ -86,24 +91,24 @@ Codex OAuth is therefore an installation option for Hermes, not an Adaptive Lear
 
 ## Tool exposure and modes
 
-Tools are separated by intent:
+Only the ten accepted learner/pack tools are registered in version 0.1. The broader mode separation below is deferred:
 
 - Learner-safe: pack list, learner select/status, study start/next/submit/status.
 - Pack administration: validate, install, export.
 - Authoring: create draft, add/update content, add sources, request status.
 - Human review: record review outcome and release validation.
 
-The plugin should register all schemas but return a typed authorization/mode error when an authoring or review operation lacks an explicit mode switch in the current request. Tool descriptions must say that only a human can accept a review. The model cannot bypass this by changing arguments.
+A future plugin may register the broader schemas with explicit authorization/mode controls. Version 0.1 must not register the deferred administration, authoring, or review operations.
 
 ## Conversation rules
 
 1. Never generate a study question when a pack question is expected.
 2. Never score from natural-language judgment; always call `study.submit`.
 3. Do not pass answer keys into conversation before submission.
-4. After submission, state the exact fixed-point-derived score and correctness returned by the tool.
-5. Ground explanations in the returned reviewed rationale and source metadata.
-6. Label any supplemental model explanation as unverified and do not persist it as pack content without authoring/review calls.
-7. On duplicate, timeout, or provider retry, reuse the same idempotency key.
+4. After submission, state the exact binary correctness returned by the tool.
+5. Ground explanations in the returned fixture rationale.
+6. Label any supplemental model explanation as unverified and do not persist it as pack content.
+7. On duplicate, timeout, or provider retry, repeat the same operation-specific payload so the core can return the existing result.
 8. On a typed conflict, read current session state rather than guessing.
 
 ## Installation sketch for later implementation
@@ -130,4 +135,3 @@ The intended reviewed flow is:
 ## Operational privacy
 
 Hermes documents that conversations, memory, and skills are stored locally under its home directory, but model calls still go to the configured provider. Adaptive Learning Agent should disclose that learner data in SQLite is local while conversational text sent through Hermes follows the user's provider and Hermes settings. Users should avoid putting secrets or unnecessary personal information in answers or pack content.
-

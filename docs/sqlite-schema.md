@@ -1,7 +1,13 @@
 # Proposed SQLite Schema
 
-Status: proposed schema version 1  
+Status: version 0.1 eight-table model accepted; broader schema proposed
 Design baseline: 2026-07-18
+
+## Accepted version 0.1 schema
+
+Implement only the eight tables and transaction boundaries mapped to AT-01 through AT-12 in [`mvp-vertical-slice.md`](mvp-vertical-slice.md): `schema_meta`, `learners`, `installed_packs`, `study_sessions`, `presentations`, `attempts`, `objective_progress`, and `question_challenges`.
+
+Version 0.1 does not store generic idempotency results, audit events, objective deltas, scheduling state, authoring state, or backup metadata. The broader DDL below is retained for later review and must not be used for the first migration.
 
 ## Scope
 
@@ -13,7 +19,7 @@ IDs are application-generated UUID strings. Times are RFC 3339 UTC text. Fixed-p
 
 Every connection enables foreign keys and a busy timeout. Normal local operation should evaluate WAL mode, but the data directory should not default to a cloud-synchronized folder. Mutations use `BEGIN IMMEDIATE` and commit the attempt, progress projections, idempotency result, and audit event in one transaction. Backups use `sqlite3.Connection.backup` or the SQLite online-backup API.
 
-## DDL
+## Deferred broader schema DDL
 
 ```sql
 PRAGMA foreign_keys = ON;

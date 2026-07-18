@@ -1,7 +1,15 @@
 # Proposed JSON Tool Contract
 
-Status: proposed contract `ala.tools.v1`  
+Status: minimal contract `0.1` accepted; broader `ala.tools.v1` proposed
 Design baseline: 2026-07-18
+
+## Accepted version 0.1 contract
+
+The normative first contract is the ten-tool JSON contract in [`mvp-vertical-slice.md`](mvp-vertical-slice.md): `system.health`, `learner.initialize`, `pack.validate`, `pack.install`, `study.start`, `study.next`, `study.submit`, `study.status`, `study.finish`, and `question.challenge`.
+
+Mutation retries are handled through concrete uniqueness and payload-comparison rules. Version 0.1 has no generic request ID, idempotency key, audit tool, authoring tool, scheduler tool, backup tool, or archive tool. The broader `ala.tools.v1` proposal below is deferred and must not be implemented in the first slice.
+
+## Deferred broader contract proposal
 
 ## Contract rules
 

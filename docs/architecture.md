@@ -3,6 +3,12 @@
 Status: proposed for review  
 Design baseline: 2026-07-18
 
+## Accepted version 0.1 overlay
+
+[`mvp-vertical-slice.md`](mvp-vertical-slice.md) is the implementation architecture for version 0.1. It retains the component boundaries below while narrowing the first proof to a standard-library Python core, JSON-plus-Markdown fixture pack, eight SQLite tables, ten tools, exact binary scoring, stable-ID selection, learner-local challenge quarantine, and a thin Hermes adapter.
+
+The mastery model, scheduler, authoring workflow, archives, generic idempotency results, generic audit events, rebuildable projections, and backup framework described below are deferred proposals. They must not be implemented as part of the first slice.
+
 ## System shape
 
 ```text
@@ -87,7 +93,7 @@ The integration may also ship a small skill that teaches conversational workflow
 
 The project MUST NOT read, copy, log, export, or refresh provider credentials.
 
-## Deterministic scoring and scheduling v1
+## Deferred post-0.1 scoring and scheduling proposal
 
 All stored fractions use integer millionths from 0 to 1,000,000.
 

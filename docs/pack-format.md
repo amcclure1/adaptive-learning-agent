@@ -1,13 +1,21 @@
 # Subject Pack Format
 
-Status: proposed format version `1.0`  
+Status: version `0.1` profile accepted; broader `1.0` proposed
 Design baseline: 2026-07-18
+
+## Accepted version 0.1 profile
+
+Version 0.1 uses the unpacked JSON-plus-Markdown format defined in [`mvp-vertical-slice.md`](mvp-vertical-slice.md) and accepted by [ADR 0008](decisions/0008-json-markdown-pack-serialization.md). A pack contains `pack.json` and one referenced `lesson.md`; structured objectives and five fixture questions are in JSON. YAML, archives, assets, sources, claims, reviews, signing, export, and dual-format parsing are not accepted in 0.1.
+
+The remainder of this document is a deferred format-1.0 proposal and must not drive the first implementation.
+
+## Deferred format 1.0 YAML proposal
 
 ## Goals
 
 The format is readable in Git, editable with ordinary text tools, deterministic to validate, safe to install, and independent of any agent runtime. YAML carries structured records; Markdown carries explanatory content. A pack contains no Python, prompts tied to Hermes, learner data, or executable hooks.
 
-## Canonical layout
+### Canonical layout
 
 ```text
 <pack-id>/

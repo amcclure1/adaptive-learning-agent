@@ -3,6 +3,14 @@
 Status: proposed for review  
 Design baseline: 2026-07-18
 
+## Accepted version 0.1 release gate
+
+AT-01 through AT-12 in [`mvp-vertical-slice.md`](mvp-vertical-slice.md) are the complete core release gate for the first implementation. All twelve must pass without Hermes, an LLM, a network, or non-standard-library runtime dependencies. A separate compatibility check must exercise health, start, next, and submit through a real Hermes v0.18.2 plugin installation before support is claimed.
+
+The broader mastery, scheduling, archive, authoring, evidence, migration, backup, generic idempotency, and performance suites below are deferred. They are test-design inventory, not version-0.1 implementation requirements.
+
+## Deferred broader MVP test inventory
+
 ## Test principles
 
 - Deterministic tests inject clock, UUID factory, and selection seed.

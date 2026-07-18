@@ -3,6 +3,12 @@
 Status: proposed for review  
 Design baseline: 2026-07-18
 
+## Version 0.1 boundary
+
+The synthetic fixture pack in [`mvp-vertical-slice.md`](mvp-vertical-slice.md) is not certification or regulated content and uses no evidence-sensitive release claims. The source, claim, independent-review, currency, and pilot rules below are deferred until an evidence-sensitive pack is implemented.
+
+Version 0.1 question challenges prove learner-local quarantine only. A challenge is a quality signal; it is not evidence adjudication, reviewer approval, or content reactivation. No agent may infer that quarantined content has been corrected.
+
 ## Purpose
 
 Evidence policy prevents a fluent agent response from becoming an unreviewed fact in a learning pack. It governs pack release validation, not general conversation. Agent memory, a chat transcript, search snippets, and model citations are discovery aids only.

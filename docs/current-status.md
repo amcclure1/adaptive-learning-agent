@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / design phase
+Status: pre-alpha / vertical-slice design accepted
 Updated: 2026-07-18
 
 ## Completed
@@ -12,6 +12,8 @@ Updated: 2026-07-18
 - Added a minimal Python 3.12 package boundary with no application behavior and no runtime dependencies.
 - Reserved documented boundaries for skills, packs, schemas, tests, and ignored local user data.
 - Recorded accepted architectural direction in ADRs.
+- Completed the final MVP design review and accepted the version-0.1 vertical slice.
+- Accepted the Hermes plugin/skill boundary and JSON-plus-Markdown pack serialization in ADRs 0007 and 0008.
 
 ## Existing design documents
 
@@ -26,14 +28,16 @@ Updated: 2026-07-18
 - `sqlite-schema.md`: proposed operational schema version 1.
 - `tool-contract.md`: proposed runtime-neutral JSON tool contract.
 - `test-plan.md`: proposed MVP validation and acceptance plan.
+- `mvp-vertical-slice.md`: accepted first implementation scope, rules, schema, tools, and twelve acceptance tests.
+- `handoffs/final-mvp-design-review.md`: final design-review decisions, deferrals, blockers, and implementation prompt.
 
 ## Under review
 
-- Exact scoring, mastery, scheduling, and question-selection algorithms.
-- Pack format 1.0 details and canonicalization rules.
-- SQLite schema normalization, migration strategy, and default data paths.
-- JSON tool names, mode separation, idempotency, backup, and restore behavior.
-- Hermes plugin packaging, discovery, enablement, restart, and skill distribution.
+- Post-0.1 mastery, scheduling, and adaptive question-selection algorithms.
+- Broader YAML pack format 1.0, archives, signing, and canonicalization.
+- Post-0.1 schema normalization, migrations, generic audit/idempotency, backup, and restore.
+- Broader authoring, review, administration, and runtime-adapter tool contracts.
+- Hermes v0.18.2 plugin packaging, discovery, enablement, restart, and skill distribution, which require an actual compatibility test.
 - Evidence policy for the two pilot packs, including independent-review expectations.
 - Pilot-pack content licensing and source-use rules.
 
@@ -41,17 +45,19 @@ Updated: 2026-07-18
 
 - Permanent security-reporting contact and disclosure channel.
 - Whether the package name and provisional project name remain final.
-- Which YAML parser, if any, to add when pack parsing implementation is authorized.
+- Whether YAML should be added in a later pack format and which safe parser it would use.
 - Exact supported Hermes version range and tested installation paths.
 - Whether an MCP adapter belongs after the in-process Hermes plugin.
 - Pack signing and reviewer identity beyond local attestations.
 - Final licensing policy for community and pilot pack content.
-- Which proposed algorithms and schemas should become accepted contracts before implementation.
+- Which broader proposed algorithms and schemas should become accepted after the vertical slice produces evidence.
 
 ## Next recommended task
 
-Conduct a human design review of the initial package in this order: product principles and vision; MVP requirements; accepted ADRs; architecture boundaries; pack/evidence policy; SQLite/tool contracts; Hermes integration; test plan. Record accepted or revised decisions without implementing the engine.
+Run the first implementation task using only the exact prompt in `docs/handoffs/final-mvp-design-review.md`. Begin with AT-01 through AT-12 and do not pull deferred features into the slice.
 
 ## Implementation authorization
 
-**Implementation has not been authorized.** Do not add learning-engine behavior, functional skills, pack schemas, pilot questions, database migrations, or runtime integration code until an explicit reviewed update to this file authorizes a scoped implementation task.
+The exact version-0.1 scope in `docs/mvp-vertical-slice.md` is design-approved for implementation **only when the user explicitly invokes the first implementation task**. That authorization permits the synthetic fixture, eight-table schema/migration, deterministic core, ten-tool contract, thin Hermes plugin, minimal workflow skill, and tests needed for AT-01 through AT-12 and the Hermes compatibility check.
+
+It does not authorize any deferred feature, pilot pack, evidence workflow, YAML/archive support, mastery/scheduler, generic audit/idempotency system, backup framework, server, UI, or release publication. This design-review task created no application code, migrations, schemas, fixture packs, or functional skills.
