@@ -48,6 +48,8 @@ The package was built, installed, and tested in external isolated environments:
 
 All three final runs executed identical test names and outcomes with no package/test warnings. A real packaging defect found by the first installed-package run was fixed by removing the redundant legacy license classifier; the SPDX expression remains. `.github/workflows/test.yml` performs only checkout, Python setup for 3.12/3.13/3.14, package installation, and unittest execution.
 
+Hosted CI result: [GitHub Actions Test run #1](https://github.com/amcclure1/adaptive-learning-agent/actions/runs/29665581746) completed successfully for all three matrix jobs (`3.12`, `3.13`, and `3.14`) after the integration changes were pushed.
+
 Core coverage, measured with `coverage 7.15.2` under CPython 3.14.6, is **87%** (614 statements, 81 missed). All AT-01 through AT-12 behaviors have direct tests. Important untested areas remain defensive/malformed branches in pack validation, the runtime-neutral tool contract, storage path/configuration failure, and application not-found/error paths. Coverage is diagnostic, not a gate; no percentage-only tests were added.
 
 See `docs/handoffs/core-implementation-review.md` for the exact reviewed commit range, changed files, AT mapping, concerns, and commands.
