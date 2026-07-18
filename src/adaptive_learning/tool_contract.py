@@ -51,10 +51,14 @@ class ToolContract:
                 raise LearningError("INVALID_ARGUMENTS", "arguments must be an object.")
             expected, operation = self._tools[tool]
             if set(arguments) != expected:
+                argument_list = ", ".join(sorted(expected)) if expected else "(none)"
                 raise LearningError(
                     "INVALID_ARGUMENTS",
-                    f"{tool} requires exactly these arguments: {', '.join(sorted(expected)) or '(none)' }.",
+                    f"{tool} requires exactly these arguments: {argument_list}.",
                 )
             return {"ok": True, "result": operation(**arguments)}
         except LearningError as error:
+            return {"ok": False, "error": error.as_dict()}
+        except Exception:
+            error = LearningError("INTERNAL_ERROR", "The core could not complete the operation.")
             return {"ok": False, "error": error.as_dict()}
