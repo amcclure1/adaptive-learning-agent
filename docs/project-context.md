@@ -56,4 +56,4 @@ The project is intended to be open source from its first durable repository. Ori
 
 ## Current implementation status
 
-The runtime-independent version-0.1 core, synthetic fixture pack, eight-table SQLite schema, ten-tool contract, and core acceptance tests are implemented. Hermes integration, functional skills, pilot packs, authoring, evidence workflows, and other deferred features remain unimplemented and require separate authorization. Detailed post-0.1 algorithms and formats remain proposed unless an accepted ADR says otherwise.
+Version 0.1.0 is a completed runtime and architecture proof: the deterministic runtime-independent core, synthetic fixture, eight-table SQLite schema, ten-operation contract, thin project-local Hermes adapter, and fixture workflow skill are implemented. Hermes v0.18.2 Windows CLI/profile behavior is verified. The fixture is not a real learning pack. Pilot packs, subject building, evidence workflows, scheduling, mastery, exam simulation, and other deferred features remain unimplemented and require separate authorization. Format 0.2 and the Amateur Extra E1A pilot are proposals unless accepted by review.

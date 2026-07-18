@@ -1,14 +1,14 @@
 # Adaptive Learning Agent
 
-Adaptive Learning Agent is a lightweight, local-first, agent-native learning system. Its runtime-independent Python core owns deterministic practice scoring, learner state, question selection, pack validation, and challenge quarantine. A thin project-local adapter and workflow skill are now verified with Hermes v0.18.2.
+Adaptive Learning Agent is a lightweight, local-first, agent-native learning system. Its runtime-independent Python core owns deterministic practice scoring, learner state, question selection, pack validation, and challenge quarantine. A thin project-local adapter and workflow skill are verified with Hermes v0.18.2.
 
 ## Status
 
-**Pre-alpha — runtime-independent core and Hermes adapter version 0.1 implemented.**
+**Pre-alpha — version 0.1.0 is a runtime and architecture proof.**
 
-The repository contains a working core, an eight-table SQLite schema, a strict JSON-plus-Markdown fixture pack, ten JSON-compatible operations, a Hermes v0.18.2 project plugin, one fixture workflow skill, and automated core/adapter tests. Conversational authoring, evidence workflows, scheduling, and pilot subject packs have not been implemented.
+The deterministic version-0.1 core is complete. The installed-package suite passes on Python 3.12, 3.13, and 3.14, and the Hermes v0.18.2 CLI/profile integration is verified on Windows. The included `fixture-basics` subject is synthetic acceptance-test data, not a real learning pack and not preparation for any certification or examination.
 
-> Adaptive Learning Agent is not ready for certification preparation or Amateur Radio examination preparation. The included fixture is synthetic test content, not a production learning pack.
+Subject building, real certification packs, evidence workflows, scheduling, mastery, and exam simulation remain deferred. Version 0.2A is a design proposal for a small sourced Amateur Extra pilot; it does not yet authorize implementation. See [the 0.1.0 release record](docs/releases/0.1.0.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
 
 ## Run the core tests
 
@@ -31,31 +31,9 @@ $env:HERMES_ENABLE_PROJECT_PLUGINS='1'
 Remove-Item Env:HERMES_ENABLE_PROJECT_PLUGINS
 ```
 
-Project plugins execute repository code. Never set the discovery environment variable globally or use this command from an untrusted checkout. See [the compatibility record](docs/hermes-compatibility-0.18.2.md) for setup, trust boundaries, exact paths, known tagged-release differences, and cleanup.
+Project plugins execute repository code. Never set the discovery environment variable globally or use this command from an untrusted checkout. See [the compatibility record](docs/hermes-compatibility-0.18.2.md) for setup, trust boundaries, exact paths, known tagged-release differences, and cleanup. Compatibility is not claimed for Linux, macOS, Hermes Desktop, the gateway, or Hermes versions other than v0.18.2.
 
-## Goals
-
-- Make the agent harness the primary user experience.
-- Keep deterministic learning behavior in testable Python code.
-- Store operational learner data locally in SQLite.
-- Define portable, versioned subject packs using YAML, JSON, and Markdown.
-- Let users create and review subjects conversationally.
-- Support evidence-sensitive packs with provenance and human review gates.
-- Keep installation and operation practical for an individual user.
-- Remain open source and runtime-independent from the beginning.
-
-## Non-goals for the MVP
-
-- A web frontend or separate API server.
-- PostgreSQL, Redis, Celery, a vector database, or Kubernetes.
-- Required Docker or cloud deployment.
-- Hosted multi-user identity and authorization.
-- A public pack marketplace.
-- Autonomous content activation or publishing.
-- A multi-agent swarm.
-- Dependence on Lumen, OpenTutor, or another complete learning platform.
-
-## Proposed architecture
+## Proven architecture
 
 ```text
 Hermes or another agent runtime
@@ -74,24 +52,31 @@ local SQLite state     portable subject packs
                        (JSON/Markdown in 0.1)
 ```
 
-Conversation and agent memory may shape presentation, but they are not authoritative learner state. Packs define reviewed content and evidence. Python owns state transitions and scoring. SQLite records operational learner facts.
+Conversation and agent memory may shape presentation, but they are never authoritative learner state. Packs define reviewed content and evidence. Python owns state transitions and scoring. SQLite records operational learner facts.
 
-## Initial use cases
+## Version-0.1 limitations
 
-- AWS Certified Solutions Architect – Professional (SAP-C02).
-- United States Amateur Radio Extra class.
+- One local learner and at most one active session; no hosted or concurrent multi-user operation.
+- Practice workflow only; no mastery, scheduling, readiness prediction, or exam simulation.
+- Synthetic fixture content only; no real subject pack or evidence-review workflow.
+- No application backup/restore, encryption at rest, or protection from hostile same-account processes.
+- Project-local Hermes plugin discovery is trusted-checkout development behavior and requires a process-local environment gate.
+- Only the Windows Hermes v0.18.2 CLI/profile path has been verified.
 
-Both pilots are expected to use evidence-sensitive policies. The project will not present generated questions as real or recalled examination questions.
+## Goals and non-goals
+
+The project aims to make an agent harness the primary experience while keeping deterministic learning behavior in testable Python, operational state in local SQLite, and portable subject content in versioned files. It does not require a web frontend, API server, PostgreSQL, Redis, Celery, a vector database, Docker, cloud deployment, hosted identity, a marketplace, autonomous publishing, or a multi-agent swarm.
+
+The first intended real pilots are AWS Certified Solutions Architect – Professional (SAP-C02) and United States Amateur Radio Extra class. Both are evidence-sensitive. The project will not present generated questions as official, real, or recalled examination questions.
 
 ## Repository organization
 
-- `docs/`: vision, requirements, architecture proposals, decisions, status, and handoffs.
+- `docs/`: product principles, accepted decisions, status, proposals, releases, and handoffs.
 - `src/adaptive_learning/`: runtime-independent pack, SQLite, learning, and tool-contract code.
 - `.hermes/plugins/adaptive-learning/`: thin project-local Hermes v0.18.2 adapter.
 - `skills/adaptive-learning/`: minimal deterministic fixture workflow guidance.
-- `packs/fixture-basics/`: synthetic functional pack used by the core acceptance tests.
-- `packs/`: additional template and pilot-pack workspaces; no functional pilot content exists yet.
-- `schemas/`: planned standalone machine-readable contracts; schema version 1 currently lives in the core.
+- `packs/fixture-basics/`: synthetic functional pack used by acceptance tests.
+- `schemas/`: reserved standalone machine-readable contracts; schema version 1 currently lives in the core.
 - `tests/`: standard-library pack, storage, contract, vertical-slice, and direct adapter tests.
 - `user-data/`: ignored local operational state boundary.
 
@@ -99,8 +84,8 @@ Start with [product principles](docs/product-principles.md), [current status](do
 
 ## Contributing
 
-Contributions are welcome for the accepted core scope and for review of requirements, architecture, pack policy, governance, and documentation. Deferred features still require explicit design acceptance. See [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) before proposing changes.
+Contributions are welcome within accepted scope and for review of proposals. Deferred features require explicit design acceptance. See [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) before proposing changes.
 
 ## License
 
-Original engine, adapter, schema, and skill code is intended to be licensed under the [Apache License 2.0](LICENSE). Subject-pack content may require its own compatible license and provenance metadata.
+Original engine, adapter, schema, and skill code is licensed under the [Apache License 2.0](LICENSE). Subject-pack content may require separate compatible rights and provenance metadata.
