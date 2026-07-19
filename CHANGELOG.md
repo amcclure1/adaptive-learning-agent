@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Accepted ADR 0021 and added a normative author first-pass protocol, closed immutable `author_self_audit` records, exact-digest eligibility, bounded create/query operations, and blocking validation/verification gates. Self-audit never grants approval.
+- Audited SAP-ORG-04 experiment integrity and reconciled 21 logical findings with 30 stored records, including nine additive binding-correction copies. Generic metrics now distinguish duplicates, changed-target repeats, supersessions, resolutions, and residuals.
+
 - Mandatory independent-AI-verification infrastructure with closed run/finding/resolution schemas, four content-stage protocols, eight bounded authoring operations, exact-digest eligibility gates, revision invalidation, verifier/approver conflicts, comparison metrics, and synthetic regression tests.
 - A reproducible SAP-ORG-04 baseline-A manifest and advisory reconstruction, plus an independently authored baseline B with formal source-grounded verification, immutable findings/resolutions, three revision cycles, and a zero-finding 47-artifact closure run.
 - Baseline A/B experiment reports and the SAP-ORG-04 repeat-experiment handoff; first-pass non-improvement and successful pre-human containment are recorded without a statistical claim.

@@ -43,7 +43,9 @@ The baseline-A stale/weak-source measure comprises three source-support mismatch
 | Full review after cycle 2 | 2 | 2 medium | Validator projection bug fixed; two OU evidence/dependency findings revised. |
 | Closure after cycle 3 | 0 | none | 47 verified, 0 unresolved. |
 
-There were 21 distinct logical findings. Thirty finding and resolution records exist because the nine first-pass findings were reproduced additively when correcting their target workspace-commit binding; this did not create nine new semantic defects.
+There were 21 distinct logical findings. Thirty finding and 30 resolution records exist because the nine first-pass findings and resolutions were reproduced additively when correcting their target workspace-commit binding; this did not create nine new semantic defects. Metrics now report stored records, logical findings, exact duplicates, repeats on changed target digests, explicit supersessions, resolutions, and residuals separately.
+
+Across the logical findings, severity is 1 high, 19 medium, and 1 low. Category is factual error 1, missing qualification 4, overbroad assertion 1, insufficient premises 5, scope drift 7, taxonomy/classification 2, and source mismatch 1. All 21 target claims. Stored resolutions are 26 accepted, 4 modified, and 0 disputed.
 
 ## Human-review burden
 
