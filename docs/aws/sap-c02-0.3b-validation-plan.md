@@ -135,7 +135,7 @@ Reports in `validations/current/` may be regenerated and replaced with expected-
 8. release-evidence integrity;
 9. pack-release approval eligibility.
 
-Independent AI verification occurs after relevant deterministic checks and before human review. It may return content for revision even when every structural check passes. Human review begins only after every exact current artifact has an eligible verification disposition and no unresolved blocking finding.
+The author first persists a completed self-audit over each exact current digest; missing or incomplete audits are blocking deterministic findings. Independent AI verification occurs after relevant deterministic checks and before human review. It may return content for revision even when every structural check passes. Human review begins only after every exact current artifact has an eligible verification disposition and no unresolved blocking finding.
 
 ## Implemented validator
 

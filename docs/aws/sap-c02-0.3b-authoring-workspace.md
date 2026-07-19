@@ -33,6 +33,8 @@ authoring/aws-sap-c02-org-04/
   validations/
     current/
     reports/
+  self-audits/
+    records/
   verifications/
     runs/
     findings/
@@ -63,6 +65,7 @@ Repository-relative paths and lower-case directory names are normative. Artifact
 | Project configuration and active draft records | `project.json` and each `drafts/` directory | Editable with expected-prior-digest checking; edits invalidate approvals over the prior digest |
 | Released authoring revisions | Each `revisions/<id>/<revision>` location | Immutable and append-only |
 | Validation reports | `validations/current/` and `validations/reports/` | Generated; current reports may be replaced, while a report selected by release evidence remains bound by ID, commit, and digest |
+| Author self-audits | `self-audits/records/` | Immutable exact-digest procedural evidence; never an approval |
 | Human approvals and review decisions | `approvals/` | Immutable append-only records; revocation/supersession is a new record |
 | Release selections | `release/selections/` | Explicit compiler inputs; immutable once compiled |
 | Candidate packs | `release/candidates/` | Generated compiled learner-facing output; immutable per candidate digest |

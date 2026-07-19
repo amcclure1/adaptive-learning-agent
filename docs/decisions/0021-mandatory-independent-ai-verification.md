@@ -1,60 +1,53 @@
-# ADR 0021: Mandatory Independent AI Verification Before Human Approval
+# ADR 0021: Mandatory First-Pass Self-Audit and Independent AI Verification
 
-Status: Proposed
+Status: Accepted
 
 Date: 2026-07-19
 
 ## Context
 
-The first `SAP-ORG-04` source-and-claim pass satisfied closed schemas and deterministic structural validation, yet a separate source-grounded review found material source-fit, qualification, classification, and premise-sufficiency defects. Schema correctness cannot establish factual truth. Sending AI-authored factual or assessment content directly from structural validation to a human reviewer also wastes scarce human attention on defects another independent research pass can contain earlier.
+Deterministic validation proves structure, not truth. In the `SAP-ORG-04` repeat experiment, generalized author instructions also failed to improve first-pass quality: baseline B had nine first-pass findings versus baseline A's seven. The independent loop nevertheless contained all 21 recorded logical findings before human review. This one-pilot result supports a fail-closed containment process, not a model-quality or statistical claim.
 
-No generative model can guarantee an error-free first draft. The enforceable process goal is therefore independent defect containment, not a claim of infallible generation.
+## Decision
 
-## Proposed decision
-
-Require this rule for all AI-authored factual or assessment content:
-
-> No AI-authored factual or assessment content may reach human approval until a separate source-grounded verifier has independently reviewed every applicable artifact and all material findings have been resolved.
-
-The normative lifecycle becomes:
+Every AI-authored factual or assessment artifact must complete the normative [first-pass authoring protocol](../authoring-first-pass-quality-protocol.md). The author records an immutable, exact-digest `author_self_audit` before deterministic validation. Deterministic validation then precedes a separately invoked, source-grounded AI verifier. Every applicable artifact is reviewed; material findings require author revision and independent reverification before qualified human approval.
 
 ```text
-drafting
-→ deterministic structural validation
-→ independent AI verification
-→ author revision
-→ independent AI reverification
-→ qualified human approval
-→ downstream authoring
+draft -> author self-audit -> deterministic validation -> independent AI verification
+      -> author revision -> new self-audit -> validation -> reverification
+      -> qualified human approval -> downstream authoring
 ```
 
-The verifier is a fresh invocation and role. It receives exact artifacts and accepted architecture, but no hidden author reasoning. It independently reopens authoritative sources, checks complete assertions and exceptions, inspects every in-scope artifact, and binds findings and dispositions to exact digests. It cannot approve, edit target records, compile, install, activate, publish, or release.
+The author stage must reopen cited sources; test exceptions, exclusions, classification, Region/account/configuration/time/freshness sensitivity, recommendation premises and decision criteria, internal contradictions, and plausible falsifiers; and narrow language when evidence does not support a universal statement. The audit records concerns, revisions, exact targets, author identity, protocol version, and workspace commit. Changed bytes require a new audit; records are immutable and never imply approval.
 
-Verification is mandatory evidence and never human authority. Human approval remains an independent exact-digest decision. A human may disagree only through an explicit adjudication with reasoning.
+The verifier is a fresh invocation and role with exact artifacts and accepted architecture but no hidden author reasoning. It independently reopens authoritative sources and binds findings and dispositions to exact digests. A separate invocation establishes role and context separation only. It does not prove different model weights, provider independence, statistical independence, or freedom from correlated error; unavailable model/provider metadata remains explicitly unverifiable.
 
-Apply the same pattern to source/claim facts, lesson factual coverage, question content and keys, distractor rationales, adversarial answer uniqueness, learner explanations, and compiled projection fidelity. Answer uniqueness uses a separate adversarial AI pass before human uniqueness review.
+The same lifecycle applies to sources and claims, lesson factual coverage, question content and keys, distractor rationales, answer uniqueness, learner explanations, and compiled projection fidelity. Answer uniqueness uses a separate adversarial pass before human uniqueness review.
 
-## Fail-closed gate
+## Fail-closed gates
 
-Human review is ineligible when an exact current artifact lacks a completed disposition, a blocking critical/high/medium finding remains, the disposition is `blocked` or `unable_to_verify`, validation or verification targets stale bytes, a revision has not been reverified, or a derived recommendation has an unverified or unapproved premise. Low/informational findings proceed only when explicitly nonblocking. Passing verification grants no approval.
+Author self-audit eligibility requires a completed current record covering the exact digest. Deterministic validation fails without it. Independent verification additionally requires a passing validation report covering the same exact targets. Human review is ineligible when verification is missing or stale, material findings remain, the disposition is `revision_required`, `blocked`, or `unable_to_verify`, or a derived recommendation has an unverified or unapproved premise. Low or informational findings proceed only when explicitly nonblocking. No machine stage grants human approval.
+
+The gate before lesson or question work also requires: accepted ADR 0021; accepted protocol and lifecycle contracts; current exact-digest source/claim self-audits, passing validation, and independent verification with no material residual findings; and separately authorized qualified human source/claim approvals. The repeat experiment did not create retrospective self-audits or human approvals, so downstream content remains blocked.
 
 ## Records and operations
 
-Add closed, canonical, file-backed AI verification run, verification finding, and finding-resolution records. Add bounded authoring operations to create/finalize runs, register independently consulted sources, add findings, query eligibility, record author responses, compare runs, and generate experiment metrics. Research remains outside the deterministic core; the operations expose no shell, unrestricted filesystem/network, approval, installation, activation, publication, or release.
+Closed canonical file-backed records comprise author self-audits, verification runs, findings, and resolutions. Bounded authoring operations create/query self-audits; create/finalize verification runs; register consulted sources; add findings; query eligibility; record responses; compare runs; and generate metrics. They expose no shell, unrestricted filesystem/network, approval, compilation, installation, activation, publication, or release.
 
-The records remain authoring evidence outside installed packs and SQLite. Changed target bytes invalidate prior verification eligibility while preserving history.
+Experiment metrics must distinguish stored finding records, semantic logical findings, exact duplicates, repeats against changed target digests, explicit superseding records, resolutions, and residual findings. Immutable correction copies remain visible and are never counted as new logical defects merely because they are stored separately.
 
-## Consequences
+## Consequences and limits
 
-- Humans receive content after two independent machine stages rather than one.
-- Source research and model invocations increase, but defects should be found earlier.
-- Verification quality remains model- and evidence-dependent; human judgment is still required.
-- Exact model configuration may be unavailable, so reproducibility metadata is recorded where available and limitations remain explicit.
-- Existing approved releases are not retroactively invalidated. New or revised AI-authored content follows the new gate after acceptance.
+- Human attention begins after three machine stages, while human authority remains mandatory.
+- More author discipline, research, records, and invocations are required.
+- The process can contain observed defects but cannot guarantee correct first drafts, discover every latent error, replace qualified human review, or establish statistical improvement.
+- Historical experiment records and approved releases remain immutable and are not silently retrofitted.
+- Agent memory and hidden reasoning are non-authoritative.
 
 ## Alternatives
 
-- Deterministic validation followed directly by human review: rejected because baseline A demonstrated semantic defects despite a clean structural result.
-- Author self-critique: rejected because it is not independent and can repeat the same assumptions.
-- AI verification as approval: rejected because model judgment is non-authoritative.
-- Sampling: rejected by default; an explicitly designed experiment may authorize it, but normal evidence-sensitive work reviews every applicable artifact.
+- Validation directly to human review: rejected; structural success did not prevent semantic defects.
+- Unrecorded self-critique: rejected; it is neither auditable nor exact-digest bound.
+- Self-audit instead of independent verification: rejected; author review is not independent.
+- AI verification as approval: rejected; model judgment is non-authoritative.
+- Default sampling: rejected for evidence-sensitive content; every applicable artifact is reviewed.

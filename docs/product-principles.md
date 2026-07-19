@@ -89,6 +89,8 @@ Material authored questions SHOULD trace from objective through approved factual
 
 No AI-authored factual or assessment content may reach human approval until a separate source-grounded verifier has independently reviewed every applicable exact artifact and all material findings have been resolved. The verifier MUST use a fresh invocation, independently consult current authoritative sources, inspect full statements and dependencies, and remain unable to approve or activate content. Verification is mandatory evidence and never human authority. Changed bytes invalidate their prior verification disposition.
 
+Before deterministic validation, the artifact author MUST reopen evidence, challenge exceptions, classification, sensitivity, premises, consistency, and plausible falsifiers, then persist a completed exact-digest self-audit. Self-audit is non-authoritative, becomes stale when target bytes change, and MUST NOT replace independent verification or qualified human approval.
+
 ## 21. Insufficient evidence degrades gracefully
 
 When assessment evidence or optional capabilities are insufficient, unsafe, declined, or unavailable, the agent MUST explain the gap, offer researched alternatives and a recommendation, narrow the scope when useful, and stop unsupported exam-matching generation. Existing local core and installed-pack operation MUST remain usable.

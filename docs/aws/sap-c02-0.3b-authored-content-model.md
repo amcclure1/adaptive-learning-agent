@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Authored-Content Model
 
-Status: accepted 0.3B contract with proposed independent-verification extension implemented for experiment
+Status: accepted 0.3B contract with accepted self-audit and independent-verification lifecycle
 
 This document defines lifecycle semantics. Exact record fields, controlled vocabularies, identity/revision rules, and canonical digests are normative in [the 0.3B schema contract](sap-c02-0.3b-schemas.md). ADRs 0017–0020 are Accepted; acceptance does not authorize content creation or implementation.
 Design date: 2026-07-18
@@ -25,7 +25,9 @@ source and claim drafting
 → separately authorized activation
 ```
 
-Generation, retrieval, validation, compilation, and independent model verification never imply approval. Every transition requiring human authority is represented by a separate review record over exact artifact bytes. [Independent AI verification](../ai-independent-verification.md) is a mandatory pre-human gate for new AI-authored factual and assessment content under proposed ADR 0021.
+The lifecycle adds an exact-digest author self-audit before each deterministic validation and a renewed audit/revalidation after every revision.
+
+Generation, retrieval, author self-audit, validation, compilation, and independent model verification never imply approval. Every transition requiring human authority is represented by a separate review record over exact artifact bytes. The [first-pass protocol](../authoring-first-pass-quality-protocol.md) and [independent AI verification](../ai-independent-verification.md) are mandatory exact-digest gates under accepted ADR 0021.
 
 ## State model
 

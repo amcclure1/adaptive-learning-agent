@@ -12,7 +12,13 @@ JSON objects are closed: an implementation rejects unknown fields unless a later
 
 ## Independent AI verification extension
 
-Proposed ADR 0021 adds three closed records, implemented subject-neutrally under the same UTF-8/NFC/LF, domain-separated canonical-digest, stable-ID, revision, timestamp, and exact-reference rules.
+Accepted ADR 0021 adds four closed records, implemented subject-neutrally under the same UTF-8/NFC/LF, domain-separated canonical-digest, stable-ID, revision, timestamp, and exact-reference rules.
+
+### `ala.authoring.author-self-audit.v1`
+
+Required fields bind audit/protocol ID, author identity, target project and workspace commit, ordered exact target references, one ordered seven-family check set per target, identified concerns, author revisions, unresolved concern IDs, completion status, and `human_approval_implication: "none"`. Check families are source reopening, exceptions/exclusions, classification, sensitivity, recommendation premises, contradictions, and falsification. Each persists completion, evidence notes, and concern IDs.
+
+Targets must be authored by the recorded author. A completed record covers every target exactly once, completes every check, and has no unresolved concern. It is immutable, changed target bytes require a new audit, and it grants no approval.
 
 ### `ala.authoring.ai-verification-run.v1`
 
