@@ -1,13 +1,13 @@
 # SAP-C02 0.3B Deterministic Validation Plan
 
-Status: final design proposal; no validator implemented
+Status: accepted implementation contract; no validator implemented
 Design date: 2026-07-18
 
 ## Principle
 
 Deterministic validation proves record shape, reference integrity, rule consistency, freshness arithmetic, compilation eligibility, and some explicit contradictions. It cannot approve source authority/rights, factual truth, architectural quality, originality, distractor plausibility, or answer uniqueness.
 
-Validation reports are immutable evidence with validator/rule version, input IDs/digests, execution time, findings, severity, and pass/fail. Passing reports expire when an input digest or relevant rule changes.
+Generated reports use `ala.validation-report/1` and the exact fields in [the schema contract](sap-c02-0.3b-schemas.md): validator name/version, execution UTC timestamp, source workspace commit, project revision/digest, checked artifact IDs/revisions/digests, deterministic findings with severity and blocking state, result, and output digest. Every report declares `human_approval_implication: "none"`. Passing reports expire when an input digest or relevant rule changes.
 
 ## Severity
 
@@ -121,6 +121,8 @@ Deterministic lint may detect copied phrases against project-controlled content 
 
 Each finding should identify artifact ID/version/digest, rule ID/version, severity, field/path, related source/claim/approval IDs, explanation, and a bounded recommended resolution. Validators never rewrite content or change approval state automatically.
 
+Reports in `validations/current/` may be regenerated and replaced with expected-prior-digest checking. [Release evidence](sap-c02-0.3b-release-evidence.md) binds the exact report ID, validator version, source workspace commit, and digest selected for compilation. Replacing a current report never changes historical release evidence.
+
 ## Validation order
 
 1. workspace and record syntax;
@@ -128,7 +130,7 @@ Each finding should identify artifact ID/version/digest, rule ID/version, severi
 3. claim structure, evidence, applicability, freshness, and approval;
 4. design-spec completeness and set coverage;
 5. question structure, claims, matrices, rationales, originality record, and approvals;
-6. lesson/content approvals;
+6. lesson-content review records;
 7. compilation eligibility and target-format validation;
 8. release-evidence integrity;
 9. pack-release approval eligibility.

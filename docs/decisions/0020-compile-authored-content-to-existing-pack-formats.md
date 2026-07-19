@@ -28,7 +28,7 @@ The first pilot should prove the manual evidence and review chain before expandi
 
 ## Consequences
 
-- No pack parser, core, SQLite, Hermes, or contract change is required for the proposed 0.3B content exercise.
+- No pack parser, core, SQLite, Hermes, or contract change is required for the accepted 0.3B content design.
 - Format 0.3 remains asset-specific and unchanged.
 - Installed packs avoid private/editorial workflow data.
 - Full claim/approval traceability depends on retaining the release-evidence bundle with the source repository/release records.

@@ -33,9 +33,9 @@ The 2026-07-18 exercise verified AWS Certified Solutions Architect - Professiona
 
 ## 0.3B — Manually reviewed SAP-C02 pilot
 
-Status: scope accepted and exact design boundary complete; content/workspace/compiler implementation requires later authorization and acceptance of Proposed ADRs 0017-0020
+Status: scope and implementation contract accepted; content/workspace/compiler implementation requires later explicit authorization
 
-The accepted realization is Domain 1 task 1.4, design a multi-account AWS environment: two original lessons, approximately 24-30 approved claims, and exactly five original scenario questions (three single-response, two multiple-response), with distractor rationales, authoritative AWS citations, answer-uniqueness review, and separate source/claim/question/uniqueness/pack approvals. Proposed architecture uses a file-backed authoring workspace and deterministic release projection into existing format 0.2 (or unchanged 0.3 only for a separately justified supported PNG); draft/review records do not enter learner packs or SQLite. See [the 0.3B final design handoff](handoffs/aws-sap-c02-0.3b-final-design.md).
+The accepted realization is Domain 1 task 1.4, design a multi-account AWS environment: two original lessons, approximately 24-30 approved claims, and exactly five original scenario questions (three single-response, two multiple-response), with internal option rationales, authoritative AWS citations, answer-uniqueness review, and separate source/claim/question-content/uniqueness/pack-release approvals. ADRs 0017-0020 and the file-backed schemas, canonicalization, immutable approval/invalidation, compiler, and external release-evidence contracts are accepted. Projection targets existing format 0.2 by default, or unchanged 0.3 only for a separately justified supported PNG; draft/review records do not enter learner packs or SQLite. No content or implementation exists yet. See [the 0.3B design acceptance](handoffs/aws-sap-c02-0.3b-design-acceptance.md).
 
 ## 0.3C — Agent-assisted construction
 

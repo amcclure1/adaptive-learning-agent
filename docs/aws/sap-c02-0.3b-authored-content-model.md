@@ -1,6 +1,8 @@
 # SAP-C02 0.3B Authored-Content Model
 
-Status: final design proposal; no content records implemented
+Status: accepted implementation contract; no content records implemented
+
+This document defines lifecycle semantics. Exact record fields, controlled vocabularies, identity/revision rules, and canonical digests are normative in [the 0.3B schema contract](sap-c02-0.3b-schemas.md). ADRs 0017–0020 are Accepted; acceptance does not authorize content creation or implementation.
 Design date: 2026-07-18
 Pilot: `aws-sap-c02-org-04-pilot`
 
@@ -42,7 +44,7 @@ An artifact may be structurally valid and still have `review: pending`. A histor
 | Claim | lifecycle `draft`; validation `not_run` | review `approved`; lifecycle `active` | `changes_requested`, `rejected`, `stale`, `superseded`, `invalidated` |
 | Question design specification | lifecycle `draft`; validation `not_run` | review `approved_for_drafting` recorded as a design decision | `changes_requested`, `superseded`, `invalidated` |
 | Question draft | lifecycle `draft`; validation `not_run`; content/uniqueness reviews `pending` | both question-content and uniqueness approvals current | `changes_requested`, `rejected`, `superseded`, `invalidated` |
-| Lesson draft | lifecycle `draft`; validation `not_run`; content review `pending` | lesson/content approval current | `changes_requested`, `superseded`, `invalidated` |
+| Lesson draft | lifecycle `draft`; validation `not_run`; content review `pending` | immutable lesson-content review current | `changes_requested`, `superseded`, `invalidated` |
 | Release candidate | release `not_compiled` or `compiled` | pack-release approval over exact compiled digest | `blocked`, `superseded`; `activated` only after approval |
 
 `approved_for_drafting` does not approve a future question. It only permits the design specification to be realized as a new draft.
@@ -123,7 +125,7 @@ A design specification is authoring-only and contains no final stem, final optio
 - intended difficulty;
 - ambiguity, similarity, freshness, and review risks.
 
-Design approval permits drafting only. A material design change after a question exists triggers impact review for that question.
+Specification finalization permits drafting only and is not an authority-bearing content approval. A material design change after a question exists triggers impact review for that question.
 
 ## Final question record
 
@@ -139,7 +141,7 @@ The future learner-ready question record must support:
 | `keyed_answer` | Exact label or set; never exposed before submission |
 | `selection_rule` | Single response or explicit `select_n` matching the key count |
 | `explanation` | Learner-facing post-answer explanation |
-| `distractor_rationales` | One record per non-key option with category, failed requirement, claims, and factual rationale |
+| `option_rationales` | One internal record per option, including keyed options, with category, requirement links, claims, and factual rationale |
 | `requirement_matrix` | Every material requirement mapped to the key and every option's satisfy/fail/not-applicable result |
 | `claim_ids` | Only current approved claims; scenario assumptions distinguished |
 | `blueprint_refs` | Blueprint ID/version and matched features |
@@ -167,4 +169,4 @@ Deterministic tooling may find empty cells, multiple all-satisfying options, mis
 
 ## Change and invalidation behavior
 
-Records are append/supersede rather than silently overwritten after approval. Changes compute an impact set using IDs and digests. Historical decisions remain readable but become ineligible when prerequisites are stale or invalid. See [the approval model](sap-c02-0.3b-approval-model.md) for the exact layer consequences.
+Records are append/supersede rather than silently overwritten after approval. An editable draft may change only with expected-prior-digest checking; the edit invalidates approvals targeting its former digest. Immutable revisions receive a new revision number and `supersedes` reference. Changes compute an impact set using IDs and digests. Historical decisions remain readable but become ineligible when prerequisites are stale or invalid. See [the approval model](sap-c02-0.3b-approval-model.md) for the exact layer consequences.

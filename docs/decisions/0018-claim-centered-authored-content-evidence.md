@@ -33,7 +33,7 @@ Questions reference approved claim IDs. Key and distractor rationales identify t
 - Factual defects can be corrected and impact-traced independently of prose.
 - Applicability and freshness become explicit rather than hidden in author memory.
 - Claim review adds editorial work and stable-ID/version requirements.
-- Full claim records remain authoring-workspace records under ADR 0017's proposal; released packs retain learner-facing citations and explanations, while the release-evidence manifest preserves the claim chain.
+- Full claim records remain authoring-workspace records under ADR 0017; released packs retain learner-facing citations and explanations, while the release-evidence manifest preserves the claim chain.
 
 ## Alternatives considered
 

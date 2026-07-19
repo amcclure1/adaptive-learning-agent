@@ -1,11 +1,13 @@
 # SAP-C02 0.3B Human Review Plan
 
-Status: checklist template; all content decisions pending
+Status: accepted checklist contract; all content decisions pending
 Design date: 2026-07-18
 
 ## Review objective
 
 Human review must establish authority, factual accuracy, architectural quality, originality, distractor quality, answer uniqueness, compilation fidelity, rights, and release suitability for the exact two-lesson/five-question `SAP-ORG-04` pilot. This template records no content approval and names no reviewer.
+
+Decisions use the immutable record and exact-digest rules in [the schema contract](sap-c02-0.3b-schemas.md) and [approval model](sap-c02-0.3b-approval-model.md). Reviewer contact details and sensitive personnel information are neither required nor permitted in public artifacts.
 
 ## Reviewer roles
 
@@ -141,3 +143,5 @@ Repeat for Q-01 through Q-05. Content and uniqueness decisions are recorded sepa
 ## Review outcomes
 
 Allowed decisions are `approved`, `changes_requested`, or `rejected`. An unresolved issue cannot be recorded as approval. Revisions create a new digest and invalidate affected downstream decisions according to [the approval model](sap-c02-0.3b-approval-model.md). All rows in this template remain pending until a later authorized content/review task supplies exact artifacts and human decisions.
+
+One qualified person may fill multiple roles when each role is recorded separately. The artifact author cannot approve that artifact, a person who materially authors or rewrites a question cannot approve its answer uniqueness, and final release review must confirm all required earlier approvals and reviews.

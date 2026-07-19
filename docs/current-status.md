@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / 0.3B design complete and implementation gated
+Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / 0.3B design contract accepted and implementation gated
 Updated: 2026-07-19
 
 ## Released baseline
@@ -68,7 +68,7 @@ The documentation-only 0.3A manual research and architecture exercise is accepte
 
 0.3A produced a rights classification, independent assessment blueprint, complete high-level learning architecture, cross-domain dependency model, five realization examples, capability-discovery report, evidence-backed question policy, bounded pilot proposal, and Subject Builder automation-gap analysis. Structural exam identity, domain, format, and response-rule evidence is high confidence. The overall blueprint is medium confidence because ten first-party public samples cannot establish universal scenario/distractor/difficulty behavior, official practice material was not accessed, and official sample-question reuse rights remain analysis-only pending a specific grant or authorized rights review.
 
-The accepted 0.3B slice is Domain 1 task 1.4 / `SAP-ORG-04`, design a multi-account AWS environment: two original lessons, approximately 24-30 approved claims, and exactly five future original scenario questions (three single-response and two multiple-response). The exact proposed implementation boundary is designed: file-backed authoring records; atomic source-bound claims; distinct source, claim, question-content, uniqueness, and pack-release approvals; deterministic validation; and compilation into existing format 0.2 by default, or unchanged format 0.3 only for a separately justified supported PNG. Draft/review records remain outside installed packs and SQLite. Four focused ADRs 0017-0020 are Proposed and require later acceptance before implementation. See [the pilot proposal](aws/sap-c02-0.3b-pilot-proposal.md) and [final design handoff](handoffs/aws-sap-c02-0.3b-final-design.md).
+The accepted 0.3B slice is Domain 1 task 1.4 / `SAP-ORG-04`, design a multi-account AWS environment: two original lessons, approximately 24-30 approved claims, and exactly five future original scenario questions (three single-response and two multiple-response). ADRs 0017-0020 are Accepted, and the implementation contract now fixes the file-backed workspace, closed record schemas, canonical digests, immutable approvals and invalidation, validation reports, deterministic compiler, release-evidence manifest, format-0.2 projection, reviewer conflicts, learner-explanation boundary, and text-only default. Draft/review records remain outside installed packs and SQLite. Acceptance authorizes neither implementation nor content. See [the pilot proposal](aws/sap-c02-0.3b-pilot-proposal.md), [final design handoff](handoffs/aws-sap-c02-0.3b-final-design.md), and [design acceptance](handoffs/aws-sap-c02-0.3b-design-acceptance.md).
 
 No source/claim workspace, lesson, claim set, learner-ready question, compiler, pack, core behavior, SQLite state, Hermes change, MCP configuration, AWS account access, AWS resource, release, or tag was created by the 0.3A closure/0.3B design task.
 
@@ -85,4 +85,4 @@ No source/claim workspace, lesson, claim set, learner-ready question, compiler, 
 
 ## Deferred
 
-0.3B authored content/workspace/compiler/approval implementation, Subject Builder operations, AWS content, capability configuration, expansion beyond E1A/E7B, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remain deferred. The 0.3B design records and Proposed ADRs are not implemented runtime objects or pack-format commitments. No MCP server, connector, AWS access, or database change was added.
+0.3B authored content/workspace/compiler/approval implementation, Subject Builder operations, AWS content, capability configuration, expansion beyond E1A/E7B, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remain deferred. The accepted 0.3B design records and ADRs are contracts, not implemented runtime objects, pack content, or authorization to release. No MCP server, connector, AWS access, or database change was added.

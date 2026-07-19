@@ -48,7 +48,7 @@ No approval layer implies another, and pack-release approval cannot cure an inva
 
 ## Fixed implementation contract
 
-- Five authority-bearing approval types are fixed: `source`, `claim`, `question_content`, `answer_uniqueness`, and `pack_release`. Lesson-content and originality decisions use immutable review records with the same identity/digest/conflict discipline but do not create additional activation authority.
+- Five authority-bearing approval types are fixed: `source_approval`, `claim_approval`, `question_content_approval`, `answer_uniqueness_approval`, and `pack_release_approval`. Lesson-content and originality decisions use immutable review records with the same identity/digest/conflict discipline but do not create additional activation authority.
 - Approval records are append-only. A later revocation or supersession is a new immutable record referring to the earlier approval; the earlier bytes never change. Current status is derived from the record graph.
 - Public reviewer identity requires only a name or stable reviewer ID, role, bounded qualification summary, and conflict declaration. Contact details and sensitive personnel data are forbidden.
 - A single qualified person may occupy multiple permitted roles; no quorum or mandatory second human is required for the first pilot. The author and uniqueness-reviewer separation remains mandatory.

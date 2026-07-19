@@ -188,4 +188,4 @@ These are editorial horizons, not implemented timers.
 
 The repository user accepted task 1.4 / `SAP-ORG-04`, the two-lesson/approximately 24–30-claim envelope, the 3-single/2-multiple mix, public-source-only research, and deferral of MCP/AWS-account access on 2026-07-18. See [the 0.3A acceptance](../handoffs/aws-sap-c02-0.3a-acceptance.md).
 
-A later explicitly authorized 0.3B content task may draft against these specifications only after creating the file-backed source/claim workspace and applying the separate approval and validation models. Final stems, options, keys, explanations, claims, lessons, pack compilation, installation, and activation remain pending.
+A later explicitly authorized 0.3B content task may draft against these specifications only through the accepted [workspace](sap-c02-0.3b-authoring-workspace.md), [schemas](sap-c02-0.3b-schemas.md), [approval](sap-c02-0.3b-approval-model.md), and [validation](sap-c02-0.3b-validation-plan.md) contracts. Final stems, options, keys, explanations, claims, lessons, pack compilation, installation, and activation remain pending.

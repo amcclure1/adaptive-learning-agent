@@ -1,157 +1,88 @@
 # AWS SAP-C02 0.3B Final Design Handoff
 
-Status: final design complete; Proposed ADR acceptance and separate implementation/content authorization required
+Status: design and implementation contract accepted; content and implementation require separate authorization
 Design date: 2026-07-18
-Pilot: `aws-sap-c02-org-04-pilot`
 
 ## Outcome
 
-0.3A is accepted and closed. The exact proposed 0.3B implementation boundary is designed without creating sources, claims, lessons, learner-ready questions, packs, tools, schemas, SQLite migrations, Hermes changes, MCP configuration, AWS access/resources, releases, or tags.
+The documentation-only 0.3B design gate is complete. ADRs 0017–0020 are Accepted, and the workspace, record schemas, canonical digests, approval/invalidation behavior, validation reports, deterministic compiler, release evidence, format projection, reviewer rules, and diagram gate are sufficiently fixed for later implementation.
 
-## Accepted 0.3A baseline
+No AWS source record, claim, lesson, question, option, key, rationale, pack, authoring tool, production-core change, SQLite change, Hermes/MCP change, credential/account/resource action, release, or tag was created.
 
-The repository user explicitly accepted:
+## Accepted baseline and pilot boundary
 
-1. AWS Certified Solutions Architect - Professional, `SAP-C02`, as the current target.
-2. The official-source/exam identity baseline as of 2026-07-18.
-3. Assessment blueprint `0.3A.1` with overall medium confidence.
-4. Fail-closed analysis-only use of official exam-guide/sample-question expression unless separate rights are established.
-5. Original assessment grammar without protected/recalled expression.
-6. The complete 22-objective high-level learning architecture.
-7. Progressive realization as the governing model.
-8. Domain 1 task 1.4 / `SAP-ORG-04` as the pilot.
-9. Public AWS documentation and ordinary public retrieval for the pilot.
-10. Deferral of MCP configuration and AWS-account access.
+The accepted 0.3A baseline remains authoritative. The pilot is Domain 1 task 1.4 / `SAP-ORG-04`, design a multi-account AWS environment, with:
 
-The controlling record is [the 0.3A acceptance handoff](aws-sap-c02-0.3a-acceptance.md).
+- exactly two future original lessons;
+- approximately 24–30 future approved atomic claims;
+- exactly five future original scenario questions: three single-response and two select-two multiple-response;
+- public authoritative AWS evidence and explicit reuse classifications;
+- text-only delivery by default;
+- no official, recalled, dumped, or copied exam-question expression.
 
-## Fixed pilot boundary
+The five accepted question specifications remain design records only. They contain no learner-ready stems, options, keys, or explanations and grant no content or uniqueness approval.
 
-- Domain 1 task 1.4 only: design a multi-account AWS environment.
-- Primary objective `SAP-ORG-04`, with bounded `SAP-FND-01`, `SAP-FND-02`, and `SAP-ORG-02` bridges.
-- Two original cited lessons.
-- Approximately 24–30 approved atomic claims.
-- Exactly five original scenario questions: three single-response and two select-two multiple-response.
-- No diagram by default. Existing static-PNG support is available only after a separate material-need and source/rights/accessibility/non-leakage review.
-- No AWS account, lab, private documentation, authenticated Skill Builder material, MCP installation, or complete Domain 1/SAP-C02 claim.
+## Authoring ownership
 
-## Proposed authored-content architecture
+The canonical workspace is `authoring/aws-sap-c02-org-04/`, with explicit directories for sources, claims, lessons, question specifications, questions, validations, approvals, and release artifacts. Drafts are editable with expected-prior-digest checks. Frozen revisions, approvals, candidates, and evidence are append-only. SQLite remains learner-state only.
 
-The canonical authoring system is a separate, Git-versioned, file-backed workspace. It owns source records, atomic claims, two lesson drafts, five design specifications, five question drafts, validation reports, immutable human approvals, and a release-evidence manifest. SQLite remains operational learner-state storage and gains no authoring tables.
+Credentials, browser state, temporary downloads, licensed source copies, copied question text, and non-public private notes are prohibited from the Git workspace. See [the workspace contract](../aws/sap-c02-0.3b-authoring-workspace.md).
 
-The lifecycle is:
+## Record and digest contract
 
-```text
-source candidate
-→ approved source
-→ claim draft
-→ approved claim
-→ question design specification
-→ question draft
-→ deterministic checks
-→ human question and uniqueness review
-→ pack approval
-→ activation
-```
+Stable artifact IDs are independent of filenames. Records bind artifact type, schema version, revision, status, UTC timestamps, author/provenance where appropriate, supersession, and canonical digest. Cross-references bind ID, type, revision, and digest.
 
-Lifecycle, validation, review, and release state are separate axes. Passing validation never changes human review state. Stale/invalidated dependencies block downstream content while preserving historical decisions.
+Canonical JSON uses UTF-8 without BOM, NFC normalization, LF, sorted object keys, preserved semantic array order, no insignificant whitespace, portable POSIX paths, canonical UTC timestamps, and artifact-type domain separation. Lesson digests bind normalized Markdown and its lesson record. Exact closed schemas and illustrative placeholders are in [the schema contract](../aws/sap-c02-0.3b-schemas.md).
 
-See [authored-content model](../aws/sap-c02-0.3b-authored-content-model.md) and [authoring workspace](../aws/sap-c02-0.3b-authoring-workspace.md).
+## Evidence and approval
 
-## Source and claim boundary
+Claims are atomic, precisely located, applicability-bounded, sensitivity/freshness classified, and source-bound. Derived recommendations cite approved premise claims and an explicit decision criterion. Lessons may introduce no material assertion outside approved claims.
 
-Source records include stable identity, publisher/title/URL, retrieval/revision dates, category, authority, rights/reuse, optional snapshot digest, freshness policy, and review state.
+Five independent human approval authorities exist: source, claim, question content, answer uniqueness, and pack release. Lesson-content and originality decisions are immutable review records and release prerequisites. Passing validation grants none of these.
 
-Claims are concise and atomic, with category, precise source locators, applicability, service/architecture scope, Region/account/configuration/time sensitivity, retrieval/review dates, explicit freshness horizon, reviewer, approval, and supersession/invalidation state. Derived architectural recommendations reference their approved factual-premise claims and decision criterion.
+Every decision targets exact bytes and dependencies. Historical decisions remain immutable; revocation and supersession are new records. Artifact authors cannot approve their artifact, and a person who materially authors or rewrites a question cannot approve answer uniqueness. See [the approval model](../aws/sap-c02-0.3b-approval-model.md).
 
-## Question and uniqueness boundary
+## Question and learner-teaching boundary
 
-Question design specifications remain separate from learner-ready records. A final question later contains original stem/options/key, selection rule, explanation, one rationale per distractor, requirement-option matrix, claim IDs, blueprint/objective mapping, originality review, question-content approval, and separate answer-uniqueness approval.
+A future final-question record contains original stem, ordered stable option IDs/text, keyed option IDs, question type, explicit selection count, learner explanation, one internal rationale per option, requirement-option matrix, claim/objective/blueprint references, citation projection, review states, and exact digest.
 
-The uniqueness reviewer must confirm explicit requirements, full key coverage, documented distractor failure, no hidden assumption, one stated prioritizer yielding one unique answer/set, current sensitive claims, and independent expression. Deterministic diagnostics can expose conflicts but cannot approve uniqueness.
+For multiple response, keyed count equals required selection count, all keyed selections are required, and existing exact-set/no-partial-credit scoring remains unchanged.
 
-The five specifications are finalized without stems/options/keys in [the accepted pilot specification](../aws/sap-c02-0.3b-pilot-proposal.md). They deliberately cover different judgments: organizational boundaries; workforce/permission assignment versus SCP guardrails; central audit evidence; central security/configuration visibility and delegated administration; and shared-resource ownership.
+The existing learner explanation may include concise learner-safe prose about why major alternatives fail. Internal rationales do not ship. If adequate teaching needs structured per-option output, work stops and proposes explicit format 0.4; no existing field may be overloaded.
 
-## Layered approval
+## Validation and invalidation
 
-Five independent human approvals are required:
+Deterministic validation checks closed schemas, identities/digests/references, source and claim eligibility, freshness arithmetic, required mappings/rationales, response counts, prohibited sources, reviewer conflicts, approval currency, projection exclusions, and reproducibility. It does not decide factual truth, authority, quality, originality, or uniqueness.
 
-1. source approval;
-2. claim approval;
-3. question-content approval;
-4. answer-uniqueness approval;
-5. pack-release approval.
+Generated reports record validator version, execution timestamp, workspace commit, checked artifact digests, structured findings/severity/blocking status, and output digest, with no human-approval implication. Release evidence binds the exact report used.
 
-Each targets exact artifact bytes/digests and records reviewer role/qualification, decision, scope, findings, dependencies, and time. A single qualified human may fill several roles if recorded separately, but an author cannot approve the same artifact and a human who materially writes a question cannot approve its uniqueness. Changes invalidate approvals according to the impact matrix in [the approval model](../aws/sap-c02-0.3b-approval-model.md).
+The exact invalidation matrix is fail-closed: material source/rights changes invalidate source authority; claim statement/locator/applicability/freshness changes invalidate claim approval; lesson mapping/prose changes invalidate lesson review; question stem/options/key/explanation/rationale changes invalidate content review; requirement/prioritizer/key/option/rationale changes invalidate uniqueness; and every compiled learner-facing byte or dependency change invalidates pack release.
 
-## Pack-format and compilation decision
+## Compiler and release evidence
 
-The proposed decision is:
+The compiler accepts one explicit project and closed selection. It rejects stale, invalidated, unapproved, prohibited, mismatched, or unsupported inputs; projects only approved learner-facing fields; emits byte-identical output for identical canonical inputs; and never installs, activates, publishes, commits, tags, or releases.
 
-- do not extend fixed format 0.3;
-- do not introduce format 0.4 for the first manual pilot;
-- keep draft/review records in the authoring workspace;
-- compile the approved learner-facing projection into existing format 0.2 by default;
-- use unchanged format 0.3 only if a separately approved supported PNG is demonstrably necessary.
+Format 0.2 is the default. Existing format 0.3 is allowed only when an independently reviewed static PNG passes the complete material-need, authority/rights, accessibility, non-leakage, and representation gate. No format 0.4 is created for this pilot.
 
-Installed packs contain the reviewed lessons/questions, response behavior, learner-facing explanations, citations/source summaries, rights/notices, and existing pack approval record. Full claim records, requirement matrices, internal distractor/originality/uniqueness findings, private notes, and most reviewer identities remain authoring-side. A release-evidence manifest outside the pack binds exact approved workspace records to the compiled pack digest.
+A candidate manifest binds all inputs, approvals, validations, compiler version, source commit, and candidate pack. A later pack-release approval targets that exact candidate/evidence. A separate deterministic final manifest binds the unchanged candidate and approval, avoiding a digest cycle. Evidence remains outside the installed pack. See [the compiler](../aws/sap-c02-0.3b-compiler-contract.md) and [release-evidence](../aws/sap-c02-0.3b-release-evidence.md) contracts.
 
-Concise learner-safe wrong-option teaching should ship post-answer when representable in the existing explanation. If structured per-option learner output or installed claim-chain verification becomes required, propose explicit format 0.4 rather than overloading format 0.2/0.3.
+## Authoring operation boundary
 
-## Tool boundary
+Accepted future operation names cover project initialization, source registration/validation/review, claim draft/validation/review, impact analysis, lesson and question-spec validation, question drafting/validation/content/uniqueness review, full-workspace validation, candidate compilation, pack review, and evidence finalization.
 
-The smallest proposed future operations cover source registration/review, claim create/validate/review/impact, question-spec validation/drafting/content review/uniqueness review, and pack compile/validate/release review. They are authoring operations, separate from the ten learner-study operations. They accept workspace-relative IDs/paths and controlled records; they expose no shell, unrestricted filesystem/network access, install, publish, or tag operation.
+They use closed requests and workspace-relative IDs/paths, expose no shell or unrestricted filesystem/network, and perform no install, publication, Git tag, or release. They are separate from the ten learner-study operations and are not registered in the learner Hermes plugin by default.
 
-## Deterministic versus human validation
-
-Structural validators check required fields, allowed vocabularies, IDs/digests, citation/source/claim/approval references, freshness arithmetic, applicability conflicts in controlled fields, complete distractor rationales/matrices, option/key/selection counts, prohibited sources, originality-review presence, compilation eligibility, projection exclusions, and reproducible output.
-
-Humans decide authority/rights, factual truth, claim atomicity/applicability, architecture quality, originality, distractor plausibility/fairness, completeness of requirements, answer uniqueness, editorial quality, and release suitability. See [validation plan](../aws/sap-c02-0.3b-validation-plan.md).
-
-## Human-review plan
-
-Required competencies cover source/rights review, AWS factual accuracy, multi-account architectural judgment, originality, distractor design, uniqueness, and pack release. All checklist entries remain pending because no content exists. See [human-review plan](../aws/sap-c02-0.3b-human-review-plan.md).
-
-## Proposed ADRs
+## Accepted ADRs
 
 - [ADR 0017: Authored-Content Workspace and Released-Pack Projection](../decisions/0017-authored-content-workspace-release-projection.md)
 - [ADR 0018: Claim-Centered Evidence for Authored Content](../decisions/0018-claim-centered-authored-content-evidence.md)
 - [ADR 0019: Layered Authored-Content Approval and Invalidation](../decisions/0019-layered-authored-content-approval.md)
 - [ADR 0020: Compile Authored Content to Existing Pack Formats for 0.3B](../decisions/0020-compile-authored-content-to-existing-pack-formats.md)
 
-All four are `Proposed`. This handoff records the final design but does not silently accept them or authorize implementation.
+## Implementation details still open
 
-## Unresolved decisions before implementation
+The accepted contracts intentionally leave only implementation choices: Python module/CLI layout, schema-validation technique, atomic-write/locking mechanics, compiler build-identity plumbing, reviewer assignment, authorized retrieval workflow, and separately authorized candidate/release versioning. None permits weakening the accepted boundary.
 
-1. Accept, revise, or reject ADRs 0017–0020.
-2. Fix exact JSON schemas, canonicalization, ID/version rules, and expected-prior-digest/atomic-write behavior.
-3. Fix the release-evidence manifest and compiler version/input/output contract.
-4. Name reviewers and record qualification/conflict/privacy rules.
-5. Decide whether concise per-option learner teaching fits the existing explanation field; otherwise propose format 0.4.
-6. Define the exact material-need test if a later author requests a static diagram.
+## Completion and next gate
 
-These are bounded implementation details. The ownership, approval layers, no-SQLite decision, author/study separation, default format-0.2 compilation path, and pilot counts are fixed as the Proposed design.
-
-## Documents created
-
-- [0.3A acceptance](aws-sap-c02-0.3a-acceptance.md)
-- [Authored-content model](../aws/sap-c02-0.3b-authored-content-model.md)
-- [Approval model](../aws/sap-c02-0.3b-approval-model.md)
-- [Authoring workspace](../aws/sap-c02-0.3b-authoring-workspace.md)
-- [Validation plan](../aws/sap-c02-0.3b-validation-plan.md)
-- [Human-review plan](../aws/sap-c02-0.3b-human-review-plan.md)
-- Proposed ADRs 0017–0020
-- This handoff
-
-## Explicitly not performed
-
-- no source/claim/question/lesson authoring;
-- no final learner-ready stems, options, keys, rationales, or pack;
-- no authoring workspace/compiler/tool/schema implementation;
-- no production core, pack parser, Hermes plugin, SQLite, scoring, or learner-state change;
-- no MCP setup, AWS credential/account/private source/lab/resource;
-- no release or tag.
-
-## Recommended next action
-
-Run a documentation-only ADR review to accept or revise ADRs 0017–0020 and the remaining schema/manifest decisions. Only after that review should a separately authorized manual 0.3B content task create file-backed source and claim records. It must stop before compilation/activation unless that exact later task is also authorized.
+[The design-acceptance record](aws-sap-c02-0.3b-design-acceptance.md) closes this documentation gate. A later explicit task may implement contract machinery without content, and a separate explicit task may author/review pilot content. Compilation, install, activation, and release remain independent authorization gates.

@@ -1,89 +1,70 @@
-# SAP-C02 0.3B Approval Model
+# SAP-C02 0.3B Approval and Invalidation Model
 
-Status: final design proposal; no approval storage implemented
-Design date: 2026-07-18
+Status: accepted implementation contract; no approval records created
 
 ## Governing rule
 
-Approval is an explicit human decision over exact artifact bytes and dependencies. Successful generation, model critique, deterministic validation, compilation, Git commit, or source authority does not imply approval. The drafting model must not approve its own source classifications, claims, lessons, questions, uniqueness determinations, packs, or activation.
+Approval is an explicit human decision over an exact artifact revision, canonical digest, and required dependency digests. Generation, retrieval, deterministic validation, compilation, model critique, or Git history never implies approval. Agent memory is non-authoritative.
 
-## Minimum approval record
+The record schema is fixed in [the schema contract](sap-c02-0.3b-schemas.md). An original approval record is immutable. Revocation or supersession creates a new record that refers to it; current status is derived from the append-only chain. Changed bytes are never silently retargeted.
 
-Each approval record is immutable and file-backed, with:
+## Authority-bearing approvals
 
-- stable approval ID and approval type;
-- artifact kind, ID, version, and SHA-256/canonical digest;
-- decision: `approved`, `changes_requested`, or `rejected`;
-- human reviewer identity and role;
-- qualification/conflict attestation;
-- reviewed scope and explicit exclusions;
-- prerequisite approval IDs and validator-report IDs;
-- UTC decision time;
-- findings, conditions, unresolved concerns, and notes visibility (`public`, `release_evidence`, or `private_local`);
-- invalidation state, trigger, time, and superseding approval ID when applicable.
+| Approval type | Exact target | Human judgment |
+| --- | --- | --- |
+| `source_approval` | Source revision/digest and intended use | Identity, authority, access, rights/reuse, freshness policy, prohibited-source disposition |
+| `claim_approval` | Atomic claim revision/digest and exact source dependencies | Truth, locator fit, applicability, sensitivities, freshness, derived reasoning |
+| `question_content_approval` | Stem, ordered options, key, explanation, internal rationales, mappings, claims, and originality result | Accuracy, objective fit, clarity, originality, realism, difficulty, distractor quality |
+| `answer_uniqueness_approval` | Exact question plus requirement-option matrix and content approval | Every stated requirement is tested, all keyed answers are necessary, distractors fail explicitly, no hidden assumption changes the answer |
+| `pack_release_approval` | Exact candidate pack and candidate evidence manifest | Completeness, compilation fidelity, earlier approvals, rights/notices, validation, exclusions, release suitability |
 
-An approval status stored on an artifact is a derived convenience and must resolve to the immutable decision record.
+Lesson content and question-originality review use immutable review records with the same exact-target and conflict discipline. They are pack-release prerequisites but do not create additional authority-bearing approval types.
 
-## Five separate approval layers
+## Required approval fields
 
-| Layer | Exact review target | Human judgment | Prerequisites | Does not approve |
-|---|---|---|---|---|
-| Source approval | Source record, retrieved identity/revision/digest, intended use, authority, rights, freshness policy | Provenance, authority, relevant scope, allowed use, rights classification, acceptable freshness | Structural source validation | Any factual claim or copied expression |
-| Claim approval | Atomic claim, citations/locators, applicability, sensitivities, derivation premises, freshness horizon | Truth, source fit, completeness of conditions, derived reasoning, current applicability | All cited sources approved and current; claim validation passed | Lesson/question prose or uniqueness |
-| Question content approval | Exact stem, ordered options, key, explanation, distractor rationales, claims, blueprint/objective mapping, originality record | Factual correctness, objective alignment, originality, clarity, realism, difficulty, distractor quality, no prohibited expression | Claims current/approved; question structural checks passed; originality review complete | Answer uniqueness or pack release |
-| Answer-uniqueness approval | Exact question plus requirement-option matrix and content approval | All requirements stated, key satisfies all, distractors fail explicitly, no hidden assumption, prioritizer selects one answer/set, current claims | Current question-content approval; freshness recheck; uniqueness diagnostics passed | Other questions or pack release |
-| Pack-release approval | Exact compiled pack digest plus release-evidence manifest and all content/dependency approvals | Scope completeness, editorial quality, rights/notices, compilation fidelity, non-claims, activation decision | All selected sources/claims/lessons/questions/content/uniqueness approvals current; pack validation passed | Later content/version or external publication beyond scope |
+Every authority-bearing decision contains:
 
-Lesson/content approval may be recorded as a content-review record analogous to question content approval. It is a prerequisite of pack release but does not replace any of the five listed layers.
+- approval ID and approval type;
+- target artifact ID, type, revision, and canonical digest;
+- exact dependency digests;
+- decision;
+- reviewer stable identity and public display name where appropriate;
+- reviewer role and concise qualification summary;
+- conflict-of-interest declaration;
+- scope, findings, and conditions;
+- UTC timestamp;
+- record kind and the superseded/revoked record ID when applicable.
 
-## Author and reviewer separation
+Allowed decisions are `approved`, `changes_requested`, `rejected`, and, only for an explicit revocation record, `revoked`. Conditions cannot defer a blocking issue while recording `approved`.
 
-Every artifact records its drafting identity. The approving identity must be distinguishable. For 0.3B, a single qualified human may approve source, claim, question-content, uniqueness, and pack-release layers if:
+## Reviewer independence and competency
 
-1. the model or another recorded identity drafted the artifacts;
-2. each reviewer role is recorded separately;
-3. the reviewer attests the relevant qualifications and conflicts;
-4. each decision is separately expressed over exact artifacts;
-5. no earlier approval is inferred from a later one.
+Required competencies are source and rights, AWS factual accuracy, multi-account architecture, question originality, distractor quality, answer uniqueness, and final release suitability. One qualified person may fill multiple roles when each decision is recorded separately, subject to both hard conflicts:
 
-Independent human reviewers are preferred for originality/uniqueness and pack release, but a second human is not an absolute pilot requirement. If a human authors or materially rewrites a question, that person cannot provide its uniqueness approval; another qualified human is required.
+- an artifact author cannot approve that artifact;
+- a person who materially authors or rewrites a question cannot approve its answer uniqueness.
 
-## Answer-uniqueness checklist
+Final release review confirms every required earlier approval and review. Public records need only a stable reviewer identity, role, qualification summary, and conflict declaration; contact details and sensitive personnel information are prohibited.
 
-The uniqueness reviewer must explicitly confirm, for each question:
+## Exact invalidation matrix
 
-- every material requirement and scenario assumption is stated;
-- the keyed answer or answer set satisfies every material requirement;
-- each distractor fails for a documented reason supported by current claims where factual;
-- no unstated assumption is needed to make the key win;
-- the explicit prioritizing criterion makes one answer or exact response set uniquely best;
-- response type, selection count, and keyed-answer cardinality agree;
-- time-, Region-, and configuration-sensitive claims remain current and applicable;
-- the item is independently expressed and not overly similar to reviewed official samples or unauthorized material;
-- learner-facing explanation does not repair ambiguity absent from the stem.
+Historical records remain preserved. `Invalidates` means the former approval is ineligible for future compilation; the replacement artifact requires a new review. When materiality is listed, an immutable impact-review record must justify a no-invalidation result while the approved target bytes remain unchanged.
 
-Any `no`, `uncertain`, or unresolved conflict results in `changes_requested` or `rejected`, never conditional activation.
+| Change | Source | Claim | Lesson/content | Question content | Answer uniqueness | Pack release |
+| --- | --- | --- | --- | --- | --- | --- |
+| Source identity, publisher, canonical URL, category, authority, rights, use, prohibited disposition, or materially relevant publication/retrieval data | Invalidates when material | Invalidates dependent claims if evidence identity/applicability/freshness changes | Invalidates through dependencies | Invalidates through dependencies | Invalidates through dependencies | Invalidates if any selected dependency or learner-facing byte changes |
+| Source note or access-limit text only, outside reviewed meaning and release projection | Impact review | Impact review | — | — | — | Invalidates only if a bound dependency digest changes |
+| Claim statement, locator, applicability, scope, Region/account/configuration/time sensitivity, freshness horizon, premises, or decision criterion | — | Invalidates | Invalidates mapped lesson review | Invalidates supporting questions | Invalidates supporting questions | Invalidates |
+| Lesson claim mapping, record field affecting projection, or Markdown prose | — | — | Invalidates | — | — | Invalidates |
+| Question stem, option ID/text/order, key, question type, selection count, explanation, internal rationale, claim/objective mapping, or citation projection | — | — | — | Invalidates | Invalidates | Invalidates |
+| Requirement, prioritizer, material constraint, requirement-option matrix, key, option, or rationale | — | — | — | Invalidates when question target changes | Invalidates | Invalidates |
+| Originality finding or content-review dependency | — | — | — | Invalidates | Invalidates by dependency | Invalidates |
+| Reviewer private/contact note excluded from target and all bound dependencies | — | — | — | — | — | No automatic invalidation; audit record required |
+| Validator version/report or deterministic blocking result | — | May block eligibility | May block eligibility | May block eligibility | May block eligibility | Invalidates if bound report digest changes or a required report fails |
+| Compiler version, projection rule, selected artifact, approval dependency, compiled learner-facing byte, candidate digest, or release-evidence dependency | — | — | — | — | — | Invalidates |
 
-## Invalidation matrix
+Freshness expiry does not rewrite a claim approval. It marks the approved revision stale, blocks dependents, and requires a new claim revision/approval or an explicitly modeled reaffirmation over unchanged bytes and refreshed dependency evidence.
 
-| Change | Source | Claim | Question content | Uniqueness | Pack release |
-|---|---:|---:|---:|---:|---:|
-| Source URL/title metadata correction with no identity/use effect | impact review | impact review | impact review | impact review | invalidated because compiled bytes changed |
-| Source content/revision/rights/authority change | invalidated | invalidated if dependent | invalidated if dependent | invalidated if dependent | invalidated |
-| Claim statement/category/citation/locator/applicability change | — | invalidated | invalidated if linked | invalidated if linked | invalidated |
-| Claim freshness expires | — | blocked/stale | blocked if linked | blocked if linked | blocked/invalidated before activation |
-| Design specification material requirement or blueprint mapping changes | — | — | invalidated for realized question | invalidated | invalidated |
-| Stem, requirement, option text/order, key, selection count, or rationale changes | — | — | invalidated | invalidated | invalidated |
-| Learner explanation/citation editorial change | — | impact review | invalidated | impact review; invalidate if reasoning changes | invalidated |
-| Reviewer/private note only, excluded from compiled/review target | — | — | no automatic invalidation | no automatic invalidation | no automatic invalidation; audit entry required |
-| Compiler/version/projection rule changes | — | — | impact review | impact review | invalidated; recompile/reapprove |
+## Release boundary
 
-All digest-covered release changes invalidate pack-release approval. Impact review may conclude that an upstream approval remains valid only when the reviewed artifact bytes and material meaning did not change; that conclusion is itself recorded.
-
-## Freshness behavior
-
-Freshness is evaluated at claim approval, question-content review, uniqueness review, and pack-release review. Expiry does not erase a prior approval. It marks the claim `stale`, blocks dependent content, and produces an impact report. Revalidation records the retrieved source identity/date and creates a new claim approval or explicit reaffirmation over the unchanged claim digest.
-
-## Activation boundary
-
-Compilation produces a candidate. Pack validation proves structure. Pack-release approval authorizes the exact candidate for activation. Activation/install is a separate deterministic action and must reject missing, stale, invalidated, mismatched, or self-approved dependencies. No activation operation is implemented by this design.
+Compilation produces an unapproved candidate. Pack-release approval targets that candidate and its candidate evidence. The final evidence manifest then binds the immutable release approval without altering the candidate. Installation or release is a separate, unimplemented and separately authorized operation.
