@@ -190,5 +190,5 @@ def register(ctx: Any) -> None:
     ctx.register_skill(
         "adaptive-learning",
         _REPOSITORY_ROOT / "skills" / "adaptive-learning" / "SKILL.md",
-        "Run the deterministic fixture study workflow through the Adaptive Learning Agent tools.",
+        "Study installed packs through deterministic Adaptive Learning Agent tools with concise sourced provenance.",
     )

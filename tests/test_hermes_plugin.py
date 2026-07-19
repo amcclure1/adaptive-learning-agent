@@ -160,6 +160,13 @@ class HermesPluginTests(unittest.TestCase):
                 imported.append(node.module)
         self.assertFalse(any(name.endswith(".storage") or name == "sqlite3" for name in imported))
 
+    def test_skill_presents_sourced_content_without_inventing_authority(self) -> None:
+        skill = (REPOSITORY_ROOT / "skills" / "adaptive-learning" / "SKILL.md").read_text(encoding="utf-8")
+        for required in ("official question ID", "project-authored", "show sources", "declared order"):
+            self.assertIn(required, skill)
+        self.assertIn("Never call project prose an official NCVEC explanation or commentary", skill)
+        self.assertIn("Do not fetch the URL", skill)
+
 
 if __name__ == "__main__":
     unittest.main()
