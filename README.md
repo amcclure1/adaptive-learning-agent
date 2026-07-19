@@ -4,25 +4,25 @@ Adaptive Learning Agent is a lightweight, local-first, agent-native learning sys
 
 ## Status
 
-**Pre-alpha — version 0.2.0-alpha.1 is published; the unreleased 0.2B format-0.3 asset candidate has final acceptance PASS.**
+**Pre-alpha — version 0.2.0-alpha.1 is published; the release-ready 0.2B format-0.3 asset candidate has final acceptance PASS.**
 
 The deterministic version-0.1 core is complete. The installed-package suite passes on Python 3.12, 3.13, and 3.14, and the Hermes v0.18.2 CLI/profile integration is verified on Windows. The included `fixture-basics` subject is synthetic acceptance-test data, not a real learning pack and not preparation for any certification or examination.
 
-The core supports strict formats 0.1, 0.2, and 0.3. Format 0.3 adds bounded local PNG assets, exact-byte validation/digesting, reviewed accessibility fallbacks, and logical installed-asset references without changing SQLite schema 1 or scoring. Anthony McClure approved the E7B10–E7B12/Figure E7-1 candidate after reviewing its source mapping, fidelity, redistribution disposition, accessibility text, mappings, content, rights, and activation. It is valid, installable, and final-acceptance PASS; no release or tag has been created. See [the review package](docs/reviews/amateur-extra-e7b-asset-content-review.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
+The core supports strict formats 0.1, 0.2, and 0.3. Format 0.3 adds bounded local PNG assets, exact-byte validation/digesting, reviewed accessibility fallbacks, and logical installed-asset references without changing SQLite schema 1 or scoring. Anthony McClure approved the E7B10–E7B12/Figure E7-1 candidate after reviewing its source mapping, fidelity, redistribution disposition, accessibility text, mappings, content, rights, and activation. It is valid, installable, and final-acceptance PASS. See [the release record](docs/releases/0.2.1-alpha.1.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
 
 ## Install from the tagged source
 
 Python 3.12 or newer and Git are required. Hermes v0.18.2 is additionally required for the verified conversational workflow.
 
 ```powershell
-git clone --branch v0.2.0-alpha.1 https://github.com/amcclure1/adaptive-learning-agent.git
+git clone --branch v0.2.1-alpha.1 https://github.com/amcclure1/adaptive-learning-agent.git
 Set-Location adaptive-learning-agent
 python -m venv .venv
 & .\.venv\Scripts\Activate.ps1
 python -m pip install .
 ```
 
-Detailed core validation and Hermes study instructions are in [the release record](docs/releases/0.2.0-alpha.1.md#installation-and-use).
+Detailed core validation and Hermes study instructions are in [the release record](docs/releases/0.2.1-alpha.1.md#installation-and-use).
 
 ## Run the core tests
 
@@ -91,14 +91,14 @@ The first real pilot is the released United States Amateur Radio Extra E1A slice
 - `skills/adaptive-learning/`: minimal deterministic fixture workflow guidance.
 - `packs/fixture-basics/`: synthetic functional pack used by acceptance tests.
 - `packs/amateur-extra-e1a/`: approved sourced E1A pilot with two lessons and eleven official questions.
-- `packs/amateur-extra-e7b/`: pending-review format-0.3 candidate with three official questions and exact Figure E7-1 bytes; not installable.
+- `packs/amateur-extra-e7b/`: approved and installable format-0.3 pilot with three official questions and exact Figure E7-1 bytes.
 - `schemas/`: reserved standalone machine-readable contracts; schema version 1 currently lives in the core.
 - `tests/`: standard-library pack, storage, contract, vertical-slice, and direct adapter tests.
 - `user-data/`: ignored local operational state boundary.
 
 Start with [product principles](docs/product-principles.md), [current status](docs/current-status.md), and [project context](docs/project-context.md). The original design package is indexed in [the initial handoff](docs/handoffs/initial-design-package.md).
 
-Accepted next-phase architecture direction is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). The 0.2B E7B asset pilot is implemented and human-approved; final runtime/CI acceptance remains in progress. Later Subject Builder milestones remain separately gated.
+Accepted next-phase architecture direction is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). The 0.2B E7B asset pilot is implemented, human-approved, and final-acceptance PASS. The accepted 0.3B authored-content design is the next milestone and remains separately implementation-gated.
 
 ## Contributing
 

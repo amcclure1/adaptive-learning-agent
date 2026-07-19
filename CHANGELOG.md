@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.1-alpha.1] - 2026-07-19
+
 ### Added
 
 - Strict pack format 0.3 with ordered PNG assets, direct lesson/question references, standard-library structural/CRC validation, exact-byte digests, limits, accessibility lint, and component provenance/rights.
 - Core-issued `ala-pack-asset-v1` logical references and additive asset summaries/descriptors under the unchanged ten-operation contract 0.1.
-- A pending-review E7B10–E7B12 candidate using the exact official E7-1 DOCX member, source-mapping evidence, golden records, and a human review checklist.
+- An independently reviewed and approved E7B10–E7B12 pilot using the exact official E7-1 DOCX member, source-mapping evidence, golden records, and reviewed accessibility fallback.
 - Format-0.3 compatibility, security, digest, resolver, restart, challenge, conflict, JSON, and answer-safety tests.
 
 ### Changed
@@ -20,10 +22,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Security
 
 - Asset validation rejects unsafe/aliased paths, undeclared files, unsupported or malformed media, invalid CRCs, excessive count/size/dimensions, duplicate identities/content, unresolved references, stale logical references, and deterministic pre-answer leakage markers.
-
-### Pending
-
-- The E7B candidate remains non-installable until explicit human approval. Real Hermes acceptance, the final Python matrix/CI run, release-readiness closure, and any version/tag/release action have not occurred.
 
 ## [0.2.0-alpha.1] - 2026-07-19
 
@@ -59,6 +57,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Removed a redundant legacy license classifier that prevented installed-package builds with modern setuptools.
 
-[Unreleased]: https://github.com/amcclure1/adaptive-learning-agent/compare/v0.2.0-alpha.1...HEAD
+[Unreleased]: https://github.com/amcclure1/adaptive-learning-agent/compare/v0.2.1-alpha.1...HEAD
+[0.2.1-alpha.1]: https://github.com/amcclure1/adaptive-learning-agent/compare/v0.2.0-alpha.1...v0.2.1-alpha.1
 [0.2.0-alpha.1]: https://github.com/amcclure1/adaptive-learning-agent/compare/v0.1.0...v0.2.0-alpha.1
 [0.1.0]: https://github.com/amcclure1/adaptive-learning-agent/releases/tag/v0.1.0
