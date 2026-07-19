@@ -1,0 +1,140 @@
+{
+  "fixture_type": "approved_transcription",
+  "source_id": "ncvec-extra-pool-fourth-errata-pdf",
+  "reviewed_by": "Anthony McClure",
+  "reviewed_at": "2026-07-19T01:12:29.8952607Z",
+  "questions": [
+    {
+      "id": "E1A01",
+      "prompt": "Why is it not legal to transmit a 3 kHz bandwidth USB signal with a carrier frequency of 14.348 MHz?",
+      "options": [
+        {"id": "A", "text": "USB is not used on 20-meter phone"},
+        {"id": "B", "text": "The lower 1 kHz of the signal is outside the 20-meter band"},
+        {"id": "C", "text": "14.348 MHz is outside the 20-meter band"},
+        {"id": "D", "text": "The upper 1 kHz of the signal is outside the 20-meter band"}
+      ],
+      "correct_option_ids": ["D"],
+      "printed_locator": "[97.305, 97.307(b)]"
+    },
+    {
+      "id": "E1A02",
+      "prompt": "When using a transceiver that displays the carrier frequency of phone signals, which of the following displayed frequencies represents the lowest frequency at which a properly adjusted LSB emission will be totally within the band?",
+      "options": [
+        {"id": "A", "text": "The exact lower band edge"},
+        {"id": "B", "text": "300 Hz above the lower band edge"},
+        {"id": "C", "text": "1 kHz above the lower band edge"},
+        {"id": "D", "text": "3 kHz above the lower band edge"}
+      ],
+      "correct_option_ids": ["D"],
+      "printed_locator": "[97.301, 97.305]"
+    },
+    {
+      "id": "E1A03",
+      "prompt": "What is the highest legal carrier frequency on the 20-meter band for transmitting a 2.8 kHz wide USB data signal?",
+      "options": [
+        {"id": "A", "text": "14.0708 MHz"},
+        {"id": "B", "text": "14.1002 MHz"},
+        {"id": "C", "text": "14.1472 MHz"},
+        {"id": "D", "text": "14.3490 MHz"}
+      ],
+      "correct_option_ids": ["C"],
+      "printed_locator": "[97.305, 97.307(b)]"
+    },
+    {
+      "id": "E1A04",
+      "prompt": "May an Extra class operator answer the CQ of a station on 3.601 MHz LSB phone?",
+      "options": [
+        {"id": "A", "text": "Yes, the entire signal will be inside the SSB allocation for Extra class operators"},
+        {"id": "B", "text": "Yes, the displayed frequency is within the 75-meter phone band segment"},
+        {"id": "C", "text": "No, the sideband components will extend beyond the edge of the phone band segment"},
+        {"id": "D", "text": "No, US stations are not permitted to use phone emissions below 3.610 MHz"}
+      ],
+      "correct_option_ids": ["C"],
+      "printed_locator": "[97.301, 97.305]"
+    },
+    {
+      "id": "E1A05",
+      "prompt": "Who must be in physical control of the station apparatus of an amateur station aboard any vessel or craft that is documented or registered in the United States?",
+      "options": [
+        {"id": "A", "text": "Only a person with an FCC Marine Radio license grant"},
+        {"id": "B", "text": "Only a person named in an amateur station license grant"},
+        {"id": "C", "text": "Any person holding an FCC issued amateur license or who is authorized for alien reciprocal operation"},
+        {"id": "D", "text": "Any person named in an amateur station license grant or a person holding an unrestricted Radiotelephone Operator Permit"}
+      ],
+      "correct_option_ids": ["C"],
+      "printed_locator": "[97.5]"
+    },
+    {
+      "id": "E1A06",
+      "prompt": "What is the required transmit frequency of a CW signal for channelized 60 meter operation?",
+      "options": [
+        {"id": "A", "text": "At the lowest frequency of the channel"},
+        {"id": "B", "text": "At the center frequency of the channel"},
+        {"id": "C", "text": "At the highest frequency of the channel"},
+        {"id": "D", "text": "On any frequency where the signal’s sidebands are within the channel"}
+      ],
+      "correct_option_ids": ["B"],
+      "printed_locator": "[97.303(h)(1)]"
+    },
+    {
+      "id": "E1A07",
+      "prompt": "What is the maximum power permitted on the 2200-meter band?",
+      "options": [
+        {"id": "A", "text": "50 watts PEP (peak envelope power)"},
+        {"id": "B", "text": "100 watts PEP (peak envelope power)"},
+        {"id": "C", "text": "1 watt EIRP (equivalent isotropic radiated power)"},
+        {"id": "D", "text": "5 watts EIRP (equivalent isotropic radiated power)"}
+      ],
+      "correct_option_ids": ["C"],
+      "printed_locator": "[97.313(k)]"
+    },
+    {
+      "id": "E1A08",
+      "prompt": "If a station in a message forwarding system inadvertently forwards a message that is in violation of FCC rules, who is primarily accountable for the rules violation?",
+      "options": [
+        {"id": "A", "text": "The control operator of the packet bulletin board station"},
+        {"id": "B", "text": "The control operator of the originating station"},
+        {"id": "C", "text": "The control operators of all the stations in the system"},
+        {"id": "D", "text": "The control operators of all the stations in the system not authenticating the source from which they accept communications"}
+      ],
+      "correct_option_ids": ["B"],
+      "printed_locator": "[97.219]"
+    },
+    {
+      "id": "E1A09",
+      "prompt": "Except in some parts of Alaska, what is the maximum power permitted on the 630-meter band?",
+      "options": [
+        {"id": "A", "text": "50 watts PEP (peak envelope power)"},
+        {"id": "B", "text": "100 watts PEP (peak envelope power)"},
+        {"id": "C", "text": "1 watt EIRP (equivalent isotropic radiated power)"},
+        {"id": "D", "text": "5 watts EIRP (equivalent isotropic radiated power)"}
+      ],
+      "correct_option_ids": ["D"],
+      "printed_locator": "[97.313(l)]"
+    },
+    {
+      "id": "E1A10",
+      "prompt": "If an amateur station is installed aboard a ship or aircraft, what condition must be met before the station is operated?",
+      "options": [
+        {"id": "A", "text": "Its operation must be approved by the master of the ship or the pilot in command of the aircraft"},
+        {"id": "B", "text": "The amateur station operator must agree not to transmit when the main radio of the ship or aircraft is in use"},
+        {"id": "C", "text": "The amateur station must have a power supply that is completely independent of the main ship or aircraft power supply"},
+        {"id": "D", "text": "The amateur station must operate only in specific segments of the amateur service HF and VHF bands"}
+      ],
+      "correct_option_ids": ["A"],
+      "printed_locator": "[97.11]"
+    },
+    {
+      "id": "E1A11",
+      "prompt": "What licensing is required when operating an amateur station aboard a US-registered vessel in international waters?",
+      "options": [
+        {"id": "A", "text": "Any amateur license with an FCC Marine or Aircraft endorsement"},
+        {"id": "B", "text": "Any FCC-issued amateur license"},
+        {"id": "C", "text": "Only General class or higher amateur licenses"},
+        {"id": "D", "text": "An unrestricted Radiotelephone Operator Permit"}
+      ],
+      "correct_option_ids": ["B"],
+      "printed_locator": "[97.5]"
+    }
+  ]
+}
