@@ -100,6 +100,11 @@ SCHEMAS: dict[str, tuple[str, set[str]]] = {
         "resolution_id", "finding", "old_artifact", "new_artifact", "author_response",
         "change_summary", "response_disposition", "supporting_source_changes", "resolved_at",
     }),
+    "author_self_audit": ("ala.authoring.author-self-audit.v1", {
+        "audit_id", "protocol_version", "target_project_id", "target_workspace_commit",
+        "target_artifacts", "artifact_checks", "identified_concerns", "author_revisions_made",
+        "unresolved_concern_ids", "completion_status", "human_approval_implication",
+    }),
 }
 
 ARTIFACT_TYPES = frozenset(SCHEMAS)
@@ -246,6 +251,7 @@ def validate_record(record: dict[str, Any], *, markdown: str | None = None, veri
         "review": "review_id", "validation_report": "validation_id", "release_candidate": "candidate_id",
         "ai_verification_run": "verification_id", "verification_finding": "finding_id",
         "finding_resolution": "resolution_id",
+        "author_self_audit": "audit_id",
     }.get(artifact_type)
     if identity_field and record[identity_field] != record["artifact_id"]:
         fail(f"{identity_field} must equal artifact_id.", field=identity_field)
@@ -797,6 +803,57 @@ def _validate_finding_resolution(record: dict[str, Any], _: str | None) -> None:
         fail("Accepted or modified resolutions require a changed artifact digest.")
     _string_list(record["supporting_source_changes"], "supporting_source_changes")
     _timestamp(record["resolved_at"], "resolved_at")
+
+
+def _validate_author_self_audit(record: dict[str, Any], _: str | None) -> None:
+    _text(record["protocol_version"], "protocol_version")
+    _id(record["target_project_id"], "target_project_id")
+    if not isinstance(record["target_workspace_commit"], str) or not re.fullmatch(r"[0-9a-f]{40}", record["target_workspace_commit"]):
+        fail("target_workspace_commit must be a full lowercase Git commit.", field="target_workspace_commit")
+    if not isinstance(record["target_artifacts"], list) or not record["target_artifacts"]:
+        fail("target_artifacts must be a non-empty array.", field="target_artifacts")
+    targets = []
+    for index, item in enumerate(record["target_artifacts"]):
+        targets.append(validate_reference(item, f"target_artifacts[{index}]"))
+    if len({(item["artifact_type"], item["artifact_id"], item["revision"], item["canonical_digest"]) for item in targets}) != len(targets):
+        fail("target_artifacts must not contain duplicates.", field="target_artifacts")
+    if not isinstance(record["artifact_checks"], list):
+        fail("artifact_checks must be an array.", field="artifact_checks")
+    check_targets = []
+    check_names = {
+        "source_reopen", "exceptions_and_exclusions", "classification", "sensitivity",
+        "recommendation_premises", "contradictions", "falsification",
+    }
+    for index, item in enumerate(record["artifact_checks"]):
+        check = _object(item, f"artifact_checks[{index}]", {"target", "checks", "notes"})
+        check_targets.append(validate_reference(check["target"], f"artifact_checks[{index}].target"))
+        checks = _object(check["checks"], f"artifact_checks[{index}].checks", check_names)
+        for name, result in checks.items():
+            entry = _object(result, f"artifact_checks[{index}].checks.{name}", {"completed", "evidence", "concerns"})
+            if not isinstance(entry["completed"], bool):
+                fail("Self-audit check completion must be boolean.")
+            _string_list(entry["evidence"], f"artifact_checks[{index}].checks.{name}.evidence")
+            _string_list(entry["concerns"], f"artifact_checks[{index}].checks.{name}.concerns", sorted_unique=True)
+        _text(check["notes"], f"artifact_checks[{index}].notes", nullable=True)
+    if check_targets != targets:
+        fail("artifact_checks must cover target_artifacts exactly and in order.", field="artifact_checks")
+    for field in ("identified_concerns", "author_revisions_made"):
+        if not isinstance(record[field], list):
+            fail(f"{field} must be an array.", field=field)
+        for index, item in enumerate(record[field]):
+            entry = _object(item, f"{field}[{index}]", {"concern_id", "target", "summary", "disposition"})
+            _id(entry["concern_id"], f"{field}[{index}].concern_id")
+            validate_reference(entry["target"], f"{field}[{index}].target")
+            _text(entry["summary"], f"{field}[{index}].summary")
+            _text(entry["disposition"], f"{field}[{index}].disposition")
+    _string_list(record["unresolved_concern_ids"], "unresolved_concern_ids", sorted_unique=True)
+    if record["completion_status"] not in {"in_progress", "completed", "blocked"}:
+        fail("completion_status is unsupported.", field="completion_status")
+    if record["completion_status"] == "completed":
+        if record["unresolved_concern_ids"] or any(not value["completed"] for item in record["artifact_checks"] for value in item["checks"].values()):
+            fail("A completed self-audit requires every check complete and no unresolved concerns.")
+    if record["human_approval_implication"] != "none":
+        fail("Author self-audit never implies human approval.")
 
 
 def seal_record(record: dict[str, Any], *, markdown: str | None = None) -> dict[str, Any]:

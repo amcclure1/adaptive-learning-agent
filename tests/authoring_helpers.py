@@ -188,8 +188,42 @@ def draft_and_freeze(ops: AuthoringOperations, project_id: str, record: dict[str
     })["artifact"]
 
 
+def self_audit_targets(ops: AuthoringOperations, project_id: str, targets: list[dict[str, Any]], suffix: str) -> list[dict[str, Any]]:
+    results = []
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for target in targets:
+        grouped.setdefault(target["author"]["identity"], []).append(target)
+    check_names = ("source_reopen", "exceptions_and_exclusions", "classification", "sensitivity", "recommendation_premises", "contradictions", "falsification")
+    for group_index, (author_id, authored) in enumerate(sorted(grouped.items())):
+        refs = [reference(item) for item in authored]
+        audit_id = f"audit-{suffix.replace('_', '-')}-{group_index + 1}"
+        record = {
+            "schema_version": "ala.authoring.author-self-audit.v1", "artifact_id": audit_id,
+            "artifact_type": "author_self_audit", "revision": 1, "status": "immutable",
+            "created_at": REVIEW_TIMESTAMP, "modified_at": REVIEW_TIMESTAMP,
+            "author": author(author_id, "artifact_author"), "supersedes": None,
+            "audit_id": audit_id, "protocol_version": "ala-author-first-pass-quality-1",
+            "target_project_id": project_id, "target_workspace_commit": COMMIT,
+            "target_artifacts": refs,
+            "artifact_checks": [
+                {"target": ref, "checks": {name: {"completed": True, "evidence": ["Synthetic test check completed."], "concerns": []} for name in check_names}, "notes": None}
+                for ref in refs
+            ],
+            "identified_concerns": [], "author_revisions_made": [], "unresolved_concern_ids": [],
+            "completion_status": "completed", "human_approval_implication": "none", "canonical_digest": "0" * 64,
+        }
+        results.append(ops.create_author_self_audit({"project_id": project_id, "record": record})["author_self_audit"])
+    return results
+
+
 def verify_targets(ops: AuthoringOperations, project_id: str, targets: list[dict[str, Any]], suffix: str) -> dict[str, Any]:
     suffix = suffix.replace("_", "-")
+    for target in targets:
+        if target["artifact_type"] not in {"source", "claim", "lesson", "question_spec", "question"}:
+            continue
+        eligibility = ops.author_self_audit_eligibility({"project_id": project_id, "target": reference(target), "target_workspace_commit": COMMIT})
+        if not eligibility["eligible"]:
+            self_audit_targets(ops, project_id, [target], f"{suffix}-{target['artifact_id']}")
     report = ops.validate_project({
         "project_id": project_id, "as_of": "2030-01-02", "workspace_commit": COMMIT,
         "validation_id": f"val-pre-{suffix}", "executed_at": REVIEW_TIMESTAMP, "persist": True,

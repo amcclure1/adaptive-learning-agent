@@ -13,7 +13,7 @@ from adaptive_learning.errors import LearningError
 from adaptive_learning.schema import SCHEMA_VERSION
 from adaptive_learning.tool_contract import ToolContract
 
-from authoring_helpers import COMMIT, REVIEW_TIMESTAMP, TIMESTAMP, author, project_request, reviewer, source_record
+from authoring_helpers import COMMIT, REVIEW_TIMESTAMP, TIMESTAMP, author, project_request, reviewer, self_audit_targets, source_record
 
 
 class IndependentVerificationTests(unittest.TestCase):
@@ -25,6 +25,7 @@ class IndependentVerificationTests(unittest.TestCase):
         self.project = self.ops.initialize_project(project_request(self.project_id))["project"]
         draft = self.ops.add_or_update_draft({"project_id": self.project_id, "record": source_record("src-verify"), "expected_prior_digest": None, "markdown": None})["artifact"]
         self.source = self.ops.freeze_draft({"project_id": self.project_id, "artifact_type": "source", "artifact_id": "src-verify", "expected_draft_digest": draft["canonical_digest"], "modified_at": REVIEW_TIMESTAMP})["artifact"]
+        self_audit_targets(self.ops, self.project_id, [self.source], "verification-test")
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
@@ -130,6 +131,9 @@ class IndependentVerificationTests(unittest.TestCase):
         changed["modified_at"] = "2030-01-03T00:00:00Z"
         draft = self.ops.add_or_update_draft({"project_id": self.project_id, "record": changed, "expected_prior_digest": current_draft["canonical_digest"], "markdown": None})["artifact"]
         revised = self.ops.freeze_draft({"project_id": self.project_id, "artifact_type": "source", "artifact_id": "src-verify", "expected_draft_digest": draft["canonical_digest"], "modified_at": "2030-01-03T00:00:00Z"})["artifact"]
+        audit_result = self.ops.author_self_audit_eligibility({"project_id": self.project_id, "target": reference(revised), "target_workspace_commit": COMMIT})
+        self.assertFalse(audit_result["eligible"])
+        self.assertIn("author_self_audit_missing", audit_result["reasons"])
         result = self.ops.verification_eligibility({"project_id": self.project_id, "target": reference(revised), "require_approved_premises": False})
         self.assertFalse(result["eligible"])
         self.assertIn("verification_missing", result["reasons"])
@@ -166,6 +170,60 @@ class IndependentVerificationTests(unittest.TestCase):
         self.assertEqual(comparison["finding_delta"], 0)
         self.assertEqual(metrics["run_count"], 2)
         self.assertEqual(metrics["human_approval_implication"], "none")
+
+    def test_metrics_separate_stored_logical_duplicates_and_supersessions(self) -> None:
+        first_run = self._start("verify-metric-first")
+        first_finding = self.ops.add_verification_finding({"project_id": self.project_id, "verification_id": first_run["verification_id"], "finding": self._finding(first_run, "finding-metric-first")})["finding"]
+        first = self.ops.finalize_verification_run({
+            "project_id": self.project_id, "verification_id": first_run["verification_id"], "expected_run_digest": first_run["canonical_digest"],
+            "finding_references": [reference(first_finding)], "artifact_dispositions": [{"target": reference(self.source), "disposition": "revision_required", "finding_ids": [first_finding["finding_id"]], "notes": None}],
+            "unresolved_questions": [], "completed_at": REVIEW_TIMESTAMP,
+        })["verification_run"]
+        second_run = self._start("verify-metric-second")
+        duplicate = self._finding(second_run, "finding-metric-second")
+        duplicate["supersedes"] = reference(first_finding)
+        second_finding = self.ops.add_verification_finding({"project_id": self.project_id, "verification_id": second_run["verification_id"], "finding": duplicate})["finding"]
+        second = self.ops.finalize_verification_run({
+            "project_id": self.project_id, "verification_id": second_run["verification_id"], "expected_run_digest": second_run["canonical_digest"],
+            "finding_references": [reference(second_finding)], "artifact_dispositions": [{"target": reference(self.source), "disposition": "revision_required", "finding_ids": [second_finding["finding_id"]], "notes": None}],
+            "unresolved_questions": [], "completed_at": REVIEW_TIMESTAMP,
+        })["verification_run"]
+        metrics = self.ops.generate_experiment_metrics({"project_id": self.project_id, "run_references": [reference(first), reference(second)]})
+        self.assertEqual(metrics["stored_finding_record_count"], 2)
+        self.assertEqual(metrics["logical_finding_count"], 1)
+        self.assertEqual(metrics["exact_duplicate_record_count"], 1)
+        self.assertEqual(metrics["repeated_on_changed_target_count"], 0)
+        self.assertEqual(metrics["superseding_finding_record_count"], 1)
+
+    def test_self_audit_is_closed_immutable_and_exact_digest_bound(self) -> None:
+        eligibility = self.ops.author_self_audit_eligibility({"project_id": self.project_id, "target": reference(self.source), "target_workspace_commit": COMMIT})
+        self.assertTrue(eligibility["eligible"])
+        commit_stale = self.ops.author_self_audit_eligibility({"project_id": self.project_id, "target": reference(self.source), "target_workspace_commit": "f" * 40})
+        self.assertFalse(commit_stale["eligible"])
+        self.assertIn("author_self_audit_workspace_commit_stale", commit_stale["reasons"])
+        audit, _ = read_record(self.root / "authoring" / self.project_id / "self-audits" / "records" / "audit-verification-test-1.json")
+        validate_record(audit)
+        bad = copy.deepcopy(audit)
+        bad["artifact_checks"][0]["checks"]["falsification"]["unknown"] = True
+        with self.assertRaises(LearningError):
+            validate_record(bad, verify_digest=False)
+        stale = reference(self.source)
+        stale["canonical_digest"] = "f" * 64
+        with self.assertRaises(LearningError):
+            self.ops.author_self_audit_eligibility({"project_id": self.project_id, "target": stale, "target_workspace_commit": COMMIT})
+
+    def test_missing_self_audit_blocks_verification_and_never_approves(self) -> None:
+        report = self._report("before-audit-removal")
+        audit_path = self.root / "authoring" / self.project_id / "self-audits" / "records" / "audit-verification-test-1.json"
+        audit_path.unlink()
+        with self.assertRaisesRegex(LearningError, "self-audit"):
+            self._start("verify-without-audit", report=report)
+        self_audit_targets(self.ops, self.project_id, [self.source], "replacement-audit")
+        result = self.ops.author_self_audit_eligibility({"project_id": self.project_id, "target": reference(self.source), "target_workspace_commit": COMMIT})
+        self.assertTrue(result["eligible"])
+        self.assertFalse(result["human_approval_granted"])
+        with self.assertRaisesRegex(LearningError, "verification"):
+            self._human_decision()
 
     def test_consulted_source_registration_is_bounded_and_offline(self) -> None:
         run = self._start("verify-source")

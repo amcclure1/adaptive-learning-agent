@@ -13,6 +13,7 @@ from .approvals import create_decision, impact_analysis
 from .canonical import artifact_digest, canonical_json_file_bytes
 from .compiler import compile_candidate, finalize_release_evidence, load_candidate_pack, validate_selection
 from .schemas import ID_RE, validate_record
+from .self_audit import author_self_audit_eligibility, create_author_self_audit
 from .validation import validate_release_evidence, validate_workspace
 from .verification import (
     add_finding,
@@ -96,6 +97,17 @@ class AuthoringOperations:
         payload = dict(request)
         workspace = self._workspace(payload.pop("project_id"))
         return {"verification_run": create_verification_run(workspace, **payload), "approval_granted": False}
+
+    def create_author_self_audit(self, request: dict[str, Any]) -> dict[str, Any]:
+        self._closed(request, {"project_id", "record"})
+        return {
+            "author_self_audit": create_author_self_audit(self._workspace(request["project_id"]), request["record"]),
+            "approval_granted": False,
+        }
+
+    def author_self_audit_eligibility(self, request: dict[str, Any]) -> dict[str, Any]:
+        self._closed(request, {"project_id", "target", "target_workspace_commit"})
+        return author_self_audit_eligibility(self._workspace(request["project_id"]), target=request["target"], target_workspace_commit=request["target_workspace_commit"])
 
     def register_verification_source(self, request: dict[str, Any]) -> dict[str, Any]:
         self._closed(request, {"project_id", "verification_id", "expected_run_digest", "source", "modified_at"})

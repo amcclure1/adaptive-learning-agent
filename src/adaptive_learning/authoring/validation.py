@@ -13,6 +13,7 @@ from .approvals import current_decision
 from .schemas import seal_record, validate_record
 from .workspace import TYPE_DIRS, all_stored_records, atomic_write, reference, store_immutable
 from .canonical import canonical_json_file_bytes
+from .self_audit import author_self_audit_eligibility
 
 
 VALIDATOR_VERSION = "1.0.0"
@@ -136,6 +137,13 @@ def validate_workspace(
             findings.append(_finding("SOURCE_RIGHTS_UNRESOLVED", artifact, "rights_reuse", "Unresolved source rights block compilation."))
         if source["status"] != "draft" and current_decision(workspace, target=reference(source), decision_type="source_approval") is None:
             findings.append(_finding("SOURCE_APPROVAL_MISSING", artifact, "review_state", "A current source approval over this exact digest is required for release.", severity="information", blocking=False))
+
+    for artifact_type in ("source", "claim", "lesson", "question_spec", "question"):
+        for artifact_record in by_type.get(artifact_type, []):
+            eligibility = author_self_audit_eligibility(workspace, target=reference(artifact_record), target_workspace_commit=workspace_commit)
+            if not eligibility["eligible"]:
+                code = "AUTHOR_SELF_AUDIT_INCOMPLETE" if "author_self_audit_incomplete" in eligibility["reasons"] else "AUTHOR_SELF_AUDIT_MISSING"
+                findings.append(_finding(code, artifact_record["artifact_id"], "canonical_digest", "A completed author self-audit over this exact artifact digest is required before deterministic validation."))
 
     for claim in by_type.get("claim", []):
         artifact = claim["artifact_id"]

@@ -32,6 +32,7 @@ from authoring_helpers import (
     project_request,
     question_record,
     reviewer,
+    self_audit_targets,
     source_record,
     specification_record,
 )
@@ -532,7 +533,8 @@ class AuthoringInfrastructureTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             ops, _, _ = self.initialize(Path(temporary))
             source = ops.add_or_update_draft({"project_id": "synthetic-authoring", "record": source_record("src-test"), "expected_prior_digest": None, "markdown": None})["artifact"]
-            ops.add_or_update_draft({"project_id": "synthetic-authoring", "record": claim_record(source), "expected_prior_digest": None, "markdown": None})
+            claim = ops.add_or_update_draft({"project_id": "synthetic-authoring", "record": claim_record(source), "expected_prior_digest": None, "markdown": None})["artifact"]
+            self_audit_targets(ops, "synthetic-authoring", [source, claim], "draft-validation")
             validation = ops.validate_project({"project_id": "synthetic-authoring", "as_of": "2030-01-01", "workspace_commit": COMMIT, "validation_id": None, "executed_at": None, "persist": False})
             self.assertEqual(validation["result"], "passed")
             self.assertFalse({"SOURCE_APPROVAL_MISSING", "CLAIM_APPROVAL_MISSING"} & {item["code"] for item in validation["findings"]})

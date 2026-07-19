@@ -15,6 +15,7 @@ from adaptive_learning.errors import LearningError
 from .canonical import canonical_json_file_bytes
 from .schemas import ID_RE, VERIFICATION_DISPOSITIONS, VERIFICATION_SEVERITIES, seal_record
 from .workspace import all_stored_records, atomic_write, find_record, read_record, reference, store_immutable
+from .self_audit import author_self_audit_eligibility
 
 
 PROTOCOL_VERSION = "ala-independent-ai-verification-1"
@@ -65,6 +66,10 @@ def create_verification_run(
     checked = {_reference_key(item) for item in validation["checked_artifacts"]}
     for target in target_artifacts:
         target_record, _, _ = find_record(workspace, target)
+        if target_record["artifact_type"] in {"source", "claim", "lesson", "question_spec", "question"}:
+            audit = author_self_audit_eligibility(workspace, target=target, target_workspace_commit=target_workspace_commit)
+            if not audit["eligible"]:
+                raise LearningError("AUTHOR_SELF_AUDIT_REQUIRED", "A completed exact-digest author self-audit is required before independent verification.", details=audit)
         if _reference_key(target) not in checked:
             raise LearningError("DETERMINISTIC_VALIDATION_STALE", "The validation report does not cover an exact verification target.")
         if target_record["author"]["identity"] == verifier.get("identity"):
@@ -264,12 +269,56 @@ def experiment_metrics(workspace: Path, *, run_references: list[dict[str, Any]])
         if run["artifact_type"] != "ai_verification_run" or run["completion_status"] != "completed":
             raise LearningError("VERIFICATION_METRICS_INVALID", "Metrics require completed verification runs.")
         runs.append(run)
+    findings_by_id = {item["artifact_id"]: item for item in _all(workspace, "verification_finding")}
+    selected_findings = [findings_by_id[ref["artifact_id"]] for run in runs for ref in run["finding_references"]]
+    selected_ids = {item["artifact_id"] for item in selected_findings}
+    resolutions = [item for item in _all(workspace, "finding_resolution") if item["finding"]["artifact_id"] in selected_ids]
+
+    def semantic_key(item: dict[str, Any]) -> tuple[Any, ...]:
+        source = item["supporting_source"]
+        dependencies = tuple(sorted((dep["artifact_type"], dep["artifact_id"]) for dep in item["affected_dependencies"]))
+        return (
+            item["target"]["artifact_type"], item["target"]["artifact_id"], item["disputed_field"],
+            item["disputed_language"], item["category"], item["severity"], source["canonical_url"],
+            source["locator"], item["explanation"], item["required_action"], item["suggested_revision"],
+            dependencies, item["confidence"], item["blocking"],
+        )
+
+    groups: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
+    for finding in selected_findings:
+        groups.setdefault(semantic_key(finding), []).append(finding)
+    logical = [items[0] for items in groups.values()]
+    exact_duplicate_count = sum(
+        len(items) - len({(item["target"]["revision"], item["target"]["canonical_digest"]) for item in items})
+        for items in groups.values()
+    )
+    repeated_changed_target_count = sum(
+        max(0, len({(item["target"]["revision"], item["target"]["canonical_digest"]) for item in items}) - 1)
+        for items in groups.values()
+    )
+    def counts(items: list[dict[str, Any]], field: str, vocabulary: set[str] | None = None) -> dict[str, int]:
+        counter = Counter(item[field] if field != "artifact_type" else item["target"]["artifact_type"] for item in items)
+        keys = sorted(vocabulary or set(counter))
+        return {key: counter[key] for key in keys}
+    latest = runs[-1] if runs else None
     return {
         "run_count": len(runs),
         "target_artifact_count": sum(item["summary_counts"]["total_artifacts"] for item in runs),
-        "finding_count": sum(item["summary_counts"]["total_findings"] for item in runs),
-        "blocking_finding_count": sum(item["summary_counts"]["blocking_findings"] for item in runs),
-        "by_severity": {severity: sum(item["summary_counts"]["by_severity"][severity] for item in runs) for severity in VERIFICATION_SEVERITIES},
+        "stored_finding_record_count": len(selected_findings),
+        "logical_finding_count": len(logical),
+        "exact_duplicate_record_count": exact_duplicate_count,
+        "repeated_on_changed_target_count": repeated_changed_target_count,
+        "superseding_finding_record_count": sum(item["supersedes"] is not None for item in selected_findings),
+        "resolution_record_count": len(resolutions),
+        "stored_by_severity": counts(selected_findings, "severity", VERIFICATION_SEVERITIES),
+        "logical_by_severity": counts(logical, "severity", VERIFICATION_SEVERITIES),
+        "stored_by_category": counts(selected_findings, "category"),
+        "logical_by_category": counts(logical, "category"),
+        "stored_by_artifact_type": counts(selected_findings, "artifact_type"),
+        "logical_by_artifact_type": counts(logical, "artifact_type"),
+        "response_by_disposition": dict(sorted(Counter(item["response_disposition"] for item in resolutions).items())),
+        "residual_finding_record_count": latest["summary_counts"]["total_findings"] if latest else 0,
+        "per_run": [{"verification_id": item["verification_id"], "stored_finding_record_count": item["summary_counts"]["total_findings"], "blocking_finding_record_count": item["summary_counts"]["blocking_findings"]} for item in runs],
         "research_capabilities": sorted({"public_web" if item["independently_accessed_sources"] else "none" for item in runs}),
         "human_approval_implication": "none",
     }
