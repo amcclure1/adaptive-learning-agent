@@ -4,6 +4,8 @@ Status: manual research/design complete; human acceptance pending
 
 Research date: 2026-07-18
 
+Repository integration updated: 2026-07-18
+
 Target: AWS Certified Solutions Architect - Professional (`SAP-C02`)
 
 Implementation authority: none granted by this handoff
@@ -13,6 +15,21 @@ Implementation authority: none granted by this handoff
 Version 0.3A has been executed manually as the intended future Subject Builder workflow. It produced a reproducible official-source baseline, rights/reuse decisions, an assessment blueprint, a complete high-level learning architecture, cross-domain dependency structure, multiple progressive realizations, optional capability recommendations, an evidence-backed authored-question policy, a bounded 0.3B pilot proposal, and an automation-gap analysis.
 
 The work is complete in coverage and dependency structure, not authored educational content. It does not approve or activate 0.3B.
+
+## Repository integration update
+
+The concurrent E7B/format-0.3 work that was deliberately excluded from the original 0.3A documentation commits has since been completed as a coherent pre-approval checkpoint, validated, committed, and pushed on top of 0.3A:
+
+- `957fe21` — `feat: add static png pack format 0.3`;
+- `ffbf681` — `test: verify asset integrity and compatibility`;
+- `49662f6` — `content: add pending amateur extra e7b asset pilot`;
+- `c44976b` — `docs: finalize e7b review checkpoint`.
+
+At integration baseline `c44976b4295736cdf6573cace96691482124fe7f`, local `main` and `origin/main` matched and the working tree was clean. The complete standard-library suite passed 77/77 tests on the available CPython 3.14 environment.
+
+This subsequent work implements generic pack format 0.3 static-PNG support and adds an exact E7B10–E7B12/Figure E7-1 candidate. The candidate remains deliberately non-installable while human content review is pending. Independent-review PASS, release-readiness PASS, the final Python 3.12–3.14 matrix, hosted CI, real Hermes E7B acceptance, release, and tag remain absent. See [the 0.2B implementation handoff](amateur-extra-asset-0.2b-implementation.md), [human review package](../reviews/amateur-extra-e7b-asset-content-review.md), and [release-readiness handoff](amateur-extra-asset-0.2b-release-readiness.md).
+
+The integration does not alter the 0.3A assessment identity, evidence baseline, rights conclusions, blueprint, learning architecture, dependency model, realization plans, capability recommendations, proposed 0.3B AWS scope, or the requirement for separate human authorization before AWS content work.
 
 ## Verified assessment identity
 
@@ -111,9 +128,11 @@ Two official PDFs were downloaded temporarily to compute byte digests and inspec
 - [Project context](../project-context.md)
 - [AWS SAP-C02 pilot plan](../aws-sap-c02-pilot-plan.md)
 
-The README was not updated because it does not present detailed 0.3 near-term milestone status requiring correction.
+The 0.3A task did not update the README because it did not present detailed 0.3 near-term milestone status requiring correction. The subsequent 0.2B integration updated the README for its own format-0.3/E7B checkpoint.
 
-## Deliberately unchanged
+## 0.3A-specific change boundary
+
+The following remained unchanged **by the 0.3A research/design task itself**:
 
 - deterministic learning core, scoring, selection, scheduling, mastery, and state mutation;
 - SQLite schema and learner/runtime state;
@@ -123,7 +142,7 @@ The README was not updated because it does not present detailed 0.3 near-term mi
 - AWS account, credentials, data, resources, or billing;
 - releases and tags.
 
-Any unrelated working-tree changes present at delivery are outside this 0.3A documentation work and must not be attributed to or silently included with it.
+The later 0.2B commits are separately attributable: they implement format-0.3 static assets, add tests and a pending E7B candidate, and update the Hermes-facing fallback workflow. They do not implement Subject Builder operations or AWS content, modify SQLite schema 1 or scoring, access AWS, configure MCP, approve the E7B candidate, or create a release/tag. The earlier working-tree caveat is therefore resolved: those changes are now reviewed as a distinct committed checkpoint rather than left as unrelated uncommitted state.
 
 ## Human decisions required before 0.3B
 
