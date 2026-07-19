@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / SAP-C02 0.3B independently verified and awaiting human review
+Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / SAP-C02 0.3B current-digest pre-human gates complete
 Updated: 2026-07-19
 
 ## Released baseline
@@ -82,6 +82,10 @@ The SAP-ORG-04 repeat experiment preserved baseline A and independently created 
 
 The generic validator projects the latest current authored revision, requires exact-digest author self-audits, and preserves immutable history. All 151 tests pass locally on CPython 3.12.13, 3.13.14, and 3.14.6. SQLite schema 1, the ten learner operations, scoring, pack formats, Hermes, and MCP configuration remain unchanged.
 
+The separately authorized current-digest continuation is now complete. The author audit reopened all 17 official AWS sources and checked all 30 current claims, finding two material service-linked-role qualification gaps and one dependent-premise rebinding requirement. One author revision cycle created `clm-b-scp-ceiling` r2, `clm-b-scp-parent-chain` r3, and `clm-b-rec-pair-access-guardrail` r3. Exact target commit `bd84b01f3a6253ee0412823f3f30d7318652b09b` then passed deterministic validation. Two separate fresh full verification contexts each reopened all 17 URLs and reviewed all 47 current artifacts; both returned 47 verified, zero findings, and zero unresolved questions. The final closure run digest is `59d66aa533fc436a696c707c285a972a003cc91188e8e3afb6ae32b0a00959ec`.
+
+The declared-scope matrix records 20 concepts covered, two partially covered, and GuardDuty organization administration intentionally omitted. The exact review package is ready for qualified humans, but all 17 source and 30 claim approvals remain pending. The pre-human evidence is not approval or authorization for downstream authoring. See the [pre-human closure](handoffs/aws-sap-c02-0.3b-source-and-claim-prehuman-closure.md), [human-review handoff](handoffs/aws-sap-c02-0.3b-qualified-human-review-ready.md), and [concept matrix](aws/sap-c02-org-04-concept-coverage.md).
+
 No lesson, question specification, learner-ready question, candidate pack, installation, activation, publication, release, or tag was created. Core behavior, SQLite schema 1, the ten learner operations, scoring, pack formats, Hermes, MCP configuration, AWS credentials, and AWS resources remain unchanged.
 
 ## Known limitations
@@ -97,4 +101,4 @@ No lesson, question specification, learner-ready question, candidate pack, insta
 
 ## Deferred
 
-0.3B qualified human source and claim approval, lessons, questions, further reviews, and pack realization; the conversational Subject Builder adapter; capability configuration; expansion beyond E1A/E7B; scheduling; mastery; readiness; exam simulation; YAML; archives; export ergonomics; signing; marketplaces; broader Hermes distribution; hosted identity; servers; cloud deployment; and stronger local-process isolation remain deferred. Verified source/claim content is not approved content, an installed pack, or authorization to compile, activate, or release. No MCP server, connector, AWS access, or database change was added.
+0.3B qualified human source and claim approval, lessons, questions, further reviews, and pack realization; the conversational Subject Builder adapter; capability configuration; expansion beyond E1A/E7B; scheduling; mastery; readiness; exam simulation; YAML; archives; export ergonomics; signing; marketplaces; broader Hermes distribution; hosted identity; servers; cloud deployment; and stronger local-process isolation remain deferred. Current exact-digest self-audited and independently verified source/claim content is still not approved content, an installed pack, or authorization to compile, activate, or release. No MCP server, connector, AWS access, or database change was added.

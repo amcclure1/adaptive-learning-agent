@@ -49,3 +49,9 @@ Process integrity: **qualified pass**. Artifact freezing, exact references, immu
 ## Gate decision
 
 Accept ADR 0021 with the added normative author self-audit and corrected metrics. Do not retroactively manufacture self-audits for frozen baselines. Before lessons or questions, the current source/claim set must receive exact-digest self-audits under the accepted protocol, pass current deterministic validation and independent verification, and receive separately authorized qualified human approvals. That gate is not currently satisfied.
+
+## Post-experiment current-digest continuation
+
+The later, separately authorized continuation did not alter the experiment's comparative result or manufacture retrospective baseline evidence. It applied the accepted lifecycle prospectively to the then-current Baseline-B set. A full 47-target author audit found two decision-relevant SCP service-linked-role qualification gaps and one dependent-premise rebinding need. One new author cycle produced three claim revisions, then deterministic validation and two separate fresh full verification contexts closed with 47 verified and no finding.
+
+This later result satisfies the machine pre-human gates for exact content commit `bd84b01f3a6253ee0412823f3f30d7318652b09b`; it does not convert the experiment into evidence of improved first-pass quality, establish statistical independence, prove exhaustive correctness, or grant human approval. Exact details are in the [pre-human closure](../handoffs/aws-sap-c02-0.3b-source-and-claim-prehuman-closure.md).

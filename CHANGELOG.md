@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Completed the current-digest SAP-ORG-04 Baseline-B author self-audit, deterministic validation, separate full independent verification, and fresh full closure verification over 17 sources and 30 claims; both new AI runs closed 47 verified with zero finding and no approval implication.
+- Added an exact qualified-human review package, pre-human closure and review-ready handoffs, and a 23-row concept-coverage matrix recording 20 covered, two partial, and one intentionally omitted concept.
 - Accepted ADR 0021 and added a normative author first-pass protocol, closed immutable `author_self_audit` records, exact-digest eligibility, bounded create/query operations, and blocking validation/verification gates. Self-audit never grants approval.
 - Audited SAP-ORG-04 experiment integrity and reconciled 21 logical findings with 30 stored records, including nine additive binding-correction copies. Generic metrics now distinguish duplicates, changed-target repeats, supersessions, resolutions, and residuals.
 
@@ -21,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Narrowed two current SCP claims to principals subject to SCPs, explicitly recorded the service-linked-role exception, and rebound the dependent workforce-access recommendation to the corrected exact premise digest while preserving all prior revisions.
 - Deterministic authored-content validation now projects the latest current artifact revision and excludes explicitly superseded artifact IDs from current counts while preserving immutable history.
 - Source/claim human approval now requires a current completed independent-AI disposition with no unresolved blocking finding; verification never grants approval.
 - Advanced the SAP-C02 0.3B pilot only through source-and-claim drafting; no lessons, learner-ready questions, approvals, candidate pack, installation, activation, publication, release, or tag was created.

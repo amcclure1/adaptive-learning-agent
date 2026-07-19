@@ -1,92 +1,88 @@
-# SAP-C02 SAP-ORG-04 Source and Claim Review
+# SAP-C02 SAP-ORG-04 Current Source and Claim Review
 
-Status: pending independent human review
+Status: qualified human review ready; every human decision remains pending
 
-Review target: `authoring/aws-sap-c02-org-04/` at workspace validation commit `c80962c3e0689e3e07e45e0852c238715635e2ec`
+Date: 2026-07-19
 
-Validation report: [`val-org04-source-claim-20260719`](../../authoring/aws-sap-c02-org-04/validations/reports/val-org04-source-claim-20260719.json), digest `759126e3f5a802337adb797039b415105f1efde9330240bc8b53b2b905efb37e`
+Exact content target: `authoring/aws-sap-c02-org-04-baseline-b/` at `bd84b01f3a6253ee0412823f3f30d7318652b09b`
 
-This package contains 14 public official-AWS source drafts and 30 claim drafts. Deterministic validation passed with no findings, but it establishes only structural consistency. It does not establish factual truth, architectural correctness, rights approval, or human approval. The drafting model cannot approve its own work. Compilation eligibility remains false.
+Project record: revision 1, digest `6bf9547d03de697dd57b27d816484f4ee0605eb1c23e99f40fb4507709164d4d`
 
-## Reviewer instructions
+Evidence keys:
 
-For every source, review official AWS ownership, canonical URL, authority for the claims it supports, current applicability, rights/reuse treatment, retrieval and visible revision dates, locator reliability, learner-citation suitability, and whether a fresher or more primary source exists. Record `Approve`, `Revise`, or `Reject`, reviewer identity, and UTC timestamp only after completing all checks.
+- **A2:** [corrected current-set author self-audit](../../authoring/aws-sap-c02-org-04-baseline-b/self-audits/records/audit-baseline-b-prehuman-current-v2-20260719.json), digest `f3e8bceb41a07ef037ceec97df3042cd022ba8f9dfe5ebb1dd37656b930de84d`. It supersedes an audit that accidentally included one retired claim ID.
+- **V:** [current deterministic report](../../authoring/aws-sap-c02-org-04-baseline-b/validations/reports/val-baseline-b-prehuman-current-20260719.json), digest `5403bf6bd888494b05d6ab053f02ec8cbc06483997f2338923090c96b814d657`; passed with no blocker and 97 expected nonblocking approval-pending notices.
+- **C:** [fresh full closure run](../../authoring/aws-sap-c02-org-04-baseline-b/verifications/runs/verify-baseline-b-prehuman-closure-20260719.json), digest `59d66aa533fc436a696c707c285a972a003cc91188e8e3afb6ae32b0a00959ec`; 47 verified, zero findings, zero unresolved questions.
+- **H:** immutable historical [findings](../../authoring/aws-sap-c02-org-04-baseline-b/verifications/findings/) and [resolutions](../../authoring/aws-sap-c02-org-04-baseline-b/verifications/resolutions/). Counts in a row refer to records for that stable artifact ID; none targets that row's current digest.
+- Coverage references resolve through the [concept matrix](../aws/sap-c02-org-04-concept-coverage.md).
 
-For every claim, apply these columns:
+Self-audit, deterministic validation, and AI verification are evidence only. They grant no approval. A qualified human must review each exact row and create immutable source or claim decisions with identity, role, qualification summary, conflict declaration, scope, findings, conditions, and UTC timestamp. The artifact author cannot approve the artifact; the AI verifier cannot be listed as human approver.
 
-- **A:** atomicity and wording independence.
-- **E:** factual accuracy, source authority, and locator precision.
-- **S:** current applicability, scope/caveats, Region/account/configuration sensitivity, and freshness horizon.
-- **O:** relationship to `SAP-ORG-04` or its bounded bridges and learner usefulness.
-- **P:** premise sufficiency and explicit decision criterion for derived recommendations; `N/A` for factual or limitation claims.
+## Sources
 
-Each claim decision is independently `Approve`, `Revise`, or `Reject`. An approval must bind the exact artifact revision and digest. Do not edit these rows as approval records; use the immutable authoring approval operation after a separately authorized review continuation.
+| Exact source | Rev | Exact digest | Self-audit | Validation | AI disposition | Findings / resolutions | Coverage | Human decision / reviewer / UTC |
+|---|---:|---|---|---|---|---|---|---|
+| [`src-b-config-aggregate`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-config-aggregate/1.json) | r1 | `51ee56a0d70bfe69b477b76acffa6eafa4a6c81bf115450b886dbc0ae567a381` | Complete (A2) | Passed (V) | `verified` (C) | None current | Config aggregation / read-only | Pending / Pending / Pending |
+| [`src-b-config-authorization`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-config-authorization/1.json) | r1 | `7cb99d4f68b5a81bc1ad94fe7a4fb2eac257a71fb51db07752b9adb031532e7e` | Complete (A2) | Passed (V) | `verified` (C) | None current | Config aggregation / read-only | Pending / Pending / Pending |
+| [`src-b-delegated-admin`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-delegated-admin/1.json) | r1 | `8ad2c20f2ff5dc1bc8aa42a8c59cf315a8b42e05ac8de2f27b77ddc0171ead35` | Complete (A2) | Passed (V) | `verified` (C) | None current | Delegated administration | Pending / Pending / Pending |
+| [`src-b-domain1`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-domain1/1.json) | r1 | `60525c4b054bd14a292a55e773b07f23bc5a8f12aabc132dc305a90140e9530d` | Complete (A2) | Passed (V) | `verified` (C) | None current | Pilot objective scope | Pending / Pending / Pending |
+| [`src-b-identity-accounts`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-identity-accounts/1.json) | r1 | `fa5e5ad36349e22328f87772800dce45507aa950a5c6ab5c68d75ec8d4fd839a` | Complete (A2) | Passed (V) | `verified` (C) | None current | Workforce federation / assignments | Pending / Pending / Pending |
+| [`src-b-management-account`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-management-account/1.json) | r1 | `603a5aac9c45c132aa8620478878cc7c9bbc17ccf4718bb99a18c9f1b4c1c12e` | Complete (A2) | Passed (V) | `verified` (C) | None current | Management-account usage | Pending / Pending / Pending |
+| [`src-b-multiaccount-principles`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-multiaccount-principles/1.json) | r1 | `8d2d5f6bedb986f3c7c0d88b5a82408248ab7ff2014999c967787c48938b944e` | Complete (A2) | Passed (V) | `verified` (C) | None current | Account boundaries / OUs | Pending / Pending / Pending |
+| [`src-b-org-trail`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-org-trail/1.json) | r1 | `e75d9e7eabac6edeee7f1f1aae31a503a18063cc29f4aa048d1c9b037328d3b8` | Complete (A2) | Passed (V) | `verified` (C) | None current | Organization trails / audit / Regions | Pending / Pending / Pending |
+| [`src-b-ou-practices`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-ou-practices/1.json) | r1 | `e85654f27aa4dd36eb8c6ea2773b0c0c6bfca449c934785280a18fe1e5ad3baf` | Complete (A2) | Passed (V) | `verified` (C) | None current | OUs / policy targeting | Pending / Pending / Pending |
+| [`src-b-permission-sets`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-permission-sets/1.json) | r1 | `bd3b7dcb16ec41a57d62d2cbd6c8982b1e48bd34b1b5c6b349e14b509d86d903` | Complete (A2) | Passed (V) | `verified` (C) | None current | Permission sets / assignments | Pending / Pending / Pending |
+| [`src-b-ram-overview`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-ram-overview/1.json) | r1 | `40ade314f1a81ccd854f670963fa5b08f5ea88b6424348895b45f2206547e694` | Complete (A2) | Passed (V) | `verified` (C) | None current | RAM / owner-participant / Regions | Pending / Pending / Pending |
+| [`src-b-ram-sharing`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-ram-sharing/1.json) | r1 | `cb36a0e0a212531d835e7f2462f72370e097b3641c7f23ae4555fe8ce275e2a9` | Complete (A2) | Passed (V) | `verified` (C) | None current | RAM / organization sharing | Pending / Pending / Pending |
+| [`src-b-scp-evaluation`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-scp-evaluation/1.json) | r1 | `463e9058f90290de991fa0aac308b958f5a3a08d690a3725ea185ae1e6324b37` | Complete (A2) | Passed (V) | `verified` (C) | None current | SCP evaluation / inheritance | Pending / Pending / Pending |
+| [`src-b-scps`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-scps/1.json) | r1 | `2bb881d43a5a2f516f52c7122b0dde356cf92e23d7450d7b3897ef9d19f42a2b` | Complete (A2) | Passed (V) | `verified` (C) | None current | SCP ceiling / non-grant / exceptions | Pending / Pending / Pending |
+| [`src-b-securityhub-central`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-securityhub-central/1.json) | r1 | `6e13b11fd4f31f03d539051a78a54c8796afdf19cdc5d1f849d07262e3e8b94c` | Complete (A2) | Passed (V) | `verified` (C) | None current | Security Hub central configuration | Pending / Pending / Pending |
+| [`src-b-securityhub-enable`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-securityhub-enable/1.json) | r1 | `9588535ad85a370a7183aa48e4c0e036d89b8e4013ffe2f8e27b9e34b1497d57` | Complete (A2) | Passed (V) | `verified` (C) | None current | Security Hub Regions | Pending / Pending / Pending |
+| [`src-b-temp-credentials`](../../authoring/aws-sap-c02-org-04-baseline-b/sources/revisions/src-b-temp-credentials/1.json) | r1 | `ef90f87eda5ea9f77c2c017413af1b38c7cf947cf1e44b756c834289cc87a085` | Complete (A2) | Passed (V) | `verified` (C) | None current | Temporary workforce credentials | Pending / Pending / Pending |
 
-## Source review
+## Claims
 
-All check and decision cells are intentionally `Pending`; reviewer identity and timestamp are also pending.
+| Exact claim | Rev | Exact digest | Self-audit | Validation | AI disposition | Findings / resolutions | Coverage | Human decision / reviewer / UTC |
+|---|---:|---|---|---|---|---|---|---|
+| [`clm-b-config-org-auth`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-config-org-auth/1.json) | r1 | `88cd6ea0108b8ca01d8922dcdfdc5082f03d4087faf416e306b6cd232222e6a0` | Complete (A2) | Passed (V) | `verified` (C) | None current | Config aggregation | Pending / Pending / Pending |
+| [`clm-b-config-readonly`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-config-readonly/1.json) | r1 | `946ff85edc3b57096f46ff28989a5b82adc202a7a21ca60c97127ea81d64dc03` | Complete (A2) | Passed (V) | `verified` (C) | None current | Config read-only behavior | Pending / Pending / Pending |
+| [`clm-b-config-source-enabled`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-config-source-enabled/1.json) | r1 | `adf92a72f48620b8b7173ec23643244320e7499d77d087d8ee2123e05866021e` | Complete (A2) | Passed (V) | `verified` (C) | None current | Config aggregation / Regions | Pending / Pending / Pending |
+| [`clm-b-delegation-service-specific`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-delegation-service-specific/1.json) | r1 | `c37f5d380cb1b65735f835cecef060504411784b3a95caae9683a934dd170786` | Complete (A2) | Passed (V) | `verified` (C) | None current | Delegated administration | Pending / Pending / Pending |
+| [`clm-b-identity-temp-creds`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-identity-temp-creds/1.json) | r1 | `297594e00dcb34eb40767089fb60b49d3abc67f221591e7ba09b154f68ac9f3b` | Complete (A2) | Passed (V) | `verified` (C) | None current | Workforce access / temporary credentials | Pending / Pending / Pending |
+| [`clm-b-management-resource-guidance`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-management-resource-guidance/1.json) | r1 | `c61e5b3182089a0941651717a2435de03d5a414fa84494a41f9a81e13bc45b7e` | Complete (A2) | Passed (V) | `verified` (C) | None current | Management-account usage; AWS guidance | Pending / Pending / Pending |
+| [`clm-b-management-scp-gap`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-management-scp-gap/1.json) | r1 | `e3312344d277a0092d87441d6ee327c092d452e2ee76e4adf5d2a0d873fe29af` | Complete (A2) | Passed (V) | `verified` (C) | None current | Management boundary / SCP exception | Pending / Pending / Pending |
+| [`clm-b-org-trail-member-lock`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-org-trail-member-lock/1.json) | r1 | `05fca3998464371be997d1a3b5f321c434e5c4b1266bacdef64e63093ae94094` | Complete (A2) | Passed (V) | `verified` (C) | None current | Organization trails | Pending / Pending / Pending |
+| [`clm-b-org-trail-new-account`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-org-trail-new-account/2.json) | r2 | `8492f21b7c18c1662681ce0e6728136174da240bd4b7d756f0db93ee47ff0252` | Complete (A2) | Passed (V) | `verified` (C) | 1 historical / 1 resolved; none current | Organization trails / Regions | Pending / Pending / Pending |
+| [`clm-b-org-trail-scope`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-org-trail-scope/2.json) | r2 | `3439fa6d3d0908e1ef7438d33374aaade884b1f0077d5fb3c3a0a9d5ef477189` | Complete (A2) | Passed (V) | `verified` (C) | 1 historical / 1 resolved; none current | Centralized audit evidence / Regions | Pending / Pending / Pending |
+| [`clm-b-ou-control-guidance`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-ou-control-guidance/2.json) | r2 | `86f2550e06e9536a6bde3890f17fe3b6bfe0ac67058c70200c5ad0589e4ea099` | Complete (A2) | Passed (V) | `verified` (C) | 1 historical / 1 resolved; none current | OUs; AWS guidance | Pending / Pending / Pending |
+| [`clm-b-ou-policy-target`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-ou-policy-target/1.json) | r1 | `079e74a58fe39b16084f8ff9bff68564c89655dff153e1535d7f06083f2bb359` | Complete (A2) | Passed (V) | `verified` (C) | None current | OUs / policy targeting | Pending / Pending / Pending |
+| [`clm-b-permission-set-reuse`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-permission-set-reuse/1.json) | r1 | `3be97b23015d984a9a8e6dac82c818a9ae5876f0a240197867f6f4f0101c40ca` | Complete (A2) | Passed (V) | `verified` (C) | None current | Permission sets / assignments | Pending / Pending / Pending |
+| [`clm-b-permission-set-role`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-permission-set-role/1.json) | r1 | `a92270f7c4d421e0d3b97a7fa0ce76dbe9a6ba168457582349b6b89fc5feae83` | Complete (A2) | Passed (V) | `verified` (C) | None current | Permission sets / account roles | Pending / Pending / Pending |
+| [`clm-b-ram-owner`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-ram-owner/1.json) | r1 | `6e4d2c4137533df10b7fe5f92ac266344fbbb4a9918781bd74b8b9454d7432b4` | Complete (A2) | Passed (V) | `verified` (C) | None current | RAM owner / participant | Pending / Pending / Pending |
+| [`clm-b-ram-permission-ceiling`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-ram-permission-ceiling/1.json) | r1 | `a2b93808d2a2d0c8085a6a3f5f562e2c12751732471ae32d3400164231c94c5e` | Complete (A2) | Passed (V) | `verified` (C) | None current | RAM permissions / identity policy | Pending / Pending / Pending |
+| [`clm-b-ram-principals`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-ram-principals/3.json) | r3 | `1932fbdba3837d6ae8f9e8e3660adc78c7af0e2dd78ce5d1973212b5dbc77980` | Complete (A2) | Passed (V) | `verified` (C) | 3 historical / 3 resolved; none current | RAM organization sharing | Pending / Pending / Pending |
+| [`clm-b-ram-regional`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-ram-regional/1.json) | r1 | `1ab0e879de5d9feb8aae5fca0afe866a1a5d1db4f838da47ef88fd7fe10edf12` | Complete (A2) | Passed (V) | `verified` (C) | None current | RAM Regions | Pending / Pending / Pending |
+| [`clm-b-rec-complement-config-securityhub`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-rec-complement-config-securityhub/3.json) | r3 | `45251072eba4dc548f5dde119f1dc4da55247c5913801f489572b56ebdcf38b1` | Complete (A2) | Passed (V) | `verified` (C) | 3 historical / 3 resolved; none current | Config + Security Hub tradeoff | Pending / Pending / Pending |
+| [`clm-b-rec-control-aligned-ous`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-rec-control-aligned-ous/4.json) | r4 | `9792d6f6edf5753fd069b146c7bf1d87ecb5ec40d65874b5827aed3dea29b3f4` | Complete (A2) | Passed (V) | `verified` (C) | 4 historical / 4 resolved; none current | OU tradeoff | Pending / Pending / Pending |
+| [`clm-b-rec-isolate-management`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-rec-isolate-management/3.json) | r3 | `2040756b2ed4bd2c800cb7e0607825dc6cffd259df2a9227fd13b841638acf31` | Complete (A2) | Passed (V) | `verified` (C) | 3 historical / 3 resolved; none current | Management-account tradeoff | Pending / Pending / Pending |
+| [`clm-b-rec-org-trail`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-rec-org-trail/3.json) | r3 | `bbe0ddc09aae3b2cda3b58828efa76c474b2c2c79150447ded6fd33098655c26` | Complete (A2) | Passed (V) | `verified` (C) | 3 historical / 3 resolved; none current | Audit tradeoff | Pending / Pending / Pending |
+| [`clm-b-rec-pair-access-guardrail`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-rec-pair-access-guardrail/3.json) | r3 | `a9577181afcdcb9a907da4103d576ed3a79c88413dd8c36202daa7edfc87cb68` | Complete (A2) | Passed (V) | `verified` (C) | 2 historical / 2 resolved; premise rebound in r3 | Identity permissions vs guardrails | Pending / Pending / Pending |
+| [`clm-b-scp-ceiling`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-scp-ceiling/2.json) | r2 | `c21f8093737aa908795c80b970033e33e4f0cd14782b25f29764d4e43fb3e223` | Complete (A2) | Passed (V) | `verified` (C) | Self-audit concern resolved in r2; none current | SCP ceiling / non-grant / exception | Pending / Pending / Pending |
+| [`clm-b-scp-feature-mode`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-scp-feature-mode/1.json) | r1 | `9df8cc18f1289225609773df53bf94fb4bd579b65460c6fa5aa355213fae49b2` | Complete (A2) | Passed (V) | `verified` (C) | None current | SCP prerequisites | Pending / Pending / Pending |
+| [`clm-b-scp-parent-chain`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-scp-parent-chain/3.json) | r3 | `eccf19b57ca535576a71a7af1a69b20656c54a0b5d09495c1609f4370287b441` | Complete (A2) | Passed (V) | `verified` (C) | 2 historical / 2 resolved; self-audit concern resolved in r3 | SCP evaluation / inheritance | Pending / Pending / Pending |
+| [`clm-b-securityhub-central-authority`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-securityhub-central-authority/3.json) | r3 | `12dc82bb10dd94b5a61591303a07a389545e6ebb64dbcedacfd8b08a3ed7b06f` | Complete (A2) | Passed (V) | `verified` (C) | 3 historical / 3 resolved; none current | Security Hub authority | Pending / Pending / Pending |
+| [`clm-b-securityhub-policy-targets`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-securityhub-policy-targets/1.json) | r1 | `9358562b65b4c81f83bdaa653d532e821afc74fde4cfe921bcfe5770a74e9c88` | Complete (A2) | Passed (V) | `verified` (C) | None current | Security Hub policy targets | Pending / Pending / Pending |
+| [`clm-b-securityhub-region-unit`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-securityhub-region-unit/3.json) | r3 | `d5defeed2387039ecc9365072dc32aa80868bd244c228f2c52788767e9760fa3` | Complete (A2) | Passed (V) | `verified` (C) | 3 historical / 3 resolved; none current | Security Hub Regions | Pending / Pending / Pending |
+| [`clm-b-task-account-governance`](../../authoring/aws-sap-c02-org-04-baseline-b/claims/revisions/clm-b-task-account-governance/2.json) | r2 | `1350bb1d589bc4be1632db519fc913803946a4576acc7cac74243ea395285424` | Complete (A2) | Passed (V) | `verified` (C) | 1 historical / 1 resolved; none current | Pilot objective scope | Pending / Pending / Pending |
 
-| Source draft | Category | Authority | Ownership / URL / claim authority / current applicability | Rights / dates / locators / learner citation / fresher source | Decision | Reviewer | UTC timestamp |
-|---|---|---|---|---|---|---|---|
-| [`src-aws-cert-domain-one`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-cert-domain-one.json) | exam guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-cloudtrail-organization-trail`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-cloudtrail-organization-trail.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-config-aggregation`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-config-aggregation.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-control-tower-overview`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-control-tower-overview.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-guardduty-organizations`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-guardduty-organizations.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-identity-center-accounts`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-identity-center-accounts.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-multi-account-guide`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-multi-account-guide.json) | whitepaper | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-organizations-delegation`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-organizations-delegation.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-organizations-management`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-organizations-management.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-organizations-scps`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-organizations-scps.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-ram-regional`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-ram-regional.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-ram-sharing`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-ram-sharing.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-security-hub-central`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-security-hub-central.json) | service guide | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
-| [`src-aws-sra-log-archive`](../../authoring/aws-sap-c02-org-04/sources/drafts/src-aws-sra-log-archive.json) | prescriptive guidance | AWS tier 1 | Pending | Pending | Pending | Pending | Pending |
+## Historical evidence interpretation
 
-## Claim review
+The workspace preserves 30 immutable finding records and 30 resolution records. They represent 21 logical historical findings plus nine binding-correction copies; every logical issue was resolved in later bytes. Finding records retain their original `open` status by design, while immutable resolution records and later exact-digest verification establish their disposition. None targets a current digest. There are no disputed findings.
 
-All rubric, decision, reviewer, and timestamp cells are intentionally `Pending`. Categories are `fact`, `limitation`, and `recommendation`.
+The current audit found two related service-linked-role qualification concerns and one dependent-premise rebinding concern. Revisions `clm-b-scp-ceiling` r2, `clm-b-scp-parent-chain` r3, and `clm-b-rec-pair-access-guardrail` r3 resolve them and preserve prior revisions.
 
-| Claim draft | Category | A | E | S | O | P | Decision | Reviewer | UTC timestamp |
-|---|---|---|---|---|---|---|---|---|---|
-| [`clm-account-isolation-boundary`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-account-isolation-boundary.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-cloudtrail-member-protection`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-cloudtrail-member-protection.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-cloudtrail-organization-coverage`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-cloudtrail-organization-coverage.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-config-aggregator-read-only`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-config-aggregator-read-only.json) | limitation | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-control-tower-control-mechanisms`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-control-tower-control-mechanisms.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-guardduty-regional-administration`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-guardduty-regional-administration.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-identity-center-central-workforce-access`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-identity-center-central-workforce-access.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-management-account-workload-boundary`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-management-account-workload-boundary.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-ou-control-based-organization`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-ou-control-based-organization.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-ou-hierarchy-controls`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-ou-hierarchy-controls.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-permission-set-account-roles`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-permission-set-account-roles.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-ram-consumer-permission-boundary`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-ram-consumer-permission-boundary.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-ram-organization-sharing`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-ram-organization-sharing.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-ram-regional-sharing`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-ram-regional-sharing.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-rec-control-aligned-ous`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-rec-control-aligned-ous.json) | recommendation | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
-| [`clm-rec-delegate-central-services`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-rec-delegate-central-services.json) | recommendation | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
-| [`clm-rec-distinguish-control-roles`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-rec-distinguish-control-roles.json) | recommendation | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
-| [`clm-rec-pair-workforce-grants-and-scps`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-rec-pair-workforce-grants-and-scps.json) | recommendation | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
-| [`clm-rec-separate-audit-ownership`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-rec-separate-audit-ownership.json) | recommendation | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
-| [`clm-rec-separate-workload-accounts`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-rec-separate-workload-accounts.json) | recommendation | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
-| [`clm-rec-share-eligible-resources`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-rec-share-eligible-resources.json) | recommendation | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
-| [`clm-scp-does-not-grant`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-scp-does-not-grant.json) | limitation | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-scp-effective-permission-intersection`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-scp-effective-permission-intersection.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-scp-hierarchical-inheritance`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-scp-hierarchical-inheritance.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-scp-management-account-exception`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-scp-management-account-exception.json) | limitation | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-scp-maximum-permissions`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-scp-maximum-permissions.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-scp-staged-testing`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-scp-staged-testing.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-security-hub-central-configuration`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-security-hub-central-configuration.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-service-delegated-administrator`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-service-delegated-administrator.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
-| [`clm-workforce-temporary-credentials`](../../authoring/aws-sap-c02-org-04/claims/drafts/clm-workforce-temporary-credentials.json) | fact | Pending | Pending | Pending | Pending | N/A | Pending | Pending | Pending |
+## Human review checklist
 
-## Open review points
+For every source, independently assess ownership, canonical identity, authority, live applicability, rights treatment, retrieval and visible-revision dates, locator reliability, learner-citation suitability, and whether a more primary/current official source exists. For every claim, assess atomicity, full evidence support, normativity, caveats, sensitivity, objective usefulness, and—where derived—exact premise sufficiency and the decision criterion.
 
-- Most continuously maintained AWS service pages expose no stable visible publication/update date. Those source records use `null`, record the access limitation, and rely on retrieval date plus a 30-day or tighter freshness policy. A reviewer must decide whether that treatment is sufficient.
-- The multi-account whitepaper has a visible publication date, but its recommendations remain conditional guidance rather than universal facts.
-- The seven derived recommendations are pending review of every cited premise digest and their explicit decision criteria.
-- No local snapshots were retained. Reviewers therefore assess live canonical pages and exact recorded locators.
-
-## Gate
-
-Stop here. All 14 source decisions and 30 claim decisions are pending. No lesson, question specification, final question, approval, candidate pack, installation, activation, publication, release, or tag is authorized by this package.
+Record `approved`, `changes_requested`, or `rejected` only through the immutable authoring decision operation after completing the review. Do not edit this table into an approval. Human approval is pending for all 17 sources and all 30 claims; lessons and questions remain blocked.
