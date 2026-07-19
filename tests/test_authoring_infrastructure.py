@@ -250,6 +250,29 @@ class AuthoringInfrastructureTests(unittest.TestCase):
         with self.assertRaisesRegex(LearningError, "cover every option"):
             seal_record(question)
 
+    def test_22a_complementary_select_two_requirement_matrix(self) -> None:
+        source = {"artifact_id": "src-test", "revision": 1, "canonical_digest": "a" * 64}
+        claim = seal_record(claim_record(source))
+        spec = specification_record()
+        spec["response_design"] = {"question_type": "multiple_response", "required_selection_count": 2}
+        spec = seal_record(spec)
+        question = question_record(spec, claim, source)
+        question["question_type"] = "multiple_response"
+        question["required_selection_count"] = 2
+        question["options"].append({"option_id": "c", "text": "Use synthetic pattern three."})
+        question["keyed_option_ids"] = ["a", "b"]
+        question["option_rationales"] = [
+            {"option_id": "a", "is_keyed": True, "category": "key_support", "requirement_ids": ["req-one"], "claim_references": [reference(claim)], "rationale": "It supplies requirement one."},
+            {"option_id": "b", "is_keyed": True, "category": "key_support", "requirement_ids": ["req-two"], "claim_references": [reference(claim)], "rationale": "It supplies requirement two."},
+            {"option_id": "c", "is_keyed": False, "category": "requirement_violation", "requirement_ids": ["req-one", "req-two"], "claim_references": [reference(claim)], "rationale": "It supplies neither requirement."},
+        ]
+        question["requirement_option_matrix"] = [
+            {"requirement_id": "req-one", "cells": [{"option_id": "a", "result": "satisfies"}, {"option_id": "b", "result": "not_applicable"}, {"option_id": "c", "result": "fails"}]},
+            {"requirement_id": "req-two", "cells": [{"option_id": "a", "result": "not_applicable"}, {"option_id": "b", "result": "satisfies"}, {"option_id": "c", "result": "fails"}]},
+        ]
+        sealed = seal_record(question)
+        self.assertEqual(sealed["keyed_option_ids"], ["a", "b"])
+
     def test_23_missing_originality_review(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             fixture = build_approved_workspace(Path(temporary))

@@ -531,8 +531,9 @@ def _validate_question(record: dict[str, Any], _: str | None) -> None:
             results[cell["option_id"]] = cell["result"]
         if cells != option_ids:
             fail("Every matrix row must cover every option in declaration order.")
-        if any(results[key] != "satisfies" for key in keys):
-            fail("Every keyed option must satisfy every material requirement.")
+        keyed_results = [results[key] for key in keys]
+        if any(result == "fails" for result in keyed_results) or "satisfies" not in keyed_results:
+            fail("The keyed response set must satisfy every material requirement without a keyed option failing it.")
     for option_id in option_ids:
         if option_id not in keys and not any(next(cell["result"] for cell in row["cells"] if cell["option_id"] == option_id) == "fails" for row in record["requirement_option_matrix"]):
             fail("Every distractor must fail at least one material requirement.")
