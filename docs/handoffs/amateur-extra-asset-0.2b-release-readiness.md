@@ -2,7 +2,7 @@
 
 Date: 2026-07-18
 
-Status: **NOT READY — human review passed; final acceptance partially complete**
+Status: **NOT READY — human review and runtime acceptance passed; coverage pending**
 
 Anthony McClure completed the mandatory human review and gave the exact candidate an overall PASS at `2026-07-19T03:45:57.7429288Z`. The pack is approved, publicly valid and installable with digest `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`.
 
@@ -15,12 +15,21 @@ Anthony McClure completed the mandatory human review and gave the exact candidat
 - SQLite remains schema 1. No scoring, session, attempt, operation-count, contract-version, format-0.1, or format-0.2 behavior changed.
 - The approval diff changes only the approved pack/notice, its golden expectation, and review/status documentation. It changes no core, adapter, schema, or Hermes plugin file.
 
-## Remaining gates
+## Real Hermes v0.18.2 acceptance
 
-- Real Hermes E7B question/fallback/answer/restart acceptance is pending. The existing profile learner has an unfinished E1A session, so the core correctly returned `ACTIVE_SESSION_CONFLICT`. The unrelated session was not altered or completed.
+Anthony McClure explicitly authorized completion of the old active E1A acceptance session because that milestone was already passed. Hermes completed its remaining eligible questions with the approved official keys and finished it, preserving the learner history rather than resetting state.
+
+Hermes then started E7B session `session-da98d25e41fd42f7895961e733c8d7c6`. Presentation `presentation-438856ad30554f809b951129641caaff` delivered E7B10 without a key or explanation before submission. Answer B at confidence 4 produced correct immutable attempt `attempt-b1731be1d45b410f8ce8bcac81e6418f` with the approved project explanation and NCVEC provenance.
+
+A fresh Hermes process reconstructed the same active session from deterministic state, not conversation memory. It presented E7B11 as `presentation-224d81a003b7486389d72297c2260ca4`, returned the exact approved E7-1 title, caption, alt text, and terminal fallback before an answer, and exposed asset SHA-256 `e4e82c7b8c2db7db3a65ffa21d00a6f93d0e6176f0aa3700b8c449bbf80dfd63`. The pre-answer result omitted `correct_option_ids` and `explanation`. Hermes confirmed fallback access and quarantined the presentation as challenge `challenge-63c402fc26704e80ab76b92a45db238e` without submitting an answer.
+
+An identical E7B10 resubmission reconstructed the original attempt ID and result. A conflicting answer A returned non-retryable `ATTEMPT_CONFLICT` and did not replace the original attempt. Native custom-plugin image output remains unsupported; the approved fallback-only path passed. No Hermes configuration or credential was read or modified.
+
+## Remaining gate
+
 - A final coverage diagnostic is pending because coverage.py is not installed in the available interpreters; no package was installed merely to produce the metric.
-- Release-readiness closure remains pending until the Hermes presentation and coverage gates are resolved or explicitly dispositioned.
+- Release-readiness closure remains pending until the coverage gate is resolved or explicitly dispositioned.
 
 Native custom-plugin image output remains unsupported in the pinned Hermes v0.18.2 Windows CLI; the accepted path is approved fallback-only presentation. Native rendering unavailability is not itself a blocker.
 
-This document must not be changed to PASS until the remaining gates are complete. No release or tag has been created or authorized.
+This document must not be changed to PASS until the remaining coverage gate is complete or explicitly dispositioned. No release or tag has been created or authorized.
