@@ -8,12 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- The real `aws-sap-c02-org-04` authored-content workspace with 14 public official-AWS source drafts, 30 atomic claim drafts, a zero-finding structural validation report, and an independent human-review package; all source and claim decisions remain pending.
 - Standard-library `adaptive_learning.authoring` infrastructure for closed authored-content schemas, deterministic JSON/Markdown canonicalization, domain-separated digests, confined file-backed workspaces, immutable revisions and decisions, impact analysis, validation reports, explicit compiler selections, format-0.2 candidate projection, and external release evidence.
 - A bounded Python authoring-operation facade separate from the unchanged ten learner-study operations.
 - Fifty-four synthetic authored-content infrastructure tests covering workspace safety, schemas, digests, approvals, invalidation, compilation, release evidence, concurrency, atomic rollback, and unchanged runtime boundaries.
 
 ### Changed
 
+- Advanced the SAP-C02 0.3B pilot only through source-and-claim drafting; no lessons, learner-ready questions, approvals, candidate pack, installation, activation, publication, release, or tag was created.
 - Recorded generic 0.3B infrastructure as implemented while keeping all AWS content, installation, activation, publication, release, and tag work gated.
 
 ## [0.2.1-alpha.1] - 2026-07-19
