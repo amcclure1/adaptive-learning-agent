@@ -1,6 +1,6 @@
 # Amateur Extra Pilot 0.2A
 
-Status: Design finalized; implementation not authorized
+Status: Implementation draft complete; independent human review required before activation
 Updated: 2026-07-18
 
 ## Verified official baseline

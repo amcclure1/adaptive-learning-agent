@@ -1,6 +1,6 @@
 # Core and Adapter Tests
 
-The standard-library test suite covers strict pack validation, the exact eight-table SQLite schema, all ten JSON-compatible operations, AT-01 through AT-12, the additional core security/retry cases, and direct non-LLM tests for every project-local Hermes adapter handler.
+The standard-library test suite covers strict format-0.1 and format-0.2 pack validation, the exact eight-table SQLite schema, all ten JSON-compatible operations, AT-01 through AT-12, sourced provenance/no-leakage behavior, additional core security/retry cases, and direct non-LLM tests for every project-local Hermes adapter handler and sourced-content skill rule.
 
 From the repository root in PowerShell:
 

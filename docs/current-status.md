@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / version 0.1.0 runtime proof complete; version 0.2A design finalized, implementation unauthorized
+Status: pre-alpha / version 0.1.0 released; version 0.2A implementation at independent-review checkpoint
 Updated: 2026-07-18
 
 ## Released baseline
@@ -33,15 +33,17 @@ The release details and reproducible commands are in [releases/0.1.0.md](release
 - The project-local Hermes plugin is trusted-checkout development behavior. Discovery requires a process-local gate and launch from the repository root.
 - Pack-directory/database installation is not fully atomic across competing processes, and validation of an unexpected existing database may create expected tables before failing closed.
 
-## Finalized next-milestone design: 0.2A
+## Version 0.2A implementation checkpoint
 
-Accepted ADR 0009 defines explicit strict directory-based JSON/Markdown format `0.2` while leaving format 0.1 unchanged. The finalized 0.2A design selects official question group E1A within Amateur Extra subelement E1: 11 official questions, two objectives, two ordered lessons, and no generated questions. It defines source/citation records, conditional retained-snapshot digests, pool/errata metadata, component rights, one human approval record, and additive capabilities under tool contract `0.1`. See [amateur-extra-pilot-0.2.md](amateur-extra-pilot-0.2.md), [pack-format-0.2-proposal.md](pack-format-0.2-proposal.md), [rights-policy.md](rights-policy.md), and [the final handoff](handoffs/amateur-extra-0.2-final-design.md).
+Accepted ADR 0009 is implemented in a subject-neutral format-0.2 parser, immutable records, digest/install path, and additive contract-0.1 provenance. Format 0.1, SQLite schema 1, scoring, sessions, retries, progress, and quarantine are unchanged. The standard-library suite has 42 tests and passes locally on CPython 3.12.13, 3.13.14, and 3.14.6.
 
-The design is implementation-ready but is not implementation authorization. No Amateur Extra question text, lesson, explanation, pack, parser, tool, Hermes, test-code, scoring, or database change has been added.
+The E1A directory contains exactly two objectives, two ordered original lessons, E1A01–E1A11, zero generated questions, and no assets. Its retained NCVEC PDF and point-in-time eCFR snapshot digests are recorded. It remains deliberately non-installable because `approval.status` is `pending`; no model has asserted human approval. The E1A06 official notation/current-rule mismatch is documented in [the source-discrepancy record](handoffs/amateur-extra-0.2-source-discrepancy.md).
+
+Hosted CI, an approved golden fixture, and real E1A Hermes acceptance are pending until independent content review. See [the implementation handoff](handoffs/amateur-extra-0.2-implementation.md).
 
 ## Deferred
 
-- Subject building and real AWS or Amateur Extra packs.
+- Subject building and AWS content; expansion beyond E1A.
 - Evidence collection/review workflows and reviewer attestations.
 - Scheduling, mastery, adaptive algorithms, readiness, and exam simulation.
 - YAML, archives, assets, signing, marketplaces, and public distribution workflows.
@@ -56,6 +58,6 @@ The design is implementation-ready but is not implementation authorization. No A
 - Obtain formal legal review if desired; the accepted rights policy is a project policy decision, not legal advice.
 - Permanent security-reporting contact, final package/project name, and supported Hermes targets beyond the verified baseline.
 
-## Implementation authorization
+## Activation gate
 
-Version 0.1 focused fixes may proceed within accepted boundaries. ADR 0009 and the version-0.2 design are accepted, but implementation still requires a separately invoked, explicitly authorized task. Subject content, pack parsing, tool-output changes, Hermes presentation changes, tests, and database changes are not authorized by this design-finalization task.
+A named human must compare the eleven records to the consolidated NCVEC source and review lessons, explanations, citations, rights, pool/errata metadata, and the E1A06 discrepancy. Only that reviewer may replace the pending approval metadata. Tests and agent memory are not approval.

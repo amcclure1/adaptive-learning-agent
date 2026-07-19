@@ -8,7 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- Design proposal for the version-0.2 Amateur Extra E1A pilot and the smallest sourced-content pack extension. No pilot content or core implementation is included.
+- Strict sourced pack format 0.2 with ordered lessons, sources/citations, official identity, pool/errata metadata, component rights, approval, and deterministic digest/install support.
+- Additive sourced-content capabilities and provenance under the unchanged ten-operation tool contract 0.1.
+- A two-lesson, eleven-question Amateur Extra E1A review draft, held non-installable pending independent human approval.
+- Narrow Hermes skill presentation for official IDs, ordered lessons, and post-answer source display.
 
 ## [0.1.0] - 2026-07-18
 
