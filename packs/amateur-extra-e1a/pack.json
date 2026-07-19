@@ -89,7 +89,7 @@
       "objective_ids": ["obj-band-edges"],
       "rights_id": "rights-original-prose",
       "citations": [
-        {"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(d), 97.305(c), and 97.307(b)"},
+        {"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(b), 97.305(c), and 97.307(b)"},
         {"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.303(h)(3)"}
       ]
     },
@@ -100,7 +100,7 @@
       "objective_ids": ["obj-special-operations"],
       "rights_id": "rights-original-prose",
       "citations": [
-        {"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.5(a)(2), 97.11(a), and 97.219(d)"},
+        {"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.5(a)(2), 97.11(a), and 97.219(b)–(d)"},
         {"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.313(k) and 97.313(l)"}
       ]
     }
@@ -124,9 +124,9 @@
       ],
       "correct_option_ids": ["D"],
       "question_rights_id": "rights-ncvec-pool",
-      "explanation": "A USB emission extends above its carrier. A 3 kHz signal centered at the displayed 14.348 MHz carrier occupies frequencies through about 14.351 MHz, while the 20-meter band ends at 14.350 MHz. The upper 1 kHz is therefore outside the band.",
+      "explanation": "A USB emission extends above its carrier reference. With the carrier at 14.348 MHz and 3 kHz of occupied bandwidth above it, the emission reaches about 14.351 MHz, while the 20-meter band ends at 14.350 MHz. The upper 1 kHz is therefore outside the band.",
       "explanation_rights_id": "rights-original-prose",
-      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(d), 97.305(c), and 97.307(b)"}]
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(b), 97.305(c), and 97.307(b)"}]
     },
     {
       "id": "E1A02",
@@ -192,7 +192,7 @@
       "question_rights_id": "rights-ncvec-pool",
       "explanation": "Extra-class phone privileges begin at 3.600 MHz, but an LSB emission on a 3.601 MHz displayed carrier extends below that boundary. The carrier is inside the segment while part of the sideband is not.",
       "explanation_rights_id": "rights-original-prose",
-      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(d) and 97.305(c)"}]
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(b) and 97.305(c)"}]
     },
     {
       "id": "E1A05",
@@ -212,7 +212,7 @@
       ],
       "correct_option_ids": ["C"],
       "question_rights_id": "rights-ncvec-pool",
-      "explanation": "For an amateur station aboard a US-documented or registered vessel or craft, the person in physical control must hold an FCC-issued amateur operator license or be authorized for alien reciprocal operation. A marine license or radiotelephone permit is not the stated amateur-service qualification.",
+      "explanation": "For an amateur station aboard a US-documented or registered vessel or craft, the person in physical control must be named in an amateur station license grant or be authorized for alien reciprocal operation. A marine license or radiotelephone permit is not the stated amateur-service qualification.",
       "explanation_rights_id": "rights-original-prose",
       "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.5(a)(2)"}]
     },
@@ -280,7 +280,7 @@
       "question_rights_id": "rights-ncvec-pool",
       "explanation": "When a message-forwarding station retransmits an improper communication, the control operator of the originating station is primarily accountable. Automatic forwarding does not shift primary accountability to every station in the path.",
       "explanation_rights_id": "rights-original-prose",
-      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.219(d)"}]
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.219(b)–(d)"}]
     },
     {
       "id": "E1A09",
@@ -322,7 +322,7 @@
       ],
       "correct_option_ids": ["A"],
       "question_rights_id": "rights-ncvec-pool",
-      "explanation": "Operation of an amateur station aboard a ship or aircraft requires approval from the ship's master or the aircraft's pilot in command. The rule does not impose the alternative equipment or band conditions listed here.",
+      "explanation": "Operation requires approval from the ship's master or the aircraft's pilot in command. The station must also be separate from and independent of other installed radio apparatus, but the rule does not require the completely independent power supply described by option C or the band restriction described by option D.",
       "explanation_rights_id": "rights-original-prose",
       "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.11(a)"}]
     },
@@ -344,7 +344,7 @@
       ],
       "correct_option_ids": ["B"],
       "question_rights_id": "rights-ncvec-pool",
-      "explanation": "An FCC-issued amateur license is the required amateur-service authority for operation aboard a US-registered vessel in international waters. No marine endorsement, minimum General class, or radiotelephone permit is specified.",
+      "explanation": "The person in physical control must be named in an FCC amateur station license grant (which is issued with the amateur operator license) or otherwise have the reciprocal authority allowed by the rule. Among the listed choices, any FCC-issued amateur license is sufficient; no marine endorsement, minimum General class, or radiotelephone permit is specified.",
       "explanation_rights_id": "rights-original-prose",
       "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.5(a)(2)"}]
     }

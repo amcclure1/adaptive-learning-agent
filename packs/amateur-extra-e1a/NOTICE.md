@@ -6,4 +6,4 @@ The lessons and question explanations are original Adaptive Learning Agent contr
 
 FCC and eCFR materials are referenced by metadata, links, and locators only. Source snapshots and their declared SHA-256 digests are editorial evidence and are not distributed in this pack.
 
-This draft is not installable until an independent human reviewer completes the approval record in `pack.json`.
+Installation requires a complete, digest-covered human approval record in `pack.json`. Automated comparison or successful tests do not constitute approval.
