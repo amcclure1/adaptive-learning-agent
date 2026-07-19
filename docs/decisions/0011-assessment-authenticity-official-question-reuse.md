@@ -1,13 +1,13 @@
 # ADR 0011: Assessment Authenticity and Official-Question Reuse
 
-Status: Proposed
+Status: Accepted
 Date: 2026-07-19
 
 ## Context
 
 The NCVEC pilot proves that some official questions can be reused exactly under a documented public-domain basis. AWS-like assessments usually provide examples that can inform style but cannot automatically be redistributed. Without a common policy, “authentic” could be mistaken for copying protected or unsafe exam material.
 
-## Proposed decision
+## Decision
 
 Classify assessment material as reusable official content, study-only evidence, or excluded material. Reuse official questions only under an explicit public-domain, license, permission, or issuing-authority reuse basis, with exact identity, bytes, key, source version, effective dates, rights, and errata handling.
 
@@ -30,8 +30,11 @@ Require assessment research to classify evidence by tier, allowed use, rights, c
 - Use public candidate recollections for realism: rejected because provenance, rights, and live-exam integrity are unsafe.
 - Ask learners to define question style without research: rejected because it shifts specialist work to the user and weakens authenticity.
 
-## Acceptance prerequisites
+## Deferred milestone details
 
-- Review the tier/use vocabulary and its relationship to existing format-0.2 source and rights records.
-- Decide whether assessment blueprints remain standalone authoring artifacts or later become pack components.
-- Define a practical originality/similarity review for 0.3B without storing protected examples.
+Acceptance establishes the authenticity, reuse, exclusion, tier, and allowed-use direction. It does not choose exact serialization, pack-format version, JSON schema, similarity algorithm, reviewer qualification, or implementation module. Milestone-specific reviews must still:
+
+- define the tier/use vocabulary's exact representation and relationship to existing format-0.2 source and rights records;
+- decide whether assessment blueprints remain standalone authoring artifacts or later become pack components;
+- define a practical originality/similarity review for 0.3B without storing protected examples;
+- define reviewer qualifications and change-invalidation behavior.

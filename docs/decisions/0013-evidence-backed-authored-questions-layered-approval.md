@@ -1,13 +1,13 @@
 # ADR 0013: Evidence-Backed Authored Questions and Layered Approval
 
-Status: Proposed
+Status: Accepted
 Date: 2026-07-19
 
 ## Context
 
 Format 0.2 can label generated questions and require one pack approval, but it does not represent claim review, distractor rationales, answer-uniqueness review, or a staged authoring workflow. Complex scenario questions can appear plausible while relying on hidden assumptions or unsupported recommendations.
 
-## Proposed decision
+## Decision
 
 Future authored questions follow an inspectable chain from objective through approved claims, explicit scenario constraints, candidate answers, keyed and distractor rationales, citations, human question review, and pack activation.
 
@@ -26,9 +26,11 @@ Separate claim approval, question approval, and pack-release approval. A qualifi
 - LLM self-critique as approval: rejected because authors cannot activate their own work and model judgment is non-authoritative.
 - Citation presence as proof of answer uniqueness: rejected because citations cannot establish that distractors fail or all constraints are explicit.
 
-## Acceptance prerequisites
+## Deferred milestone details
 
-- Define minimum claim and question review records for the five-question 0.3B pilot.
-- Decide who qualifies to approve AWS architectural conclusions and uniqueness.
-- Define which edits invalidate each approval layer.
-- Decide whether these records are embedded, adjacent portable files, or review-only build artifacts.
+Acceptance establishes the evidence chain, quality requirements, human uniqueness review, and layered approval direction. It does not choose exact records, pack-format version, JSON schema, database representation, tool-contract changes, reviewer qualifications, or implementation modules. Milestone-specific reviews must still:
+
+- define minimum claim and question review records for the five-question 0.3B pilot;
+- decide who qualifies to approve AWS architectural conclusions and uniqueness;
+- define which edits invalidate each approval layer;
+- decide whether records are embedded, adjacent portable files, or review-only build artifacts.
