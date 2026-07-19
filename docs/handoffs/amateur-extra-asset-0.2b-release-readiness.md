@@ -2,7 +2,7 @@
 
 Date: 2026-07-18
 
-Status: **NOT READY — human review and runtime acceptance passed; coverage pending**
+Status: **PASS; no release or tag created**
 
 Anthony McClure completed the mandatory human review and gave the exact candidate an overall PASS at `2026-07-19T03:45:57.7429288Z`. The pack is approved, publicly valid and installable with digest `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`.
 
@@ -25,11 +25,12 @@ A fresh Hermes process reconstructed the same active session from deterministic 
 
 An identical E7B10 resubmission reconstructed the original attempt ID and result. A conflicting answer A returned non-retryable `ATTEMPT_CONFLICT` and did not replace the original attempt. Native custom-plugin image output remains unsupported; the approved fallback-only path passed. No Hermes configuration or credential was read or modified.
 
-## Remaining gate
+## Coverage disposition and final PASS
 
-- A final coverage diagnostic is pending because coverage.py is not installed in the available interpreters; no package was installed merely to produce the metric.
-- Release-readiness closure remains pending until the coverage gate is resolved or explicitly dispositioned.
+Coverage.py was not installed in the available interpreters, and no package was installed merely to produce a diagnostic. After reviewing the acceptance results and suggested follow-up work, Anthony McClure explicitly gave the test and release-readiness checkpoint a final PASS at `2026-07-19T04:08:51.3070005Z`. This human disposition treats a new coverage measurement as non-blocking for this bounded pilot given the passing 77-test local Python 3.12–3.14 matrix, hosted three-version CI, offline lifecycle, and real Hermes acceptance. It does not claim a new coverage percentage.
+
+At Anthony McClure's request, the remaining E7B12 item was answered with approved key C and scored correctly. E7B session `session-da98d25e41fd42f7895961e733c8d7c6` then completed with two correct answers and one challenged item. Authoritative learner status reports no active session. A process-level check reports no Hermes process running.
 
 Native custom-plugin image output remains unsupported in the pinned Hermes v0.18.2 Windows CLI; the accepted path is approved fallback-only presentation. Native rendering unavailability is not itself a blocker.
 
-This document must not be changed to PASS until the remaining coverage gate is complete or explicitly dispositioned. No release or tag has been created or authorized.
+All required 0.2B acceptance gates are complete or explicitly dispositioned. No release or tag has been created or authorized.

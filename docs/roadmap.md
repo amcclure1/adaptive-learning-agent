@@ -17,13 +17,13 @@ Proved format 0.2, format-0.1 compatibility, ordered lessons, authoritative sour
 
 ## 0.2B — Official diagram and static-asset pilot
 
-Status: implementation and human review PASS; final runtime/CI acceptance in progress
+Status: complete; final acceptance PASS; unreleased
 
 Bounded objective: E7B10–E7B12 with shared official Figure E7-1, exact asset identity, source/rights metadata, byte digest, question references, reviewed alternative text, terminal fallback, offline install/study, and real Hermes display/fallback verification.
 
 Authoritative review selected E7B from all nine figure-dependent groups. Accepted design uses explicit format 0.3, PNG-only static local assets, strict local-asset integrity, direct ordered references, core-issued logical references, additive contract-0.1 descriptors, mandatory accessibility fallback, and no SQLite change. Anthony McClure approved the exact embedded official PNG, source/fidelity/project-policy disposition, and accessibility/non-leakage text. Native custom-plugin image output is unsupported for the pinned Hermes CLI; the approved fallback path is the acceptance target, and native rendering unavailability alone does not block format-0.3 acceptance.
 
-Format 0.3, PNG validation/digesting, logical references, additive contract responses, and the fallback-first skill are implemented. Anthony McClure approved the exact E7B10–E7B12/E7-1 candidate, which is now valid and installable. The offline lifecycle, local Python 3.12–3.14 matrix, hosted three-version CI, and real pinned-Hermes fallback/restart/scoring/challenge/immutability acceptance pass. The final coverage diagnostic remains before release readiness. 0.2B still excludes generated questions, curriculum planning, subject building, capability discovery, MCP, AWS, new scoring, and SQLite changes. See [the review package](reviews/amateur-extra-e7b-asset-content-review.md) and [release-readiness handoff](handoffs/amateur-extra-asset-0.2b-release-readiness.md).
+Format 0.3, PNG validation/digesting, logical references, additive contract responses, and the fallback-first skill are implemented. Anthony McClure approved the exact E7B10–E7B12/E7-1 candidate, which is valid and installable. The offline lifecycle, local Python 3.12–3.14 matrix, hosted three-version CI, and real pinned-Hermes fallback/restart/scoring/challenge/immutability acceptance pass. Anthony McClure explicitly dispositioned a new coverage measurement as non-blocking and gave final release readiness a PASS. The acceptance learning session is complete and Hermes is shut down. 0.2B still excludes generated questions, curriculum planning, subject building, capability discovery, MCP, AWS, new scoring, and SQLite changes. See [the review package](reviews/amateur-extra-e7b-asset-content-review.md) and [release-readiness handoff](handoffs/amateur-extra-asset-0.2b-release-readiness.md).
 
 ## 0.3A — Assessment research and curriculum architecture
 

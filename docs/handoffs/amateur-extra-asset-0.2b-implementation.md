@@ -2,7 +2,7 @@
 
 Date: 2026-07-18
 
-Status: Generic implementation PASS; exact content human-approved and installable; final acceptance in progress
+Status: Generic implementation, exact content, and final acceptance PASS; unreleased
 
 ## Outcome
 
@@ -64,7 +64,7 @@ The adapter remains a serializer/delegator. The skill presents the returned capt
 - Format-0.3 tests cover dispatch, closed fields, approval, PNG corruption/CRC/framing/dimensions/limits, inventory/path aliases, duplicate identities, references, rights, accessibility/lint, digest inputs/order, logical references, confinement, conflicts, restart, challenge, immutable attempts, answer safety, JSON compatibility, and no core network dependency.
 - SQLite schema remains 1; no migration exists.
 
-Post-approval update: independent review is PASS, the approved digest is `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`, the offline lifecycle passes, and Python 3.12/3.13/3.14 each pass 77 tests. Coverage, hosted CI, complete real Hermes E7B presentation, and release-readiness closure remain pending as detailed in the release-readiness handoff.
+Post-approval update: independent review is PASS, the approved digest is `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`, the offline lifecycle passes, and Python 3.12/3.13/3.14 each pass 77 tests locally and in hosted CI. Real Hermes E7B fallback/restart/scoring/challenge/immutability acceptance passed. Anthony McClure explicitly dispositioned a new coverage measurement as non-blocking and gave final release readiness a PASS. No release or tag has been created.
 
 ## Required next action
 
