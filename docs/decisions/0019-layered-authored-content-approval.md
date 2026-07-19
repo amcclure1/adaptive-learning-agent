@@ -50,4 +50,3 @@ No approval layer implies another, and pack-release approval cannot cure an inva
 
 - Final reviewer identity format and privacy/redaction rules.
 - Whether a later larger workflow needs quorum or independent dual review.
-

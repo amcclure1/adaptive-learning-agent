@@ -1,6 +1,6 @@
-# Proposed Manually Reviewed SAP-C02 0.3B Pilot
+# Accepted Scope and Final Design Specifications for the SAP-C02 0.3B Pilot
 
-Status: proposal; human approval required before content work
+Status: pilot scope accepted; five design specifications finalized; all authored content and reviews pending
 
 Pilot ID: `aws-sap-c02-org-04-pilot`
 
@@ -28,10 +28,10 @@ The realization does not complete Domain 1 or SAP-C02.
 |---|---|
 | Lessons | 2 original, cited lessons: (1) account/OU boundaries, guardrails, and workforce access; (2) centralized evidence, delegation, and resource sharing |
 | Approved claims | Approximately 24-30; final count follows source/claim review rather than a quota |
-| Questions | **Exactly five original scenario questions**; design specifications below, no learner-ready text in 0.3A |
+| Questions | **Exactly five original scenario questions**; finalized design specifications below, no learner-ready text exists |
 | Response mix | Three single-response; two multiple-response, each with an explicit selection count |
 | Assessment depth | Evaluate/govern/justify, not service-name recall |
-| Diagram | None; text-only is sufficient and diagram support is not required |
+| Diagram | None by default; existing format-0.3 static PNG support may be considered only after a demonstrated material need and separate source/rights/accessibility/non-leakage review |
 | AWS account | None required |
 
 ## Planned authoritative source set
@@ -54,9 +54,25 @@ Service facts must use precise sections/locators in 0.3B claim records. Guidance
 
 These are design specifications only. They intentionally omit final stems, answer text, option order, and keys.
 
+All five are version `0.3B-design-1`, status `finalized_for_drafting`. This status approves the design boundary only; it is not question-content or answer-uniqueness approval.
+
+Set-level differentiation is fixed:
+
+| Specification | Primary judgment | Required distinct contribution |
+|---|---|---|
+| QSPEC-01 | Organizational structure | Account/OU boundaries, isolation, autonomy, management-account boundary |
+| QSPEC-02 | Workforce and preventive controls | Federation/permission assignment versus SCP maximum-permission guardrails |
+| QSPEC-03 | Audit evidence | Organization-wide activity evidence, central ownership, new-account coverage |
+| QSPEC-04 | Security/configuration governance | Visibility versus configuration, delegated administration, drift reduction |
+| QSPEC-05 | Shared-resource ownership | RAM eligibility, owner/consumer permissions, Region and operational tradeoffs |
+
+No question may be rewritten into a generic “which SCP” item. The final set must preserve these different decision operations and use varied distractor categories.
+
 ### QSPEC-01 — Account and OU boundary design
 
+- **Specification ID/version/status:** `QSPEC-01` / `0.3B-design-1` / `finalized_for_drafting`.
 - **Format:** single response.
+- **Selection rule:** select one from four options.
 - **Target objective:** SAP-ORG-04; supporting SAP-FND-01/02.
 - **Cognitive operation:** evaluate and justify organizational boundaries.
 - **Scenario theme:** a growing enterprise needs workload isolation, distinct production/nonproduction controls, team autonomy, and room to add regulated workloads.
@@ -72,7 +88,9 @@ These are design specifications only. They intentionally omit final stems, answe
 
 ### QSPEC-02 — Workforce access and guardrails
 
+- **Specification ID/version/status:** `QSPEC-02` / `0.3B-design-1` / `finalized_for_drafting`.
 - **Format:** multiple response, select two.
+- **Selection rule:** select exactly two from at least five options.
 - **Target objective:** SAP-ORG-04 with bounded SAP-ORG-02 bridge.
 - **Cognitive operation:** distinguish permission grant, maximum-permission guardrail, federation, and management-account exception.
 - **Scenario theme:** centrally managed workforce access across many accounts with least privilege and prohibited member-account actions.
@@ -88,7 +106,9 @@ These are design specifications only. They intentionally omit final stems, answe
 
 ### QSPEC-03 — Central, tamper-resistant audit coverage
 
+- **Specification ID/version/status:** `QSPEC-03` / `0.3B-design-1` / `finalized_for_drafting`.
 - **Format:** single response.
+- **Selection rule:** select one from four options.
 - **Target objective:** SAP-ORG-04; supporting SAP-FND-02.
 - **Cognitive operation:** design evidence ownership and organization-wide coverage.
 - **Scenario theme:** security requires centrally controlled activity evidence for existing and newly added accounts across enabled Regions while workload administrators retain normal operational access.
@@ -104,7 +124,9 @@ These are design specifications only. They intentionally omit final stems, answe
 
 ### QSPEC-04 — Central security posture and configuration visibility
 
+- **Specification ID/version/status:** `QSPEC-04` / `0.3B-design-1` / `finalized_for_drafting`.
 - **Format:** multiple response, select two.
+- **Selection rule:** select exactly two from at least five options.
 - **Target objective:** SAP-ORG-04 with SAP-ORG-02 bridge.
 - **Cognitive operation:** select complementary central-governance capabilities and distinguish visibility from mutation.
 - **Scenario theme:** a security team needs organization-wide configuration/compliance visibility and centrally governed security standards while workload teams remain in member accounts.
@@ -120,7 +142,9 @@ These are design specifications only. They intentionally omit final stems, answe
 
 ### QSPEC-05 — Shared service versus duplicate resources
 
+- **Specification ID/version/status:** `QSPEC-05` / `0.3B-design-1` / `finalized_for_drafting`.
 - **Format:** single response.
+- **Selection rule:** select one from four options.
 - **Target objective:** SAP-ORG-04; recommended SAP-ORG-01 context only if a network resource is selected.
 - **Cognitive operation:** compare centralized sharing with per-account duplication from ownership, isolation, operations, and Region constraints.
 - **Scenario theme:** platform teams need to provide an eligible shared capability to selected OUs while preserving resource ownership and limiting consumer permissions.
@@ -160,6 +184,8 @@ These are editorial horizons, not implemented timers.
 - no pack-format, SQLite, deterministic-core, scoring, Hermes, or tool-contract change;
 - no authoring-agent self-approval or autonomous activation.
 
-## Approval request
+## Acceptance and next gate
 
-Recommended user decision for the next phase: approve task 1.4 / SAP-ORG-04 as the manually reviewed 0.3B slice, retain the two-lesson/24-30-claim envelope and 3-single/2-multiple mix, and require a currently practicing AWS multi-account architect to approve claims and uniqueness. If the user does not approve, the fallback is to keep 0.3A complete and propose another bounded task from the same architecture rather than begin content work.
+The repository user accepted task 1.4 / `SAP-ORG-04`, the two-lesson/approximately 24–30-claim envelope, the 3-single/2-multiple mix, public-source-only research, and deferral of MCP/AWS-account access on 2026-07-18. See [the 0.3A acceptance](../handoffs/aws-sap-c02-0.3a-acceptance.md).
+
+A later explicitly authorized 0.3B content task may draft against these specifications only after creating the file-backed source/claim workspace and applying the separate approval and validation models. Final stems, options, keys, explanations, claims, lessons, pack compilation, installation, and activation remain pending.

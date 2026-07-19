@@ -46,4 +46,3 @@ Questions reference approved claim IDs. Key and distractor rationales identify t
 - Exact claim versioning and ID rules.
 - Whether claims may have multiple independent approving reviewers.
 - Default freshness horizons by category; 0.3B records explicit horizons rather than relying on defaults.
-

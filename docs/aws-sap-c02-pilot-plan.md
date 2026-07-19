@@ -1,6 +1,6 @@
 # AWS SAP-C02 Pilot Plan
 
-Status: 0.3A research/design complete and pending human acceptance; no 0.3B content or capability setup authorized
+Status: 0.3A accepted and closed; 0.3B scope/final design complete; content and tooling not implemented
 Updated: 2026-07-19
 
 ## Purpose
@@ -11,7 +11,7 @@ The 2026-07-18 0.3A exercise verified the current target and recorded the assess
 
 ## 0.3A — Research and curriculum architecture
 
-Status: complete as a manual research/design exercise; human approval remains an exit gate.
+Status: accepted and complete as a manual research/design exercise.
 
 Deliver design and review artifacts, not a full AWS pack:
 
@@ -25,7 +25,7 @@ Deliver design and review artifacts, not a full AWS pack:
 - one or more candidate realization plans;
 - curriculum version and impact-report design evidence.
 
-0.3A exit requires human approval of the research baseline, blueprint, whole architecture, and a bounded 0.3B realization. It does not require a full pack, MCP installation, AWS account, private environment access, generated questions, or a generalized builder implementation.
+0.3A exit was satisfied by explicit repository-user acceptance of the research baseline, blueprint, whole architecture, and bounded 0.3B realization on 2026-07-18. It did not require a full pack, MCP installation, AWS account, private environment access, generated questions, or a generalized builder implementation. See [the acceptance handoff](handoffs/aws-sap-c02-0.3a-acceptance.md).
 
 ### 0.3A result
 
@@ -40,7 +40,7 @@ Artifacts are indexed in [the 0.3A handoff](handoffs/aws-sap-c02-0.3a-research-a
 
 ## 0.3B — Manually reviewed SAP-C02 pilot
 
-Status: proposed; not authorized.
+Status: accepted scope and final design; authored content and authoring-tool implementation remain pending separate authorization.
 
 Subject to human approval, select current Domain 1 task 1.4 / `SAP-ORG-04` from the 0.3A architecture. The proposed envelope is two original lessons, approximately 24-30 approved claims, and exactly five future original scenario questions: three single-response and two multiple-response. Build a deliberately small realization containing:
 
@@ -59,7 +59,18 @@ The five questions are project-authored and must never be labeled official, reca
 
 0.3B is manual-first: the project proves review quality and artifact boundaries before generalizing automation. Selection, scoring, attempts, and learner state remain deterministic.
 
-The five non-learner-ready design specifications and explicit non-goals are in [the pilot proposal](aws/sap-c02-0.3b-pilot-proposal.md).
+The five finalized non-learner-ready design specifications and explicit non-goals are in [the pilot proposal](aws/sap-c02-0.3b-pilot-proposal.md).
+
+### 0.3B authored-content boundary
+
+- Canonical drafts/reviews remain in a separate file-backed authoring workspace; no SQLite ownership.
+- Atomic approved claims mediate between approved sources and lessons/questions.
+- Source, claim, question-content, answer-uniqueness, and pack-release approvals are separate human decisions over exact artifacts.
+- Deterministic validation checks structure, references, freshness state, matrices, counts, approvals, and compilation eligibility but cannot approve truth, originality, architecture quality, distractors, or uniqueness.
+- Release compilation targets existing format 0.2 by default. Existing format 0.3 may be selected only for a separately justified supported PNG; neither format is extended and format 0.4 is deferred.
+- Full claims, requirement matrices, originality/uniqueness findings, and private reviewer notes stay outside the installed pack; a release-evidence manifest binds them to the compiled digest.
+
+These are Proposed decisions in ADRs 0017-0020 and require acceptance before implementation. See [the 0.3B final design handoff](handoffs/aws-sap-c02-0.3b-final-design.md).
 
 ## 0.3C — Agent-assisted construction
 
@@ -109,13 +120,12 @@ No AWS MCP, account, cloud access, lab, or external capability is required by th
 
 ## Implementation prerequisites and unresolved decisions
 
-- Obtain human acceptance of the 0.3A identity/source baseline, medium-confidence blueprint, complete architecture, and selected task 1.4 realization.
-- Decide the standalone serialization of blueprint, curriculum, realization, claims, rationales, and layered reviews.
-- Define reviewer qualifications for factual claims, architectural recommendations, and answer uniqueness.
-- Define originality/similarity review without retaining unsafe material.
-- Decide how freshness changes invalidate claims, questions, and approvals.
-- Decide the minimum deterministic validation and whether a new pack format/tool contract is required.
-- Confirm or revise the proposed two-lesson, 24-30-claim, five-question 0.3B envelope after 0.3A evidence is approved.
+- Accept, revise, or reject Proposed ADRs 0017-0020 before creating authoring tools or pack compilation.
+- Choose exact JSON schemas, canonicalization, stable ID/version rules, and atomic-write/conflict behavior for the file workspace.
+- Name human reviewers and record qualifications/conflicts for factual, architectural, originality, distractor, uniqueness, and release roles.
+- Define the exact release-evidence manifest and compiler-version contract.
+- Confirm whether concise per-option teaching fits the existing explanation field; otherwise propose format 0.4 rather than overloading it.
+- Keep the accepted two-lesson, approximately 24-30-claim, exactly five-question boundary unless a new explicit design decision changes it.
 - Explicitly authorize every implementation, content, capability, and private-access task separately.
 
 ## Persistent non-goals

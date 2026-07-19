@@ -45,4 +45,3 @@ The release-evidence manifest remains an authoring/release artifact beside the p
 - Atomic-write and concurrent-edit behavior.
 - Retention/redaction rules for reviewer notes.
 - Exact release-evidence manifest shape.
-
