@@ -53,7 +53,7 @@ The runtime-neutral tool contract remains version `0.1`; there is no separate 0.
 
 ### Digest and layout
 
-Format 0.2 is an unpacked directory containing `pack.json`, declared Markdown lessons, and optional `NOTICE.md`. Machine validation relies only on `pack.json`; no separate source, question, or citation file is required for this pilot. The canonical digest covers the canonical manifest and each declared lesson in declared lesson order, with domain separation. It excludes optional `NOTICE.md`. Changing or reordering lessons therefore changes both digest and presentation order. Official content modifications require a new pack version/digest and never silently replace installed content.
+Format 0.2 is an unpacked directory containing `pack.json`, declared Markdown lessons, and optional `NOTICE.md`. Machine validation relies only on `pack.json`; no separate source, question, or citation file is required for this pilot. The canonical digest covers the canonical manifest, each declared lesson in declared lesson order, and optional `NOTICE.md`, with domain separation. Changing or reordering lessons therefore changes both digest and presentation order. Official content modifications require a new pack version/digest and never silently replace installed content.
 
 ## Consequences
 
