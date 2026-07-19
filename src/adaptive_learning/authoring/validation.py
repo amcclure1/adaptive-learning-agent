@@ -42,6 +42,30 @@ def _source_reference_key(item: dict[str, Any]) -> tuple[str, str, int, str]:
     return "source", item["source_id"], item["revision"], item["canonical_digest"]
 
 
+def _schema_finding_code(error: LearningError) -> str:
+    field = error.details.get("field", "") if error.details else ""
+    message = error.message.lower()
+    if "missing fields" in message:
+        return "FIELD_MISSING"
+    if "unknown fields" in message:
+        return "FIELD_UNKNOWN"
+    if "canonical_digest" in field or "digest" in message:
+        return "DIGEST_MISMATCH"
+    if field.endswith("revision") or "revision" in message:
+        return "REVISION_INVALID"
+    if "artifact-id" in message or field.endswith("_id"):
+        return "ID_INVALID"
+    if "source_category" in field or "source_category" in message:
+        return "SOURCE_CATEGORY_INVALID"
+    if "option_rationales" in field or "rationale" in message:
+        return "RATIONALE_MISSING"
+    if "requirement_option_matrix" in field or "matrix" in message:
+        return "REQUIREMENT_MATRIX_INCOMPLETE"
+    if "selection count" in message or "key count" in message:
+        return "SELECTION_COUNT_MISMATCH"
+    return "SCHEMA_INVALID"
+
+
 def validate_workspace(
     workspace: Path,
     *,
@@ -65,7 +89,7 @@ def validate_workspace(
             validate_record(record, markdown=markdown)
             valid.append((record, markdown, path))
         except LearningError as exc:
-            findings.append(_finding("SCHEMA_INVALID", str(record.get("artifact_id", path.name)), exc.details.get("field", "$") if exc.details else "$", exc.message))
+            findings.append(_finding(_schema_finding_code(exc), str(record.get("artifact_id", path.name)), exc.details.get("field", "$") if exc.details else "$", exc.message))
     index = {_key(record): record for record, _, _ in valid}
     by_type: dict[str, list[dict[str, Any]]] = {}
     for record, _, _ in valid:
