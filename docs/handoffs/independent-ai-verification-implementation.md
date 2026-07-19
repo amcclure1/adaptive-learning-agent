@@ -1,6 +1,6 @@
 # Independent AI Verification Implementation Handoff
 
-Status: generic implementation complete; ADR 0021 Proposed; experiment in progress
+Status: generic implementation and repeat experiment complete; ADR 0021 Proposed; human review pending
 
 Date: 2026-07-19
 
@@ -30,3 +30,5 @@ Historical approvals and released packs are not rewritten. The gate applies thro
 Twelve new generic tests cover closed schemas, JSON serialization, exact binding, stale verification, blocking and nonblocking findings, revision invalidation, resolution linkage, disputed findings, absent-verification approval rejection, verifier/approver conflict, comparison metrics, bounded offline source registration, SQLite schema 1, ten learner operations, and absence of Hermes/MCP/network dependencies. Existing authoring fixtures now carry synthetic independent verification evidence before synthetic human decisions.
 
 The implementation does not assert factual correctness. Research-capable agents operate outside the deterministic module and submit inspected evidence through the bounded records.
+
+The SAP-ORG-04 repeat experiment is complete. Baseline B required three revision cycles and closed with 17 sources and 30 claims independently verified, zero residual findings, and no human approval. See the [comparison](../experiments/sap-org-04-comparison.md) and [repeat-experiment handoff](sap-org-04-repeat-experiment.md).

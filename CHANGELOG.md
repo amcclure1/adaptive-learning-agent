@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Mandatory independent-AI-verification infrastructure with closed run/finding/resolution schemas, four content-stage protocols, eight bounded authoring operations, exact-digest eligibility gates, revision invalidation, verifier/approver conflicts, comparison metrics, and synthetic regression tests.
+- A reproducible SAP-ORG-04 baseline-A manifest and advisory reconstruction, plus an independently authored baseline B with formal source-grounded verification, immutable findings/resolutions, three revision cycles, and a zero-finding 47-artifact closure run.
+- Baseline A/B experiment reports and the SAP-ORG-04 repeat-experiment handoff; first-pass non-improvement and successful pre-human containment are recorded without a statistical claim.
 - The real `aws-sap-c02-org-04` authored-content workspace with 14 public official-AWS source drafts, 30 atomic claim drafts, a zero-finding structural validation report, and an independent human-review package; all source and claim decisions remain pending.
 - Standard-library `adaptive_learning.authoring` infrastructure for closed authored-content schemas, deterministic JSON/Markdown canonicalization, domain-separated digests, confined file-backed workspaces, immutable revisions and decisions, impact analysis, validation reports, explicit compiler selections, format-0.2 candidate projection, and external release evidence.
 - A bounded Python authoring-operation facade separate from the unchanged ten learner-study operations.
@@ -15,6 +18,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Deterministic authored-content validation now projects the latest current artifact revision and excludes explicitly superseded artifact IDs from current counts while preserving immutable history.
+- Source/claim human approval now requires a current completed independent-AI disposition with no unresolved blocking finding; verification never grants approval.
 - Advanced the SAP-C02 0.3B pilot only through source-and-claim drafting; no lessons, learner-ready questions, approvals, candidate pack, installation, activation, publication, release, or tag was created.
 - Recorded generic 0.3B infrastructure as implemented while keeping all AWS content, installation, activation, publication, release, and tag work gated.
 

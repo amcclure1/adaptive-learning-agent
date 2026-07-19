@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / SAP-C02 0.3B source and claim drafts awaiting human review
+Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / SAP-C02 0.3B independently verified and awaiting human review
 Updated: 2026-07-19
 
 ## Released baseline
@@ -76,6 +76,12 @@ Only synthetic non-AWS fixtures were used to test the generic infrastructure. Re
 
 The later source-and-claim authoring task created `authoring/aws-sap-c02-org-04/` with 14 public official-AWS source drafts and 30 atomic claim drafts: 20 documented facts, 3 service limitations, and 7 derived recommendations. A persisted deterministic report checked all 45 artifacts and returned no findings. Every source and claim decision remains pending, there are no approval records, and compilation eligibility is false. See the [authoring handoff](handoffs/aws-sap-c02-0.3b-source-and-claim-authoring.md) and [human-review package](reviews/aws-sap-c02-org-04-source-and-claim-review.md).
 
+The authored-content lifecycle now requires a separate source-grounded AI verification stage between deterministic validation and qualified human approval. Proposed ADR 0021, four stage protocols, closed verification/finding/resolution records, eight bounded authoring operations, exact-current validation, stale-digest gates, revision invalidation, verifier/approver conflicts, and synthetic lifecycle tests are implemented. Verification remains evidence only and cannot approve, compile, install, activate, publish, or release.
+
+The SAP-ORG-04 repeat experiment preserved the original workspace as baseline A and independently created baseline B without exposing baseline-A defects to the new author. Baseline A had 7 advisory findings (5 medium, 2 low). Baseline B's first pass had 9 blocking findings (1 high, 8 medium), so first-pass quality did not improve. Three author revision cycles and four fresh semantic verifier contexts ultimately produced 17 verified sources and 30 verified claims with zero residual finding. This demonstrates pre-human defect containment, not statistical significance or human approval. See [baseline B](experiments/sap-org-04-baseline-b.md), the [comparison](experiments/sap-org-04-comparison.md), and the [repeat-experiment handoff](handoffs/sap-org-04-repeat-experiment.md).
+
+The generic validator was corrected to project the latest current authored revision while preserving superseded history. The suite now contains 148 tests. SQLite schema 1, the ten learner operations, scoring, pack formats, Hermes, and MCP configuration remain unchanged.
+
 No lesson, question specification, learner-ready question, candidate pack, installation, activation, publication, release, or tag was created. Core behavior, SQLite schema 1, the ten learner operations, scoring, pack formats, Hermes, MCP configuration, AWS credentials, and AWS resources remain unchanged.
 
 ## Known limitations
@@ -91,4 +97,4 @@ No lesson, question specification, learner-ready question, candidate pack, insta
 
 ## Deferred
 
-0.3B source and claim approval, lessons, questions, further reviews, and pack realization; the conversational Subject Builder adapter; capability configuration; expansion beyond E1A/E7B; scheduling; mastery; readiness; exam simulation; YAML; archives; export ergonomics; signing; marketplaces; broader Hermes distribution; hosted identity; servers; cloud deployment; and stronger local-process isolation remain deferred. Draft source/claim content is not an installed pack or authorization to compile, activate, or release. No MCP server, connector, AWS access, or database change was added.
+0.3B qualified human source and claim approval, lessons, questions, further reviews, and pack realization; the conversational Subject Builder adapter; capability configuration; expansion beyond E1A/E7B; scheduling; mastery; readiness; exam simulation; YAML; archives; export ergonomics; signing; marketplaces; broader Hermes distribution; hosted identity; servers; cloud deployment; and stronger local-process isolation remain deferred. Verified source/claim content is not approved content, an installed pack, or authorization to compile, activate, or release. No MCP server, connector, AWS access, or database change was added.
