@@ -2,7 +2,7 @@
 
 Date: 2026-07-18
 
-Status: Generic implementation PASS; exact content candidate pending human review and non-installable
+Status: Generic implementation PASS; exact content human-approved and installable; final acceptance in progress
 
 ## Outcome
 
@@ -64,7 +64,7 @@ The adapter remains a serializer/delegator. The skill presents the returned capt
 - Format-0.3 tests cover dispatch, closed fields, approval, PNG corruption/CRC/framing/dimensions/limits, inventory/path aliases, duplicate identities, references, rights, accessibility/lint, digest inputs/order, logical references, confinement, conflicts, restart, challenge, immutable attempts, answer safety, JSON compatibility, and no core network dependency.
 - SQLite schema remains 1; no migration exists.
 
-The final 3.12/3.13/3.14 matrix, coverage diagnostic, hosted CI, real Hermes E7B flow, independent review, and release-readiness closure deliberately remain pending until explicit human approval.
+Post-approval update: independent review is PASS, the approved digest is `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`, the offline lifecycle passes, and Python 3.12/3.13/3.14 each pass 77 tests. Coverage, hosted CI, complete real Hermes E7B presentation, and release-readiness closure remain pending as detailed in the release-readiness handoff.
 
 ## Required next action
 

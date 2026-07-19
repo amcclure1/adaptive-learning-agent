@@ -1,16 +1,22 @@
 # Amateur Extra E7B Asset Content Review
 
-Status: **PENDING — explicit human review required**
+Status: **COMPLETED — PASS**
+
+Reviewer: Anthony McClure
+
+Review completed: 2026-07-19T03:45:57.7429288Z
 
 Candidate: `us-amateur-extra-e7b` version `0.2.1-alpha.1`
 
 Format: `0.3`
 
-Draft digest: `9c43be04bc38910f12ddf1d90eb62e69cd916ed06fccf44c0770e6fbf2218d43`
+Reviewed draft digest: `9c43be04bc38910f12ddf1d90eb62e69cd916ed06fccf44c0770e6fbf2218d43`
+
+Approved digest: `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`
 
 Asset SHA-256: `e4e82c7b8c2db7db3a65ffa21d00a6f93d0e6176f0aa3700b8c449bbf80dfd63`
 
-This is a human decision record, not an agent approval. The public validator and installer reject this candidate while `approval.status` is `pending`. Any content change after review changes the digest and invalidates the decision.
+This is a human decision record, not an agent approval. Anthony McClure reviewed the complete checklist and gave the exact candidate an overall PASS. The approval metadata changes the digest as designed. Any later content change changes the digest and requires renewed approval under the immutable-version rules.
 
 ## Authoritative baseline
 
@@ -36,9 +42,9 @@ These facts are deterministic evidence. The reviewer must still decide identity,
 
 | ID | Official key | Exact prompt | Exact ordered options | Status |
 |---|---|---|---|---|
-| E7B10 | B | In Figure E7-1, what is the purpose of R1 and R2? | A Load resistors; B Voltage divider bias; C Self bias; D Feedback | Pending |
-| E7B11 | D | In Figure E7-1, what is the purpose of R3? | A Fixed bias; B Emitter bypass; C Output load resistor; D Self bias | Pending |
-| E7B12 | C | What type of amplifier circuit is shown in Figure E7-1? | A Common base; B Common collector; C Common emitter; D Emitter follower | Pending |
+| E7B10 | B | In Figure E7-1, what is the purpose of R1 and R2? | A Load resistors; B Voltage divider bias; C Self bias; D Feedback | PASS |
+| E7B11 | D | In Figure E7-1, what is the purpose of R3? | A Fixed bias; B Emitter bypass; C Output load resistor; D Self bias | PASS |
+| E7B12 | C | What type of amplifier circuit is shown in Figure E7-1? | A Common base; B Common collector; C Common emitter; D Emitter follower | PASS |
 
 The golden record is [amateur-extra-e7b-official.json](../../tests/fixtures/amateur-extra-e7b-official.json). It pins IDs, prompts, ordered option labels/text, keys, locators, source digest, member mapping, asset digest, byte length, and dimensions.
 
@@ -78,28 +84,28 @@ Deterministic lint currently passes: no explicit answer marker and no complete n
 
 | Review item | Evidence or target | Human result |
 |---|---|---|
-| E7B10 official identity, wording, options/order, key, locator | Golden record and current DOCX/PDF | Pending |
-| E7B11 official identity, wording, options/order, key, locator | Golden record and current DOCX/PDF | Pending |
-| E7B12 official identity, wording, options/order, key, locator | Golden record and current DOCX/PDF | Pending |
-| Figure identity | Exact candidate pixels print `Figure E7-1`; compare official page 2 | Pending |
-| Source member mapping | DOCX `rId10` → `word/media/image5.png`; one embed | Pending |
-| Source hashes and current errata | Evidence JSON; baseline matches; no E7B/E7-1 change found | Pending |
-| Visual fidelity and absence of alteration | Exact member and official figure distribution comparison | Pending |
-| Redistribution policy | NCVEC public-domain statement and proposed project disposition | Pending |
-| Caption | Candidate above | Pending |
-| Alt text | Candidate above, reviewed against all three questions | Pending |
-| Terminal fallback | Candidate above, reviewed against all three questions | Pending |
-| Question-to-asset mappings/order | One shared E7-1 asset first/only for E7B10–E7B12 | Pending |
-| Lesson 1 | `01-reading-figure-e7-1.md` | Pending |
-| Lesson 2 | `02-reasoning-from-connections.md` | Pending |
-| Explanations | Three project-authored post-answer explanations in `pack.json` | Pending |
-| Citations/source locators | Four source records and per-content citations in `pack.json` | Pending |
-| Component rights and `NOTICE.md` | Public-domain/project-policy, CC-BY-4.0, reference-only separation | Pending |
-| No leakage across E7B10–E7B12 | Accessibility text and pre-answer descriptors; lint is only supporting evidence | Pending |
-| Final activation of exact candidate digest | Must be an explicit human decision | Pending |
+| E7B10 official identity, wording, options/order, key, locator | Golden record and current DOCX/PDF | PASS |
+| E7B11 official identity, wording, options/order, key, locator | Golden record and current DOCX/PDF | PASS |
+| E7B12 official identity, wording, options/order, key, locator | Golden record and current DOCX/PDF | PASS |
+| Figure identity | Exact candidate pixels print `Figure E7-1`; compare official page 2 | PASS |
+| Source member mapping | DOCX `rId10` → `word/media/image5.png`; one embed | PASS |
+| Source hashes and current errata | Evidence JSON; baseline matches; no E7B/E7-1 change found | PASS |
+| Visual fidelity and absence of alteration | Exact member and official figure distribution comparison | PASS |
+| Redistribution policy | NCVEC public-domain statement and proposed project disposition | PASS |
+| Caption | Candidate above | PASS |
+| Alt text | Candidate above, reviewed against all three questions | PASS |
+| Terminal fallback | Candidate above, reviewed against all three questions | PASS |
+| Question-to-asset mappings/order | One shared E7-1 asset first/only for E7B10–E7B12 | PASS |
+| Lesson 1 | `01-reading-figure-e7-1.md` | PASS |
+| Lesson 2 | `02-reasoning-from-connections.md` | PASS |
+| Explanations | Three project-authored post-answer explanations in `pack.json` | PASS |
+| Citations/source locators | Four source records and per-content citations in `pack.json` | PASS |
+| Component rights and `NOTICE.md` | Public-domain/project-policy, CC-BY-4.0, reference-only separation | PASS |
+| No leakage across E7B10–E7B12 | Accessibility text and pre-answer descriptors; lint is only supporting evidence | PASS |
+| Final activation of exact candidate digest | Must be an explicit human decision | PASS |
 
-## Approval boundary
+## Human determination
 
-To approve, the reviewer must explicitly identify themselves and approve all of these scopes for the exact candidate: source mapping; visual fidelity; redistribution policy; official content; caption, alt text, and fallback; all mappings/order; non-leakage across all three questions; lessons, explanations, and citations; component rights; and final activation.
+Anthony McClure explicitly identified himself, reviewed the checklist and agent evaluation, stated that the material looked good, and gave an overall **PASS**. That decision covers source mapping; figure identity and visual fidelity; redistribution policy; official content; caption, alt text, and fallback; all mappings/order; non-leakage across all three questions; lessons, explanations, and citations; component rights; and final activation of the exact reviewed candidate.
 
-After that statement, the implementation agent will record the actual reviewer name and actual UTC completion time, replace the pending approval with the complete scope list, calculate the resulting approved digest, and then run installability, real Hermes fallback acceptance, the Python 3.12–3.14 matrix, hosted CI, and readiness closure. No release or tag will be created.
+The actual UTC completion time and complete format-0.3 scope list are recorded in `pack.json`. The resulting approved digest is shown above. This approval does not itself create or authorize a release or tag.

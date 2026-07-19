@@ -338,10 +338,29 @@
     }
   ],
   "approval": {
-    "status": "pending",
-    "reviewed_by": null,
-    "reviewed_at": null,
-    "review_scope": [],
-    "notes": "Awaiting explicit human review of source mapping, fidelity, redistribution policy, official content, accessibility text, mappings, non-leakage, lessons, explanations, citations, and rights."
+    "status": "approved",
+    "reviewed_by": "Anthony McClure",
+    "reviewed_at": "2026-07-19T03:45:57.7429288Z",
+    "review_scope": [
+      "answer_keys",
+      "asset_alt_text",
+      "asset_caption",
+      "asset_identity",
+      "asset_non_leakage",
+      "asset_question_mappings",
+      "asset_redistribution_policy",
+      "asset_source_mapping",
+      "asset_terminal_fallback",
+      "asset_visual_fidelity",
+      "citations",
+      "explanations",
+      "lessons",
+      "official_ids",
+      "official_wording",
+      "option_ordering",
+      "pool_and_errata_metadata",
+      "rights_metadata"
+    ],
+    "notes": "Anthony McClure reviewed the complete E7B checklist for draft digest 9c43be04bc38910f12ddf1d90eb62e69cd916ed06fccf44c0770e6fbf2218d43 and gave an overall PASS, including source mapping, figure identity and fidelity, redistribution policy, official content, accessibility text, question mappings, cross-question non-leakage, lessons, explanations, citations, component rights, and final activation."
   }
 }

@@ -1,9 +1,9 @@
 # Amateur Extra Official-Asset Pilot 0.2B
 
-Status: Implemented as a non-installable review candidate; explicit human approval pending
+Status: Implemented and human-approved; final runtime/CI acceptance in progress
 Updated: 2026-07-19
 
-Implementation checkpoint: the exact source baseline was freshly reverified, the accepted member was imported without transformation into a pending candidate, generic format-0.3 support is implemented, and the local suite passes. This document retains the earlier design/research wording for traceability. Human review and activation remain pending in [the E7B review package](reviews/amateur-extra-e7b-asset-content-review.md).
+Implementation checkpoint: the exact source baseline was freshly reverified, the accepted member was imported without transformation, generic format-0.3 support is implemented, and Anthony McClure gave the complete candidate an overall PASS. The approved digest is `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`. This document retains earlier design/research wording for traceability. Final acceptance status is recorded in [the release-readiness handoff](handoffs/amateur-extra-asset-0.2b-release-readiness.md).
 
 ## Authoritative baseline
 

@@ -2,10 +2,24 @@
 
 Date: 2026-07-18
 
-Status: **NOT READY — blocked at mandatory human content review**
+Status: **NOT READY — human review passed; final acceptance partially complete**
 
-Generic implementation and 77 local tests pass. The candidate is intentionally rejected by public validation/installation because `approval.status` is pending. Therefore real Hermes acceptance, final Python matrix, hosted CI, coverage diagnostic, final approved digest, and release-readiness determination have not been performed.
+Anthony McClure completed the mandatory human review and gave the exact candidate an overall PASS at `2026-07-19T03:45:57.7429288Z`. The pack is approved, publicly valid and installable with digest `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`.
 
-Native custom-plugin image output is unsupported in the pinned Hermes v0.18.2 Windows CLI; the accepted contingency is fallback-only presentation after human approval. SQLite remains schema 1 and no scoring or operation-count change exists.
+## Completed verification
 
-This document must not be changed to PASS until the human review, approved metadata/digest, install/study/restart/challenge/immutability workflow, Python 3.12–3.14 matrix, hosted CI, and boundary audit all pass. No release or tag has been created or authorized.
+- Offline validation, install, fallback descriptor, deterministic scoring, restart/resume reconstruction, idempotent retry, conflicting-retry rejection, and challenge quarantine passed.
+- The 77-test suite passed on CPython 3.12.13, 3.13.14, and 3.14.6.
+- Pinned Hermes v0.18.2, using the isolated `adaptive-learning-dev` profile and only the process-local project-plugin gate, validated and installed the approved pack with the exact approved digest. No Hermes configuration or credential was read or modified.
+- SQLite remains schema 1. No scoring, session, attempt, operation-count, contract-version, format-0.1, or format-0.2 behavior changed.
+
+## Remaining gates
+
+- Real Hermes E7B question/fallback/answer/restart acceptance is pending. The existing profile learner has an unfinished E1A session, so the core correctly returned `ACTIVE_SESSION_CONFLICT`. The unrelated session was not altered or completed.
+- Hosted CI for the approved commit is pending.
+- A final coverage diagnostic is pending because coverage.py is not installed in the available interpreters; no package was installed merely to produce the metric.
+- Final boundary audit and release-readiness closure remain pending until these gates are resolved or explicitly dispositioned.
+
+Native custom-plugin image output remains unsupported in the pinned Hermes v0.18.2 Windows CLI; the accepted path is approved fallback-only presentation. Native rendering unavailability is not itself a blocker.
+
+This document must not be changed to PASS until the remaining gates are complete. No release or tag has been created or authorized.

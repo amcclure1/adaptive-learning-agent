@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / 0.2.0-alpha.1 published / 0.2B implementation pending human content review
+Status: pre-alpha / 0.2.0-alpha.1 published / 0.2B human review PASS and final acceptance in progress
 Updated: 2026-07-19
 
 ## Released baseline
@@ -41,24 +41,24 @@ The generic format-0.3 implementation is complete at the pre-approval checkpoint
 
 Fresh NCVEC retrieval on 2026-07-18 matched the accepted DOCX/PDF/figure hashes and still identified the fourth errata dated February 4, 2026 as current. No errata affects E7B10–E7B12 or E7-1. DOCX relationship `rId10` targets `word/media/image5.png`; the exact member is a structurally valid 796×674 PNG, 41,357 bytes, SHA-256 `e4e82c7b8c2db7db3a65ffa21d00a6f93d0e6176f0aa3700b8c449bbf80dfd63`, and visibly prints `Figure E7-1`. The separate official figure distribution supplies the review comparison.
 
-The pending `us-amateur-extra-e7b` candidate contains exactly E7B10–E7B12, the one exact E7-1 member, two bounded original lessons, three original explanations, component rights, source evidence, golden records, and draft accessibility text. Its review digest is `9c43be04bc38910f12ddf1d90eb62e69cd916ed06fccf44c0770e6fbf2218d43`. Public validation/installation rejects the pending approval. No identity, fidelity, redistribution, accessibility, mapping, non-leakage, content, rights, or activation approval has been recorded.
+The `us-amateur-extra-e7b` candidate contains exactly E7B10–E7B12, the one exact E7-1 member, two bounded original lessons, three original explanations, component rights, source evidence, golden records, and reviewed accessibility text. Anthony McClure reviewed the complete checklist and gave an overall PASS at `2026-07-19T03:45:57.7429288Z`. The reviewed draft digest was `9c43be04bc38910f12ddf1d90eb62e69cd916ed06fccf44c0770e6fbf2218d43`; the digest-covered approved pack is publicly valid and installable at `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`.
 
-Pinned Hermes v0.18.2 maps to source tag `v2026.7.7.2`. Its public ordinary-plugin contract supports JSON-string tool results but no learner-facing local-image output API. Native custom-plugin output is therefore recorded as unsupported for the pinned CLI, and the skill uses the approved text fallback without Hermes core/configuration changes or model vision. Real Hermes study acceptance remains blocked until human approval.
+Pinned Hermes v0.18.2 maps to source tag `v2026.7.7.2`. Its public ordinary-plugin contract supports JSON-string tool results but no learner-facing local-image output API. Native custom-plugin output is therefore recorded as unsupported for the pinned CLI, and the skill uses the approved text fallback without Hermes core/configuration changes or model vision. Post-approval Hermes validation/install passed. E7B presentation remains pending because the existing profile learner has an unfinished E1A session and the core correctly rejected a subject switch with `ACTIVE_SESSION_CONFLICT`; that unrelated session was not changed.
 
-The 77-test local standard-library suite passes. Final Python 3.12–3.14 matrix, hosted CI, coverage diagnostic, real Hermes acceptance, independent-review PASS, and release-readiness PASS remain pending. No release or tag has been created. See [the human review package](reviews/amateur-extra-e7b-asset-content-review.md) and [implementation handoff](handoffs/amateur-extra-asset-0.2b-implementation.md).
+The offline approved-pack lifecycle passes validation/install, fallback descriptors, scoring, restart/resume, immutable retry/conflict behavior, and challenge quarantine. The 77-test standard-library suite passes on CPython 3.12.13, 3.13.14, and 3.14.6. Independent human review is PASS. Hosted CI, the coverage diagnostic, complete real Hermes E7B study acceptance, and release-readiness PASS remain pending. No release or tag has been created. See [the human review package](reviews/amateur-extra-e7b-asset-content-review.md), [independent review](handoffs/amateur-extra-asset-0.2b-independent-review.md), and [release-readiness handoff](handoffs/amateur-extra-asset-0.2b-release-readiness.md).
 
 ## Next-phase architecture checkpoint
 
 Accepted architecture now separates two future lines:
 
-- **0.2B** is implemented through a non-installable human-review candidate. E7B10–E7B12 and exact Figure E7-1 bytes are present, but activation and final acceptance are pending.
+- **0.2B** is implemented and human-approved. E7B10–E7B12 and exact Figure E7-1 bytes are installable; final runtime/CI acceptance remains in progress.
 - **0.3A–C** progresses from assessment/curriculum research, to a manually reviewed five-question SAP-C02 slice, to agent-assisted construction with mandatory human gates.
 
 Accepted ADRs 0010–0013 establish whole learning architecture with progressive realization, assessment authenticity and official-question reuse, capability discovery with controlled activation, and evidence-backed authored questions with layered approval. Acceptance establishes architectural direction only and does not authorize implementation.
 
 The target Subject Builder flow distinguishes independent assessment blueprints from learning architectures, keeps architectures complete in coverage/dependencies rather than authored content, guides partial scope through visible prerequisite dispositions, researches assessment grammar automatically, seeks optional capabilities at defined planning/stage triggers, and degrades gracefully when evidence or access is insufficient. External capabilities remain optional to the core and packs.
 
-For 0.2B, format version, PNG-only media/limits, asset/digest model, approval scopes, logical-reference boundary, Hermes fallback, and no-schema/no-new-operation boundaries are implemented. Reviewer designation, exact candidate approval, final activation, and acceptance evidence remain pending. Other next-phase serialization, database representation, provider behavior, similarity algorithms, lifecycle persistence, and concrete modules remain deferred to their milestone-specific reviews.
+For 0.2B, format version, PNG-only media/limits, asset/digest model, approval scopes, logical-reference boundary, Hermes fallback, and no-schema/no-new-operation boundaries are implemented. Reviewer designation, exact candidate approval, and final activation are complete; final Hermes/CI/coverage acceptance evidence remains pending. Other next-phase serialization, database representation, provider behavior, similarity algorithms, lifecycle persistence, and concrete modules remain deferred to their milestone-specific reviews.
 
 See [Subject Builder architecture](subject-builder-architecture.md), [assessment policy](assessment-research-policy.md), [curriculum planning](curriculum-planning.md), [capability discovery](capability-discovery.md), [asset pilot plan](amateur-extra-asset-pilot-plan.md), and [SAP-C02 plan](aws-sap-c02-pilot-plan.md).
 
@@ -75,7 +75,7 @@ The recommended 0.3B slice is Domain 1 task 1.4 / `SAP-ORG-04`, design a multi-a
 - One local learner and at most one active session are supported; multi-user hosting and concurrent-process guarantees are absent.
 - The workflow is practice only: no mastery, scheduling, readiness prediction, or exam simulation.
 - E1A is one question group, not a complete Amateur Extra course or examination-preparation claim.
-- The E7B candidate is not approved or installable and is not a complete Amateur Extra course or examination-preparation claim.
+- The approved E7B pilot is installable but is not a complete Amateur Extra course or examination-preparation claim.
 - There is no conversational subject builder, evidence-review administration, application backup/restore, or encryption at rest.
 - Project-local Hermes discovery is trusted-checkout development behavior and requires a process-local gate.
 - Compatibility is verified only for Hermes v0.18.2 Windows CLI/profile, not Linux, macOS, Desktop, gateway, or other Hermes versions.
@@ -83,4 +83,4 @@ The recommended 0.3B slice is Domain 1 task 1.4 / `SAP-ORG-04`, design a multi-a
 
 ## Deferred
 
-Human activation and final acceptance of the format-0.3 E7B candidate, Subject Builder operations, AWS content, capability configuration, expansion beyond E1A/E7B, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remain deferred. The 0.3A assessment/curriculum artifacts are design records, not implemented runtime objects or pack-format commitments. No MCP server, connector, AWS access, database change, or unsupported Hermes configuration was added by 0.2B.
+Final acceptance of the human-approved format-0.3 E7B candidate, Subject Builder operations, AWS content, capability configuration, expansion beyond E1A/E7B, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remain deferred. The 0.3A assessment/curriculum artifacts are design records, not implemented runtime objects or pack-format commitments. No MCP server, connector, AWS access, database change, or unsupported Hermes configuration was added by 0.2B.

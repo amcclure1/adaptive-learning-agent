@@ -8,7 +8,7 @@ Adaptive Learning Agent is a lightweight, local-first, agent-native learning sys
 
 The deterministic version-0.1 core is complete. The installed-package suite passes on Python 3.12, 3.13, and 3.14, and the Hermes v0.18.2 CLI/profile integration is verified on Windows. The included `fixture-basics` subject is synthetic acceptance-test data, not a real learning pack and not preparation for any certification or examination.
 
-The core supports strict formats 0.1, 0.2, and 0.3. Format 0.3 adds bounded local PNG assets, exact-byte validation/digesting, reviewed accessibility fallbacks, and logical installed-asset references without changing SQLite schema 1 or scoring. The E7B10–E7B12/Figure E7-1 candidate is deliberately non-installable until a human approves its source mapping, fidelity, redistribution disposition, accessibility text, mappings, content, rights, and activation. See [the review package](docs/reviews/amateur-extra-e7b-asset-content-review.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
+The core supports strict formats 0.1, 0.2, and 0.3. Format 0.3 adds bounded local PNG assets, exact-byte validation/digesting, reviewed accessibility fallbacks, and logical installed-asset references without changing SQLite schema 1 or scoring. Anthony McClure approved the E7B10–E7B12/Figure E7-1 candidate after reviewing its source mapping, fidelity, redistribution disposition, accessibility text, mappings, content, rights, and activation. It is now valid and installable while final runtime/CI acceptance remains in progress. See [the review package](docs/reviews/amateur-extra-e7b-asset-content-review.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
 
 ## Install from the tagged source
 
@@ -98,7 +98,7 @@ The first real pilot is the released United States Amateur Radio Extra E1A slice
 
 Start with [product principles](docs/product-principles.md), [current status](docs/current-status.md), and [project context](docs/project-context.md). The original design package is indexed in [the initial handoff](docs/handoffs/initial-design-package.md).
 
-Accepted next-phase architecture direction is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). The generic 0.2B implementation is present, but content activation and final acceptance remain human-gated. Later Subject Builder milestones remain separately gated.
+Accepted next-phase architecture direction is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). The 0.2B E7B asset pilot is implemented and human-approved; final runtime/CI acceptance remains in progress. Later Subject Builder milestones remain separately gated.
 
 ## Contributing
 

@@ -6,15 +6,14 @@ import json
 import unittest
 from pathlib import Path
 
-from adaptive_learning.errors import LearningError
 from adaptive_learning.pack_digest import digest_pack
-from adaptive_learning.pack_validation import load_pack, load_pack_for_review
+from adaptive_learning.pack_validation import load_pack
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PACK_PATH = ROOT / "packs" / "amateur-extra-e7b"
 GOLDEN_PATH = ROOT / "tests" / "fixtures" / "amateur-extra-e7b-official.json"
-DRAFT_DIGEST = "9c43be04bc38910f12ddf1d90eb62e69cd916ed06fccf44c0770e6fbf2218d43"
+APPROVED_DIGEST = "ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826"
 
 
 def official_records(pack) -> list[dict[str, object]]:
@@ -32,17 +31,17 @@ def official_records(pack) -> list[dict[str, object]]:
     return records
 
 
-class PendingE7BGoldenTests(unittest.TestCase):
-    def test_pending_pack_matches_exact_official_question_golden(self) -> None:
+class ApprovedE7BGoldenTests(unittest.TestCase):
+    def test_approved_pack_matches_exact_official_question_golden(self) -> None:
         golden = json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))
-        pack = load_pack_for_review(PACK_PATH)
+        pack = load_pack(PACK_PATH)
         self.assertEqual(official_records(pack), golden["questions"])
         self.assertEqual([question.question_id for question in pack.questions], ["E7B10", "E7B11", "E7B12"])
         self.assertEqual([question.asset_ids for question in pack.questions], [("asset-figure-e7-1",)] * 3)
 
     def test_exact_asset_and_source_mapping_match_golden(self) -> None:
         golden = json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))
-        pack = load_pack_for_review(PACK_PATH)
+        pack = load_pack(PACK_PATH)
         asset = pack.assets[0]
         expected = golden["asset"]
         self.assertEqual(asset.official_figure_id, expected["official_figure_id"])
@@ -53,12 +52,11 @@ class PendingE7BGoldenTests(unittest.TestCase):
         source = pack.source("ncvec-extra-pool-docx-fourth-errata")
         self.assertEqual(source.content_sha256, golden["source"]["content_sha256"])
 
-    def test_pending_draft_digest_is_stable_and_public_load_is_blocked(self) -> None:
-        pack = load_pack_for_review(PACK_PATH)
-        self.assertEqual(digest_pack(pack), DRAFT_DIGEST)
-        with self.assertRaises(LearningError) as caught:
-            load_pack(PACK_PATH)
-        self.assertIn("approved", caught.exception.message)
+    def test_approved_digest_is_stable_and_public_load_succeeds(self) -> None:
+        pack = load_pack(PACK_PATH)
+        self.assertEqual(digest_pack(pack), APPROVED_DIGEST)
+        self.assertEqual(pack.approval["status"], "approved")
+        self.assertEqual(pack.approval["reviewed_by"], "Anthony McClure")
 
     def test_golden_comparison_detects_every_official_field_class(self) -> None:
         golden = json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))["questions"]

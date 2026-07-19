@@ -41,7 +41,7 @@ Before significant research or authoring, the agent seeks useful capabilities by
 
 - **0.1.0:** released runtime/architecture proof.
 - **0.2A / 0.2.0-alpha.1:** released sourced-content pilot with independently approved NCVEC E1A questions and real Hermes acceptance.
-- **0.2B design accepted, not implemented:** E7B10–E7B12 with official Figure E7-1; explicit format 0.3, PNG-only static local assets, accessibility/fallback, offline install/study, no SQLite or curriculum/AWS scope. Exact E7-1 PNG bytes remain provisional pending human source/fidelity approval.
+- **0.2B implemented and human-approved; final acceptance in progress:** E7B10–E7B12 with official Figure E7-1; explicit format 0.3, PNG-only static local assets, accessibility/fallback, offline install/study, no SQLite or curriculum/AWS scope. Anthony McClure approved the exact source mapping, fidelity, redistribution policy, accessibility/non-leakage, content, rights, and activation.
 - **0.3A manual research/design complete; human acceptance pending:** verified current SAP-C02 identity; recorded source/rights evidence, blueprint, complete high-level architecture, dependencies, realization plans, capability proposals, question policy, pilot proposal, and automation gaps. No content or tool implementation occurred.
 - **0.3B proposed, not authorized:** Domain 1 task 1.4 / `SAP-ORG-04`, design a multi-account AWS environment, with two original lessons, approximately 24-30 approved claims, and five original scenario questions under layered human review.
 - **0.3C proposed:** agent-assisted construction after manual artifacts and layered approvals are proven.
