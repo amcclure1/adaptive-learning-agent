@@ -1,0 +1,9 @@
+# Band edges, privileges, and occupied signals
+
+An amateur authorization applies to the transmitted emission, not merely to the carrier-frequency number shown on a radio. Before transmitting near an edge, identify the authorized band or emission segment, determine which side of the displayed carrier the modulation occupies, and leave enough room for the complete signal. A USB signal extends above its carrier; an LSB signal extends below it. A 3 kHz-wide signal therefore needs about 3 kHz of clearance on the occupied side. The controlling principle is that emissions must stay within the authorized frequency privileges and must not occupy more bandwidth than necessary. [47 CFR §§ 97.301(d), 97.305(c), and 97.307(b)]
+
+For a USB example near an upper edge, add the occupied bandwidth to the carrier. Near a lower edge with LSB, subtract it. For a data segment, first find the segment in the emission table and then perform the same occupied-signal check. This method explains why a displayed carrier can lie inside a band while part of the actual emission does not.
+
+The 60-meter channels are a special case. For CW on a channel, the rules specify the transmitted carrier frequency directly: it must be at the channel center frequency. That requirement is more specific than the general edge-clearance method. The current rule places it at § 97.303(h)(3). The NCVEC E1A06 source notation still prints § 97.303(h)(1); preserve that official notation when identifying the pool question, but use the current paragraph when explaining the rule. [47 CFR § 97.303(h)(3)]
+
+Exam strategy is secondary to the regulatory facts: sketch the allowed interval, mark the carrier, and extend the emission in the correct direction. Then compare the entire occupied interval with the applicable band or segment. Do not memorize an answer letter; changes in bandwidth or sideband direction change the result.

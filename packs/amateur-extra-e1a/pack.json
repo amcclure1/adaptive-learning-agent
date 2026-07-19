@@ -1,0 +1,369 @@
+{
+  "format_version": "0.2",
+  "pack_id": "us-amateur-extra-e1a",
+  "version": "0.2.0",
+  "title": "US Amateur Extra E1A Practice",
+  "language": "en-US",
+  "tags": ["amateur-radio", "extra-class", "fcc-rules", "e1a"],
+  "assessment_pool": {
+    "id": "ncvec-extra-2024-2028",
+    "title": "2024-2028 Extra Class FCC Element 4 Question Pool and Syllabus",
+    "publisher": "NCVEC Question Pool Committee",
+    "effective_from": "2024-07-01",
+    "effective_through": "2028-06-30",
+    "source_id": "ncvec-extra-pool-fourth-errata-pdf",
+    "errata_revision": "consolidated-fourth-errata-2026-02-04",
+    "errata_source_id": "ncvec-extra-release-page",
+    "withdrawn_official_question_ids": ["E2A13", "E4D05", "E6D07", "E9E10"]
+  },
+  "rights": [
+    {
+      "id": "rights-ncvec-pool",
+      "scope": "official_question_pool_content",
+      "status": "public_domain",
+      "basis_source_id": "ncvec-extra-release-page",
+      "covered_material": ["wording", "choices", "answer_keys", "identifiers"]
+    },
+    {
+      "id": "rights-original-prose",
+      "scope": "original_lessons_and_explanations",
+      "status": "licensed",
+      "license_expression": "CC-BY-4.0",
+      "copyright_holder": "Adaptive Learning Agent contributors"
+    },
+    {
+      "id": "rights-external-references",
+      "scope": "external_official_sources",
+      "status": "reference_only"
+    }
+  ],
+  "sources": [
+    {
+      "id": "ncvec-extra-pool-fourth-errata-pdf",
+      "type": "official_question_pool",
+      "title": "2024-2028 Extra Class FCC Element 4 Question Pool and Syllabus Public Release with 4th Errata Feb 4 2026",
+      "publisher": "NCVEC Question Pool Committee",
+      "url": "https://ncvec.org/downloads/2024-2028%20Extra%20Class%20Question%20Pool%20and%20Syllabus%20Public%20Release%20with%204th%20Errata%20Feb%204%202026.pdf",
+      "retrieved_on": "2026-07-18",
+      "effective_from": "2024-07-01",
+      "effective_through": "2028-06-30",
+      "revision": "consolidated-fourth-errata-2026-02-04",
+      "locator": "E1A",
+      "snapshot_retained": true,
+      "content_sha256": "9cc63ae0c1c9ee63a617824555d5b4e73da8c8edb91566f97a66770eb200f517",
+      "rights_id": "rights-ncvec-pool"
+    },
+    {
+      "id": "ncvec-extra-release-page",
+      "type": "official_errata",
+      "title": "2024-2028 Extra Class Question Pool Release",
+      "publisher": "NCVEC Question Pool Committee",
+      "url": "https://ncvec.org/index.php/2024-2028-extra-class-question-pool-release",
+      "retrieved_on": "2026-07-18",
+      "revision": "consolidated-fourth-errata-2026-02-04",
+      "snapshot_retained": false,
+      "rights_id": "rights-external-references"
+    },
+    {
+      "id": "ecfr-part-97-2026-07-16",
+      "type": "regulation",
+      "title": "47 CFR Part 97 — Amateur Radio Service",
+      "publisher": "Federal Communications Commission",
+      "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-07-16/title-47.xml?part=97",
+      "retrieved_on": "2026-07-18",
+      "revision": "eCFR current through 2026-07-16",
+      "snapshot_retained": true,
+      "content_sha256": "7b86cd2b22f11437adc8720a19fd244529295a1f76728c214cb91b4e3c4583e3",
+      "rights_id": "rights-external-references"
+    }
+  ],
+  "objectives": [
+    {"id": "obj-band-edges", "title": "Band edges and occupied signals"},
+    {"id": "obj-special-operations", "title": "Special operations and LF/MF power"}
+  ],
+  "lessons": [
+    {
+      "id": "lesson-band-edges",
+      "title": "Band edges, privileges, and occupied signals",
+      "path": "lessons/01-band-edges.md",
+      "objective_ids": ["obj-band-edges"],
+      "rights_id": "rights-original-prose",
+      "citations": [
+        {"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(d), 97.305(c), and 97.307(b)"},
+        {"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.303(h)(3)"}
+      ]
+    },
+    {
+      "id": "lesson-special-operations",
+      "title": "Special operations and regulatory limitations",
+      "path": "lessons/02-special-operations.md",
+      "objective_ids": ["obj-special-operations"],
+      "rights_id": "rights-original-prose",
+      "citations": [
+        {"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.5(a)(2), 97.11(a), and 97.219(d)"},
+        {"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.313(k) and 97.313(l)"}
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "E1A01",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A01",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A01 (D) [97.305, 97.307(b)]"},
+      "objective_id": "obj-band-edges",
+      "tags": ["band-edge", "occupied-bandwidth"],
+      "prompt": "Why is it not legal to transmit a 3 kHz bandwidth USB signal with a carrier frequency of 14.348 MHz?",
+      "options": [
+        {"id": "A", "text": "USB is not used on 20-meter phone"},
+        {"id": "B", "text": "The lower 1 kHz of the signal is outside the 20-meter band"},
+        {"id": "C", "text": "14.348 MHz is outside the 20-meter band"},
+        {"id": "D", "text": "The upper 1 kHz of the signal is outside the 20-meter band"}
+      ],
+      "correct_option_ids": ["D"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "A USB emission extends above its carrier. A 3 kHz signal centered at the displayed 14.348 MHz carrier occupies frequencies through about 14.351 MHz, while the 20-meter band ends at 14.350 MHz. The upper 1 kHz is therefore outside the band.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(d), 97.305(c), and 97.307(b)"}]
+    },
+    {
+      "id": "E1A02",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A02",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A02 (D) [97.301, 97.305]"},
+      "objective_id": "obj-band-edges",
+      "tags": ["band-edge", "lsb"],
+      "prompt": "When using a transceiver that displays the carrier frequency of phone signals, which of the following displayed frequencies represents the lowest frequency at which a properly adjusted LSB emission will be totally within the band?",
+      "options": [
+        {"id": "A", "text": "The exact lower band edge"},
+        {"id": "B", "text": "300 Hz above the lower band edge"},
+        {"id": "C", "text": "1 kHz above the lower band edge"},
+        {"id": "D", "text": "3 kHz above the lower band edge"}
+      ],
+      "correct_option_ids": ["D"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "An LSB phone emission occupies frequencies below the displayed carrier. Allowing 3 kHz between the carrier and the lower edge keeps the complete properly adjusted emission inside the authorized band.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301 and 97.305"}]
+    },
+    {
+      "id": "E1A03",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A03",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A03 (C) [97.305, 97.307(b)]"},
+      "objective_id": "obj-band-edges",
+      "tags": ["band-edge", "data"],
+      "prompt": "What is the highest legal carrier frequency on the 20-meter band for transmitting a 2.8 kHz wide USB data signal?",
+      "options": [
+        {"id": "A", "text": "14.0708 MHz"},
+        {"id": "B", "text": "14.1002 MHz"},
+        {"id": "C", "text": "14.1472 MHz"},
+        {"id": "D", "text": "14.3490 MHz"}
+      ],
+      "correct_option_ids": ["C"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "The 20-meter RTTY/data segment ends at 14.150 MHz. Subtracting the 2.8 kHz occupied USB width places the highest carrier at 14.1472 MHz, so the entire signal remains within the data segment.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.305(c) and 97.307(b)"}]
+    },
+    {
+      "id": "E1A04",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A04",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A04 (C) [97.301, 97.305]"},
+      "objective_id": "obj-band-edges",
+      "tags": ["band-edge", "lsb", "privileges"],
+      "prompt": "May an Extra class operator answer the CQ of a station on 3.601 MHz LSB phone?",
+      "options": [
+        {"id": "A", "text": "Yes, the entire signal will be inside the SSB allocation for Extra class operators"},
+        {"id": "B", "text": "Yes, the displayed frequency is within the 75-meter phone band segment"},
+        {"id": "C", "text": "No, the sideband components will extend beyond the edge of the phone band segment"},
+        {"id": "D", "text": "No, US stations are not permitted to use phone emissions below 3.610 MHz"}
+      ],
+      "correct_option_ids": ["C"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "Extra-class phone privileges begin at 3.600 MHz, but an LSB emission on a 3.601 MHz displayed carrier extends below that boundary. The carrier is inside the segment while part of the sideband is not.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§§ 97.301(d) and 97.305(c)"}]
+    },
+    {
+      "id": "E1A05",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A05",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A05 (C) [97.5]"},
+      "objective_id": "obj-special-operations",
+      "tags": ["station-license", "vessel"],
+      "prompt": "Who must be in physical control of the station apparatus of an amateur station aboard any vessel or craft that is documented or registered in the United States?",
+      "options": [
+        {"id": "A", "text": "Only a person with an FCC Marine Radio license grant"},
+        {"id": "B", "text": "Only a person named in an amateur station license grant"},
+        {"id": "C", "text": "Any person holding an FCC issued amateur license or who is authorized for alien reciprocal operation"},
+        {"id": "D", "text": "Any person named in an amateur station license grant or a person holding an unrestricted Radiotelephone Operator Permit"}
+      ],
+      "correct_option_ids": ["C"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "For an amateur station aboard a US-documented or registered vessel or craft, the person in physical control must hold an FCC-issued amateur operator license or be authorized for alien reciprocal operation. A marine license or radiotelephone permit is not the stated amateur-service qualification.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.5(a)(2)"}]
+    },
+    {
+      "id": "E1A06",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A06",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A06 (B) [97.303(h)(1)]"},
+      "objective_id": "obj-band-edges",
+      "tags": ["60-meters", "cw", "channelized-operation"],
+      "prompt": "What is the required transmit frequency of a CW signal for channelized 60 meter operation?",
+      "options": [
+        {"id": "A", "text": "At the lowest frequency of the channel"},
+        {"id": "B", "text": "At the center frequency of the channel"},
+        {"id": "C", "text": "At the highest frequency of the channel"},
+        {"id": "D", "text": "On any frequency where the signal’s sidebands are within the channel"}
+      ],
+      "correct_option_ids": ["B"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "The current 60-meter channel rule requires a CW emission's carrier frequency to be set to the channel center frequency. The official pool's printed notation, preserved in the source-question reference, points to paragraph (h)(1); the current provision is paragraph (h)(3).",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.303(h)(3)"}]
+    },
+    {
+      "id": "E1A07",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A07",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A07 (C) [97.313(k)]"},
+      "objective_id": "obj-special-operations",
+      "tags": ["2200-meters", "power", "eirp"],
+      "prompt": "What is the maximum power permitted on the 2200-meter band?",
+      "options": [
+        {"id": "A", "text": "50 watts PEP (peak envelope power)"},
+        {"id": "B", "text": "100 watts PEP (peak envelope power)"},
+        {"id": "C", "text": "1 watt EIRP (equivalent isotropic radiated power)"},
+        {"id": "D", "text": "5 watts EIRP (equivalent isotropic radiated power)"}
+      ],
+      "correct_option_ids": ["C"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "The 2200-meter band limit is 1 watt EIRP. The rule uses equivalent isotropic radiated power rather than transmitter PEP, so both the number and the unit matter.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.313(k)"}]
+    },
+    {
+      "id": "E1A08",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A08",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A08 (B) [97.219]"},
+      "objective_id": "obj-special-operations",
+      "tags": ["message-forwarding", "accountability"],
+      "prompt": "If a station in a message forwarding system inadvertently forwards a message that is in violation of FCC rules, who is primarily accountable for the rules violation?",
+      "options": [
+        {"id": "A", "text": "The control operator of the packet bulletin board station"},
+        {"id": "B", "text": "The control operator of the originating station"},
+        {"id": "C", "text": "The control operators of all the stations in the system"},
+        {"id": "D", "text": "The control operators of all the stations in the system not authenticating the source from which they accept communications"}
+      ],
+      "correct_option_ids": ["B"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "When a message-forwarding station retransmits an improper communication, the control operator of the originating station is primarily accountable. Automatic forwarding does not shift primary accountability to every station in the path.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.219(d)"}]
+    },
+    {
+      "id": "E1A09",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A09",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A09 (D) [97.313(l)]"},
+      "objective_id": "obj-special-operations",
+      "tags": ["630-meters", "power", "eirp"],
+      "prompt": "Except in some parts of Alaska, what is the maximum power permitted on the 630-meter band?",
+      "options": [
+        {"id": "A", "text": "50 watts PEP (peak envelope power)"},
+        {"id": "B", "text": "100 watts PEP (peak envelope power)"},
+        {"id": "C", "text": "1 watt EIRP (equivalent isotropic radiated power)"},
+        {"id": "D", "text": "5 watts EIRP (equivalent isotropic radiated power)"}
+      ],
+      "correct_option_ids": ["D"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "The general 630-meter limit is 5 watts EIRP. The rule specifies a lower limit in designated parts of Alaska, which is why the question states that exception.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.313(l)"}]
+    },
+    {
+      "id": "E1A10",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A10",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A10 (A) [97.11]"},
+      "objective_id": "obj-special-operations",
+      "tags": ["ship", "aircraft", "permission"],
+      "prompt": "If an amateur station is installed aboard a ship or aircraft, what condition must be met before the station is operated?",
+      "options": [
+        {"id": "A", "text": "Its operation must be approved by the master of the ship or the pilot in command of the aircraft"},
+        {"id": "B", "text": "The amateur station operator must agree not to transmit when the main radio of the ship or aircraft is in use"},
+        {"id": "C", "text": "The amateur station must have a power supply that is completely independent of the main ship or aircraft power supply"},
+        {"id": "D", "text": "The amateur station must operate only in specific segments of the amateur service HF and VHF bands"}
+      ],
+      "correct_option_ids": ["A"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "Operation of an amateur station aboard a ship or aircraft requires approval from the ship's master or the aircraft's pilot in command. The rule does not impose the alternative equipment or band conditions listed here.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.11(a)"}]
+    },
+    {
+      "id": "E1A11",
+      "type": "single_response",
+      "origin": "official_pool",
+      "official_question_id": "E1A11",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {"source_id": "ncvec-extra-pool-fourth-errata-pdf", "locator": "E1A11 (B) [97.5]"},
+      "objective_id": "obj-special-operations",
+      "tags": ["vessel", "international-waters", "licensing"],
+      "prompt": "What licensing is required when operating an amateur station aboard a US-registered vessel in international waters?",
+      "options": [
+        {"id": "A", "text": "Any amateur license with an FCC Marine or Aircraft endorsement"},
+        {"id": "B", "text": "Any FCC-issued amateur license"},
+        {"id": "C", "text": "Only General class or higher amateur licenses"},
+        {"id": "D", "text": "An unrestricted Radiotelephone Operator Permit"}
+      ],
+      "correct_option_ids": ["B"],
+      "question_rights_id": "rights-ncvec-pool",
+      "explanation": "An FCC-issued amateur license is the required amateur-service authority for operation aboard a US-registered vessel in international waters. No marine endorsement, minimum General class, or radiotelephone permit is specified.",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [{"source_id": "ecfr-part-97-2026-07-16", "locator": "§ 97.5(a)(2)"}]
+    }
+  ],
+  "approval": {
+    "status": "pending",
+    "reviewed_by": "PENDING INDEPENDENT HUMAN REVIEW",
+    "reviewed_at": "2026-07-18T00:00:00Z",
+    "review_scope": [
+      "official_wording",
+      "option_ordering",
+      "answer_keys",
+      "official_ids",
+      "lessons",
+      "explanations",
+      "citations",
+      "rights_metadata",
+      "pool_and_errata_metadata"
+    ],
+    "notes": "Draft only. Do not change status, reviewer, or time until independent comparison and review are complete; review the E1A06 source-notation discrepancy explicitly."
+  }
+}
