@@ -85,7 +85,8 @@ class VerticalSliceAcceptanceTests(CoreTestCase):
     def test_at_01_clean_install_and_health(self) -> None:
         health = self.call("system.health")
         self.assertEqual(health["schema_version"], "1")
-        self.assertEqual(health["pack_format_versions"], ["0.1"])
+        self.assertEqual(health["pack_format_versions"], ["0.1", "0.2"])
+        self.assertEqual(health["capabilities"]["supported_pack_formats"], ["0.1", "0.2"])
         with self.service.storage.read() as connection:
             tables = {
                 row["name"]
