@@ -336,8 +336,15 @@ def compile_candidate(
         validate_release_evidence(evidence)
         with workspace_lock(workspace):
             os.replace(temporary, output_path)
-            atomic_write(candidate_record_path, canonical_json_file_bytes(candidate), expected_absent=True)
-            atomic_write(evidence_path, canonical_json_file_bytes(evidence), expected_absent=True)
+            try:
+                atomic_write(candidate_record_path, canonical_json_file_bytes(candidate), expected_absent=True)
+                atomic_write(evidence_path, canonical_json_file_bytes(evidence), expected_absent=True)
+            except Exception:
+                candidate_record_path.unlink(missing_ok=True)
+                evidence_path.unlink(missing_ok=True)
+                if output_path.exists():
+                    shutil.rmtree(output_path)
+                raise
     except Exception:
         if temporary.exists():
             shutil.rmtree(temporary)

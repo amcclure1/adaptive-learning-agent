@@ -468,6 +468,25 @@ class AuthoringInfrastructureTests(unittest.TestCase):
             self.assertEqual(final["phase"], "final")
             self.assertEqual(final["release_review_approval"], reference(approval))
 
+    def test_54_candidate_failure_rolls_back_all_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = build_approved_workspace(Path(temporary))
+            real_atomic_write = atomic_write
+            calls = 0
+
+            def fail_second(path, content, **kwargs):
+                nonlocal calls
+                calls += 1
+                if calls == 2:
+                    raise OSError("synthetic evidence-write failure")
+                return real_atomic_write(path, content, **kwargs)
+
+            with mock.patch("adaptive_learning.authoring.compiler.atomic_write", side_effect=fail_second), self.assertRaises(OSError):
+                fixture["ops"].compile_approved_project({"project_id": fixture["project_id"], "selection_id": "selection-synthetic", "candidate_id": "cand-rollback", "evidence_id": "evidence-rollback"})
+            self.assertFalse((fixture["workspace"] / "release/candidates/cand-rollback-pack").exists())
+            self.assertFalse((fixture["workspace"] / "release/candidates/cand-rollback.json").exists())
+            self.assertFalse((fixture["workspace"] / "release/evidence/evidence-rollback.json").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
