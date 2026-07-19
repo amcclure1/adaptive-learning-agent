@@ -1,8 +1,10 @@
 # Asset-Capable Pack Format 0.3
 
-Status: Accepted design; implementation and content import not authorized
+Status: Accepted and implemented for format 0.3; E7B content activation pending human review
 Updated: 2026-07-19
 Governing decisions: [ADR 0014](decisions/0014-explicit-asset-capable-pack-format-0.3.md), [ADR 0015](decisions/0015-static-local-asset-security-integrity.md), and [ADR 0016](decisions/0016-asset-accessibility-nonleaking-fallbacks.md)
+
+Implementation checkpoint: the generic rules below are implemented. References to a “future implementation” preserve the accepted design history. The exact E7B candidate is pending human review and remains rejected by public validation/installation; see [the review package](reviews/amateur-extra-e7b-asset-content-review.md).
 
 ## Decision summary
 

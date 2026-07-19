@@ -1,5 +1,4 @@
 name: adaptive-learning
-version: 0.1.0
-description: Thin Hermes adapter for the runtime-independent Adaptive Learning Agent core.
+version: 0.2.1-alpha.1
+description: Thin Hermes adapter for the runtime-independent Adaptive Learning Agent core, including format-0.3 asset descriptors.
 author: Adaptive Learning Agent contributors
-

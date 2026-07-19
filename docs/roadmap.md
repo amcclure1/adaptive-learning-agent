@@ -17,13 +17,13 @@ Proved format 0.2, format-0.1 compatibility, ordered lessons, authoritative sour
 
 ## 0.2B — Official diagram and static-asset pilot
 
-Status: design accepted by ADRs 0014–0016; implementation and content import not authorized
+Status: generic implementation complete; exact candidate imported as non-installable draft; human review pending
 
 Bounded objective: E7B10–E7B12 with shared official Figure E7-1, exact asset identity, source/rights metadata, byte digest, question references, reviewed alternative text, terminal fallback, offline install/study, and real Hermes display/fallback verification.
 
 Authoritative review selected E7B from all nine figure-dependent groups. Accepted design uses explicit format 0.3, PNG-only static local assets, strict local-asset integrity, direct ordered references, core-issued logical references, additive contract-0.1 descriptors, mandatory accessibility fallback, and no SQLite change. The exact embedded official PNG remains provisional pending source/fidelity/project-policy approval. Human accessibility/non-leakage approval and pinned Hermes native-display verification remain implementation/content gates; native rendering unavailability alone does not block fallback-based format-0.3 acceptance.
 
-0.2B excludes generated questions, curriculum planning, subject building, capability discovery, MCP, AWS, new scoring, and SQLite changes. See [the asset pilot](amateur-extra-asset-pilot-0.2b.md), [accepted format design](asset-pack-format-proposal.md), [accessibility policy](asset-accessibility-policy.md), and [final handoff](handoffs/amateur-extra-asset-0.2b-final-design.md).
+Format 0.3, PNG validation/digesting, logical references, additive contract responses, and the fallback-first skill are implemented. A draft E7B10–E7B12 pack contains the exact verified E7-1 member and remains rejected by public validation/installation while approval is pending. Final activation, real Hermes acceptance, matrix/CI closure, and release readiness await the explicit human checklist decision. 0.2B still excludes generated questions, curriculum planning, subject building, capability discovery, MCP, AWS, new scoring, and SQLite changes. See [the review package](reviews/amateur-extra-e7b-asset-content-review.md) and [implementation handoff](handoffs/amateur-extra-asset-0.2b-implementation.md).
 
 ## 0.3A — Assessment research and curriculum architecture
 

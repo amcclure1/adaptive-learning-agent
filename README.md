@@ -4,11 +4,11 @@ Adaptive Learning Agent is a lightweight, local-first, agent-native learning sys
 
 ## Status
 
-**Pre-alpha — version 0.2.0-alpha.1 is published as a pre-release sourced-content pilot.**
+**Pre-alpha — version 0.2.0-alpha.1 is published; the 0.2B format-0.3 asset candidate is implemented but pending human content review.**
 
 The deterministic version-0.1 core is complete. The installed-package suite passes on Python 3.12, 3.13, and 3.14, and the Hermes v0.18.2 CLI/profile integration is verified on Windows. The included `fixture-basics` subject is synthetic acceptance-test data, not a real learning pack and not preparation for any certification or examination.
 
-The core supports strict sourced format 0.2 while retaining format 0.1. The approved E1A pilot contains two lessons and the eleven official E1A questions, and has passed exact-source comparison, named human review, automated golden tests, and real Hermes acceptance. It is a narrow practice pilot, not a complete Amateur Extra course, exam simulation, or readiness claim. Subject building, scheduling, mastery, exam simulation, and AWS content remain deferred. See [the 0.2.0-alpha.1 release record](docs/releases/0.2.0-alpha.1.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
+The core supports strict formats 0.1, 0.2, and 0.3. Format 0.3 adds bounded local PNG assets, exact-byte validation/digesting, reviewed accessibility fallbacks, and logical installed-asset references without changing SQLite schema 1 or scoring. The E7B10–E7B12/Figure E7-1 candidate is deliberately non-installable until a human approves its source mapping, fidelity, redistribution disposition, accessibility text, mappings, content, rights, and activation. See [the review package](docs/reviews/amateur-extra-e7b-asset-content-review.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
 
 ## Install from the tagged source
 
@@ -63,7 +63,7 @@ deterministic Python learning core
        |                    |
        v                    v
 local SQLite state     portable subject packs
-                       (JSON/Markdown in 0.1 and 0.2)
+                       (JSON/Markdown plus bounded PNG in 0.3)
 ```
 
 Conversation and agent memory may shape presentation, but they are never authoritative learner state. Packs define reviewed content and evidence. Python owns state transitions and scoring. SQLite records operational learner facts.
@@ -91,13 +91,14 @@ The first real pilot is the released United States Amateur Radio Extra E1A slice
 - `skills/adaptive-learning/`: minimal deterministic fixture workflow guidance.
 - `packs/fixture-basics/`: synthetic functional pack used by acceptance tests.
 - `packs/amateur-extra-e1a/`: approved sourced E1A pilot with two lessons and eleven official questions.
+- `packs/amateur-extra-e7b/`: pending-review format-0.3 candidate with three official questions and exact Figure E7-1 bytes; not installable.
 - `schemas/`: reserved standalone machine-readable contracts; schema version 1 currently lives in the core.
 - `tests/`: standard-library pack, storage, contract, vertical-slice, and direct adapter tests.
 - `user-data/`: ignored local operational state boundary.
 
 Start with [product principles](docs/product-principles.md), [current status](docs/current-status.md), and [project context](docs/project-context.md). The original design package is indexed in [the initial handoff](docs/handoffs/initial-design-package.md).
 
-Accepted next-phase architecture direction is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). The 0.2B/0.3 milestone plans and all implementation details remain separately gated; architecture acceptance does not authorize implementation.
+Accepted next-phase architecture direction is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). The generic 0.2B implementation is present, but content activation and final acceptance remain human-gated. Later Subject Builder milestones remain separately gated.
 
 ## Contributing
 

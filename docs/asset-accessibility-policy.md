@@ -1,7 +1,9 @@
 # Static-Asset Accessibility and Non-Leakage Policy
 
-Status: Accepted for asset-capable pack format 0.3; implementation not authorized
+Status: Accepted and structurally implemented; E7-1 prose/non-leakage approval pending human review
 Updated: 2026-07-19
+
+Implementation checkpoint: structural validation, deterministic leakage lint, descriptor delivery, and the Hermes fallback-first workflow are implemented. Human semantic approval of the E7-1 caption, alt text, fallback, mappings, and non-leakage remains pending in [the review package](reviews/amateur-extra-e7b-asset-content-review.md).
 
 ## Purpose and scope
 

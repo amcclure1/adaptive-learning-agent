@@ -1,0 +1,347 @@
+{
+  "format_version": "0.3",
+  "pack_id": "us-amateur-extra-e7b",
+  "version": "0.2.1-alpha.1",
+  "title": "US Amateur Extra E7B Figure Pilot",
+  "language": "en-US",
+  "tags": [
+    "amateur-radio",
+    "extra-class",
+    "e7b",
+    "official-pool"
+  ],
+  "assessment_pool": {
+    "id": "ncvec-extra-2024-2028",
+    "title": "2024-2028 Extra Class FCC Element 4 Question Pool",
+    "publisher": "NCVEC Question Pool Committee",
+    "effective_from": "2024-07-01",
+    "effective_through": "2028-06-30",
+    "source_id": "ncvec-extra-pool-docx-fourth-errata",
+    "errata_revision": "Fourth errata, February 4, 2026",
+    "errata_source_id": "ncvec-extra-pool-pdf-fourth-errata",
+    "withdrawn_official_question_ids": [
+      "E2A13",
+      "E4D05",
+      "E6D07",
+      "E9E10"
+    ]
+  },
+  "rights": [
+    {
+      "id": "rights-ncvec-official-questions",
+      "scope": "Exact official E7B10-E7B12 identifiers, wording, options, order, keys, and figure references",
+      "status": "public_domain",
+      "basis_source_id": "ncvec-extra-release-page",
+      "covered_material": [
+        "E7B10",
+        "E7B11",
+        "E7B12"
+      ]
+    },
+    {
+      "id": "rights-ncvec-official-figure",
+      "scope": "Exact official Figure E7-1 geometry and printed labels as embedded in the consolidated NCVEC DOCX",
+      "status": "public_domain",
+      "basis_source_id": "ncvec-extra-release-page",
+      "covered_material": [
+        "Figure E7-1",
+        "word/media/image5.png"
+      ]
+    },
+    {
+      "id": "rights-original-prose",
+      "scope": "Project-authored lessons, explanations, caption, alternative text, and terminal fallback",
+      "status": "licensed",
+      "license_expression": "CC-BY-4.0",
+      "copyright_holder": "Adaptive Learning Agent contributors"
+    },
+    {
+      "id": "rights-external-references",
+      "scope": "External source metadata, links, titles, locators, dates, and declared hashes only",
+      "status": "reference_only"
+    }
+  ],
+  "sources": [
+    {
+      "id": "ncvec-extra-pool-docx-fourth-errata",
+      "type": "official_question_pool",
+      "title": "2024-2028 Extra Class Question Pool and Syllabus Public Release with 4th Errata Feb 4 2026.docx",
+      "publisher": "NCVEC Question Pool Committee",
+      "url": "https://ncvec.org/downloads/2024-2028%20Extra%20Class%20Question%20Pool%20and%20Syllabus%20Public%20Release%20with%204th%20Errata%20Feb%204%202026.docx",
+      "retrieved_on": "2026-07-18",
+      "snapshot_retained": true,
+      "rights_id": "rights-external-references",
+      "effective_from": "2024-07-01",
+      "effective_through": "2028-06-30",
+      "revision": "Fourth errata, February 4, 2026",
+      "locator": "E7B10-E7B12; Figure E7-1; word/media/image5.png",
+      "content_sha256": "581ff3aa4c98bb2a6fcc303fe1ce19beb29bc7d3d02ff7fe5c6162c4c26ce4f7"
+    },
+    {
+      "id": "ncvec-extra-pool-pdf-fourth-errata",
+      "type": "official_errata",
+      "title": "2024-2028 Extra Class Question Pool and Syllabus Public Release with 4th Errata Feb 4 2026.pdf",
+      "publisher": "NCVEC Question Pool Committee",
+      "url": "https://ncvec.org/downloads/2024-2028%20Extra%20Class%20Question%20Pool%20and%20Syllabus%20Public%20Release%20with%204th%20Errata%20Feb%204%202026.pdf",
+      "retrieved_on": "2026-07-18",
+      "snapshot_retained": true,
+      "rights_id": "rights-external-references",
+      "effective_from": "2024-07-01",
+      "effective_through": "2028-06-30",
+      "revision": "Fourth errata, February 4, 2026",
+      "locator": "Consolidated errata pages 1-4; E7B10-E7B12 on document page 75",
+      "content_sha256": "9cc63ae0c1c9ee63a617824555d5b4e73da8c8edb91566f97a66770eb200f517"
+    },
+    {
+      "id": "ncvec-extra-release-page",
+      "type": "official_guidance",
+      "title": "2024- 2028 Extra Class Question Pool Release",
+      "publisher": "National Conference of Volunteer Examiner Coordinators",
+      "url": "https://www.ncvec.org/index.php/2024-2028-extra-class-question-pool-release",
+      "retrieved_on": "2026-07-18",
+      "snapshot_retained": false,
+      "rights_id": "rights-external-references",
+      "revision": "Fourth errata current on retrieval; public-domain statement dated November 8, 2024",
+      "locator": "Fourth errata notice, current pool links, public-domain statement, and figure links"
+    },
+    {
+      "id": "ncvec-extra-figures-pdf",
+      "type": "official_guidance",
+      "title": "Extra_Figures_2024-2028-1.pdf",
+      "publisher": "NCVEC Question Pool Committee",
+      "url": "https://www.ncvec.org/downloads/Extra_Figures_2024-2028-1.pdf",
+      "retrieved_on": "2026-07-18",
+      "snapshot_retained": true,
+      "rights_id": "rights-external-references",
+      "revision": "Current figure distribution linked by the release page",
+      "locator": "Page 2, Figure E7-1",
+      "content_sha256": "591bb4c9fc9a9267e298b3ee23c93ab54ba3813f8ea3730123f9ccda1e4b80f2"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj-e7b-trace",
+      "title": "Trace the labeled supply, signal, component, and ground connections in Figure E7-1"
+    },
+    {
+      "id": "obj-e7b-infer",
+      "title": "Infer resistor roles and amplifier configuration from the connections in Figure E7-1"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "lesson-e7b-reading",
+      "title": "Read Figure E7-1 by nodes",
+      "path": "lessons/01-reading-figure-e7-1.md",
+      "objective_ids": [
+        "obj-e7b-trace"
+      ],
+      "rights_id": "rights-original-prose",
+      "citations": [
+        {
+          "source_id": "ncvec-extra-pool-docx-fourth-errata",
+          "locator": "Figure E7-1; word/media/image5.png"
+        },
+        {
+          "source_id": "ncvec-extra-figures-pdf",
+          "locator": "Page 2, Figure E7-1"
+        }
+      ],
+      "asset_ids": []
+    },
+    {
+      "id": "lesson-e7b-reasoning",
+      "title": "Reason from transistor connections",
+      "path": "lessons/02-reasoning-from-connections.md",
+      "objective_ids": [
+        "obj-e7b-infer"
+      ],
+      "rights_id": "rights-original-prose",
+      "citations": [
+        {
+          "source_id": "ncvec-extra-pool-docx-fourth-errata",
+          "locator": "E7B10-E7B12; Figure E7-1"
+        }
+      ],
+      "asset_ids": []
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-figure-e7-1",
+      "media_type": "image/png",
+      "path": "assets/figure-e7-1.png",
+      "title": "NCVEC Figure E7-1",
+      "caption": "Official NCVEC Figure E7-1.",
+      "alt_text": "Black-and-white transistor circuit labeled Figure E7-1. IN connects through C1 to a junction shared with the transistor's left lead, the lower end of R1, and the upper end of R2. R1 continues to the top rail; R2 continues to ground. The top rail, marked with a plus sign at its right end, also connects through a vertical unlabeled resistor to the transistor's upper-right lead. That upper-right junction connects through C2 to OUT. The transistor's lower-right lead joins the upper end of R3 and the left side of C3. R3 continues to ground, and C3 continues to a separate ground symbol.",
+      "terminal_fallback": "Orientation: IN is at the left, OUT is at the right, a plus-marked rail is at the top, and ground symbols are at the bottom.\nInput node: IN connects through C1 to one junction. That junction connects to the transistor's left lead, the lower end of R1, and the upper end of R2.\nR1 and R2: R1 connects from the input junction to the top rail. R2 connects from the input junction to ground.\nUpper-right transistor node: The transistor's upper-right lead shares a junction with the lower end of a vertical unlabeled resistor and the left side of C2. The resistor's upper end connects to the top rail. C2 continues right to OUT.\nLower-right transistor node: The transistor's lower-right lead shares a junction with the upper end of R3 and the left side of C3. R3 continues to ground. C3 continues right and then down to a separate ground symbol.",
+      "source_id": "ncvec-extra-pool-docx-fourth-errata",
+      "rights_id": "rights-ncvec-official-figure",
+      "accessibility_rights_id": "rights-original-prose",
+      "content_sha256": "e4e82c7b8c2db7db3a65ffa21d00a6f93d0e6176f0aa3700b8c449bbf80dfd63",
+      "width": 796,
+      "height": 674,
+      "official_figure_id": "E7-1",
+      "language": "en-US"
+    }
+  ],
+  "questions": [
+    {
+      "id": "E7B10",
+      "type": "single_response",
+      "objective_id": "obj-e7b-infer",
+      "prompt": "In Figure E7-1, what is the purpose of R1 and R2?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Load resistors"
+        },
+        {
+          "id": "B",
+          "text": "Voltage divider bias"
+        },
+        {
+          "id": "C",
+          "text": "Self bias"
+        },
+        {
+          "id": "D",
+          "text": "Feedback"
+        }
+      ],
+      "correct_option_ids": [
+        "B"
+      ],
+      "explanation": "R1 connects from the positive supply rail to the transistor's input-side node, while R2 connects from that same node to ground. Together they set that node's bias voltage, so the official keyed response is B.",
+      "origin": "official_pool",
+      "official_question_id": "E7B10",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {
+        "source_id": "ncvec-extra-pool-docx-fourth-errata",
+        "locator": "E7B10 (B); Figure E7-1"
+      },
+      "tags": [
+        "amplifier-bias",
+        "figure-e7-1"
+      ],
+      "question_rights_id": "rights-ncvec-official-questions",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [
+        {
+          "source_id": "ncvec-extra-pool-docx-fourth-errata",
+          "locator": "E7B10 (B); Figure E7-1"
+        }
+      ],
+      "asset_ids": [
+        "asset-figure-e7-1"
+      ]
+    },
+    {
+      "id": "E7B11",
+      "type": "single_response",
+      "objective_id": "obj-e7b-infer",
+      "prompt": "In Figure E7-1, what is the purpose of R3?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Fixed bias"
+        },
+        {
+          "id": "B",
+          "text": "Emitter bypass"
+        },
+        {
+          "id": "C",
+          "text": "Output load resistor"
+        },
+        {
+          "id": "D",
+          "text": "Self bias"
+        }
+      ],
+      "correct_option_ids": [
+        "D"
+      ],
+      "explanation": "R3 is in the transistor's lower-lead path to ground. The voltage developed across it changes with device current and stabilizes the operating point, which is the self-bias role identified by official response D.",
+      "origin": "official_pool",
+      "official_question_id": "E7B11",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {
+        "source_id": "ncvec-extra-pool-docx-fourth-errata",
+        "locator": "E7B11 (D); Figure E7-1"
+      },
+      "tags": [
+        "amplifier-bias",
+        "figure-e7-1"
+      ],
+      "question_rights_id": "rights-ncvec-official-questions",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [
+        {
+          "source_id": "ncvec-extra-pool-docx-fourth-errata",
+          "locator": "E7B11 (D); Figure E7-1"
+        }
+      ],
+      "asset_ids": [
+        "asset-figure-e7-1"
+      ]
+    },
+    {
+      "id": "E7B12",
+      "type": "single_response",
+      "objective_id": "obj-e7b-infer",
+      "prompt": "What type of amplifier circuit is shown in Figure E7-1?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Common base"
+        },
+        {
+          "id": "B",
+          "text": "Common collector"
+        },
+        {
+          "id": "C",
+          "text": "Common emitter"
+        },
+        {
+          "id": "D",
+          "text": "Emitter follower"
+        }
+      ],
+      "correct_option_ids": [
+        "C"
+      ],
+      "explanation": "The signal enters the transistor's base-side node through C1 and leaves the collector-side node through C2, while the emitter-side node returns toward ground through R3 and is AC-bypassed by C3. The official keyed configuration is therefore common emitter, response C.",
+      "origin": "official_pool",
+      "official_question_id": "E7B12",
+      "pool_id": "ncvec-extra-2024-2028",
+      "source_question_ref": {
+        "source_id": "ncvec-extra-pool-docx-fourth-errata",
+        "locator": "E7B12 (C); Figure E7-1"
+      },
+      "tags": [
+        "amplifier-configuration",
+        "figure-e7-1"
+      ],
+      "question_rights_id": "rights-ncvec-official-questions",
+      "explanation_rights_id": "rights-original-prose",
+      "explanation_citations": [
+        {
+          "source_id": "ncvec-extra-pool-docx-fourth-errata",
+          "locator": "E7B12 (C); Figure E7-1"
+        }
+      ],
+      "asset_ids": [
+        "asset-figure-e7-1"
+      ]
+    }
+  ],
+  "approval": {
+    "status": "pending",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "review_scope": [],
+    "notes": "Awaiting explicit human review of source mapping, fidelity, redistribution policy, official content, accessibility text, mappings, non-leakage, lessons, explanations, citations, and rights."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "source": {
+    "publisher": "NCVEC Question Pool Committee",
+    "title": "2024-2028 Extra Class Question Pool and Syllabus Public Release with 4th Errata Feb 4 2026.docx",
+    "retrieved_on": "2026-07-18",
+    "revision": "Fourth errata, February 4, 2026",
+    "content_sha256": "581ff3aa4c98bb2a6fcc303fe1ce19beb29bc7d3d02ff7fe5c6162c4c26ce4f7"
+  },
+  "questions": [
+    {
+      "id": "E7B10",
+      "prompt": "In Figure E7-1, what is the purpose of R1 and R2?",
+      "options": [
+        {"id": "A", "text": "Load resistors"},
+        {"id": "B", "text": "Voltage divider bias"},
+        {"id": "C", "text": "Self bias"},
+        {"id": "D", "text": "Feedback"}
+      ],
+      "correct_option_ids": ["B"],
+      "printed_locator": "E7B10 (B); Figure E7-1"
+    },
+    {
+      "id": "E7B11",
+      "prompt": "In Figure E7-1, what is the purpose of R3?",
+      "options": [
+        {"id": "A", "text": "Fixed bias"},
+        {"id": "B", "text": "Emitter bypass"},
+        {"id": "C", "text": "Output load resistor"},
+        {"id": "D", "text": "Self bias"}
+      ],
+      "correct_option_ids": ["D"],
+      "printed_locator": "E7B11 (D); Figure E7-1"
+    },
+    {
+      "id": "E7B12",
+      "prompt": "What type of amplifier circuit is shown in Figure E7-1?",
+      "options": [
+        {"id": "A", "text": "Common base"},
+        {"id": "B", "text": "Common collector"},
+        {"id": "C", "text": "Common emitter"},
+        {"id": "D", "text": "Emitter follower"}
+      ],
+      "correct_option_ids": ["C"],
+      "printed_locator": "E7B12 (C); Figure E7-1"
+    }
+  ],
+  "asset": {
+    "official_figure_id": "E7-1",
+    "docx_member": "word/media/image5.png",
+    "relationship_id": "rId10",
+    "relationship_target": "media/image5.png",
+    "media_type": "image/png",
+    "width": 796,
+    "height": 674,
+    "byte_length": 41357,
+    "content_sha256": "e4e82c7b8c2db7db3a65ffa21d00a6f93d0e6176f0aa3700b8c449bbf80dfd63"
+  }
+}

@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Strict pack format 0.3 with ordered PNG assets, direct lesson/question references, standard-library structural/CRC validation, exact-byte digests, limits, accessibility lint, and component provenance/rights.
+- Core-issued `ala-pack-asset-v1` logical references and additive asset summaries/descriptors under the unchanged ten-operation contract 0.1.
+- A pending-review E7B10–E7B12 candidate using the exact official E7-1 DOCX member, source-mapping evidence, golden records, and a human review checklist.
+- Format-0.3 compatibility, security, digest, resolver, restart, challenge, conflict, JSON, and answer-safety tests.
+
+### Changed
+
+- The Hermes skill uses the reviewed terminal fallback and requires access confirmation before answer solicitation for asset questions. Pinned v0.18.2 CLI native custom-plugin image output is recorded as unsupported.
+
+### Security
+
+- Asset validation rejects unsafe/aliased paths, undeclared files, unsupported or malformed media, invalid CRCs, excessive count/size/dimensions, duplicate identities/content, unresolved references, stale logical references, and deterministic pre-answer leakage markers.
+
+### Pending
+
+- The E7B candidate remains non-installable until explicit human approval. Real Hermes acceptance, the final Python matrix/CI run, release-readiness closure, and any version/tag/release action have not occurred.
+
 ## [0.2.0-alpha.1] - 2026-07-19
 
 ### Added

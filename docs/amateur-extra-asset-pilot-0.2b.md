@@ -1,7 +1,9 @@
 # Amateur Extra Official-Asset Pilot 0.2B
 
-Status: Accepted design; implementation and content import are not authorized
+Status: Implemented as a non-installable review candidate; explicit human approval pending
 Updated: 2026-07-19
+
+Implementation checkpoint: the exact source baseline was freshly reverified, the accepted member was imported without transformation into a pending candidate, generic format-0.3 support is implemented, and the local suite passes. This document retains the earlier design/research wording for traceability. Human review and activation remain pending in [the E7B review package](reviews/amateur-extra-e7b-asset-content-review.md).
 
 ## Authoritative baseline
 

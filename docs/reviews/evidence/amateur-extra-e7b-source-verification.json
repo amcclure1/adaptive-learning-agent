@@ -1,0 +1,91 @@
+{
+  "verification_date": "2026-07-18",
+  "status": "source_baseline_matched_human_review_pending",
+  "release_page": {
+    "title": "2024- 2028 Extra Class Question Pool Release",
+    "url": "https://www.ncvec.org/index.php/2024-2028-extra-class-question-pool-release",
+    "current_errata_revision": "Fourth errata, February 4, 2026",
+    "current_change": "E4D05 withdrawn",
+    "public_domain_statement_date": "2024-11-08",
+    "e7b_or_e7_1_change_found": false
+  },
+  "retrieved_files": [
+    {
+      "title": "2024-2028 Extra Class Question Pool and Syllabus Public Release with 4th Errata Feb 4 2026.docx",
+      "url": "https://ncvec.org/downloads/2024-2028%20Extra%20Class%20Question%20Pool%20and%20Syllabus%20Public%20Release%20with%204th%20Errata%20Feb%204%202026.docx",
+      "byte_length": 674155,
+      "sha256": "581ff3aa4c98bb2a6fcc303fe1ce19beb29bc7d3d02ff7fe5c6162c4c26ce4f7"
+    },
+    {
+      "title": "2024-2028 Extra Class Question Pool and Syllabus Public Release with 4th Errata Feb 4 2026.pdf",
+      "url": "https://ncvec.org/downloads/2024-2028%20Extra%20Class%20Question%20Pool%20and%20Syllabus%20Public%20Release%20with%204th%20Errata%20Feb%204%202026.pdf",
+      "byte_length": 952745,
+      "sha256": "9cc63ae0c1c9ee63a617824555d5b4e73da8c8edb91566f97a66770eb200f517"
+    },
+    {
+      "title": "Extra_Figures_2024-2028-1.pdf",
+      "url": "https://www.ncvec.org/downloads/Extra_Figures_2024-2028-1.pdf",
+      "byte_length": 78505,
+      "sha256": "591bb4c9fc9a9267e298b3ee23c93ab54ba3813f8ea3730123f9ccda1e4b80f2"
+    },
+    {
+      "title": "2024-2028 Amateur Extra Class Pool Diagrams_Page_2.jpg",
+      "url": "https://www.ncvec.org/downloads/2024-2028%20Amateur%20Extra%20Class%20Pool%20Diagrams_Page_2.jpg",
+      "byte_length": 168703,
+      "sha256": "6b085fb7461331899b33c24a0e9eb690bc0d555e00775086538cd5b8742931a9"
+    }
+  ],
+  "docx_mapping": {
+    "document_xml_sha256": "e5093702adbda001ee9a0c70658b6dbe16f6da37f00bbd49a84953808282f1b6",
+    "document_relationships_xml_sha256": "0a8c09afc418aabacc505a889af0aa158021b62c13f2074be7c3974aae8b6d53",
+    "relationship_id": "rId10",
+    "relationship_type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+    "relationship_target": "media/image5.png",
+    "embed_occurrences": 1,
+    "member": "word/media/image5.png",
+    "member_byte_length": 41357,
+    "member_sha256": "e4e82c7b8c2db7db3a65ffa21d00a6f93d0e6176f0aa3700b8c449bbf80dfd63",
+    "png": {
+      "width": 796,
+      "height": 674,
+      "bit_depth": 8,
+      "color_type": 2,
+      "structure_and_crc_valid": true,
+      "visible_printed_identity": "Figure E7-1"
+    },
+    "independent_distribution_comparison": {
+      "reference": "Official page-2 JPEG and official figure PDF, page 2",
+      "finding": "Both display a circuit labeled Figure E7-1 with the same component labels and connections; human fidelity approval remains pending."
+    }
+  },
+  "errata_scope": {
+    "consolidated_revisions_checked": [
+      "January 31, 2024",
+      "November 8, 2024",
+      "September 25, 2025",
+      "February 4, 2026"
+    ],
+    "affected_official_ids": [
+      "E1D07",
+      "E1E10",
+      "E1E11",
+      "E1F03",
+      "E2A13",
+      "E4D05",
+      "E4D12",
+      "E4D13",
+      "E6A06",
+      "E6D07",
+      "E9E10",
+      "E9-3"
+    ],
+    "e7b10_e7b11_e7b12_or_e7_1_affected": false
+  },
+  "human_determinations_not_made": [
+    "official figure identity approval",
+    "visual fidelity approval",
+    "redistribution policy approval",
+    "accessibility and non-leakage approval",
+    "final pack activation"
+  ]
+}

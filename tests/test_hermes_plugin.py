@@ -167,6 +167,18 @@ class HermesPluginTests(unittest.TestCase):
         self.assertIn("Never call project prose an official NCVEC explanation or commentary", skill)
         self.assertIn("Do not fetch the URL", skill)
 
+    def test_skill_requires_asset_fallback_and_access_confirmation_before_answer(self) -> None:
+        skill = (REPOSITORY_ROOT / "skills" / "adaptive-learning" / "SKILL.md").read_text(encoding="utf-8")
+        for required in (
+            "terminal_fallback",
+            "alt_text",
+            "explicitly confirms access",
+            "do not solicit or accept an answer yet",
+            "never ask the model to inspect pixels",
+            "challenge/quarantine",
+        ):
+            self.assertIn(required, skill)
+
 
 if __name__ == "__main__":
     unittest.main()
