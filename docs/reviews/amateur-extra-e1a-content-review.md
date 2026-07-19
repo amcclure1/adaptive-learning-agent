@@ -1,9 +1,9 @@
 # Amateur Extra E1A Content Review
 
-Status: pending independent human review
+Status: completed — PASS
 Reviewer: Anthony McClure
 Prepared: 2026-07-18
-Review completed: ☐ No
+Review completed: ☒ Yes — 2026-07-19T01:12:29.8952607Z
 
 This checklist supports human review of `packs/amateur-extra-e1a/`. Automated comparison evidence is preparatory evidence only. It does not approve content, establish that the reviewer performed a review, or authorize activation.
 
@@ -30,114 +30,114 @@ Legend: every checkbox begins unchecked. Mark it only after direct human inspect
 
 | Official ID | Prompt exact match | Option labels/order exact | Option text exact | Answer key exact | Printed NCVEC rule notation | Project explanation reviewed | Explanation citation reviewed | Reviewer disposition | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| E1A01 | ☐ | ☐ | ☐ | ☐ D | ☐ `[97.305, 97.307(b)]` | ☐ | ☐ | Pending | |
-| E1A02 | ☐ | ☐ | ☐ | ☐ D | ☐ `[97.301, 97.305]` | ☐ | ☐ | Pending | |
-| E1A03 | ☐ | ☐ | ☐ | ☐ C | ☐ `[97.305, 97.307(b)]` | ☐ | ☐ | Pending | |
-| E1A04 | ☐ | ☐ | ☐ | ☐ C | ☐ `[97.301, 97.305]` | ☐ | ☐ | Pending | |
-| E1A05 | ☐ | ☐ | ☐ | ☐ C | ☐ `[97.5]` | ☐ | ☐ | Pending | |
-| E1A06 | ☐ | ☐ | ☐ | ☐ B | ☐ `[97.303(h)(1)]` | ☐ | ☐ `§ 97.303(h)(3)` | Pending | Explicit disposition required below. |
-| E1A07 | ☐ | ☐ | ☐ | ☐ C | ☐ `[97.313(k)]` | ☐ | ☐ | Pending | |
-| E1A08 | ☐ | ☐ | ☐ | ☐ B | ☐ `[97.219]` | ☐ | ☐ | Pending | |
-| E1A09 | ☐ | ☐ | ☐ | ☐ D | ☐ `[97.313(l)]` | ☐ | ☐ | Pending | |
-| E1A10 | ☐ | ☐ | ☐ | ☐ A | ☐ `[97.11]` | ☐ | ☐ | Pending | |
-| E1A11 | ☐ | ☐ | ☐ | ☐ B | ☐ `[97.5]` | ☐ | ☐ | Pending | |
+| E1A01 | ☒ | ☒ | ☒ | ☒ D | ☒ `[97.305, 97.307(b)]` | ☒ | ☒ | PASS | Direct transcription and revised project explanation accepted. |
+| E1A02 | ☒ | ☒ | ☒ | ☒ D | ☒ `[97.301, 97.305]` | ☒ | ☒ | PASS | |
+| E1A03 | ☒ | ☒ | ☒ | ☒ C | ☒ `[97.305, 97.307(b)]` | ☒ | ☒ | PASS | |
+| E1A04 | ☒ | ☒ | ☒ | ☒ C | ☒ `[97.301, 97.305]` | ☒ | ☒ | PASS | Revised Extra-class locator accepted. |
+| E1A05 | ☒ | ☒ | ☒ | ☒ C | ☒ `[97.5]` | ☒ | ☒ | PASS | Revised station-license terminology accepted. |
+| E1A06 | ☒ | ☒ | ☒ | ☒ B | ☒ `[97.303(h)(1)]` | ☒ | ☒ `§ 97.303(h)(3)` | PASS | Explicit disposition recorded below. |
+| E1A07 | ☒ | ☒ | ☒ | ☒ C | ☒ `[97.313(k)]` | ☒ | ☒ | PASS | |
+| E1A08 | ☒ | ☒ | ☒ | ☒ B | ☒ `[97.219]` | ☒ | ☒ | PASS | Revised §§ 97.219(b)–(d) citation accepted. |
+| E1A09 | ☒ | ☒ | ☒ | ☒ D | ☒ `[97.313(l)]` | ☒ | ☒ | PASS | |
+| E1A10 | ☒ | ☒ | ☒ | ☒ A | ☒ `[97.11]` | ☒ | ☒ | PASS | Revised apparatus/power-supply distinction accepted. |
+| E1A11 | ☒ | ☒ | ☒ | ☒ B | ☒ `[97.5]` | ☒ | ☒ | PASS | Revised station-license terminology accepted. |
 
 ## E1A06 explicit disposition
 
 The NCVEC printed locator appears stale: the consolidated fourth-errata source prints `[97.303(h)(1)]`, while current § 97.303 places the operative CW center-frequency requirement in paragraph (h)(3). The answer remains correct. The project has not altered the official ID, prompt, choices, option order, key, or printed locator. The project-authored explanation cites the current operative paragraph, § 97.303(h)(3).
 
-- ☐ I verified that NCVEC still prints `[97.303(h)(1)]` and has not issued newer applicable errata.
-- ☐ I verified that current § 97.303(h)(3) requires the CW carrier at the channel center frequency.
-- ☐ I accept preserving the official question and printed locator unchanged while citing § 97.303(h)(3) in project prose.
-- Reviewer disposition: Pending
-- Reviewer notes:
+- ☒ I verified that NCVEC still prints `[97.303(h)(1)]` and has not issued newer applicable errata.
+- ☒ I verified that current § 97.303(h)(3) requires the CW carrier at the channel center frequency.
+- ☒ I accept preserving the official question and printed locator unchanged while citing § 97.303(h)(3) in project prose.
+- Reviewer disposition: PASS
+- Reviewer notes: The NCVEC printed locator appears stale; answer B remains correct; the project has not altered the official question; the project explanation cites the current operative paragraph.
 
 ## Lessons
 
 ### Lesson 1 — Band edges, privileges, and occupied signals
 
-- ☐ Original project prose; no copied third-party study text.
-- ☐ Regulatory claims are accurate under the cited current Part 97 text.
-- ☐ USB/LSB occupied-signal reasoning is accurate and teaches concepts rather than answer letters.
-- ☐ The 60-meter explanation accurately distinguishes the NCVEC printed locator from the current rule paragraph.
-- ☐ Citations and locators are sufficient and correctly resolved.
-- Reviewer disposition: Pending
-- Notes:
+- ☒ Original project prose; no copied third-party study text.
+- ☒ Regulatory claims are accurate under the cited current Part 97 text.
+- ☒ USB/LSB occupied-signal reasoning is accurate and teaches concepts rather than answer letters.
+- ☒ The 60-meter explanation accurately distinguishes the NCVEC printed locator from the current rule paragraph.
+- ☒ Citations and locators are sufficient and correctly resolved.
+- Reviewer disposition: PASS
+- Notes: Revised § 97.301(b) locator and USB carrier-reference wording accepted.
 
 ### Lesson 2 — Special operations and regulatory limitations
 
-- ☐ Original project prose; no copied third-party study text.
-- ☐ Vessel/aircraft licensing, permission, and physical-control statements are accurate.
-- ☐ Message-forwarding accountability is accurate.
-- ☐ 2200-meter and 630-meter EIRP statements are accurate, including the Alaska qualification.
-- ☐ Citations and locators are sufficient and correctly resolved.
-- Reviewer disposition: Pending
-- Notes:
+- ☒ Original project prose; no copied third-party study text.
+- ☒ Vessel/aircraft licensing, permission, and physical-control statements are accurate.
+- ☒ Message-forwarding accountability is accurate.
+- ☒ 2200-meter and 630-meter EIRP statements are accurate, including the Alaska qualification.
+- ☒ Citations and locators are sufficient and correctly resolved.
+- Reviewer disposition: PASS
+- Notes: Revised station-license terminology and §§ 97.219(b)–(d) locator accepted.
 
 ## Sources, pool, rights, and notice
 
 ### Source metadata and snapshots
 
-- ☐ Exact titles, publishers, HTTPS URLs, retrieval dates, revision identities, and source types reviewed.
-- ☐ Fresh NCVEC PDF hash matches the declared retained digest.
-- ☐ Fresh point-in-time eCFR XML hash matches the declared retained digest.
-- ☐ NCVEC DOCX authoring snapshot hash recorded above and understood as comparison evidence, not a distributed pack file.
-- ☐ `snapshot_retained` and `content_sha256` combinations are accurate.
-- Disposition: Pending
+- ☒ Exact titles, publishers, HTTPS URLs, retrieval dates, revision identities, and source types reviewed.
+- ☒ Fresh NCVEC PDF hash matches the declared retained digest.
+- ☒ Fresh point-in-time eCFR XML hash matches the declared retained digest.
+- ☒ NCVEC DOCX authoring snapshot hash recorded above and understood as comparison evidence, not a distributed pack file.
+- ☒ `snapshot_retained` and `content_sha256` combinations are accurate.
+- Disposition: PASS
 - Notes:
 
 ### Assessment pool and errata
 
-- ☐ Pool ID, title, publisher, effective date 2024-07-01, and effective-through date 2028-06-30 reviewed.
-- ☐ Fourth-errata identity dated 2026-02-04 reviewed.
-- ☐ Withdrawal list contains E2A13, E4D05, E6D07, and E9E10 exactly.
-- ☐ No E1A01–E1A11 question is withdrawn or superseded.
-- ☐ Current Element 4 standard of 50 questions with 37 required to pass reviewed.
-- Disposition: Pending
+- ☒ Pool ID, title, publisher, effective date 2024-07-01, and effective-through date 2028-06-30 reviewed.
+- ☒ Fourth-errata identity dated 2026-02-04 reviewed.
+- ☒ Withdrawal list contains E2A13, E4D05, E6D07, and E9E10 exactly.
+- ☒ No E1A01–E1A11 question is withdrawn or superseded.
+- ☒ Current Element 4 standard of 50 questions with 37 required to pass reviewed.
+- Disposition: PASS
 - Notes:
 
 ### Rights metadata
 
-- ☐ NCVEC official IDs, wording, ordered choices, and keys are limited to the `public_domain` component scope and linked to the NCVEC statement.
-- ☐ Original lessons and explanations are `licensed` as `CC-BY-4.0`, copyright Adaptive Learning Agent contributors.
-- ☐ External official source records are `reference_only` metadata and links.
-- ☐ No logo, seal, screenshot, branding asset, commercial course prose, or unofficial study text is included.
-- ☐ Project policy is understood not to be formal legal advice.
-- Disposition: Pending
+- ☒ NCVEC official IDs, wording, ordered choices, and keys are limited to the `public_domain` component scope and linked to the NCVEC statement.
+- ☒ Original lessons and explanations are `licensed` as `CC-BY-4.0`, copyright Adaptive Learning Agent contributors.
+- ☒ External official source records are `reference_only` metadata and links.
+- ☒ No logo, seal, screenshot, branding asset, commercial course prose, or unofficial study text is included.
+- ☒ Project policy is understood not to be formal legal advice.
+- Disposition: PASS
 - Notes:
 
 ### NOTICE.md
 
-- ☐ NOTICE accurately distinguishes official pool material, original project prose, and external references.
-- ☐ NOTICE does not override or contradict machine-readable rights metadata.
-- ☐ NOTICE accurately states that the current pack is a draft pending independent review.
-- Disposition: Pending
+- ☒ NOTICE accurately distinguishes official pool material, original project prose, and external references.
+- ☒ NOTICE does not override or contradict machine-readable rights metadata.
+- ☒ NOTICE accurately states that installation requires digest-covered human approval and that automated checks are not approval.
+- Disposition: PASS
 - Notes:
 
 ## Approval scope confirmation
 
-- ☐ `official_wording`
-- ☐ `option_ordering`
-- ☐ `answer_keys`
-- ☐ `official_ids`
-- ☐ `lessons`
-- ☐ `explanations`
-- ☐ `citations`
-- ☐ `rights_metadata`
-- ☐ `pool_and_errata_metadata`
+- ☒ `official_wording`
+- ☒ `option_ordering`
+- ☒ `answer_keys`
+- ☒ `official_ids`
+- ☒ `lessons`
+- ☒ `explanations`
+- ☒ `citations`
+- ☒ `rights_metadata`
+- ☒ `pool_and_errata_metadata`
 
 ## Human confirmation gate
 
 Do not complete this section until every applicable item above has been reviewed.
 
 - Reviewer: Anthony McClure
-- Review completion time (actual UTC, recorded only after explicit confirmation): Pending
-- Overall disposition: Pending
-- ☐ All 11 questions were reviewed.
-- ☐ Both lessons were reviewed.
-- ☐ All explanations and citations were reviewed.
-- ☐ Rights and source metadata were reviewed.
-- ☐ The E1A06 treatment was explicitly accepted.
-- Final reviewer notes:
+- Review completion time: 2026-07-19T01:12:29.8952607Z
+- Overall disposition: PASS
+- ☒ All 11 questions were reviewed.
+- ☒ Both lessons were reviewed.
+- ☒ All explanations and citations were reviewed.
+- ☒ Rights and source metadata were reviewed.
+- ☒ The E1A06 treatment was explicitly accepted.
+- Final reviewer notes: Anthony McClure first accepted the exact direct-source NCVEC transcription, then explicitly reviewed the remaining documents and checklist items and gave them a PASS.
 
 After completing the review, Anthony McClure must explicitly confirm these five statements to Codex. Only then may Codex record the actual current UTC timestamp and change the digest-covered pack approval status to `approved`.

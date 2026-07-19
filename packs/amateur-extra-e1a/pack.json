@@ -350,9 +350,9 @@
     }
   ],
   "approval": {
-    "status": "pending",
-    "reviewed_by": "PENDING INDEPENDENT HUMAN REVIEW",
-    "reviewed_at": "2026-07-18T00:00:00Z",
+    "status": "approved",
+    "reviewed_by": "Anthony McClure",
+    "reviewed_at": "2026-07-19T01:12:29.8952607Z",
     "review_scope": [
       "official_wording",
       "option_ordering",
@@ -364,6 +364,6 @@
       "rights_metadata",
       "pool_and_errata_metadata"
     ],
-    "notes": "Draft only. Do not change status, reviewer, or time until independent comparison and review are complete; review the E1A06 source-notation discrepancy explicitly."
+    "notes": "Anthony McClure approved the direct NCVEC transcription and the project-authored lessons, explanations, citations, source and rights metadata, NOTICE, and approval scope. For E1A06, the reviewer accepted preserving NCVEC's printed [97.303(h)(1)] locator, unchanged official wording, choices, and answer B while the project explanation cites the current operative § 97.303(h)(3)."
   }
 }
