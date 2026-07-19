@@ -2,7 +2,7 @@
 
 Date: 2026-07-18
 
-Status: **PASS; no release or tag created**
+Status: **PASS; published as prerelease `v0.2.1-alpha.1`**
 
 Anthony McClure completed the mandatory human review and gave the exact candidate an overall PASS at `2026-07-19T03:45:57.7429288Z`. The pack is approved, publicly valid and installable with digest `ac93a973ca85fbd1938ea5adbd10dc5a663126451f15b45d36ead06b3b07b826`.
 
@@ -33,4 +33,4 @@ At Anthony McClure's request, the remaining E7B12 item was answered with approve
 
 Native custom-plugin image output remains unsupported in the pinned Hermes v0.18.2 Windows CLI; the accepted path is approved fallback-only presentation. Native rendering unavailability is not itself a blocker.
 
-All required 0.2B acceptance gates are complete or explicitly dispositioned. No release or tag has been created or authorized.
+All required 0.2B acceptance gates are complete or explicitly dispositioned. The annotated tag `v0.2.1-alpha.1` resolves to `b597401b92520a1cb7bd655cb14c94cc940cc14f`, and the [GitHub prerelease](https://github.com/amcclure1/adaptive-learning-agent/releases/tag/v0.2.1-alpha.1) was published on 2026-07-19. No other release or tag was created by this release task.

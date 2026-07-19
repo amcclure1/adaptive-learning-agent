@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / 0.2.0-alpha.1 published / 0.2B final acceptance PASS and unreleased
+Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / 0.3B design complete and implementation gated
 Updated: 2026-07-19
 
 ## Released baseline
@@ -35,9 +35,9 @@ The approved pilot is published as the `v0.2.0-alpha.1` annotated tag and GitHub
 - Format 0.2 added sourced content without changing SQLite schema 1 or embedding Amateur Extra constants in the core or adapter.
 - Format 0.3 adds bounded static PNG validation, exact-byte digesting, logical references, and additive descriptors without changing SQLite schema 1, scoring, or the ten-operation contract.
 
-## Version 0.2B implementation checkpoint
+## Version 0.2.1-alpha.1 release
 
-The generic format-0.3 implementation and final acceptance are complete. It includes exact version dispatch, closed ordered asset records/references, standard-library PNG framing/chunk/CRC/IHDR validation, accepted count/size/dimension limits, exact raw-byte and pack digesting, strict inventory/path/reference/rights/accessibility checks, deterministic leakage lint, core-issued `ala-pack-asset-v1` logical references, additive contract-0.1 summaries/descriptors, and the fallback-first Hermes skill. Formats 0.1/0.2, SQLite schema 1, scoring, sessions, attempts, retry, progress, and quarantine remain unchanged.
+The generic format-0.3 implementation and final acceptance are complete and published as the [`v0.2.1-alpha.1` GitHub prerelease](https://github.com/amcclure1/adaptive-learning-agent/releases/tag/v0.2.1-alpha.1). The annotated tag resolves to release commit `b597401b92520a1cb7bd655cb14c94cc940cc14f`. The release includes exact version dispatch, closed ordered asset records/references, standard-library PNG framing/chunk/CRC/IHDR validation, accepted count/size/dimension limits, exact raw-byte and pack digesting, strict inventory/path/reference/rights/accessibility checks, deterministic leakage lint, core-issued `ala-pack-asset-v1` logical references, additive contract-0.1 summaries/descriptors, and the fallback-first Hermes skill. Formats 0.1/0.2, SQLite schema 1, scoring, sessions, attempts, retry, progress, and quarantine remain unchanged.
 
 Fresh NCVEC retrieval on 2026-07-18 matched the accepted DOCX/PDF/figure hashes and still identified the fourth errata dated February 4, 2026 as current. No errata affects E7B10–E7B12 or E7-1. DOCX relationship `rId10` targets `word/media/image5.png`; the exact member is a structurally valid 796×674 PNG, 41,357 bytes, SHA-256 `e4e82c7b8c2db7db3a65ffa21d00a6f93d0e6176f0aa3700b8c449bbf80dfd63`, and visibly prints `Figure E7-1`. The separate official figure distribution supplies the review comparison.
 
@@ -45,13 +45,13 @@ The `us-amateur-extra-e7b` candidate contains exactly E7B10–E7B12, the one exa
 
 Pinned Hermes v0.18.2 maps to source tag `v2026.7.7.2`. Its public ordinary-plugin contract supports JSON-string tool results but no learner-facing local-image output API. Native custom-plugin output is therefore recorded as unsupported for the pinned CLI, and the skill uses the approved text fallback without Hermes core/configuration changes or model vision. Anthony McClure authorized completion of the old E1A acceptance session. Real E7B acceptance then passed validation/install, answer-safe fallback presentation, correct scoring/provenance, fresh-process restart reconstruction, challenge quarantine, idempotent retry, and conflicting-retry rejection without Hermes configuration changes.
 
-The offline approved-pack lifecycle passes validation/install, fallback descriptors, scoring, restart/resume, immutable retry/conflict behavior, and challenge quarantine. The 77-test standard-library suite passes locally on CPython 3.12.13, 3.13.14, and 3.14.6; hosted [GitHub Actions run 29672473830](https://github.com/amcclure1/adaptive-learning-agent/actions/runs/29672473830) also passed all three jobs for approval commit `fc8cd0286ebdf052c520eee3cbf6781115e4d3d4`. Independent human review and real pinned-Hermes acceptance are PASS. Anthony McClure explicitly dispositioned a new coverage measurement as non-blocking and gave final release readiness a PASS at `2026-07-19T04:08:51.3070005Z`. The E7B acceptance session is completed and no Hermes process remains running. No release or tag has been created. See [the human review package](reviews/amateur-extra-e7b-asset-content-review.md), [independent review](handoffs/amateur-extra-asset-0.2b-independent-review.md), and [release-readiness handoff](handoffs/amateur-extra-asset-0.2b-release-readiness.md).
+The offline approved-pack lifecycle passes validation/install, fallback descriptors, scoring, restart/resume, immutable retry/conflict behavior, and challenge quarantine. The 77-test standard-library suite passes locally on CPython 3.12.13, 3.13.14, and 3.14.6; hosted [GitHub Actions run 29673147507](https://github.com/amcclure1/adaptive-learning-agent/actions/runs/29673147507) passed all three jobs for the tagged release commit. Independent human review and real pinned-Hermes acceptance are PASS. Anthony McClure explicitly dispositioned a new coverage measurement as non-blocking and gave final release readiness a PASS at `2026-07-19T04:08:51.3070005Z`. The E7B acceptance session is completed and no Hermes process remains running. See [the human review package](reviews/amateur-extra-e7b-asset-content-review.md), [independent review](handoffs/amateur-extra-asset-0.2b-independent-review.md), and [release-readiness handoff](handoffs/amateur-extra-asset-0.2b-release-readiness.md).
 
 ## Next-phase architecture checkpoint
 
 Accepted architecture now separates two future lines:
 
-- **0.2B** is implemented, human-approved, and final-acceptance PASS. E7B10–E7B12 and exact Figure E7-1 bytes are installable; no release or tag exists.
+- **0.2B / 0.2.1-alpha.1** is implemented, human-approved, final-acceptance PASS, and published as a prerelease. E7B10–E7B12 and exact Figure E7-1 bytes are installable.
 - **0.3A–C** progresses from assessment/curriculum research, to a manually reviewed five-question SAP-C02 slice, to agent-assisted construction with mandatory human gates.
 
 Accepted ADRs 0010–0013 establish whole learning architecture with progressive realization, assessment authenticity and official-question reuse, capability discovery with controlled activation, and evidence-backed authored questions with layered approval. Acceptance establishes architectural direction only and does not authorize implementation.
@@ -85,4 +85,4 @@ No source/claim workspace, lesson, claim set, learner-ready question, compiler, 
 
 ## Deferred
 
-Publication of the final-acceptance-PASS format-0.3 E7B candidate, 0.3B authored content/workspace/compiler/approval implementation, Subject Builder operations, AWS content, capability configuration, expansion beyond E1A/E7B, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remain deferred. The 0.3B design records and Proposed ADRs are not implemented runtime objects or pack-format commitments. No MCP server, connector, AWS access, or database change was added.
+0.3B authored content/workspace/compiler/approval implementation, Subject Builder operations, AWS content, capability configuration, expansion beyond E1A/E7B, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remain deferred. The 0.3B design records and Proposed ADRs are not implemented runtime objects or pack-format commitments. No MCP server, connector, AWS access, or database change was added.

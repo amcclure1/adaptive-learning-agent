@@ -17,7 +17,7 @@ Proved format 0.2, format-0.1 compatibility, ordered lessons, authoritative sour
 
 ## 0.2B — Official diagram and static-asset pilot
 
-Status: complete; final acceptance PASS; unreleased
+Status: complete; published as prerelease `v0.2.1-alpha.1`
 
 Bounded objective: E7B10–E7B12 with shared official Figure E7-1, exact asset identity, source/rights metadata, byte digest, question references, reviewed alternative text, terminal fallback, offline install/study, and real Hermes display/fallback verification.
 

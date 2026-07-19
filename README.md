@@ -4,11 +4,11 @@ Adaptive Learning Agent is a lightweight, local-first, agent-native learning sys
 
 ## Status
 
-**Pre-alpha — version 0.2.0-alpha.1 is published; the release-ready 0.2B format-0.3 asset candidate has final acceptance PASS.**
+**Pre-alpha — versions 0.2.0-alpha.1 and 0.2.1-alpha.1 are published as prereleases.**
 
 The deterministic version-0.1 core is complete. The installed-package suite passes on Python 3.12, 3.13, and 3.14, and the Hermes v0.18.2 CLI/profile integration is verified on Windows. The included `fixture-basics` subject is synthetic acceptance-test data, not a real learning pack and not preparation for any certification or examination.
 
-The core supports strict formats 0.1, 0.2, and 0.3. Format 0.3 adds bounded local PNG assets, exact-byte validation/digesting, reviewed accessibility fallbacks, and logical installed-asset references without changing SQLite schema 1 or scoring. Anthony McClure approved the E7B10–E7B12/Figure E7-1 candidate after reviewing its source mapping, fidelity, redistribution disposition, accessibility text, mappings, content, rights, and activation. It is valid, installable, and final-acceptance PASS. See [the release record](docs/releases/0.2.1-alpha.1.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
+The core supports strict formats 0.1, 0.2, and 0.3. Format 0.3 adds bounded local PNG assets, exact-byte validation/digesting, reviewed accessibility fallbacks, and logical installed-asset references without changing SQLite schema 1 or scoring. Anthony McClure approved the E7B10–E7B12/Figure E7-1 pilot after reviewing its source mapping, fidelity, redistribution disposition, accessibility text, mappings, content, rights, and activation. It is published as [v0.2.1-alpha.1](https://github.com/amcclure1/adaptive-learning-agent/releases/tag/v0.2.1-alpha.1). See [the release record](docs/releases/0.2.1-alpha.1.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
 
 ## Install from the tagged source
 
