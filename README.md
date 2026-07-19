@@ -4,11 +4,25 @@ Adaptive Learning Agent is a lightweight, local-first, agent-native learning sys
 
 ## Status
 
-**Pre-alpha — version 0.1.0 is released; the version 0.2A E1A pilot has passed independent review and release-readiness verification.**
+**Pre-alpha — version 0.2.0-alpha.1 is published as a pre-release sourced-content pilot.**
 
 The deterministic version-0.1 core is complete. The installed-package suite passes on Python 3.12, 3.13, and 3.14, and the Hermes v0.18.2 CLI/profile integration is verified on Windows. The included `fixture-basics` subject is synthetic acceptance-test data, not a real learning pack and not preparation for any certification or examination.
 
-The core now supports strict sourced format 0.2 while retaining format 0.1. The approved E1A pilot contains two lessons and the eleven official E1A questions, and has passed exact-source comparison, a named human review, automated golden tests, and real Hermes acceptance. It is a narrow practice pilot, not a complete Amateur Extra course, exam simulation, or readiness claim. Subject building, scheduling, mastery, exam simulation, and AWS content remain deferred. See [the independent-review handoff](docs/handoffs/amateur-extra-0.2-independent-review.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
+The core supports strict sourced format 0.2 while retaining format 0.1. The approved E1A pilot contains two lessons and the eleven official E1A questions, and has passed exact-source comparison, named human review, automated golden tests, and real Hermes acceptance. It is a narrow practice pilot, not a complete Amateur Extra course, exam simulation, or readiness claim. Subject building, scheduling, mastery, exam simulation, and AWS content remain deferred. See [the 0.2.0-alpha.1 release record](docs/releases/0.2.0-alpha.1.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
+
+## Install from the tagged source
+
+Python 3.12 or newer and Git are required. Hermes v0.18.2 is additionally required for the verified conversational workflow.
+
+```powershell
+git clone --branch v0.2.0-alpha.1 https://github.com/amcclure1/adaptive-learning-agent.git
+Set-Location adaptive-learning-agent
+python -m venv .venv
+& .\.venv\Scripts\Activate.ps1
+python -m pip install .
+```
+
+Detailed core validation and Hermes study instructions are in [the release record](docs/releases/0.2.0-alpha.1.md#installation-and-use).
 
 ## Run the core tests
 
@@ -49,12 +63,12 @@ deterministic Python learning core
        |                    |
        v                    v
 local SQLite state     portable subject packs
-                       (JSON/Markdown in 0.1)
+                       (JSON/Markdown in 0.1 and 0.2)
 ```
 
 Conversation and agent memory may shape presentation, but they are never authoritative learner state. Packs define reviewed content and evidence. Python owns state transitions and scoring. SQLite records operational learner facts.
 
-## Version-0.1 limitations
+## Current limitations
 
 - One local learner and at most one active session; no hosted or concurrent multi-user operation.
 - Practice workflow only; no mastery, scheduling, readiness prediction, or exam simulation.

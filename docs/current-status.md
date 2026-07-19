@@ -1,13 +1,13 @@
 # Current Status
 
-Status: pre-alpha / version 0.1.0 released; version 0.2A E1A pilot independently approved and acceptance-verified
+Status: pre-alpha / version 0.2.0-alpha.1 sourced-content pilot published as a pre-release
 Updated: 2026-07-19
 
 ## Released baseline
 
 Version 0.1.0 proved the runtime-independent deterministic Python core, local SQLite state, strict portable pack input, runtime-neutral JSON tool contract, and thin Hermes adapter. The synthetic `fixture-basics` pack remains test data, not examination preparation. See [the 0.1.0 release record](releases/0.1.0.md).
 
-## Version 0.2A outcome
+## Version 0.2.0-alpha.1 release
 
 Accepted ADR 0009 is implemented in a subject-neutral format-0.2 parser, immutable records, digest/install path, and additive contract-0.1 provenance. Format 0.1, SQLite schema 1, scoring, sessions, retries, progress, and quarantine remain unchanged.
 
@@ -22,7 +22,9 @@ Verification completed:
 - Hosted GitHub Actions passed all three Python jobs for implementation commit `2c3d364df410a9408e9c4f558d23904749de5207`.
 - Real pinned Hermes v0.18.2 acceptance passed validation/install, ordered lessons, answer-safe question display, confidence scoring, post-answer explanation/source display, independent restart reconstruction, challenge quarantine, and immutable retry rejection.
 
-See [the independent-review handoff](handoffs/amateur-extra-0.2-independent-review.md) and [release-readiness handoff](handoffs/amateur-extra-0.2-release-readiness.md). This is release-readiness evidence, not a release or tag.
+See [the independent-review handoff](handoffs/amateur-extra-0.2-independent-review.md) and [release-readiness handoff](handoffs/amateur-extra-0.2-release-readiness.md).
+
+The approved pilot is published as the `v0.2.0-alpha.1` annotated tag and GitHub pre-release. See [the release record](releases/0.2.0-alpha.1.md). The Python distribution version is the PEP 440 equivalent `0.2.0a1`.
 
 ## Architecture boundary proven
 

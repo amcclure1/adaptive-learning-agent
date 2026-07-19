@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.0-alpha.1] - 2026-07-19
+
 ### Added
 
 - Strict sourced pack format 0.2 with ordered lessons, sources/citations, official identity, pool/errata metadata, component rights, approval, and deterministic digest/install support.
@@ -38,5 +40,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Removed a redundant legacy license classifier that prevented installed-package builds with modern setuptools.
 
-[Unreleased]: https://github.com/amcclure1/adaptive-learning-agent/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/amcclure1/adaptive-learning-agent/compare/v0.2.0-alpha.1...HEAD
+[0.2.0-alpha.1]: https://github.com/amcclure1/adaptive-learning-agent/compare/v0.1.0...v0.2.0-alpha.1
 [0.1.0]: https://github.com/amcclure1/adaptive-learning-agent/releases/tag/v0.1.0
