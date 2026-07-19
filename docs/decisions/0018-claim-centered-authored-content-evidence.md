@@ -1,17 +1,17 @@
 # ADR 0018: Claim-Centered Evidence for Authored Content
 
-Status: Proposed
+Status: Accepted
 Date: 2026-07-18
 
 ## Context
 
 Direct source citations do not by themselves show which factual premise supports a lesson, answer, or distractor. Professional AWS scenarios also depend on conditions such as Region, account configuration, time, and explicit architectural priorities. Derived recommendations require several factual premises rather than one source link.
 
-## Proposed decision
+## Decision
 
 Make approved atomic claims the evidence boundary between approved sources and authored lessons/questions.
 
-Each claim has a stable ID, concise statement, category, source citations with precise locators, applicability constraints, service/architecture scope, Region/account/configuration/time sensitivity, retrieval and review dates, freshness horizon, reviewer, review status, and supersession/invalidation state.
+Each claim has a stable ID, explicit schema version and revision, concise atomic statement, category, source citations with precise locators and source digests, applicability constraints, service/architecture scope, Region/account/configuration/time sensitivity, explicit freshness horizon, validation and human-review state, supersession/invalidation state, and a domain-separated canonical digest.
 
 Supported categories are:
 
@@ -41,8 +41,13 @@ Questions reference approved claim IDs. Key and distractor rationales identify t
 - Treat paragraphs as claims: rejected because they are difficult to review, supersede, and reuse precisely.
 - Let a model decide current truth during compilation: rejected because generation and retrieval are not approval.
 
-## Open points before acceptance
+## Fixed implementation contract
 
-- Exact claim versioning and ID rules.
-- Whether claims may have multiple independent approving reviewers.
-- Default freshness horizons by category; 0.3B records explicit horizons rather than relying on defaults.
+- Claim IDs are stable across revisions and independent of filenames. Revisions are positive integers; an approved revision is immutable, while an editable draft may be replaced only with expected-prior-digest conflict checking.
+- One claim contains one independently reviewable assertion. Compound prose must be split unless the conditions are inseparable from that single assertion.
+- Source references bind source ID, source revision, source canonical digest, precise locator, and supported proposition.
+- Derived recommendations bind every approved premise claim by ID/revision/digest and state a decision criterion plus applicability conditions. Derived-claim graphs must be acyclic.
+- Multiple claim approvals may exist, but release eligibility requires at least one current qualifying approval and no current revocation or unresolved conflict. No quorum is required for the bounded pilot.
+- Every claim records an explicit date or rule-based freshness horizon. No category default silently grants currency.
+
+The exact record shape and controlled vocabularies are normative in [the schema contract](../aws/sap-c02-0.3b-schemas.md).
