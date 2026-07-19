@@ -1,6 +1,6 @@
 # Amateur Extra Official-Asset Pilot 0.2B
 
-Status: Proposed research and design; implementation and content import are not authorized  
+Status: Accepted design; implementation and content import are not authorized
 Updated: 2026-07-19
 
 ## Authoritative baseline
@@ -39,9 +39,9 @@ Select exactly **E7B10, E7B11, and E7B12 using official Figure E7-1**.
 
 The group is the smallest strong reuse case: one static monochrome circuit serves three questions, requires no color, animation, interaction, software, or network access, and has no listed figure errata. It exercises component-label fidelity, topology, shared references, accessibility, digesting, restart behavior, and fallback presentation without the graphical density of the coordinate and antenna plots.
 
-### Asset identity and bytes
+### Provisional asset identity and bytes
 
-The preferred pilot representation is the **exact PNG embedded as `word/media/image5.png` in the current official DOCX**, not a screenshot or newly rendered image. Research inspection found:
+The accepted preferred pilot representation is provisionally the **exact PNG embedded as `word/media/image5.png` in the current official DOCX**, not a screenshot or newly rendered image. Research inspection found:
 
 - official figure identity: `Figure E7-1`;
 - media type: `image/png`;
@@ -61,22 +61,22 @@ The pilot should remain one group and may use two concise original lessons:
 1. identify circuit nodes, labeled components, and signal/rail paths without naming a keyed answer;
 2. reason from the visible connections to bias, feedback, and amplifier configuration.
 
-Proposed objectives are to (a) trace the labeled bias and signal paths in E7-1 and (b) infer component purpose and amplifier configuration from those connections. The full E7B domain is not claimed.
+The pilot objectives are to (a) trace the labeled bias and signal paths in E7-1 and (b) infer component purpose and amplifier configuration from those connections. The full E7B domain is not claimed.
 
 ### Rights finding
 
-NCVEC's official release page places the pool, figure downloads, public-domain statement, and figure errata together. The project may reasonably propose that Figure E7-1, its labels, and the question-to-figure wording are included in the released pool. The page does **not** separately say “all diagram bytes and transformed formats are public domain,” and this project has no formal legal opinion. Asset redistribution therefore remains a required human rights-review scope before import or release.
+NCVEC's official release page places the pool, figure downloads, public-domain statement, and figure errata together. For this pilot, project policy treats Figure E7-1 geometry, labels, and question-to-figure wording as official NCVEC pool material under that public-domain statement. The page does **not** separately say “all diagram bytes and transformed formats are public domain,” and this project has no formal legal opinion. Redistribution of the exact embedded PNG therefore remains gated on human confirmation of the source mapping and project-policy approval before import or release.
 
 For the pilot:
 
-- the exact official E7-1 PNG bytes and official labels are proposed as `public_domain` under the NCVEC basis;
+- official E7-1 geometry and labels are treated as `public_domain` under the NCVEC basis, with exact embedded-PNG redistribution still gated as stated above;
 - question-to-figure references remain official question content under the same basis;
 - project-authored alt text, caption, fallback, lessons, and explanations remain separately copyrighted project prose under CC-BY-4.0;
 - fonts, renderers, and conversion tools are not pack content and retain their own terms;
 - screenshots, crops, re-creations, third-party renderings, and generated images are prohibited;
 - if exact embedded PNG use is rejected, any converted representation must be labeled project-derived and record both source and output hashes plus the complete conversion procedure.
 
-This is project policy and an evidence finding, not legal advice. Whether the NCVEC statement legally reaches every distributed container byte or transformation is unresolved pending human review.
+This is accepted project policy and an evidence finding, not legal advice or formal legal review. It does not assert that the NCVEC statement legally reaches every distributed container byte or transformation.
 
 ### Accessibility approach
 
@@ -93,7 +93,7 @@ The caption should identify only the source and figure, for example “Official 
 5. The skill confirms access, then asks for the option and confidence. It never asks a model to inspect or paraphrase the diagram.
 6. After deterministic scoring, `study.submit` may return project-authored explanation references to E7-1.
 
-Hermes's current official [plugin guide](https://hermes-agent.nousresearch.com/docs/developer-guide/plugins) documents JSON-string tool handlers, and its [vision documentation](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/vision.md) documents image input and vision routing. Neither verifies a generic custom-plugin local-image attachment path for the project's pinned Hermes v0.18.2 CLI. Native E7-1 image delivery is therefore **unverified** and must be proven against the pinned release; the text fallback is mandatory and runtime-neutral.
+Hermes's current official [plugin guide](https://hermes-agent.nousresearch.com/docs/developer-guide/plugins) documents JSON-string tool handlers, and its [vision documentation](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/vision.md) documents image input and vision routing. Neither verifies a generic custom-plugin local-image attachment path for the project's pinned Hermes v0.18.2 CLI. Native E7-1 image delivery is therefore **unverified** and must be tested against the pinned release. If no public mechanism is verified, the approved alt text and terminal fallback are used, Hermes core/configuration remains unchanged, and the rest of format-0.3 acceptance is not blocked solely by native rendering unavailability.
 
 ### Explicit non-goals
 

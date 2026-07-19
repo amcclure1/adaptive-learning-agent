@@ -17,13 +17,13 @@ Proved format 0.2, format-0.1 compatibility, ordered lessons, authoritative sour
 
 ## 0.2B — Official diagram and static-asset pilot
 
-Status: research/design complete; Proposed ADRs 0014–0016 require review; implementation not authorized
+Status: design accepted by ADRs 0014–0016; implementation and content import not authorized
 
 Bounded objective: E7B10–E7B12 with shared official Figure E7-1, exact asset identity, source/rights metadata, byte digest, question references, reviewed alternative text, terminal fallback, offline install/study, and real Hermes display/fallback verification.
 
-Authoritative review selected E7B from all nine figure-dependent groups. The design proposes explicit format 0.3, exact embedded official PNG bytes, strict local-asset integrity, direct ordered references, additive contract-0.1 descriptors, and no SQLite change. Proposed ADRs 0014–0016, asset-specific rights, human accessibility/non-leakage approval, and pinned Hermes native-display compatibility remain gates.
+Authoritative review selected E7B from all nine figure-dependent groups. Accepted design uses explicit format 0.3, PNG-only static local assets, strict local-asset integrity, direct ordered references, core-issued logical references, additive contract-0.1 descriptors, mandatory accessibility fallback, and no SQLite change. The exact embedded official PNG remains provisional pending source/fidelity/project-policy approval. Human accessibility/non-leakage approval and pinned Hermes native-display verification remain implementation/content gates; native rendering unavailability alone does not block fallback-based format-0.3 acceptance.
 
-0.2B excludes generated questions, curriculum planning, subject building, capability discovery, MCP, AWS, new scoring, and SQLite changes. See [the asset pilot](amateur-extra-asset-pilot-0.2b.md), [format proposal](asset-pack-format-proposal.md), [accessibility policy](asset-accessibility-policy.md), and [handoff](handoffs/amateur-extra-asset-0.2b-design.md).
+0.2B excludes generated questions, curriculum planning, subject building, capability discovery, MCP, AWS, new scoring, and SQLite changes. See [the asset pilot](amateur-extra-asset-pilot-0.2b.md), [accepted format design](asset-pack-format-proposal.md), [accessibility policy](asset-accessibility-policy.md), and [final handoff](handoffs/amateur-extra-asset-0.2b-final-design.md).
 
 ## 0.3A — Assessment research and curriculum architecture
 

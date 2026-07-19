@@ -36,13 +36,13 @@ The approved pilot is published as the `v0.2.0-alpha.1` annotated tag and GitHub
 
 ## Version 0.2B design checkpoint
 
-The documentation-only 0.2B research/design task is complete. Fresh authoritative NCVEC review inventoried all nine current figure-dependent groups and selected E7B10–E7B12 with shared Figure E7-1. No listed errata affects E7-1. The preferred representation is the exact 796×674 PNG embedded in the current official DOCX, avoiding image conversion.
+The documentation-only 0.2B research/design task is complete. Fresh authoritative NCVEC review inventoried all nine current figure-dependent groups and selected E7B10–E7B12 with shared Figure E7-1. No listed errata affects E7-1. The preferred representation is provisionally the exact 796×674 PNG embedded in the current official DOCX, avoiding image conversion; import remains gated on independent identity/fidelity approval.
 
-The design proposes explicit pack format 0.3, PNG-only static local assets, strict raw-byte and pack digesting, direct ordered references, reviewed non-leaking alt/fallback text, logical runtime references, additive responses under the existing ten-operation contract 0.1, and no SQLite schema change. ADRs 0014–0016 remain Proposed; they do not authorize implementation.
+ADRs 0014–0016 are Accepted. They establish explicit pack format 0.3, PNG-only static local assets, the accepted format-0.3 limits, strict raw-byte and pack digesting, direct ordered references, reviewed non-leaking alt/fallback text, core-issued logical runtime references, additive responses under the existing ten-operation contract 0.1, and no SQLite schema change. Acceptance establishes architectural direction and pilot constraints only; it does not authorize implementation or content import. Later pack formats may revise media types, limits, or runtime rendering through a new decision without changing format 0.3.
 
-NCVEC's public-domain statement reasonably supports an asset-rights proposal but does not separately enumerate diagram bytes or transformed formats. Human rights approval remains required. Native local-image delivery from a custom plugin is not verified for pinned Hermes v0.18.2; fallback presentation is mandatory and native presentation remains an implementation-time compatibility gate.
+Project policy treats official E7-1 geometry, labels, and question references as NCVEC public-domain pool material; this is not legal advice or formal legal review. Redistribution of the provisional exact embedded PNG remains gated on independent source mapping, visual fidelity, and project-policy approval. Native local-image delivery from a custom plugin is not verified for pinned Hermes v0.18.2. Implementation must test for a public mechanism; if unavailable, approved alt text and terminal fallback are accepted without changing Hermes core/configuration, and native rendering unavailability alone does not block the remaining format-0.3 acceptance.
 
-See [the format proposal](asset-pack-format-proposal.md), [pilot research](amateur-extra-asset-pilot-0.2b.md), [accessibility policy](asset-accessibility-policy.md), and [0.2B handoff](handoffs/amateur-extra-asset-0.2b-design.md).
+See [the accepted format design](asset-pack-format-proposal.md), [pilot research](amateur-extra-asset-pilot-0.2b.md), [accessibility policy](asset-accessibility-policy.md), and [final 0.2B design handoff](handoffs/amateur-extra-asset-0.2b-final-design.md).
 
 No official question, figure, pack field, code, test, schema, tool behavior, Hermes behavior, or release was added.
 
@@ -50,14 +50,14 @@ No official question, figure, pack field, code, test, schema, tool behavior, Her
 
 Accepted architecture now separates two future lines:
 
-- **0.2B** is a designed, unimplemented official Amateur Extra static-asset pilot. E7B10–E7B12 and Figure E7-1 are selected; format 0.3 and its asset policies remain Proposed, and no question/figure has been imported.
+- **0.2B** is an accepted, unimplemented official Amateur Extra static-asset design. E7B10–E7B12 and Figure E7-1 are selected; format 0.3 and its asset policies are accepted, and no question/figure has been imported.
 - **0.3A–C** progresses from assessment/curriculum research, to a manually reviewed five-question SAP-C02 slice, to agent-assisted construction with mandatory human gates.
 
 Accepted ADRs 0010–0013 establish whole learning architecture with progressive realization, assessment authenticity and official-question reuse, capability discovery with controlled activation, and evidence-backed authored questions with layered approval. Acceptance establishes architectural direction only and does not authorize implementation.
 
 The target Subject Builder flow distinguishes independent assessment blueprints from learning architectures, keeps architectures complete in coverage/dependencies rather than authored content, guides partial scope through visible prerequisite dispositions, researches assessment grammar automatically, seeks optional capabilities at defined planning/stage triggers, and degrades gracefully when evidence or access is insufficient. External capabilities remain optional to the core and packs.
 
-For 0.2B, format version, media type/limits, asset/digest model, approval scopes, and no-schema/no-new-operation boundaries are now proposed. ADR acceptance, exact JSON Schema/code modules, reviewer designations, rights determination, and Hermes native presentation remain deferred. Other next-phase serialization, database representation, provider behavior, similarity algorithms, lifecycle persistence, and concrete modules remain deferred to their milestone-specific reviews.
+For 0.2B, format version, PNG-only media/limits, asset/digest model, approval scopes, logical-reference boundary, Hermes fallback, and no-schema/no-new-operation boundaries are accepted. Exact JSON Schema/code modules, reviewer designations, provisional asset identity/fidelity approval, and Hermes native presentation verification remain deferred. Other next-phase serialization, database representation, provider behavior, similarity algorithms, lifecycle persistence, and concrete modules remain deferred to their milestone-specific reviews.
 
 See [Subject Builder architecture](subject-builder-architecture.md), [assessment policy](assessment-research-policy.md), [curriculum planning](curriculum-planning.md), [capability discovery](capability-discovery.md), [asset pilot plan](amateur-extra-asset-pilot-plan.md), and [SAP-C02 plan](aws-sap-c02-pilot-plan.md).
 

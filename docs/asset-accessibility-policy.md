@@ -1,11 +1,11 @@
 # Static-Asset Accessibility and Non-Leakage Policy
 
-Status: Proposed for asset-capable pack format 0.3  
+Status: Accepted for asset-capable pack format 0.3; implementation not authorized
 Updated: 2026-07-19
 
 ## Purpose and scope
 
-This policy applies only to reviewed static local assets in a future format-0.3 pack. It makes nonvisual access and answer safety release gates rather than runtime improvisation. It does not authorize format 0.3, asset import, or implementation.
+This policy applies only to reviewed static local assets in format-0.3 packs. It makes nonvisual access and answer safety release gates rather than runtime improvisation. Its acceptance establishes design constraints only and does not authorize asset import, content activation, or implementation.
 
 ## Required representations
 

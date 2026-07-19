@@ -1,8 +1,8 @@
-# Asset-Capable Pack Format 0.3 Proposal
+# Asset-Capable Pack Format 0.3
 
-Status: Proposed; implementation not authorized  
-Updated: 2026-07-19  
-Proposed decisions: [ADR 0014](decisions/0014-explicit-asset-capable-pack-format-0.3.md), [ADR 0015](decisions/0015-static-local-asset-security-integrity.md), and [ADR 0016](decisions/0016-asset-accessibility-nonleaking-fallbacks.md)
+Status: Accepted design; implementation and content import not authorized
+Updated: 2026-07-19
+Governing decisions: [ADR 0014](decisions/0014-explicit-asset-capable-pack-format-0.3.md), [ADR 0015](decisions/0015-static-local-asset-security-integrity.md), and [ADR 0016](decisions/0016-asset-accessibility-nonleaking-fallbacks.md)
 
 ## Decision summary
 
@@ -93,7 +93,7 @@ Format 0.3 supports **PNG only**.
 
 The official E7-1 DOCX contains an exact PNG, so PNG requires extraction but no image transformation. Standard-library code can validate PNG signature, IHDR, chunk framing/CRC, dimensions, IEND, declared size, and digest without decoding pixels. A future implementation may demonstrate that a small image library is safer, but no dependency is accepted by this design.
 
-Initial limits are deliberately small: at most 16 assets, 2 MiB per asset, 8 MiB total asset bytes, and dimensions from 1×1 through 4096×4096. Limits apply before any renderer receives the file. Changing them requires evidence and review.
+Format-0.3 limits are deliberately small: at most 16 assets, 2 MiB per asset, 8 MiB total asset bytes, and dimensions from 1×1 through 4096×4096. Limits apply before any renderer receives the file. A later pack format may revise them only through a new decision with evidence and compatibility rules; format 0.3 remains fixed.
 
 ## Canonicalization and digesting
 
@@ -173,7 +173,7 @@ For an asset question, add ordered descriptors before answer collection:
 ```json
 {
   "asset_id": "asset-figure-e7-1",
-  "asset_ref": "ala-pack-asset-v1:<pack-digest>:asset-figure-e7-1",
+  "asset_ref": "ala-pack-asset-v1:<opaque-core-issued-reference>",
   "media_type": "image/png",
   "title": "NCVEC Figure E7-1",
   "caption": "Official NCVEC Figure E7-1.",
@@ -186,7 +186,7 @@ For an asset question, add ordered descriptors before answer collection:
 }
 ```
 
-`asset_ref` is a logical non-network reference bound to an installed pack digest and asset ID. It is not an arbitrary or user-supplied filesystem path. A runtime adapter resolves it only through the core's controlled installed-pack resolver and never returns raw binary in the JSON contract. The descriptor contains no answer, explanation, or answer-revealing annotation.
+`asset_ref` is a logical non-network reference produced only by the core and bound to pack ID, pack version, installed pack digest, and asset ID. The exact token encoding is an implementation detail within the `ala-pack-asset-v1` family. It is not an arbitrary or user-supplied filesystem path. A runtime adapter resolves it only through the core's controlled installed-pack resolver; stale, malformed, mismatched, or out-of-store references are rejected. The JSON contract never returns raw binary. The descriptor contains no answer, explanation, or answer-revealing annotation.
 
 ### `study.submit`
 
@@ -207,7 +207,7 @@ After scoring, the result may add the same figure identity and project-authored 
 - Attach/display the exact PNG only through a public Hermes mechanism proven for the pinned target; otherwise return/present the approved fallback.
 - Never rewrite bytes, invent descriptions, inspect pixels for scoring, expose arbitrary paths, or fetch URLs.
 
-Hermes currently documents plugins as JSON-string tool handlers in [Build a Hermes Plugin](https://hermes-agent.nousresearch.com/docs/developer-guide/plugins). Its [Vision & Image Paste guide](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/vision.md) documents image input, native/fallback vision routing, and PNG storage, but does not verify generic local-image output from a v0.18.2 custom tool. Native presentation is **unverified** until a separate implementation task tests the pinned CLI. The required text fallback preserves usability.
+Hermes currently documents plugins as JSON-string tool handlers in [Build a Hermes Plugin](https://hermes-agent.nousresearch.com/docs/developer-guide/plugins). Its [Vision & Image Paste guide](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/vision.md) documents image input, native/fallback vision routing, and PNG storage, but does not verify generic local-image output from a v0.18.2 custom tool. Native presentation is **unverified** until a separate implementation task tests the pinned CLI. If no public mechanism is verified, the adapter uses the approved alt text and terminal fallback, records native rendering as unsupported or unverified, and does not modify Hermes core or configuration. Native rendering unavailability alone does not block the rest of format-0.3 acceptance.
 
 ### Skill
 
@@ -218,7 +218,7 @@ Hermes currently documents plugins as JSON-string tool handlers in [Build a Herm
 
 ## SQLite impact
 
-No schema change is proposed. The existing installed-pack receipt stores identity, version, controlled path, and pack digest; sessions/presentations already pin the installed content and question. On restart, the core reloads the installed pack, recomputes the format-0.3 pack and asset digests, and reconstructs the question descriptor.
+No SQLite schema change is permitted for format 0.3. The existing installed-pack receipt stores identity, version, controlled path, and pack digest; sessions/presentations already pin the installed content and question. On restart, the core reloads the installed pack, recomputes the format-0.3 pack and asset digests, and reconstructs the question descriptor.
 
 An asset table, blob store, cache receipt, or presentation snapshot is unnecessary. If implementation cannot pass restart/resume and immutable-version tests with existing schema 1, it must document the exact failing acceptance test and stop for a new design decision rather than migrate implicitly.
 
