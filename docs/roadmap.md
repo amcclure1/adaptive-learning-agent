@@ -27,7 +27,7 @@ E7B is the research-first candidate based on the current official NCVEC pool; E7
 
 ## 0.3A — Assessment research and curriculum architecture
 
-Status: proposed; ADRs 0010–0013 require review
+Status: architecture direction accepted by ADRs 0010–0013; milestone design and implementation not authorized
 
 Define and manually exercise assessment research, source rights/use classification, assessment blueprints, whole learning architectures, dependency categories, progressive realization, guided scope negotiation, version impacts, and optional capability discovery/proposals. No full AWS pack or generalized builder is required.
 

@@ -1,8 +1,8 @@
 # Assessment Research and Authenticity Policy
 
-Status: proposed normative design
+Status: accepted architecture direction; implementation details deferred
 Updated: 2026-07-19
-Related proposals: [ADR 0011](decisions/0011-assessment-authenticity-official-question-reuse.md) and [ADR 0013](decisions/0013-evidence-backed-authored-questions-layered-approval.md)
+Governing decisions: [ADR 0011](decisions/0011-assessment-authenticity-official-question-reuse.md) and [ADR 0013](decisions/0013-evidence-backed-authored-questions-layered-approval.md)
 
 ## Purpose
 

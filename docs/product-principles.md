@@ -55,11 +55,11 @@ Tool mutations MUST expose what changed, preserve provenance, use transactions o
 
 ## 13. Whole-plan coherence, progressive realization
 
-The complete learning architecture for a stated outcome SHOULD be designed and approved early enough to expose gaps, dependencies, evidence needs, and completion criteria. Content MAY be realized incrementally through smaller versioned plans. A partial realization MUST NOT be represented as the complete outcome.
+The complete learning architecture for a stated outcome SHOULD be designed and approved early enough to expose outcome coverage, domains, objectives, prerequisites, dependencies, assessment intent, completion criteria, gaps, and evidence needs. It MUST be complete in coverage and dependency structure, not complete in authored content. Content MAY be realized incrementally through smaller versioned plans. A partial realization MUST NOT be represented as the complete outcome. Assessment blueprints are independent assessment-model artifacts; the learning architecture owns curriculum coverage and dependencies.
 
 ## 14. Learner control is guided by coherence
 
-Learners SHOULD choose focus, sequence, and scope without manually designing a dependency graph. Planning MUST identify blocking and bridge prerequisites, explain gaps, recommend the smallest coherent realization, and permit nonblocking omissions with visible warnings. Scope SHOULD be refused or revised only when it cannot satisfy the learner's stated outcome.
+Learners SHOULD choose focus, sequence, and scope without manually designing a dependency graph. Planning MUST identify blocking and bridge prerequisites, explain gaps, recommend the smallest coherent realization, and permit nonblocking omissions with visible warnings. Included, bridged, prior-learned, evidenced, diagnostically satisfied, and temporarily waived prerequisites MUST remain visible. Asserted blocking prerequisites SHOULD be verified, and waivers MAY reduce confidence or completion claims. Scope SHOULD be refused or revised only when it cannot satisfy the learner's stated outcome.
 
 ## 15. Assessment authenticity comes from evidence
 
@@ -71,7 +71,7 @@ Official questions MAY be included when a public-domain basis, applicable licens
 
 ## 17. The agent seeks capabilities by role
 
-Before significant research or authoring, the agent SHOULD inspect available and trustworthy discoverable capabilities for roles such as authoritative search, verification, asset inspection, execution, and labs. Discovery MUST NOT be treated as compatibility, permission, installation, or evidence authority.
+During initial planning and relevant workflow-stage transitions, the agent SHOULD inspect available and trustworthy discoverable capabilities for roles such as authoritative search, verification, asset inspection, execution, and labs. It SHOULD rediscover when a required role is unsatisfied, a requested action needs a new capability, or an existing capability becomes unavailable. It MUST NOT run discovery continuously during ordinary study. Discovery MUST NOT be treated as compatibility, permission, installation, configuration, health, or evidence authority.
 
 ## 18. Capability activation is controlled and least-privileged
 
@@ -79,7 +79,7 @@ Private access, credential setup, external mutation, sensitive execution, and ma
 
 ## 19. External capabilities remain optional to the portable core
 
-MCP servers, connectors, APIs, cloud accounts, and runtime tools MAY enhance research, verification, or labs. They MUST NOT become mandatory dependencies of the runtime-independent learning core, portable packs, deterministic scoring, authoritative learner state, or offline study without a later accepted architectural decision.
+MCP servers, connectors, APIs, cloud accounts, and runtime tools MAY enhance research, verification, or labs through the Subject Builder/runtime-orchestration layer. The deterministic learning core MUST NOT discover them. They MUST NOT become mandatory dependencies of portable packs, deterministic scoring, authoritative learner state, normal study, or offline study without a later accepted architectural decision. Packs MUST NOT carry capability credentials or runtime configuration.
 
 ## 20. Authored assessment is evidence-backed and reviewable
 

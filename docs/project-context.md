@@ -46,7 +46,7 @@ Before significant research or authoring, the agent seeks useful capabilities by
 - **0.3B proposed:** one manually reviewed current SAP-C02 slice with approved claims, original lessons, and five original scenario questions.
 - **0.3C proposed:** agent-assisted construction after manual artifacts and layered approvals are proven.
 
-No 0.2B or 0.3 implementation is currently authorized. Proposed ADRs 0010–0013 require review.
+No 0.2B or 0.3 implementation is currently authorized. ADRs 0010–0013 are Accepted architecture direction; milestone-specific serialization, schema, storage, tool, provider, reviewer, asset, similarity, and module decisions remain deferred.
 
 ## Open-source and rights objective
 

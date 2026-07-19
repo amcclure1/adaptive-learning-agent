@@ -1,7 +1,7 @@
 # Subject Builder Next-Phase Design Handoff
 
 Date: 2026-07-19
-Status: design complete for review; implementation not authorized
+Status: architecture accepted; implementation not authorized
 
 ## Outcome
 
@@ -75,14 +75,23 @@ Every proposal explains provider/source, purpose, benefit, authentication, acces
 
 The guided setup flow covers provider verification, runtime compatibility, approval, setup, health testing, recorded scope, and removal. AWS documentation/knowledge MCP is only an illustration; no provider behavior or compatibility is claimed, no AWS account is required architecturally, and nothing was installed.
 
-## Proposed ADRs
+## Accepted ADRs
 
 - [ADR 0010 — Whole Learning Architecture with Progressive Realization](../decisions/0010-whole-learning-architecture-progressive-realization.md)
 - [ADR 0011 — Assessment Authenticity and Official-Question Reuse](../decisions/0011-assessment-authenticity-official-question-reuse.md)
 - [ADR 0012 — Capability Discovery with Controlled Activation](../decisions/0012-capability-discovery-controlled-activation.md)
 - [ADR 0013 — Evidence-Backed Authored Questions and Layered Approval](../decisions/0013-evidence-backed-authored-questions-layered-approval.md)
 
-All four are **Proposed**. Repository governance does not treat this design task alone as sufficient formal acceptance, and none authorizes implementation.
+All four were explicitly accepted by the user on 2026-07-19. Acceptance establishes architectural direction only; none authorizes implementation or locks serialization, pack/schema/storage/tool details, reviewer qualifications, provider behavior, asset limits, similarity algorithms, or concrete modules. See [the acceptance handoff](subject-builder-architecture-acceptance.md).
+
+## Acceptance refinements
+
+- Assessment blueprints are independent assessment-model artifacts: one may support multiple learning architectures, and an architecture may reference zero, one, or several. Curriculum coverage and dependencies belong to the learning architecture.
+- A complete learning architecture is complete in outcome coverage, domains, objectives, prerequisites, dependencies, assessment intent, completion criteria, and gap visibility—not complete in authored content.
+- Realization plans visibly record prerequisites as included, bridged, satisfied by prior learning/evidence/diagnostic, or temporarily waived. Assertions and waivers may affect confidence/completion, and blocking assertions should be verified.
+- Capability lifecycle distinguishes discovered, recommended, approved, configured, healthy, unavailable, and revoked. Approval is not proof of health.
+- Discovery runs at initial planning, workflow-stage changes, unsatisfied roles, new capability needs, or capability loss—not continuously during ordinary study.
+- Discovery remains Subject Builder/runtime orchestration; the core and packs stay capability-independent and normal study needs no live discovery.
 
 ## Revised roadmap
 
@@ -106,7 +115,7 @@ Add conversational research, blueprint/curriculum proposals, scope negotiation, 
 
 ## Implementation prerequisites
 
-1. Review and accept, revise, or reject ADRs 0010–0013.
+1. Complete milestone-specific designs for serialization, validation, storage, tools, reviewer requirements, and implementation modules without reopening the accepted architectural direction unless evidence requires it.
 2. For 0.2B, complete official figure inventory, rights/derivative/accessibility review, security limits, exact format proposal, and content-review plan.
 3. For 0.3A, verify current SAP-C02 target material and decide standalone artifact serialization/versioning.
 4. Define stable objective/version semantics, impact rules, and human approval scopes.
@@ -138,7 +147,7 @@ Add conversational research, blueprint/curriculum proposals, scope negotiation, 
 - [Capability discovery](../capability-discovery.md)
 - [AWS SAP-C02 pilot plan](../aws-sap-c02-pilot-plan.md)
 - [Amateur Extra asset pilot plan](../amateur-extra-asset-pilot-plan.md)
-- Proposed ADRs 0010–0013 listed above
+- Accepted ADRs 0010–0013 listed above
 - This handoff
 
 ## Documents updated

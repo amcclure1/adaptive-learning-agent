@@ -36,14 +36,16 @@ The approved pilot is published as the `v0.2.0-alpha.1` annotated tag and GitHub
 
 ## Next-phase design checkpoint
 
-Documentation now proposes two separate future lines:
+Accepted architecture now separates two future lines:
 
 - **0.2B** is a bounded official Amateur Extra static-asset pilot. E7B is the research-first candidate, with E7D and E9B as fallbacks, but no question/figure has been imported and no format change is accepted.
 - **0.3A–C** progresses from assessment/curriculum research, to a manually reviewed five-question SAP-C02 slice, to agent-assisted construction with mandatory human gates.
 
-Proposed ADRs 0010–0013 cover whole learning architecture with progressive realization, assessment authenticity and official-question reuse, capability discovery with controlled activation, and evidence-backed authored questions with layered approval. They are **Proposed**, not Accepted. They do not authorize implementation.
+Accepted ADRs 0010–0013 establish whole learning architecture with progressive realization, assessment authenticity and official-question reuse, capability discovery with controlled activation, and evidence-backed authored questions with layered approval. Acceptance establishes architectural direction only and does not authorize implementation.
 
-The target Subject Builder flow now distinguishes learning architecture from realization plans, guides partial learner scope through dependency categories, researches assessment grammar automatically, seeks optional capabilities by role, and degrades gracefully when evidence or access is insufficient. External capabilities remain optional to the core and packs.
+The target Subject Builder flow distinguishes independent assessment blueprints from learning architectures, keeps architectures complete in coverage/dependencies rather than authored content, guides partial scope through visible prerequisite dispositions, researches assessment grammar automatically, seeks optional capabilities at defined planning/stage triggers, and degrades gracefully when evidence or access is insufficient. External capabilities remain optional to the core and packs.
+
+Exact serialization, pack-format version, JSON schemas, database representation, tool-contract changes, reviewer qualifications, provider behavior, asset media types/limits, similarity algorithms, lifecycle persistence, and concrete modules remain deferred to milestone-specific design reviews.
 
 See [Subject Builder architecture](subject-builder-architecture.md), [assessment policy](assessment-research-policy.md), [curriculum planning](curriculum-planning.md), [capability discovery](capability-discovery.md), [asset pilot plan](amateur-extra-asset-pilot-plan.md), and [SAP-C02 plan](aws-sap-c02-pilot-plan.md).
 

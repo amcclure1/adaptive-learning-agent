@@ -97,7 +97,7 @@ The first real pilot is the released United States Amateur Radio Extra E1A slice
 
 Start with [product principles](docs/product-principles.md), [current status](docs/current-status.md), and [project context](docs/project-context.md). The original design package is indexed in [the initial handoff](docs/handoffs/initial-design-package.md).
 
-Next-phase design is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). These are proposals and do not authorize implementation.
+Accepted next-phase architecture direction is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). The 0.2B/0.3 milestone plans and all implementation details remain separately gated; architecture acceptance does not authorize implementation.
 
 ## Contributing
 

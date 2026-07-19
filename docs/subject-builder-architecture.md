@@ -1,6 +1,6 @@
 # Future Subject Builder Architecture
 
-Status: proposed target architecture; implementation not authorized
+Status: accepted architecture direction; implementation not authorized
 Updated: 2026-07-19
 
 ## Objective
@@ -17,7 +17,7 @@ The architecture preserves three separations:
 
 1. **Identify learning goal.** Capture the learner's intended outcome, constraints, prior evidence, and explicit non-goals.
 2. **Identify assessment or competency target.** Resolve the current certification, exam, practical competency, or other success target and version.
-3. **Discover useful capabilities.** Inspect available and trustworthy discoverable tools by abstract role.
+3. **Discover useful capabilities.** During planning or a relevant stage transition, inspect available and trustworthy discoverable tools by abstract role; rediscover when a role is unsatisfied, a new action requires it, or an existing capability becomes unavailable.
 4. **Propose capability setup.** Explain benefit, permissions, data, effects, cost, least privilege, fallback, and removal; obtain approval where required.
 5. **Research authoritative learning sources.** Build a source inventory with identity, authority, currency, rights, and allowed uses.
 6. **Research assessment structure and style.** Determine formats, response rules, cognitive demands, scenarios, constraints, exhibits/labs, and uncertainty.
@@ -50,6 +50,12 @@ The architecture preserves three separations:
 
 The exact serialization of pre-pack authoring outputs is unresolved. They must be inspectable, versioned files rather than hidden conversation state. No new pack fields, tools, or database tables are implied by this table.
 
+## Blueprint and learning-architecture relationship
+
+An assessment blueprint is an independent assessment-model artifact. One blueprint may support multiple learning architectures. A learning architecture may reference zero, one, or several blueprints, and non-certification learning need not reference an external exam blueprint. The learning architecture owns curriculum coverage, prerequisites, dependencies, and completion criteria; blueprint references inform assessment intent and mappings.
+
+The learning architecture is complete in outcome coverage, domains, objectives, prerequisites, dependencies, assessment intent, completion criteria, and gap visibility—not in authored lesson prose, complete claims, complete questions, or detailed deferred content.
+
 ## Research and assessment behavior
 
 Assessment research follows [Assessment Research and Authenticity Policy](assessment-research-policy.md). The agent should research style automatically and guide fallback when evidence is incomplete; it should not ask the learner to invent question style. Evidence authority, assessment-style usefulness, and reuse rights are classified separately.
@@ -60,13 +66,13 @@ Reusable official questions require exact provenance and rights. Study-only exam
 
 Planning follows [Curriculum Planning](curriculum-planning.md). The complete architecture is approved first, but content is progressively realized. Partial-scope requests are mapped to the complete plan; the user receives the smallest coherent recommendation, bridge options, warnings for nonblocking omissions, and a refusal only when the stated outcome cannot be met.
 
-Claims of prior knowledge can influence a proposal, but deterministic diagnostic or other approved evidence—not conversation memory—should justify skipping a blocking prerequisite.
+Each relevant prerequisite is visibly marked included, bridged, satisfied by prior learning, satisfied by evidence, satisfied by diagnostic assessment, or temporarily waived. A prior-learning assertion or waiver remains visible and may reduce confidence or qualify completion. The agent recommends verification when a blocking prerequisite is asserted rather than demonstrated. Conversation memory alone never satisfies it.
 
 ## Capability-seeking behavior
 
 Capability behavior follows [Capability Discovery and Controlled Activation](capability-discovery.md). The agent seeks roles such as authoritative search, source snapshotting, claim verification, asset inspection, execution, and labs. Runtime-specific providers are optional implementations.
 
-Public read-only discovery can be automatic. Private access, credentials, mutation, and sensitive/costly work require explicit permission. Setup state and credentials remain outside packs. Declining a capability triggers a manual, local, or narrower fallback.
+Capability records distinguish discovered, recommended, approved, configured, healthy, unavailable, and revoked. Discovery is not activation, and approval/configuration is not proof of health. Public read-only discovery can be automatic at the defined planning/stage triggers; it does not run continuously during ordinary study. Private access, credentials, mutation, and sensitive/costly work require explicit permission. Setup state and credentials remain outside packs. Declining a capability triggers a manual, local, or narrower fallback.
 
 ## Authored-content authority
 
@@ -80,7 +86,7 @@ Target or source changes first revise research and architecture. A versioned imp
 
 ## Runtime-neutrality
 
-The orchestration experience begins in Hermes, but Subject Builder artifacts and deterministic validation must not require Hermes semantics. A future runtime adapter may expose equivalent interactions. Optional MCP servers/connectors enhance research or labs but never become required for installed-pack validation, scoring, learner state, or offline study.
+The orchestration experience begins in Hermes, but Subject Builder artifacts and deterministic validation must not require Hermes semantics. Capability discovery belongs to Subject Builder/runtime orchestration; the deterministic learning core does not discover MCP servers or connectors. A future runtime adapter may expose equivalent interactions. Packs contain no credentials or runtime configuration. Optional capabilities never become required for installed-pack validation, scoring, learner state, normal study, or offline study, and installed packs remain usable when those capabilities are unavailable.
 
 ## Milestone boundary
 

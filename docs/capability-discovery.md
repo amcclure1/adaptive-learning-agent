@@ -1,8 +1,8 @@
 # Capability Discovery and Controlled Activation
 
-Status: proposed design
+Status: accepted architecture direction; implementation details deferred
 Updated: 2026-07-19
-Related proposal: [ADR 0012](decisions/0012-capability-discovery-controlled-activation.md)
+Governing decision: [ADR 0012](decisions/0012-capability-discovery-controlled-activation.md)
 
 ## Purpose
 
@@ -30,6 +30,32 @@ The agent should inspect capabilities already available and capabilities discove
 - source freshness and revision checking.
 
 Discovery records what appears available; it does not assert that a capability is compatible, safe, authenticated, or approved.
+
+## Lifecycle
+
+A capability record distinguishes these states:
+
+- **discovered:** a candidate was found;
+- **recommended:** the agent has proposed it for a stated role;
+- **approved:** the user approved the specified setup/access scope;
+- **configured:** the capability was installed or connected within that scope;
+- **healthy:** a current least-invasive health check succeeded;
+- **unavailable:** the capability cannot currently satisfy its role;
+- **revoked:** approval or access was withdrawn.
+
+Discovery is not activation. Recommendation is not approval. Approval is not configuration, and approval/configuration is not proof of health. Exact transition rules, timestamps, expiry, persistence, and audit representation remain deferred.
+
+## Discovery timing
+
+Run capability discovery:
+
+- during initial subject or project planning;
+- when entering a new workflow stage;
+- when one or more required abstract roles are not satisfied;
+- when the user requests an action that needs a new capability; or
+- when an existing capability becomes unavailable or is revoked.
+
+Do not run discovery continuously during ordinary study turns. Normal study uses installed pack content and deterministic local state without live capability discovery.
 
 ## Abstract capability roles
 
@@ -100,6 +126,12 @@ When a capability spans levels, use the highest level needed for the proposed op
 - Never make a capability mandatory for validation, installation, scoring, or offline study unless a later accepted architecture explicitly changes the local-first boundary.
 - Never imply current provider behavior without authoritative verification during the implementation/setup task.
 
+## Runtime and pack boundary
+
+Capability discovery belongs to the Subject Builder or runtime-orchestration layer. The deterministic learning core does not discover MCP servers, connectors, provider APIs, skills, or local utilities. Portable packs do not contain credentials, tokens, private resource identifiers, provider configuration, or runtime configuration.
+
+Installed packs remain valid and usable when optional capabilities are unavailable, declined, or revoked. Validation, installation, deterministic scoring, learner-state reconstruction, and normal study do not depend on live capability discovery.
+
 ## Guided setup workflow
 
 1. Discover a capability relevant to an abstract role.
@@ -110,7 +142,7 @@ When a capability spans levels, use the highest level needed for the proposed op
 6. Obtain explicit approval for installation, credentials, private access, mutation, or sensitive execution as applicable.
 7. Guide or perform setup only within that approval.
 8. Test connection health with the least invasive operation.
-9. Record availability, version, permission scope, health result, and expiry/recheck needs outside portable packs.
+9. Record lifecycle state, availability, version, permission scope, health result, and expiry/recheck needs outside portable packs.
 10. Document disable, credential revocation, and removal steps.
 
 Setup records are local operational/runtime records, not learner progress and not portable content. The future storage mechanism is unresolved and must not default to agent memory.
@@ -142,4 +174,4 @@ Declining an optional capability must not make the local core, installed packs, 
 
 ## Future validation questions
 
-Implementation design must decide how to represent discovered versus active capability state, prevent permission drift, expire health results, distinguish runtime availability from pack requirements, test provider failures, redact secrets, and make disable/removal instructions durable. These questions are intentionally not resolved by adding fields or tools now.
+Implementation design must decide exact lifecycle serialization, transition rules, storage/database representation, tool-contract behavior, provider modules, permission audit, health expiry, rediscovery, failure handling, secret redaction, and durable disable/removal instructions. It must also distinguish runtime availability from pack requirements. These questions are intentionally not resolved by adding fields or tools now.
