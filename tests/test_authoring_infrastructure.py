@@ -170,6 +170,27 @@ class AuthoringInfrastructureTests(unittest.TestCase):
             result = ops.validate_project({"project_id": "synthetic-authoring", "as_of": "2030-01-01", "workspace_commit": COMMIT, "validation_id": None, "executed_at": None, "persist": False})
             self.assertIn("CLAIM_STALE", {item["code"] for item in result["findings"]})
 
+    def test_15a_superseded_latest_revision_is_historical_not_current(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            ops, _, _ = self.initialize(root)
+            source = draft_and_freeze(ops, "synthetic-authoring", source_record("src-test"))
+            current = draft_and_freeze(ops, "synthetic-authoring", claim_record(source, claim_id="clm-current"))
+            retired = draft_and_freeze(ops, "synthetic-authoring", claim_record(source, claim_id="clm-retired"))
+            superseded = copy.deepcopy(retired)
+            superseded.update({"revision": 2, "status": "superseded", "modified_at": "2030-01-05T00:00:00Z", "supersedes": reference(retired), "canonical_digest": "0" * 64})
+            superseded = seal_record(superseded)
+            workspace = root / "authoring/synthetic-authoring"
+            store_immutable(workspace, superseded, path=revision_path(workspace, "claim", superseded["artifact_id"], 2))
+
+            result = ops.validate_project({"project_id": "synthetic-authoring", "as_of": "2030-01-06", "workspace_commit": COMMIT, "validation_id": None, "executed_at": None, "persist": False})
+            codes = {item["code"] for item in result["findings"]}
+            checked = {(item["artifact_type"], item["artifact_id"], item["revision"]) for item in result["checked_artifacts"]}
+            self.assertNotIn("CLAIM_STALE", codes)
+            self.assertNotIn("DECLARED_CLAIM_RANGE_MISMATCH", codes)
+            self.assertIn(("claim", current["artifact_id"], current["revision"]), checked)
+            self.assertFalse(any(item[1] == retired["artifact_id"] for item in checked))
+
     def test_16_unapproved_source_finding(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             ops, _, _ = self.initialize(Path(temporary))

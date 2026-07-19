@@ -11,7 +11,7 @@ from adaptive_learning.errors import LearningError
 
 from .approvals import current_decision
 from .schemas import seal_record, validate_record
-from .workspace import all_stored_records, atomic_write, reference, store_immutable
+from .workspace import TYPE_DIRS, all_stored_records, atomic_write, reference, store_immutable
 from .canonical import canonical_json_file_bytes
 
 
@@ -66,6 +66,31 @@ def _schema_finding_code(error: LearningError) -> str:
     return "SCHEMA_INVALID"
 
 
+def _current_records(valid: list[tuple[dict[str, Any], str | None, Path]]) -> list[tuple[dict[str, Any], str | None, Path]]:
+    """Project the current authored-content view while retaining immutable history on disk.
+
+    The greatest revision is current; modification time distinguishes an
+    edited draft from its same-number immutable revision. A latest revision
+    explicitly marked ``superseded`` retires that artifact ID from the current
+    content set; prior revisions remain available for historical references.
+    """
+
+    revisioned = set(TYPE_DIRS)
+    grouped: dict[tuple[str, str], list[tuple[dict[str, Any], str | None, Path]]] = {}
+    current: list[tuple[dict[str, Any], str | None, Path]] = []
+    for item in valid:
+        record = item[0]
+        if record["artifact_type"] in revisioned:
+            grouped.setdefault((record["artifact_type"], record["artifact_id"]), []).append(item)
+        else:
+            current.append(item)
+    for items in grouped.values():
+        selected = max(items, key=lambda item: (item[0]["revision"], item[0]["modified_at"], item[0]["status"] == "draft", item[0]["canonical_digest"]))
+        if selected[0]["status"] != "superseded":
+            current.append(selected)
+    return current
+
+
 def validate_workspace(
     workspace: Path,
     *,
@@ -91,8 +116,9 @@ def validate_workspace(
         except LearningError as exc:
             findings.append(_finding(_schema_finding_code(exc), str(record.get("artifact_id", path.name)), exc.details.get("field", "$") if exc.details else "$", exc.message))
     index = {_key(record): record for record, _, _ in valid}
+    current_valid = _current_records(valid)
     by_type: dict[str, list[dict[str, Any]]] = {}
-    for record, _, _ in valid:
+    for record, _, _ in current_valid:
         by_type.setdefault(record["artifact_type"], []).append(record)
 
     def resolve(ref: dict[str, Any], artifact: str, field: str) -> dict[str, Any] | None:
@@ -157,7 +183,7 @@ def validate_workspace(
     for claim_key in claim_graph:
         visit_claim(claim_key)
 
-    lesson_markdown = {record["artifact_id"]: markdown for record, markdown, _ in valid if record["artifact_type"] == "lesson"}
+    lesson_markdown = {record["artifact_id"]: markdown for record, markdown, _ in current_valid if record["artifact_type"] == "lesson"}
     for lesson in by_type.get("lesson", []):
         artifact = lesson["artifact_id"]
         if lesson["status"] == "draft":
@@ -237,7 +263,7 @@ def validate_workspace(
             findings.append(_finding("DECLARED_SCOPE_MISMATCH", project_records[0]["artifact_id"], "pilot_scope", "Active content counts do not match the declared generic project scope."))
 
     result = "failed" if any(item.blocking for item in findings) else "passed"
-    checked = sorted((reference(record) for record, _, _ in valid if record["artifact_type"] != "validation_report"), key=lambda item: (item["artifact_type"], item["artifact_id"], item["revision"], item["canonical_digest"]))
+    checked = sorted((reference(record) for record, _, _ in current_valid if record["artifact_type"] != "validation_report"), key=lambda item: (item["artifact_type"], item["artifact_id"], item["revision"], item["canonical_digest"]))
     payload = {"result": result, "findings": [asdict(item) for item in findings], "checked_artifacts": checked, "human_approval_implication": "none"}
     if validation_id is None:
         return payload
