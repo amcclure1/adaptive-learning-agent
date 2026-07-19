@@ -4,11 +4,11 @@ Adaptive Learning Agent is a lightweight, local-first, agent-native learning sys
 
 ## Status
 
-**Pre-alpha — version 0.1.0 is released; version 0.2A is at its independent content-review checkpoint.**
+**Pre-alpha — version 0.1.0 is released; the version 0.2A E1A pilot has passed independent review and release-readiness verification.**
 
 The deterministic version-0.1 core is complete. The installed-package suite passes on Python 3.12, 3.13, and 3.14, and the Hermes v0.18.2 CLI/profile integration is verified on Windows. The included `fixture-basics` subject is synthetic acceptance-test data, not a real learning pack and not preparation for any certification or examination.
 
-The core now supports strict sourced format 0.2 while retaining format 0.1. An E1A pilot draft is present but intentionally cannot validate or install until a named human completes the digest-covered approval record. It is not yet examination preparation. Subject building, scheduling, mastery, exam simulation, and AWS content remain deferred. See [the implementation handoff](docs/handoffs/amateur-extra-0.2-implementation.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
+The core now supports strict sourced format 0.2 while retaining format 0.1. The approved E1A pilot contains two lessons and the eleven official E1A questions, and has passed exact-source comparison, a named human review, automated golden tests, and real Hermes acceptance. It is a narrow practice pilot, not a complete Amateur Extra course, exam simulation, or readiness claim. Subject building, scheduling, mastery, exam simulation, and AWS content remain deferred. See [the independent-review handoff](docs/handoffs/amateur-extra-0.2-independent-review.md), [current status](docs/current-status.md), and [roadmap](docs/roadmap.md).
 
 ## Run the core tests
 
@@ -58,7 +58,7 @@ Conversation and agent memory may shape presentation, but they are never authori
 
 - One local learner and at most one active session; no hosted or concurrent multi-user operation.
 - Practice workflow only; no mastery, scheduling, readiness prediction, or exam simulation.
-- The real E1A content is an unapproved review draft and is blocked from installation.
+- The approved real E1A content covers only one question group and is not complete examination preparation.
 - No application backup/restore, encryption at rest, or protection from hostile same-account processes.
 - Project-local Hermes plugin discovery is trusted-checkout development behavior and requires a process-local environment gate.
 - Only the Windows Hermes v0.18.2 CLI/profile path has been verified.
@@ -76,7 +76,7 @@ The first intended real pilots are AWS Certified Solutions Architect – Profess
 - `.hermes/plugins/adaptive-learning/`: thin project-local Hermes v0.18.2 adapter.
 - `skills/adaptive-learning/`: minimal deterministic fixture workflow guidance.
 - `packs/fixture-basics/`: synthetic functional pack used by acceptance tests.
-- `packs/amateur-extra-e1a/`: sourced E1A review draft; non-installable until independent approval.
+- `packs/amateur-extra-e1a/`: approved sourced E1A pilot with two lessons and eleven official questions.
 - `schemas/`: reserved standalone machine-readable contracts; schema version 1 currently lives in the core.
 - `tests/`: standard-library pack, storage, contract, vertical-slice, and direct adapter tests.
 - `user-data/`: ignored local operational state boundary.

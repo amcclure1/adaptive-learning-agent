@@ -1,11 +1,11 @@
 # Amateur Extra 0.2A Implementation Handoff
 
 Date: 2026-07-18
-Status: independent-review checkpoint; pilot activation blocked
+Status: superseded by completed independent review and release-readiness verification
 
 ## Outcome
 
-Format 0.2 is implemented without changing format 0.1, SQLite schema 1, deterministic scoring, confidence, attempts, sessions, restart behavior, progress, or challenge quarantine. The E1A content draft is complete enough for independent review but intentionally fails validation because its approval status is `pending`. No release/tag has been created and the draft has not been pushed as approved content.
+Format 0.2 was implemented without changing format 0.1, SQLite schema 1, deterministic scoring, confidence, attempts, sessions, restart behavior, progress, or challenge quarantine. The subsequent independent review passed and the E1A pack is approved, installable, pushed, and acceptance-verified. See [the independent-review handoff](amateur-extra-0.2-independent-review.md) and [release-readiness handoff](amateur-extra-0.2-release-readiness.md). No release or tag has been created.
 
 ## Authoritative baseline
 
@@ -17,7 +17,7 @@ All sources were retrieved on 2026-07-18 from authoritative publishers only.
 | 2024-2028 Extra Class Question Pool Release | NCVEC Question Pool Committee | consolidated fourth errata 2026-02-04 | not retained |
 | 47 CFR Part 97 — Amateur Radio Service | Federal Communications Commission via eCFR | point-in-time XML current through 2026-07-16 | SHA-256 `7b86cd2b22f11437adc8720a19fd244529295a1f76728c214cb91b4e3c4583e3` |
 
-Exact HTTPS URLs are recorded in `pack.json`. The current § 97.503(c) standard remains 50 Element 4 questions with 37 required to pass; § 97.523 describes pool structure. The official E1A06 notation points to § 97.303(h)(1), while the current CW center-frequency provision is § 97.303(h)(3). The draft preserves the official notation and cites the current provision in project prose. This requires explicit reviewer disposition; see [the discrepancy record](amateur-extra-0.2-source-discrepancy.md).
+Exact HTTPS URLs are recorded in `pack.json`. The current § 97.503(c) standard remains 50 Element 4 questions with 37 required to pass; § 97.523 describes pool structure. The official E1A06 notation points to § 97.303(h)(1), while the current CW center-frequency provision is § 97.303(h)(3). The pack preserves the official notation and cites the current provision in project prose. The reviewer explicitly accepted this treatment; see [the discrepancy record](amateur-extra-0.2-source-discrepancy.md).
 
 ## Pack inventory and mapping
 
@@ -34,7 +34,7 @@ Official IDs are E1A01, E1A02, E1A03, E1A04, E1A05, E1A06, E1A07, E1A08, E1A09, 
 
 Rights are separate: `rights-ncvec-pool` is public domain only for NCVEC wording/choices/keys/identifiers and cites the release statement; `rights-original-prose` is CC-BY-4.0 for contributor lessons/explanations; `rights-external-references` is reference-only metadata/links.
 
-The approval record lists all nine required scopes but remains `pending` with no claimed reviewer. `load_pack()` rejects it with `PACK_VALIDATION_FAILED: approval.status must be approved before validation or installation.`
+The approval record now lists all nine required scopes as approved by Anthony McClure at `2026-07-19T01:12:29.8952607Z`. `load_pack()` accepts the pack and produces digest `08bf23dab11ea27ed945f94bd6dbcf8892e156726a7596144df4d8b4610cb73e`.
 
 ## Core, tool, and Hermes changes
 
@@ -44,15 +44,15 @@ The ten operations and contract version remain 0.1. Health advertises the two fo
 
 The Hermes adapter remains a serializer/delegator. The skill now presents ordered lessons, labels official IDs, distinguishes generated/project content, shows concise sources only after feedback, supports “show sources” from returned provenance, and forbids calling project explanations official NCVEC commentary.
 
-## Verification at this checkpoint
+## Verification after approval
 
-- Local suite: 42/42 passed.
-- Local matrix: Python 3.12.13, 3.13.14, and 3.14.6 passed before the final documentation-only changes; rerun after approval is required.
+- Local suite: 45/45 passed.
+- Local matrix: Python 3.12.13, 3.13.14, and 3.14.6 each passed 45/45.
 - Format-0.1 golden digest: `12bcb272e4c8059f06880df8ad15dd9abaea30149d02734c4a09a81618878cbf`.
-- Draft source comparison: all 11 prompts and 44 option strings matched the retained official DOCX exactly; all 11 header lines exposed the expected IDs, keys, and printed rule notation. This is authoring evidence, not independent approval and not the final golden fixture.
-- Coverage: Python `coverage` was unavailable without installing a package, which this task forbids. A standard-library `trace` diagnostic completed all 42 tests; its summary is not treated as a comparable statement-coverage percentage.
-- Hosted CI: pending final approved bytes and push.
-- Real Hermes E1A validation, delivery, confidence submission, source display, and restart/resume: blocked by the approval gate and therefore not attempted.
+- Approved source comparison: all 11 records matched the fresh official DOCX exactly by ID, prompt, ordered option labels/text, answer key, and printed locator. The committed golden fixture and mutation tests preserve that approved transcription.
+- Coverage: 87% statement coverage (1,064 statements, 141 missed), using coverage.py already present in an isolated external environment; no package was installed.
+- Hosted CI: [run 29668355434](https://github.com/amcclure1/adaptive-learning-agent/actions/runs/29668355434) passed Python 3.12, 3.13, and 3.14 for implementation commit `2c3d364df410a9408e9c4f558d23904749de5207`.
+- Real Hermes v0.18.2 acceptance passed validation/install, delivery, confidence scoring, source display, independent restart reconstruction, challenge quarantine, and immutable retry rejection.
 
 ## Independent review procedure
 
@@ -80,6 +80,6 @@ Remove-Item Env:HERMES_ENABLE_PROJECT_PLUGINS
 
 In Hermes, ask to validate and install `packs/amateur-extra-e1a`, initialize the local learner, study `us-amateur-extra-e1a` version `0.2.0`, answer the displayed official question with an option ID and confidence 1–5, then ask “show sources.” Exit Hermes completely, relaunch with the same command, and require it to reconstruct the active session from health/initialize/status tools.
 
-## Deviations and unresolved issues
+## Closure
 
-The completion gate is not met because independent approval, approved golden evidence, real E1A Hermes acceptance, hosted CI, and final push remain outstanding. No source was fetched during pack validation/study, no schema migration or deferred feature was introduced, and no release/tag was created.
+The previously outstanding independent approval, approved golden evidence, real E1A Hermes acceptance, hosted CI, and push gates are complete. No source was fetched during pack validation/study, no schema migration or deferred feature was introduced, and no release/tag was created. The two closure handoffs contain the detailed final evidence.

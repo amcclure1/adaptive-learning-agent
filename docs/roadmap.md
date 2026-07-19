@@ -11,7 +11,7 @@ Proves the deterministic Python/SQLite learning core, strict synthetic format-0.
 
 ## 0.2A — Small sourced-content pilot
 
-Status: implemented; independent content review and acceptance pending
+Status: complete; independently reviewed and acceptance-verified
 
 Target one real, reviewable slice: Amateur Extra question group E1A within subelement E1. Accepted format 0.2 adds only the semantics needed for two ordered lessons, authoritative source/citation records, official question identity and origin, pool/errata metadata, language/tags, component rights, conditional retained-snapshot digests, and human approval. Tool contract 0.1 gains only additive capabilities/provenance. Scoring, attempts, sessions, quarantine, objective counts, and SQLite schema remain unchanged.
 
@@ -21,7 +21,7 @@ Design exit criteria completed:
 - Component rights, source snapshot/digest behavior, approval, errata, and capability signaling are defined.
 - The future validation matrix covers format 0.1 unchanged and format 0.2 provenance/errata behavior.
 
-Implementation now covers the strict parser/model/digest, additive contract results, narrow Hermes presentation, and the scoped E1A draft without changing SQLite or learning behavior. Before activation, a named human must complete the nine-scope content approval. Golden comparison, hosted CI, and real E1A Hermes restart/source-display acceptance then remain as release-candidate gates.
+Implementation covers the strict parser/model/digest, additive contract results, narrow Hermes presentation, and scoped E1A pack without changing SQLite or learning behavior. Anthony McClure completed all nine approval scopes and explicitly accepted the E1A06 discrepancy treatment. Exact golden comparison, the full local Python matrix, hosted CI, and real E1A Hermes question/scoring/source/restart/challenge/immutable-attempt acceptance passed. No release or tag is implied by this milestone.
 
 ## Later candidates
 

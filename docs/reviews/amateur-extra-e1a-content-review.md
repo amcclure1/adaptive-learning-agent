@@ -5,7 +5,7 @@ Reviewer: Anthony McClure
 Prepared: 2026-07-18
 Review completed: ☒ Yes — 2026-07-19T01:12:29.8952607Z
 
-This checklist supports human review of `packs/amateur-extra-e1a/`. Automated comparison evidence is preparatory evidence only. It does not approve content, establish that the reviewer performed a review, or authorize activation.
+This checklist records the completed human review of `packs/amateur-extra-e1a/`. Automated comparison evidence remained preparatory evidence; Anthony McClure's explicit determinations supplied the approval.
 
 ## Fresh authoritative-source revalidation
 
@@ -140,4 +140,4 @@ Do not complete this section until every applicable item above has been reviewed
 - ☒ The E1A06 treatment was explicitly accepted.
 - Final reviewer notes: Anthony McClure first accepted the exact direct-source NCVEC transcription, then explicitly reviewed the remaining documents and checklist items and gave them a PASS.
 
-After completing the review, Anthony McClure must explicitly confirm these five statements to Codex. Only then may Codex record the actual current UTC timestamp and change the digest-covered pack approval status to `approved`.
+Anthony McClure explicitly confirmed the five statements above. The actual UTC timestamp was recorded and the digest-covered pack approval status was changed to `approved` only after that confirmation.

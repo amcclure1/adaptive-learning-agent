@@ -10,8 +10,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Strict sourced pack format 0.2 with ordered lessons, sources/citations, official identity, pool/errata metadata, component rights, approval, and deterministic digest/install support.
 - Additive sourced-content capabilities and provenance under the unchanged ten-operation tool contract 0.1.
-- A two-lesson, eleven-question Amateur Extra E1A review draft, held non-installable pending independent human approval.
+- An independently reviewed and approved two-lesson, eleven-question Amateur Extra E1A pilot.
 - Narrow Hermes skill presentation for official IDs, ordered lessons, and post-answer source display.
+- Exact official-transcription golden tests, an offline approved-pack workflow test, and real Hermes acceptance evidence.
+
+### Changed
+
+- Corrected project-authored regulatory explanations and lesson citations without changing any official NCVEC question bytes.
 
 ## [0.1.0] - 2026-07-18
 
