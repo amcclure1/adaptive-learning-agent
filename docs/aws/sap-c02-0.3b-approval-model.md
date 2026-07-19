@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Approval and Invalidation Model
 
-Status: accepted contract; generic immutable-decision infrastructure implemented; no AWS approval records created
+Status: accepted contract; infrastructure implemented; current SAP-ORG-04 sources and claims approved
 
 ## Governing rule
 

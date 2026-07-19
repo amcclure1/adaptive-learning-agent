@@ -1,10 +1,14 @@
 # AWS SAP-C02 0.3B Qualified Human Review Ready
 
-Status: ready for qualified human source and claim review; all decisions pending
+Status: qualified human source and claim review complete; all 47 decisions approved
 
 Date: 2026-07-19
 
 ## Review target
+
+Completion note: Anthony McClure approved every exact source and claim in this package at `2026-07-19T19:14:33Z`. The requirements below record the process that was completed and remain applicable to any future revision.
+
+The post-approval deterministic report `val-baseline-b-human-approved-20260719`, digest `eb190d76889bc07a8e2025beb818c85ce5a5efdd56411e134217f4ee304caee8`, checks all 164 current operational and evidence records with zero finding.
 
 Review only the 17 source and 30 claim revisions listed in the [exact current review package](../reviews/aws-sap-c02-org-04-source-and-claim-review.md). They are bound to content commit `bd84b01f3a6253ee0412823f3f30d7318652b09b`. Do not substitute earlier Baseline-B revisions or the original `authoring/aws-sap-c02-org-04/` workspace.
 
@@ -32,10 +36,10 @@ Create one immutable `claim_approval` decision per claim. Any changed bytes inva
 
 ## Human decision worksheet
 
-The review package intentionally leaves every row as `Pending / Pending / Pending` for decision, reviewer, and timestamp. A reviewer may use the table as navigation but must not edit it into an approval. Formal decisions belong in immutable approval records.
+The review package now reports `Approved / Anthony McClure / 2026-07-19T19:14:33Z` for all 47 rows. Formal authority comes from the 17 immutable source-approval and 30 immutable claim-approval records, not from the Markdown table.
 
 If a reviewer disagrees with AI evidence, record the disagreement and rationale. Do not rewrite or delete the verification run. A material requested change returns the artifact to author revision, renewed self-audit, deterministic validation, fresh independent verification, and fresh closure verification.
 
 ## Stop boundary
 
-This handoff authorizes human review only. It does not authorize lesson or question authoring, compilation, pack installation, activation, publication, release, tagging, Hermes/MCP changes, AWS access, SQLite/scoring changes, or learner-operation changes. Human approval remains pending for all 47 current artifacts.
+This completed handoff records source and claim approval only. It does not by itself authorize lesson or question authoring, compilation, pack installation, activation, publication, release, tagging, Hermes/MCP changes, AWS access, SQLite/scoring changes, or learner-operation changes. Any changed source or claim digest requires renewed audit, validation, verification, and human approval.

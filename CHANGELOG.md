@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Recorded Anthony McClure's 17 immutable source approvals and 30 immutable claim approvals for the exact current SAP-ORG-04 Baseline-B set, including reviewer role, qualification, conflict declaration, reviewed scopes, exact dependencies, and prerequisite decisions.
 - Completed the current-digest SAP-ORG-04 Baseline-B author self-audit, deterministic validation, separate full independent verification, and fresh full closure verification over 17 sources and 30 claims; both new AI runs closed 47 verified with zero finding and no approval implication.
 - Added an exact qualified-human review package, pre-human closure and review-ready handoffs, and a 23-row concept-coverage matrix recording 20 covered, two partial, and one intentionally omitted concept.
 - Accepted ADR 0021 and added a normative author first-pass protocol, closed immutable `author_self_audit` records, exact-digest eligibility, bounded create/query operations, and blocking validation/verification gates. Self-audit never grants approval.

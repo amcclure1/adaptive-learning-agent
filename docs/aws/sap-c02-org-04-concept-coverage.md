@@ -1,12 +1,12 @@
 # SAP-ORG-04 Concept Coverage
 
-Status: current Baseline-B coverage record; human approval pending
+Status: current Baseline-B coverage record; source and claim human approvals complete
 
 Date: 2026-07-19
 
 Target content commit: `bd84b01f3a6253ee0412823f3f30d7318652b09b`
 
-This matrix makes the bounded pilot's coverage visible. It is not a claim approval, a completeness guarantee, or an instruction to add a separate claim for every row. The controlled statuses are `covered`, `partially covered`, `intentionally omitted`, `accidentally omitted`, `blocked by source or verification issue`, and `outside pilot scope`.
+This matrix makes the bounded pilot's coverage visible. It is not itself a claim approval, a completeness guarantee, or an instruction to add a separate claim for every row. Anthony McClure separately approved all exact current source and claim records at `2026-07-19T19:14:33Z`. The controlled statuses are `covered`, `partially covered`, `intentionally omitted`, `accidentally omitted`, `blocked by source or verification issue`, and `outside pilot scope`.
 
 | Concept | Status | Current evidence | Boundary or follow-up |
 |---|---|---|---|
