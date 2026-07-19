@@ -1,6 +1,7 @@
 # Hermes v0.18.2 Static-Asset Presentation Investigation
 
-Status: Complete for the pinned Windows CLI/plugin boundary; real study acceptance remains blocked on human pack approval  
+Status: Complete for the pinned Windows CLI/plugin boundary; real study acceptance remains blocked on human pack approval
+
 Investigated: 2026-07-18
 
 ## Pinned identity

@@ -1,9 +1,13 @@
 # Amateur Extra E7B Asset Content Review
 
-Status: **PENDING — explicit human review required**  
-Candidate: `us-amateur-extra-e7b` version `0.2.1-alpha.1`  
-Format: `0.3`  
-Draft digest: `9c43be04bc38910f12ddf1d90eb62e69cd916ed06fccf44c0770e6fbf2218d43`  
+Status: **PENDING — explicit human review required**
+
+Candidate: `us-amateur-extra-e7b` version `0.2.1-alpha.1`
+
+Format: `0.3`
+
+Draft digest: `9c43be04bc38910f12ddf1d90eb62e69cd916ed06fccf44c0770e6fbf2218d43`
+
 Asset SHA-256: `e4e82c7b8c2db7db3a65ffa21d00a6f93d0e6176f0aa3700b8c449bbf80dfd63`
 
 This is a human decision record, not an agent approval. The public validator and installer reject this candidate while `approval.status` is `pending`. Any content change after review changes the digest and invalidates the decision.
@@ -50,10 +54,14 @@ Alt text:
 
 Terminal fallback:
 
-> Orientation: IN is at the left, OUT is at the right, a plus-marked rail is at the top, and ground symbols are at the bottom.  
-> Input node: IN connects through C1 to one junction. That junction connects to the transistor's left lead, the lower end of R1, and the upper end of R2.  
-> R1 and R2: R1 connects from the input junction to the top rail. R2 connects from the input junction to ground.  
-> Upper-right transistor node: The transistor's upper-right lead shares a junction with the lower end of a vertical unlabeled resistor and the left side of C2. The resistor's upper end connects to the top rail. C2 continues right to OUT.  
+> Orientation: IN is at the left, OUT is at the right, a plus-marked rail is at the top, and ground symbols are at the bottom.
+>
+> Input node: IN connects through C1 to one junction. That junction connects to the transistor's left lead, the lower end of R1, and the upper end of R2.
+>
+> R1 and R2: R1 connects from the input junction to the top rail. R2 connects from the input junction to ground.
+>
+> Upper-right transistor node: The transistor's upper-right lead shares a junction with the lower end of a vertical unlabeled resistor and the left side of C2. The resistor's upper end connects to the top rail. C2 continues right to OUT.
+>
 > Lower-right transistor node: The transistor's lower-right lead shares a junction with the upper end of R3 and the left side of C3. R3 continues to ground. C3 continues right and then down to a separate ground symbol.
 
 Deterministic lint currently passes: no explicit answer marker and no complete normalized keyed-option text appears in the title, caption, alt text, or fallback. Lint cannot establish semantic safety. Review all text separately against E7B10, E7B11, and E7B12.

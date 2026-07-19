@@ -1,6 +1,7 @@
 # Amateur Extra Static-Asset 0.2B Implementation Handoff
 
-Date: 2026-07-18  
+Date: 2026-07-18
+
 Status: Generic implementation PASS; exact content candidate pending human review and non-installable
 
 ## Outcome
