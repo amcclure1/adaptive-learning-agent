@@ -188,7 +188,49 @@ def draft_and_freeze(ops: AuthoringOperations, project_id: str, record: dict[str
     })["artifact"]
 
 
+def verify_targets(ops: AuthoringOperations, project_id: str, targets: list[dict[str, Any]], suffix: str) -> dict[str, Any]:
+    suffix = suffix.replace("_", "-")
+    report = ops.validate_project({
+        "project_id": project_id, "as_of": "2030-01-02", "workspace_commit": COMMIT,
+        "validation_id": f"val-pre-{suffix}", "executed_at": REVIEW_TIMESTAMP, "persist": True,
+    })
+    if report["result"] != "passed":
+        raise AssertionError(report["findings"])
+    project = ops._workspace(project_id)
+    from adaptive_learning.authoring.workspace import project_record
+    project_data = project_record(project)
+    run = ops.create_verification_run({
+        "project_id": project_id,
+        "verification_id": f"aiv-pre-{suffix}",
+        "target_workspace_commit": COMMIT,
+        "verifier": {"identity": "synthetic-independent-verifier", "identity_type": "model", "role": "independent_ai_verifier", "invocation_id": f"inv-{suffix}"},
+        "model": {"provider": "synthetic", "model_id": "synthetic-verifier", "configuration": {}, "reproducibility_notes": "Deterministic synthetic test evidence."},
+        "research_date": "2030-01-02",
+        "target_artifacts": [reference(target) for target in targets],
+        "architecture_references": [
+            {"artifact_id": name, **project_data["pilot_scope"][name]}
+            for name in ("assessment_blueprint", "learning_architecture", "realization_plan")
+        ],
+        "verification_scope": ["synthetic_full_artifact_review"],
+        "deterministic_validation_report": reference(report),
+        "created_at": REVIEW_TIMESTAMP,
+    })["verification_run"]
+    ops.finalize_verification_run({
+        "project_id": project_id,
+        "verification_id": run["verification_id"],
+        "expected_run_digest": run["canonical_digest"],
+        "finding_references": [],
+        "artifact_dispositions": [{"target": reference(target), "disposition": "verified", "finding_ids": [], "notes": None} for target in targets],
+        "unresolved_questions": [],
+        "completed_at": REVIEW_TIMESTAMP,
+    })
+    return report
+
+
 def decide(ops: AuthoringOperations, project_id: str, decision_id: str, decision_type: str, target: dict[str, Any], reviewer_id: str, dependencies: list[str] | None = None, prerequisites: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+    eligibility = ops.verification_eligibility({"project_id": project_id, "target": reference(target), "require_approved_premises": False})
+    if not eligibility["eligible"]:
+        verify_targets(ops, project_id, [target], decision_id)
     return ops.create_decision({
         "project_id": project_id,
         "decision_id": decision_id,
@@ -215,16 +257,17 @@ def build_approved_workspace(root: Path) -> dict[str, Any]:
     project = initialized["project"]
     source_pool = draft_and_freeze(ops, project_id, source_record("src-pool", category="certification_blueprint"))
     source_errata = draft_and_freeze(ops, project_id, source_record("src-errata", category="announcement", author_id="errata-author"))
-    source_pool_approval = decide(ops, project_id, "apr-source-pool", "source_approval", source_pool, "source-reviewer")
-    source_errata_approval = decide(ops, project_id, "apr-source-errata", "source_approval", source_errata, "source-reviewer")
     claim = draft_and_freeze(ops, project_id, claim_record(source_pool))
-    claim_approval = decide(ops, project_id, "apr-claim", "claim_approval", claim, "claim-reviewer", [source_pool["canonical_digest"]], [reference(source_pool_approval)])
     lesson_draft, markdown = lesson_record(claim, source_pool)
     lesson = draft_and_freeze(ops, project_id, lesson_draft, markdown)
-    lesson_review = decide(ops, project_id, "rev-lesson", "lesson_content_review", lesson, "lesson-reviewer", [claim["canonical_digest"]], [reference(claim_approval)])
     spec = draft_and_freeze(ops, project_id, specification_record())
-    spec_review = decide(ops, project_id, "rev-spec", "question_spec_design_review", spec, "spec-reviewer")
     question = draft_and_freeze(ops, project_id, question_record(spec, claim, source_pool))
+    verify_targets(ops, project_id, [source_pool, source_errata, claim, lesson, spec, question], "approved-workspace")
+    source_pool_approval = decide(ops, project_id, "apr-source-pool", "source_approval", source_pool, "source-reviewer")
+    source_errata_approval = decide(ops, project_id, "apr-source-errata", "source_approval", source_errata, "source-reviewer")
+    claim_approval = decide(ops, project_id, "apr-claim", "claim_approval", claim, "claim-reviewer", [source_pool["canonical_digest"]], [reference(source_pool_approval)])
+    lesson_review = decide(ops, project_id, "rev-lesson", "lesson_content_review", lesson, "lesson-reviewer", [claim["canonical_digest"]], [reference(claim_approval)])
+    spec_review = decide(ops, project_id, "rev-spec", "question_spec_design_review", spec, "spec-reviewer")
     originality = decide(ops, project_id, "rev-originality", "question_originality_review", question, "originality-reviewer")
     content = decide(ops, project_id, "apr-content", "question_content_approval", question, "content-reviewer", [claim["canonical_digest"], spec["canonical_digest"], originality["canonical_digest"]], [reference(claim_approval), reference(spec_review), reference(originality)])
     uniqueness = decide(ops, project_id, "apr-uniqueness", "answer_uniqueness_approval", question, "uniqueness-reviewer", [content["canonical_digest"], question["canonical_digest"]], [reference(content)])
