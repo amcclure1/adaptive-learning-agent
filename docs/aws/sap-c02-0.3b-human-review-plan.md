@@ -5,7 +5,7 @@ Design date: 2026-07-18
 
 ## Review objective
 
-Human review must establish authority, factual accuracy, architectural quality, originality, distractor quality, answer uniqueness, compilation fidelity, rights, and release suitability for the exact two-lesson/five-question `SAP-ORG-04` pilot. This template records no content approval and names no reviewer.
+Human review must establish authority, factual accuracy, architectural quality, originality, distractor quality, answer uniqueness, compilation fidelity, rights, and release suitability for the exact two-lesson/five-question `SAP-ORG-04` pilot. Human review cannot begin until the exact targets pass deterministic validation and mandatory independent AI verification with no unresolved blocking finding. Reviewers inspect that evidence and retain independent judgment. This template records no content approval and names no reviewer.
 
 Decisions use the immutable record and exact-digest rules in [the schema contract](sap-c02-0.3b-schemas.md) and [approval model](sap-c02-0.3b-approval-model.md). Reviewer contact details and sensitive personnel information are neither required nor permitted in public artifacts.
 

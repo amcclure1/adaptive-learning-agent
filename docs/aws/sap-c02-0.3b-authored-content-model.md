@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Authored-Content Model
 
-Status: accepted contract; generic lifecycle infrastructure implemented; no AWS content records created
+Status: accepted 0.3B contract with proposed independent-verification extension implemented for experiment
 
 This document defines lifecycle semantics. Exact record fields, controlled vocabularies, identity/revision rules, and canonical digests are normative in [the 0.3B schema contract](sap-c02-0.3b-schemas.md). ADRs 0017–0020 are Accepted; acceptance does not authorize content creation or implementation.
 Design date: 2026-07-18
@@ -13,19 +13,19 @@ This model applies only to the accepted Domain 1 task 1.4 / `SAP-ORG-04` pilot: 
 ## Lifecycle
 
 ```text
-source candidate
-→ approved source
-→ claim draft
-→ approved claim
-→ question design specification
-→ question draft
-→ deterministic checks
-→ human question and uniqueness review
-→ pack approval
-→ activation
+source and claim drafting
+→ deterministic structural validation
+→ independent AI verification
+→ author revision
+→ independent AI reverification
+→ qualified human source and claim approval
+→ downstream lesson and question authoring
+→ stage-specific deterministic and independent AI verification
+→ qualified human content, uniqueness, and release approvals
+→ separately authorized activation
 ```
 
-Generation, retrieval, validation, compilation, and model critique never imply approval. Every transition requiring human authority is represented by a separate review record over exact artifact bytes.
+Generation, retrieval, validation, compilation, and independent model verification never imply approval. Every transition requiring human authority is represented by a separate review record over exact artifact bytes. [Independent AI verification](../ai-independent-verification.md) is a mandatory pre-human gate for new AI-authored factual and assessment content under proposed ADR 0021.
 
 ## State model
 

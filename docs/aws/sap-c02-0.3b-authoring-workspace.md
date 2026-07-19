@@ -33,6 +33,11 @@ authoring/aws-sap-c02-org-04/
   validations/
     current/
     reports/
+  verifications/
+    runs/
+    findings/
+    resolutions/
+    metrics/
   approvals/
     sources/
     claims/
@@ -46,6 +51,8 @@ authoring/aws-sap-c02-org-04/
     candidates/
     evidence/
 ```
+
+Verification records are authoring evidence outside installed packs and SQLite. Runs and findings bind exact target digests. Findings and resolutions are immutable; a resolution does not erase the finding, and only a completed fresh reverification establishes current eligibility.
 
 Repository-relative paths and lower-case directory names are normative. Artifact identity comes from record fields, not filenames. Implementations must reject a path whose contained ID disagrees with its record.
 

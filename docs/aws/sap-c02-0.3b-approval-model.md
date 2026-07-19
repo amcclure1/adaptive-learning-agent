@@ -4,7 +4,9 @@ Status: accepted contract; generic immutable-decision infrastructure implemented
 
 ## Governing rule
 
-Approval is an explicit human decision over an exact artifact revision, canonical digest, and required dependency digests. Generation, retrieval, deterministic validation, compilation, model critique, or Git history never implies approval. Agent memory is non-authoritative.
+Approval is an explicit human decision over an exact artifact revision, canonical digest, and required dependency digests. Generation, retrieval, deterministic validation, compilation, independent AI verification, or Git history never implies approval. Agent memory is non-authoritative.
+
+For AI-authored content, approval eligibility additionally requires a passing exact-target deterministic report, a completed current independent-AI disposition, no unresolved blocking finding, and reviewer inspection of that evidence. A revised digest must be revalidated and reverified. Derived recommendations require verified and approved exact premises. The verifier cannot be the human approver. A human disagreement with a finding requires an explicit adjudication and reasoning; silence never resolves it.
 
 The record schema is fixed in [the schema contract](sap-c02-0.3b-schemas.md). An original approval record is immutable. Revocation or supersession creates a new record that refers to it; current status is derived from the append-only chain. Changed bytes are never silently retargeted.
 

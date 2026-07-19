@@ -10,6 +10,26 @@ This document fixes the file-record contract for the future `aws-sap-c02-org-04-
 
 JSON objects are closed: an implementation rejects unknown fields unless a later accepted schema version explicitly adds them. Every cross-reference binds identity, revision, and canonical digest; an ID alone is insufficient for approval or compilation.
 
+## Independent AI verification extension
+
+Proposed ADR 0021 adds three closed records, implemented subject-neutrally under the same UTF-8/NFC/LF, domain-separated canonical-digest, stable-ID, revision, timestamp, and exact-reference rules.
+
+### `ala.authoring.ai-verification-run.v1`
+
+Required fields bind verification ID/protocol, target project and workspace commit, fresh verifier invocation identity, provider/model/configuration metadata where available, research date, exact target artifact references, accepted blueprint/architecture/realization references, verification scope, exact passing deterministic report, independently accessed sources and locators, exact finding references, one disposition per target, complete disposition/severity counts, unresolved questions, completion status, and `human_approval_implication: "none"`.
+
+Dispositions are `verified`, `verified_with_nonblocking_note`, `revision_required`, `blocked`, and `unable_to_verify`. A completed run covers every declared target exactly once and cannot grant approval.
+
+### `ala.authoring.verification-finding.v1`
+
+Required fields bind finding/run ID, exact target ID/type/revision/digest, disputed field and optional exact language, controlled category/severity, official supporting source URL and locator, explanation, required action, optional suggested revision, affected exact dependencies, confidence, explicit blocking flag, status, and canonical digest.
+
+Categories are `factual_error`, `missing_qualification`, `overbroad_assertion`, `outdated_behavior`, `source_mismatch`, `weak_locator`, `unsupported_recommendation`, `insufficient_premises`, `internal_contradiction`, `taxonomy_or_classification_error`, `scope_drift`, `freshness_concern`, `rights_concern`, and `unable_to_verify`. Severities are `critical`, `high`, `medium`, `low`, and `informational`. Findings are immutable evidence.
+
+### `ala.authoring.finding-resolution.v1`
+
+Required fields bind resolution ID, exact finding reference, exact old/new artifact references with the same stable identity, author response, change summary, response disposition (`accepted`, `modified`, or `disputed`), source changes, UTC timestamp, and canonical digest. A resolution never silently edits or closes its finding. A dispute remains blocking for adjudication; only a new full verification disposition establishes current eligibility.
+
 ## Common artifact envelope
 
 Every structured artifact contains:

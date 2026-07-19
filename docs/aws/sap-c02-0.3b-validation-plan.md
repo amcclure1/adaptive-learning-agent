@@ -135,7 +135,7 @@ Reports in `validations/current/` may be regenerated and replaced with expected-
 8. release-evidence integrity;
 9. pack-release approval eligibility.
 
-Human review occurs after relevant deterministic checks and may return content for revision even when every check passes.
+Independent AI verification occurs after relevant deterministic checks and before human review. It may return content for revision even when every structural check passes. Human review begins only after every exact current artifact has an eligible verification disposition and no unresolved blocking finding.
 
 ## Implemented validator
 
@@ -143,4 +143,4 @@ Human review occurs after relevant deterministic checks and may return content f
 
 Draft source and claim records receive full structural, exact-reference, freshness, derivation-graph, objective-mapping, prohibited-source, and declared-claim-range validation without treating their pending human decisions as errors. Approval requirements become blocking when an artifact leaves draft status. The declared future lesson/question envelope is checked once delivery-content records exist, so a source-and-claim-only authoring phase does not falsely fail for content that is deliberately not yet authorized.
 
-The implementation is deliberately subject-neutral. Pilot-specific factual truth, objective semantics, assessment coverage, AWS architecture judgment, originality, distractor quality, and answer uniqueness remain human review duties. The synthetic tests exercise structural rules without embedding AWS facts or learner-ready pilot content.
+The implementation is deliberately subject-neutral. Pilot-specific factual truth, objective semantics, assessment coverage, AWS architecture judgment, originality, distractor quality, and answer uniqueness remain human review duties. Independent AI verification is mandatory intermediate evidence, not a replacement for those duties. The synthetic tests exercise structural and verification-gate rules without embedding AWS facts or learner-ready pilot content.
