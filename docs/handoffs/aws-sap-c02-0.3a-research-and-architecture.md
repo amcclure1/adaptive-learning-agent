@@ -1,0 +1,142 @@
+# AWS SAP-C02 0.3A Research and Architecture Handoff
+
+Status: manual research/design complete; human acceptance pending
+
+Research date: 2026-07-18
+
+Target: AWS Certified Solutions Architect - Professional (`SAP-C02`)
+
+Implementation authority: none granted by this handoff
+
+## Outcome
+
+Version 0.3A has been executed manually as the intended future Subject Builder workflow. It produced a reproducible official-source baseline, rights/reuse decisions, an assessment blueprint, a complete high-level learning architecture, cross-domain dependency structure, multiple progressive realizations, optional capability recommendations, an evidence-backed authored-question policy, a bounded 0.3B pilot proposal, and an automation-gap analysis.
+
+The work is complete in coverage and dependency structure, not authored educational content. It does not approve or activate 0.3B.
+
+## Verified assessment identity
+
+As verified from current official AWS sources on 2026-07-18:
+
+- **Certification:** AWS Certified Solutions Architect - Professional.
+- **Exam code:** `SAP-C02`.
+- **Current guide baseline:** AWS's current HTML exam guide and official PDF version 1.2. The PDF object metadata reports `Last-Modified: Wed, 19 Feb 2025 22:00:24 GMT` and `x-amz-meta-version: 2025-02-19T21:59:27.773Z`; the retained-download SHA-256 was `e11f5a66162786ad41a62985f4c3da0f040cb5f080741c72b58650f11addeb7a`.
+- **Domain structure:** design solutions for organizational complexity, 26%; design for new solutions, 29%; continuous improvement for existing solutions, 25%; accelerate workload migration and modernization, 20%.
+- **Task structure:** 20 task statements across the four domains.
+- **Candidate:** two or more years using AWS services to design and implement cloud solutions, with the professional capabilities stated in the guide.
+- **Format:** 180 minutes; 75 questions; multiple choice and multiple response; Pearson VUE test center or online proctored.
+- **Response rules:** multiple choice has one correct and three distractors; multiple response has two or more correct responses from five or more and requires all correct responses.
+- **Scoring published by AWS:** 65 scored and 10 unidentified unscored questions; scaled 100-1,000; minimum passing score 750; compensatory overall scoring; no penalty for guessing and unanswered questions count incorrect.
+- **Languages on the current exam page:** English, Japanese, Korean, Portuguese (Brazil), Simplified Chinese, and Spanish (Latin America).
+- **Validity:** three years; recertification is by passing the current exam version before expiration.
+- **Effective-history point:** AWS states SAP-C02 testing began 2022-11-15 and the prior exam's last test date was 2022-11-14.
+
+The current HTML guide also lists emerging responsible-AI/security topics as possible unscored pretest content. They are not included in scored domain coverage. No official replacement, beta, transition, or retirement notice was found in the official pages and announcement searches reviewed. That absence is a bounded research conclusion, not proof that no unpublished change exists. Evidence and exact citations are in [the assessment research](../aws/sap-c02-assessment-research.md) and [source register](../aws/sap-c02-source-register.md).
+
+## Assessment-blueprint confidence
+
+**Overall: medium.**
+
+- High: exam identity, domain coverage, question formats, and response rules.
+- Medium: scenario style, distractor model, and difficulty profile. Ten official public sample questions are useful direct evidence but cannot establish universal behavior; no authenticated Skill Builder practice set was accessed.
+- High: the operational rights/reuse conclusion is fail-closed. AWS documentation has an explicit CC BY-SA 4.0 boundary, while the separately hosted exam-guide and sample-question PDFs carry no specific open reuse grant identified in this research. Their content remains analysis-only unless an authorized rights review finds a controlling grant; this is project policy, not legal advice.
+
+The structured blueprint parses as JSON and deliberately makes no pack-format or runtime-schema commitment. See [the Markdown blueprint](../aws/sap-c02-assessment-blueprint.md) and [structured blueprint](../aws/sap-c02-assessment-blueprint.json).
+
+## Proposed 0.3B pilot
+
+Recommend **Domain 1, task 1.4 / `SAP-ORG-04`: design a multi-account AWS environment**.
+
+Proposed envelope:
+
+- two original cited lessons;
+- approximately 24-30 source-bound, human-approved claims;
+- exactly five future original scenario questions;
+- three single-response and two multiple-response specifications;
+- prerequisite bridges for explicit architectural priorities, identity/evidence boundaries, and the distinction between permissions, guardrails, federation, audit, and delegated administration;
+- no diagram, AWS account, lab, MCP server, or private capability;
+- qualified human source, claim, question/uniqueness, and pack-release approvals.
+
+The proposal includes five design specifications only. It contains no final learner-ready stems, options, answer keys, or rationales. See [the pilot proposal](../aws/sap-c02-0.3b-pilot-proposal.md).
+
+## Recommended capabilities
+
+For an explicitly authorized 0.3B or 0.3C task:
+
+1. Keep official AWS web pages and local digest/PDF inspection as the baseline. This is Level 0 and sufficient for the first manual content pilot.
+2. Optionally approve either the remote official AWS Knowledge MCP server or the local AWS Documentation MCP server for public read-only documentation retrieval. Both are recommended at Level 0; neither requires AWS credentials. Do not install both initially unless their distinct value is demonstrated.
+3. Consider the official managed AWS MCP Server later with a strict read-only tool allowlist only if broader discovery materially improves 0.3C. Public documentation tools can operate without authentication, while API/script tools require IAM and may create Level 1-3 effects.
+4. Defer AWS account inspection, authenticated Skill Builder practice access, and lab/sandbox execution. They are unnecessary for the first pilot. Account inspection would require explicit Level 1 approval and least-privileged credentials; mutations or labs require Level 2 or Level 3 approval, budgets, and teardown controls.
+
+No MCP server was configured or health-tested. All candidates remain only `discovered` or `recommended`. Exact candidate fields, official capability citations, Hermes v0.18.2 transport evidence, fallbacks, and disable procedures are in [the capability report](../aws/sap-c02-capability-report.md).
+
+## Rights and source issues
+
+- The official sample-question PDF is copyright-marked and no specific open redistribution/adaptation grant was found. Classification: **analysis-only**.
+- The official exam-guide PDF is also treated as analysis-only for copied expression; official facts may be cited and paraphrased.
+- The `docs.aws.amazon.com` documentation license does not automatically extend to separate `d1.awsstatic.com` exam PDFs.
+- No Tier 2 licensed/openly reusable SAP-C02 question bank was found or needed.
+- Authenticated AWS Skill Builder official-practice content was not accessed; its detailed style and reuse rights remain unresolved.
+- No formal legal review was performed. Any verbatim or close reuse request requires authorized rights review.
+- The future originality process still needs a human similarity-review protocol. Automated matching may flag risk but cannot prove independent expression.
+
+The operative boundary is: **copy the assessment grammar, not the assessment sentences**. See [rights and reuse](../aws/sap-c02-rights-and-reuse.md) and [authored-question policy](../aws/sap-c02-authored-question-policy.md).
+
+## Reproducibility and capabilities actually used
+
+Research used public web search/open-page retrieval, official AWS pages/PDFs, local PowerShell download/header inspection, and SHA-256 calculation. Official sources were preferred; search-result summaries were not used when the underlying source was available. Suspicious dumps, recalled-live-question claims, actual-current-question offers, leaked keys, unauthorized scraped/commercial banks, and unverifiable derivatives were excluded without ingesting their question text.
+
+Two official PDFs were downloaded temporarily to compute byte digests and inspect content; both files and their dedicated temporary directory were then deleted. No source snapshot, licensed copy, browser state, credential, AWS data, or private file was added to the repository. No AWS account or external mutation was used. Known source-access and dating limitations are recorded in the source register.
+
+## Documents created
+
+- [Assessment research](../aws/sap-c02-assessment-research.md)
+- [Source register](../aws/sap-c02-source-register.md)
+- [Rights and reuse](../aws/sap-c02-rights-and-reuse.md)
+- [Assessment blueprint](../aws/sap-c02-assessment-blueprint.md)
+- [Structured assessment blueprint](../aws/sap-c02-assessment-blueprint.json)
+- [Learning architecture](../aws/sap-c02-learning-architecture.md)
+- [Dependency model](../aws/sap-c02-dependency-model.md)
+- [Realization plans](../aws/sap-c02-realization-plans.md)
+- [Capability report](../aws/sap-c02-capability-report.md)
+- [Authored-question policy](../aws/sap-c02-authored-question-policy.md)
+- [0.3B pilot proposal](../aws/sap-c02-0.3b-pilot-proposal.md)
+- [Subject Builder gap analysis](../aws/sap-c02-subject-builder-gap-analysis.md)
+- This handoff
+
+## Documents updated
+
+- [Current status](../current-status.md)
+- [Roadmap](../roadmap.md)
+- [Project context](../project-context.md)
+- [AWS SAP-C02 pilot plan](../aws-sap-c02-pilot-plan.md)
+
+The README was not updated because it does not present detailed 0.3 near-term milestone status requiring correction.
+
+## Deliberately unchanged
+
+- deterministic learning core, scoring, selection, scheduling, mastery, and state mutation;
+- SQLite schema and learner/runtime state;
+- pack formats, schemas, fixtures, and content;
+- Hermes adapter, skills, plugins, configuration, and tool contract;
+- MCP installation/configuration;
+- AWS account, credentials, data, resources, or billing;
+- releases and tags.
+
+Any unrelated working-tree changes present at delivery are outside this 0.3A documentation work and must not be attributed to or silently included with it.
+
+## Human decisions required before 0.3B
+
+Recommended choices:
+
+1. **Accept the official-source baseline and medium-confidence blueprint**, while retaining the stated style/difficulty and rights limitations.
+2. **Approve task 1.4 / `SAP-ORG-04` as the bounded pilot**, including the two-lesson, approximately 24-30-claim, three-single/two-multiple envelope.
+3. **Name qualified human reviewers** for AWS factual/architectural claims, question originality and answer uniqueness, and final pack release. The drafting author/model must not occupy those approval roles.
+4. **Use public web/manual documentation first**. Defer MCP installation and all AWS-account access unless a later task demonstrates a specific need and receives explicit permission.
+5. **Authorize content work separately** only after these decisions. Approval of this handoff alone must not be interpreted as permission to implement tools, formats, persistence, content, capabilities, or cloud resources.
+
+If task 1.4 is declined, keep 0.3A complete and select another bounded slice from the full architecture with the same prerequisite, evidence, and human-approval gates.
+
+## Next implementation-design boundary
+
+The smallest useful future Subject Builder automation spine is source registration, source/rights review, blueprint drafting, deterministic structural validation, and a distinct human blueprint-approval record. Artifact serialization, SQLite ownership, pack inclusion, capability setup, and AWS-account integration remain separate decisions. See [the automation-gap analysis](../aws/sap-c02-subject-builder-gap-analysis.md).

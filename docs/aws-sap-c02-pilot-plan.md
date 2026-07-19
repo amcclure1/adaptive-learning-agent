@@ -1,15 +1,17 @@
 # AWS SAP-C02 Pilot Plan
 
-Status: proposed version-0.3 plan; no AWS content or capability setup authorized
+Status: 0.3A research/design complete and pending human acceptance; no 0.3B content or capability setup authorized
 Updated: 2026-07-19
 
 ## Purpose
 
 The SAP-C02 line tests whether the project can research a current, changing certification target, design a coherent curriculum, and author original evidence-backed scenario questions without copying protected exam material. It is split into three separately reviewed stages so architecture, manual content quality, and agent assistance are not conflated.
 
-The exact current assessment guide, domains, task statements, policies, sample questions, and source set must be researched from authoritative AWS sources when 0.3A begins. This plan intentionally does not claim their current contents or select a domain from memory.
+The 2026-07-18 0.3A exercise verified the current target and recorded the assessment guide, domains, task statements, policies, sample evidence, rights boundary, architecture, and proposed pilot from authoritative sources. It did not rely on the historical `SAP-C02` label in this plan. See [the assessment research](aws/sap-c02-assessment-research.md), [source register](aws/sap-c02-source-register.md), and [rights analysis](aws/sap-c02-rights-and-reuse.md).
 
 ## 0.3A — Research and curriculum architecture
+
+Status: complete as a manual research/design exercise; human approval remains an exit gate.
 
 Deliver design and review artifacts, not a full AWS pack:
 
@@ -25,9 +27,22 @@ Deliver design and review artifacts, not a full AWS pack:
 
 0.3A exit requires human approval of the research baseline, blueprint, whole architecture, and a bounded 0.3B realization. It does not require a full pack, MCP installation, AWS account, private environment access, generated questions, or a generalized builder implementation.
 
+### 0.3A result
+
+- Verified target: **AWS Certified Solutions Architect - Professional (`SAP-C02`)**.
+- Guide baseline: current AWS HTML guide plus official PDF version 1.2, whose retained HTTP metadata reports revision on 2025-02-19; the HTML guide's emerging topics are possible unscored content only.
+- Blueprint confidence: medium overall, with high identity/domain/format/response-rule confidence and bounded uncertainty for universal style, distractors, difficulty, and reuse rights.
+- Whole architecture: 22 required objectives (two cross-cutting foundations plus all 20 official task statements), with optional emerging-topic awareness outside scored coverage.
+- Proposed 0.3B realization: Domain 1 task 1.4 / `SAP-ORG-04`, design a multi-account AWS environment.
+- Capability result: public official web retrieval was sufficient; official AWS Knowledge MCP or AWS Documentation MCP is recommended only as optional Level 0 research assistance for a later approved task.
+
+Artifacts are indexed in [the 0.3A handoff](handoffs/aws-sap-c02-0.3a-research-and-architecture.md).
+
 ## 0.3B — Manually reviewed SAP-C02 pilot
 
-Select one current domain or task statement from the approved 0.3A architecture. Build a deliberately small realization containing:
+Status: proposed; not authorized.
+
+Subject to human approval, select current Domain 1 task 1.4 / `SAP-ORG-04` from the 0.3A architecture. The proposed envelope is two original lessons, approximately 24-30 approved claims, and exactly five future original scenario questions: three single-response and two multiple-response. Build a deliberately small realization containing:
 
 - a bounded set of authoritative factual claims;
 - original cited lessons;
@@ -43,6 +58,8 @@ Select one current domain or task statement from the approved 0.3A architecture.
 The five questions are project-authored and must never be labeled official, recalled, actual, or representative of exact live questions. Official examples may inform the approved blueprint only within their allowed use and rights. No unstated assumption may be required to make a keyed answer win.
 
 0.3B is manual-first: the project proves review quality and artifact boundaries before generalizing automation. Selection, scoring, attempts, and learner state remain deterministic.
+
+The five non-learner-ready design specifications and explicit non-goals are in [the pilot proposal](aws/sap-c02-0.3b-pilot-proposal.md).
 
 ## 0.3C — Agent-assisted construction
 
@@ -92,13 +109,13 @@ No AWS MCP, account, cloud access, lab, or external capability is required by th
 
 ## Implementation prerequisites and unresolved decisions
 
-- Verify current SAP-C02 identity, guide, domains, task statements, format, examples, policies, and reuse constraints from authoritative AWS sources.
+- Obtain human acceptance of the 0.3A identity/source baseline, medium-confidence blueprint, complete architecture, and selected task 1.4 realization.
 - Decide the standalone serialization of blueprint, curriculum, realization, claims, rationales, and layered reviews.
 - Define reviewer qualifications for factual claims, architectural recommendations, and answer uniqueness.
 - Define originality/similarity review without retaining unsafe material.
 - Decide how freshness changes invalidate claims, questions, and approvals.
 - Decide the minimum deterministic validation and whether a new pack format/tool contract is required.
-- Define 0.3B scope and completion criteria only after 0.3A evidence is approved.
+- Confirm or revise the proposed two-lesson, 24-30-claim, five-question 0.3B envelope after 0.3A evidence is approved.
 - Explicitly authorize every implementation, content, capability, and private-access task separately.
 
 ## Persistent non-goals

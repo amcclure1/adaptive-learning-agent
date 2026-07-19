@@ -61,6 +61,14 @@ For 0.2B, format version, PNG-only media/limits, asset/digest model, approval sc
 
 See [Subject Builder architecture](subject-builder-architecture.md), [assessment policy](assessment-research-policy.md), [curriculum planning](curriculum-planning.md), [capability discovery](capability-discovery.md), [asset pilot plan](amateur-extra-asset-pilot-plan.md), and [SAP-C02 plan](aws-sap-c02-pilot-plan.md).
 
+## Version 0.3A research checkpoint
+
+The documentation-only 0.3A manual research and architecture exercise is complete and awaits human acceptance. As verified on 2026-07-18, the current official target remains **AWS Certified Solutions Architect - Professional (SAP-C02)**. The public exam page states 180 minutes, 75 multiple-choice or multiple-response questions, Pearson VUE test-center or online-proctored delivery, and three-year certification validity. The current HTML guide supplies the four-domain/task baseline and includes emerging topics only as possible unscored content; the official PDF is version 1.2 and carries an AWS object revision timestamp of 2025-02-19. See [the assessment research](aws/sap-c02-assessment-research.md) and [source register](aws/sap-c02-source-register.md).
+
+0.3A produced a rights classification, independent assessment blueprint, complete high-level learning architecture, cross-domain dependency model, five realization examples, capability-discovery report, evidence-backed question policy, bounded pilot proposal, and Subject Builder automation-gap analysis. Structural exam identity, domain, format, and response-rule evidence is high confidence. The overall blueprint is medium confidence because ten first-party public samples cannot establish universal scenario/distractor/difficulty behavior, official practice material was not accessed, and official sample-question reuse rights remain analysis-only pending a specific grant or authorized rights review.
+
+The recommended 0.3B slice is Domain 1 task 1.4 / `SAP-ORG-04`, design a multi-account AWS environment: two proposed original lessons, approximately 24-30 approved claims, and exactly five future original scenario questions (three single-response and two multiple-response). It requires human approval before content work. No lesson, claim set, learner-ready question, pack, core behavior, SQLite state, Hermes integration, MCP configuration, AWS account access, AWS resource, release, or tag was created by 0.3A. See [the pilot proposal](aws/sap-c02-0.3b-pilot-proposal.md) and [handoff](handoffs/aws-sap-c02-0.3a-research-and-architecture.md).
+
 ## Known limitations
 
 - One local learner and at most one active session are supported; multi-user hosting and concurrent-process guarantees are absent.
@@ -73,4 +81,4 @@ See [Subject Builder architecture](subject-builder-architecture.md), [assessment
 
 ## Deferred
 
-Implementation of format 0.3/asset support, subject building, assessment/curriculum artifacts, capability discovery, AWS content, expansion beyond E1A, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remains deferred. No MCP server, connector, AWS access, diagram content, new implemented pack field/tool, database change, or Hermes workflow change was added by the design tasks.
+Implementation of format 0.3/asset support, Subject Builder operations, AWS content, capability configuration, expansion beyond E1A, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remains deferred. The 0.3A assessment/curriculum artifacts are design records, not implemented runtime objects or pack-format commitments. No MCP server, connector, AWS access, diagram content, new implemented pack field/tool, database change, or Hermes workflow change was added by the design tasks.

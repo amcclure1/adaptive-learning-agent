@@ -27,15 +27,15 @@ Authoritative review selected E7B from all nine figure-dependent groups. Accepte
 
 ## 0.3A — Assessment research and curriculum architecture
 
-Status: architecture direction accepted by ADRs 0010–0013; milestone design and implementation not authorized
+Status: manual research/design complete; human acceptance pending; no Subject Builder or content implementation authorized
 
-Define and manually exercise assessment research, source rights/use classification, assessment blueprints, whole learning architectures, dependency categories, progressive realization, guided scope negotiation, version impacts, and optional capability discovery/proposals. No full AWS pack or generalized builder is required.
+The 2026-07-18 exercise verified AWS Certified Solutions Architect - Professional (`SAP-C02`), registered official evidence and reuse boundaries, and produced an assessment blueprint, complete 22-objective required architecture, dependency graph, five realization plans, capability recommendations, question policy, bounded pilot proposal, and automation-gap analysis. No full AWS pack, final content, generalized builder, capability setup, or AWS account was used. See [the 0.3A handoff](handoffs/aws-sap-c02-0.3a-research-and-architecture.md).
 
 ## 0.3B — Manually reviewed SAP-C02 pilot
 
-Status: proposed; depends on approved 0.3A artifacts
+Status: proposed task 1.4 / `SAP-ORG-04` slice; depends on human approval of 0.3A artifacts and separate implementation authorization
 
-Realize one current SAP-C02 domain or task statement with a small approved claim set, original lessons, exactly five original scenario questions, distractor rationales, authoritative AWS citations, answer-uniqueness review, and human claim/question/pack approvals. It is a slice, not complete SAP-C02 preparation.
+The recommended realization is Domain 1 task 1.4, design a multi-account AWS environment: two original lessons, approximately 24-30 approved claims, and exactly five original scenario questions (three single-response, two multiple-response), with distractor rationales, authoritative AWS citations, answer-uniqueness review, and separate human claim/question/pack approvals. It is a proposal and slice, not complete SAP-C02 preparation. See [the 0.3B pilot proposal](aws/sap-c02-0.3b-pilot-proposal.md).
 
 ## 0.3C — Agent-assisted construction
 
