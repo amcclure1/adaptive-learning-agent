@@ -43,7 +43,14 @@ class ApplicationService:
             "status": "ok",
             "contract_version": self.contract_version,
             "schema_version": version,
-            "pack_format_versions": ["0.1"],
+            "pack_format_versions": ["0.1", "0.2"],
+            "capabilities": {
+                "supported_pack_formats": ["0.1", "0.2"],
+                "sourced_content": True,
+                "multiple_lessons": True,
+                "official_question_identity": True,
+                "post_answer_citations": True,
+            },
         }
 
     def learner_initialize(self, display_name: str) -> dict[str, Any]:
@@ -67,7 +74,7 @@ class ApplicationService:
 
     def pack_validate(self, source_path: str | Path) -> dict[str, Any]:
         pack = load_pack(source_path)
-        return {
+        result = {
             "valid": True,
             "pack_id": pack.pack_id,
             "pack_version": pack.version,
@@ -76,6 +83,9 @@ class ApplicationService:
             "question_count": len(pack.questions),
             "diagnostics": [],
         }
+        if pack.format_version == "0.2":
+            result.update(self._pack_provenance_summary(pack))
+        return result
 
     def pack_install(self, source_path: str | Path) -> dict[str, Any]:
         pack = load_pack(source_path)
@@ -94,8 +104,10 @@ class ApplicationService:
         if not destination.exists():
             temporary = Path(tempfile.mkdtemp(prefix="install-", dir=self.storage.pack_store_path))
             try:
-                shutil.copyfile(pack.source_path / "pack.json", temporary / "pack.json")
-                shutil.copyfile(pack.source_path / pack.lesson_name, temporary / pack.lesson_name)
+                for relative_name in pack.declared_files:
+                    target = temporary.joinpath(*relative_name.split("/"))
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(pack.source_path.joinpath(*relative_name.split("/")), target)
                 os.replace(temporary, destination)
                 created_destination = True
             except FileExistsError:
@@ -134,13 +146,16 @@ class ApplicationService:
             if created_destination:
                 shutil.rmtree(destination, ignore_errors=True)
             raise
-        return {
+        result = {
             "pack_id": pack.pack_id,
             "pack_version": pack.version,
             "pack_digest": pack_digest,
             "title": pack.title,
             "installed": True,
         }
+        if pack.format_version == "0.2":
+            result.update(self._pack_provenance_summary(pack))
+        return result
 
     def study_start(self, learner_id: str, pack_id: str, pack_version: str) -> dict[str, Any]:
         self._require_text(learner_id, "learner_id")
@@ -561,7 +576,7 @@ class ApplicationService:
             "SELECT count(*) FROM presentations WHERE session_id = ? AND status = 'answered'",
             (session["session_id"],),
         ).fetchone()[0]
-        return {
+        result = {
             "session_id": session["session_id"],
             "status": session["status"],
             "resumed": resumed,
@@ -570,12 +585,25 @@ class ApplicationService:
             "answered_count": answered_count,
             "eligible_count": len(pack.questions) - len(challenged),
         }
+        if pack.format_version == "0.2":
+            result["lessons"] = [
+                {
+                    "lesson_id": lesson.lesson_id,
+                    "title": lesson.title,
+                    "objective_ids": list(lesson.objective_ids),
+                    "markdown": lesson.markdown,
+                    "citations": self._resolved_citations(pack, lesson.citations),
+                }
+                for lesson in pack.lessons
+            ]
+            result["sourced_content"] = self._pack_provenance_summary(pack)
+        return result
 
     @staticmethod
     def _presentation_result(presentation: sqlite3.Row, pack: Pack) -> dict[str, Any]:
         question = pack.question(presentation["question_id"])
         objective = pack.objective(question.objective_id)
-        return {
+        result = {
             "presentation_id": presentation["presentation_id"],
             "ordinal": presentation["ordinal"],
             "question": {
@@ -586,6 +614,15 @@ class ApplicationService:
                 "objective": {"id": objective.objective_id, "title": objective.title},
             },
         }
+        if pack.format_version == "0.2":
+            result["question"]["origin"] = question.origin
+            if question.official_question_id is not None:
+                result["question"]["official_question_id"] = question.official_question_id
+                result["question"]["assessment_pool"] = {
+                    key: pack.assessment_pool[key]
+                    for key in ("id", "title", "publisher", "errata_revision")
+                }
+        return result
 
     def _attempt_result(
         self,
@@ -612,7 +649,7 @@ class ApplicationService:
         objective_attempts = [
             row for row in historical if question_objectives.get(row["question_id"]) == question.objective_id
         ]
-        return {
+        result = {
             "attempt_id": attempt["attempt_id"],
             "is_correct": bool(attempt["is_correct"]),
             "confidence": attempt["confidence"],
@@ -622,6 +659,65 @@ class ApplicationService:
                 "objective_id": question.objective_id,
                 "attempts_count": len(objective_attempts),
                 "correct_count": sum(row["is_correct"] for row in objective_attempts),
+            },
+        }
+        if pack.format_version == "0.2":
+            result["provenance"] = {
+                "origin": question.origin,
+                "official_question_id": question.official_question_id,
+                "assessment_pool": {
+                    key: pack.assessment_pool[key]
+                    for key in ("id", "title", "publisher", "errata_revision")
+                },
+                "explanation_citations": self._resolved_citations(pack, question.explanation_citations),
+                "explanation_rights_id": question.explanation_rights_id,
+            }
+        return result
+
+    @staticmethod
+    def _resolved_citations(pack: Pack, citations: tuple[Any, ...]) -> list[dict[str, Any]]:
+        resolved = []
+        for citation in citations:
+            source = pack.source(citation.source_id)
+            item: dict[str, Any] = {
+                "source_id": citation.source_id,
+                "locator": citation.locator,
+                "source": {
+                    "title": source.title,
+                    "publisher": source.publisher,
+                    "url": source.url,
+                    "retrieved_on": source.retrieved_on,
+                },
+            }
+            if source.revision is not None:
+                item["source"]["revision"] = source.revision
+            resolved.append(item)
+        return resolved
+
+    @staticmethod
+    def _pack_provenance_summary(pack: Pack) -> dict[str, Any]:
+        origins = {origin: 0 for origin in ("official_pool", "generated")}
+        for question in pack.questions:
+            origins[question.origin] = origins.get(question.origin, 0) + 1
+        return {
+            "format_version": pack.format_version,
+            "language": pack.language,
+            "lesson_count": len(pack.lessons),
+            "source_count": len(pack.sources),
+            "citation_count": sum(len(lesson.citations) for lesson in pack.lessons)
+            + sum(len(question.explanation_citations) + (question.source_question_reference is not None) for question in pack.questions),
+            "official_question_count": sum(question.origin == "official_pool" for question in pack.questions),
+            "question_origins": origins,
+            "assessment_pool": {
+                key: pack.assessment_pool[key]
+                for key in (
+                    "id", "title", "publisher", "effective_from", "effective_through",
+                    "errata_revision",
+                )
+            },
+            "approval": {
+                key: pack.approval[key]
+                for key in ("status", "reviewed_by", "reviewed_at", "review_scope")
             },
         }
 

@@ -37,14 +37,22 @@ def normalize_lesson(text: str) -> str:
 
 def digest_pack(pack: Pack) -> str:
     record_bytes = canonical_json_bytes(pack.normalized_record)
-    lesson_bytes = normalize_lesson(pack.lesson_markdown).encode("utf-8")
-    payload = (
-        len(record_bytes).to_bytes(8, "big")
-        + record_bytes
-        + len(lesson_bytes).to_bytes(8, "big")
-        + lesson_bytes
-    )
+    if pack.format_version == "0.1":
+        lesson_bytes = normalize_lesson(pack.lesson_markdown).encode("utf-8")
+        payload = _frame(record_bytes) + _frame(lesson_bytes)
+    else:
+        payload = _frame(b"adaptive-learning-pack-format-0.2") + _frame(record_bytes)
+        for lesson in pack.lessons:
+            payload += _frame(lesson.path.encode("utf-8"))
+            payload += _frame(normalize_lesson(lesson.markdown).encode("utf-8"))
+        if pack.notice_markdown is not None:
+            payload += _frame(b"NOTICE.md")
+            payload += _frame(normalize_lesson(pack.notice_markdown).encode("utf-8"))
     return hashlib.sha256(payload).hexdigest()
+
+
+def _frame(value: bytes) -> bytes:
+    return len(value).to_bytes(8, "big") + value
 
 
 def digest_question(question: Question) -> str:
