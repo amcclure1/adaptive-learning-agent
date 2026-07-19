@@ -1,6 +1,6 @@
 # SAP-C02 Capability Discovery Report
 
-Status: discovery/recommendation only; nothing installed or configured
+Status: accepted discovery report; public retrieval selected and all setup deferred
 
 Research date: 2026-07-18
 

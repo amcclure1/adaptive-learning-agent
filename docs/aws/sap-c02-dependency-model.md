@@ -1,6 +1,6 @@
 # SAP-C02 Objective Dependency Model
 
-Status: draft 0.3A dependency proposal
+Status: accepted 0.3A dependency baseline
 
 Architecture: `aws-sap-c02-learning-architecture` version `0.3A.1`
 

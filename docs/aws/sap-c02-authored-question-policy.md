@@ -1,6 +1,6 @@
 # SAP-C02 Evidence-Backed Authored Question Policy
 
-Status: 0.3A policy proposal; no approval storage or validation implemented
+Status: accepted 0.3A policy foundation; 0.3B record details remain Proposed design
 
 Applies to: future original AWS questions, beginning with manually reviewed 0.3B
 

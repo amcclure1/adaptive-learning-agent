@@ -1,6 +1,6 @@
 # SAP-C02 Progressive Realization Plans
 
-Status: 0.3A planning examples; human approval required
+Status: accepted progressive-realization examples; plan B selected for 0.3B
 
 Architecture: `aws-sap-c02-learning-architecture` version `0.3A.1`
 

@@ -1,6 +1,6 @@
 # SAP-C02 Source Register
 
-Status: draft 0.3A research artifact; human review required
+Status: accepted 0.3A source baseline; freshness review still required for later content approval
 
 Research date: 2026-07-18 (America/Chicago)
 

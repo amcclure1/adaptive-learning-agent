@@ -1,6 +1,6 @@
 # SAP-C02 Assessment Blueprint
 
-Status: draft; human review required
+Status: accepted with overall medium confidence
 
 Blueprint ID: `aws-sap-c02-assessment-blueprint`
 
@@ -134,4 +134,4 @@ Other uncertainties:
 
 ## Review record
 
-Review status: `draft`. No human has yet approved the blueprint. Approval should confirm the dual PDF/HTML baseline, medium style/difficulty confidence, analysis-only sample use, and text-only 0.3B default. Any exam-code, guide, domain/task, response-rule, or source-rights change supersedes this version and triggers impact review.
+Review status: `accepted` by explicit repository-user instruction on 2026-07-18. Acceptance confirms the dual PDF/HTML baseline, medium style/difficulty confidence, analysis-only sample use, and text-only 0.3B default. Any exam-code, guide, domain/task, response-rule, or source-rights change triggers impact review and may require a superseding blueprint version. See [the 0.3A acceptance](../handoffs/aws-sap-c02-0.3a-acceptance.md).

@@ -1,6 +1,6 @@
 # AWS SAP-C02 0.3A Research and Architecture Handoff
 
-Status: manual research/design complete; human acceptance pending
+Status: superseded as the pending handoff by accepted 0.3A closure
 
 Research date: 2026-07-18
 
@@ -14,7 +14,7 @@ Implementation authority: none granted by this handoff
 
 Version 0.3A has been executed manually as the intended future Subject Builder workflow. It produced a reproducible official-source baseline, rights/reuse decisions, an assessment blueprint, a complete high-level learning architecture, cross-domain dependency structure, multiple progressive realizations, optional capability recommendations, an evidence-backed authored-question policy, a bounded 0.3B pilot proposal, and an automation-gap analysis.
 
-The work is complete in coverage and dependency structure, not authored educational content. It does not approve or activate 0.3B.
+The work is complete in coverage and dependency structure, not authored educational content. The repository user subsequently accepted the 0.3A decisions and the bounded 0.3B pilot; see [the acceptance handoff](aws-sap-c02-0.3a-acceptance.md). That acceptance does not itself approve or activate authored 0.3B content.
 
 ## Repository integration update
 
@@ -144,17 +144,15 @@ The following remained unchanged **by the 0.3A research/design task itself**:
 
 The later 0.2B commits are separately attributable: they implement format-0.3 static assets, add tests and a pending E7B candidate, and update the Hermes-facing fallback workflow. They do not implement Subject Builder operations or AWS content, modify SQLite schema 1 or scoring, access AWS, configure MCP, approve the E7B candidate, or create a release/tag. The earlier working-tree caveat is therefore resolved: those changes are now reviewed as a distinct committed checkpoint rather than left as unrelated uncommitted state.
 
-## Human decisions required before 0.3B
+## Human decisions resolved for 0.3A closure
 
-Recommended choices:
+The repository user explicitly resolved the earlier recommendations on 2026-07-18:
 
-1. **Accept the official-source baseline and medium-confidence blueprint**, while retaining the stated style/difficulty and rights limitations.
-2. **Approve task 1.4 / `SAP-ORG-04` as the bounded pilot**, including the two-lesson, approximately 24-30-claim, three-single/two-multiple envelope.
-3. **Name qualified human reviewers** for AWS factual/architectural claims, question originality and answer uniqueness, and final pack release. The drafting author/model must not occupy those approval roles.
-4. **Use public web/manual documentation first**. Defer MCP installation and all AWS-account access unless a later task demonstrates a specific need and receives explicit permission.
-5. **Authorize content work separately** only after these decisions. Approval of this handoff alone must not be interpreted as permission to implement tools, formats, persistence, content, capabilities, or cloud resources.
-
-If task 1.4 is declined, keep 0.3A complete and select another bounded slice from the full architecture with the same prerequisite, evidence, and human-approval gates.
+1. accepted the official-source baseline and medium-confidence blueprint with stated limitations;
+2. accepted task 1.4 / `SAP-ORG-04` and the two-lesson, approximately 24–30-claim, three-single/two-multiple envelope;
+3. retained qualified human factual, architectural, originality, distractor, uniqueness, and pack-release review requirements;
+4. selected public web/manual documentation and deferred MCP installation and AWS-account access;
+5. kept content authoring, compilation, implementation, activation, and release as later explicit tasks.
 
 ## Next implementation-design boundary
 

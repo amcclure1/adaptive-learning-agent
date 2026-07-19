@@ -1,6 +1,6 @@
 # SAP-C02 Assessment Research
 
-Status: draft 0.3A research baseline; human approval required
+Status: accepted 0.3A research baseline
 
 Research date: 2026-07-18 (America/Chicago)
 

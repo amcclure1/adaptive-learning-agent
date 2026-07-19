@@ -3,7 +3,7 @@
   "schema_commitment": false,
   "blueprint_id": "aws-sap-c02-assessment-blueprint",
   "version": "0.3A.1",
-  "status": "draft",
+  "status": "accepted",
   "research_cutoff": "2026-07-18",
   "provider": "Amazon Web Services",
   "certification": {
@@ -239,9 +239,9 @@
     "suspicious or unverifiable derivatives"
   ],
   "review": {
-    "status": "draft",
-    "reviewed_by": null,
-    "reviewed_at": null,
-    "approval_required": true
+    "status": "accepted",
+    "reviewed_by": "repository user (explicit instruction)",
+    "reviewed_at": "2026-07-18",
+    "approval_required": false
   }
 }

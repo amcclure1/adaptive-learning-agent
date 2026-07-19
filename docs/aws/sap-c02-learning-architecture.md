@@ -1,6 +1,6 @@
 # SAP-C02 Complete High-Level Learning Architecture
 
-Status: draft architecture for human approval
+Status: accepted 0.3A structural baseline
 
 Architecture ID: `aws-sap-c02-learning-architecture`
 

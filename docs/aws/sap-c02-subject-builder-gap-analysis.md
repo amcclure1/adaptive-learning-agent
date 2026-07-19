@@ -1,6 +1,6 @@
 # SAP-C02 Subject Builder Automation Gap Analysis
 
-Status: version 0.3A design record; no implementation authorized
+Status: accepted 0.3A automation-gap record; no implementation authorized
 
 Research date: 2026-07-18
 
