@@ -1,23 +1,21 @@
 # Amateur Extra Official-Asset Pilot Plan
 
-Status: proposed 0.2B research and design plan; implementation not authorized
+Status: 0.2B design complete; implementation and content import not authorized
 Updated: 2026-07-19
 
 ## Purpose
 
 Version 0.2B is a bounded official-content asset pilot. It should prove that one active Amateur Extra question group requiring an official figure can be validated, installed, and studied offline without broadening into curriculum planning, generated content, or subject building.
 
-Format 0.2 explicitly excludes assets. Therefore 0.2B requires a new proposed pack-format decision and version; it must not add fields to format 0.2 or change its accepted semantics. The exact future format number and fields remain unresolved.
+Format 0.2 explicitly excludes assets. The completed design proposes explicit format 0.3, PNG-only static assets, and no changes to formats 0.1 or 0.2. The proposal is not accepted or implemented. See [the detailed candidate and pilot research](amateur-extra-asset-pilot-0.2b.md), [format proposal](asset-pack-format-proposal.md), and [accessibility policy](asset-accessibility-policy.md).
 
-## Research-first candidate
+## Selected design pilot
 
-The current NCVEC **2024–2028 Extra Class FCC Element 4 Question Pool and Syllabus**, consolidated through the fourth errata dated February 4, 2026, provides an authoritative shortlist:
+Fresh review of the current NCVEC **2024–2028 Extra Class FCC Element 4 Question Pool and Syllabus**, consolidated through the fourth errata dated February 4, 2026, selected **E7B10–E7B12 with Figure E7-1**.
 
-- **Primary research candidate: E7B.** The official pool references Figure E7-1 from three questions in one group. One shared circuit figure offers a small test of identity, question references, rendering, alternative text, and digest behavior.
-- **Fallback: E7D.** The official pool references Figure E7-2 from three questions in one group and provides a similarly bounded circuit case.
-- **Broader fallback: E9B.** The official pool references Figures E9-1 and E9-2 across multiple antenna-pattern questions. It exercises more assets and graphical interpretation but is a larger first slice.
+All nine figure-dependent groups were inventoried. E7B is the smallest strong shared-asset case: one monochrome circuit supports three active questions, has no listed figure errata, requires no color or interaction, and permits a connection-based alternative description without naming the tested functions or topology. E7D remains the closest fallback. E5C, E6A/B/C, E7G, E9B, and E9G add accessibility, density, asset-count, or errata complexity.
 
-This shortlist comes from the [official consolidated NCVEC pool](https://ncvec.org/downloads/2024-2028%20Extra%20Class%20Question%20Pool%20and%20Syllabus%20Public%20Release%20with%204th%20Errata%20Feb%204%202026.pdf), not model memory. No question or figure content is imported by this plan. E7B is only the first group to research, not approved content. Final selection requires a fresh pool/errata check, exact active-question inventory, figure-file inventory, asset-specific rights determination, technical inspection, and human approval.
+The selection comes from the [official consolidated NCVEC pool](https://ncvec.org/downloads/2024-2028%20Extra%20Class%20Question%20Pool%20and%20Syllabus%20Public%20Release%20with%204th%20Errata%20Feb%204%202026.pdf), official figure files, and [official release/errata page](https://ncvec.org/index.php/2024-2028-extra-class-question-pool-release), not model memory. No question or figure content is imported by this plan. E7B is proposed, not approved content; a fresh source/errata check and human rights, fidelity, accessibility, and non-leakage approval remain mandatory before import.
 
 ## Bounded capabilities to prove
 
@@ -37,18 +35,17 @@ The later pilot should test:
 - offline validation, installation, restart, and study;
 - immutable historical pack versions when a figure or erratum changes.
 
-## Logical asset requirements for later design
+## Proposed asset boundary
 
-The future design will likely need stable asset ID, normalized relative path, media type, byte length, SHA-256, source/figure locator, rights reference, accessibility text, and question references. These are logical requirements, not accepted fields. It must decide:
+The completed proposal defines stable asset ID, normalized relative path, PNG media type, SHA-256, dimensions, source/figure identity, separate figure/accessibility rights, title/caption/alt/fallback, and direct ordered lesson/question references. Exact raw bytes and asset paths participate in a format-0.3 pack digest. These remain proposed fields. Key decisions are:
 
-- whether alternative text is asset-wide or question-context-specific;
-- whether the original official file is retained as-is or a permitted normalized derivative is distributed;
-- how derivative provenance and both source/derived digests are represented;
-- which image formats are permitted and whether SVG is treated as active content or rejected;
-- image decoding limits and validation without a heavy dependency;
-- how terminal fallback avoids answer leakage;
-- whether assets can appear in lessons as well as questions;
-- how runtime adapters receive safe local asset references.
+- asset-wide accessibility text must be safe for every reference; context-specific variants are deferred;
+- the pilot uses exact PNG bytes embedded in the official DOCX rather than conversion;
+- a conditional derivation record is defined but no conversion pipeline is proposed;
+- PNG is the only media type; JPEG and SVG are deferred;
+- strict signature/chunk/dimension/file/count limits are designed for standard-library validation;
+- lessons and questions may reference declared assets directly in deterministic order;
+- adapters receive a logical installed-pack reference rather than an arbitrary filesystem path.
 
 ## Rights and evidence gates
 
@@ -62,7 +59,7 @@ The existing NCVEC public-domain statement is relevant but not assumed to settle
 - current errata, including figure-specific changes;
 - exact identity between question references and distributed asset.
 
-No retained authoritative snapshot should be published until redistribution is explicitly approved.
+No retained authoritative snapshot or asset should be published until redistribution is explicitly approved. NCVEC's public-domain statement reasonably supports the proposal but does not separately enumerate diagram bytes or transformations; that legal interpretation remains unresolved and is not formal legal advice.
 
 ## Accessibility and presentation
 
@@ -85,10 +82,9 @@ Future acceptance should cover exact asset digest and identity, path traversal a
 
 ## Implementation prerequisites
 
-1. Complete authoritative E7B/E7D/E9B inventory and select the smallest useful group.
-2. Resolve asset-specific rights and derivative policy.
-3. Inspect exact official asset files and accessibility needs.
-4. Propose and accept a narrow new pack-format ADR with security limits and compatibility rules.
-5. Specify core/tool/runtime behavior and negative-test matrix.
-6. Name independent content, rights, and accessibility reviewers.
-7. Explicitly authorize implementation and content import in separate scope.
+1. Human-review and accept or revise Proposed ADRs 0014–0016.
+2. Resolve the asset-specific rights interpretation and approve exact embedded-PNG redistribution.
+3. Independently compare E7-1 identity/fidelity and approve alt text, caption, fallback, mappings, and non-leakage.
+4. Verify a public native-image path for pinned Hermes v0.18.2 or formally accept fallback-only behavior for that surface.
+5. Name independent content, rights, and accessibility reviewers.
+6. Explicitly authorize implementation and content import in separate scope.

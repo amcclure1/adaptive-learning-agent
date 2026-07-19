@@ -34,18 +34,30 @@ The approved pilot is published as the `v0.2.0-alpha.1` annotated tag and GitHub
 - The JSON-compatible contract and Python core import no Hermes, MCP, model-provider, or network clients.
 - Format 0.2 added sourced content without changing SQLite schema 1 or embedding Amateur Extra constants in the core or adapter.
 
-## Next-phase design checkpoint
+## Version 0.2B design checkpoint
+
+The documentation-only 0.2B research/design task is complete. Fresh authoritative NCVEC review inventoried all nine current figure-dependent groups and selected E7B10–E7B12 with shared Figure E7-1. No listed errata affects E7-1. The preferred representation is the exact 796×674 PNG embedded in the current official DOCX, avoiding image conversion.
+
+The design proposes explicit pack format 0.3, PNG-only static local assets, strict raw-byte and pack digesting, direct ordered references, reviewed non-leaking alt/fallback text, logical runtime references, additive responses under the existing ten-operation contract 0.1, and no SQLite schema change. ADRs 0014–0016 remain Proposed; they do not authorize implementation.
+
+NCVEC's public-domain statement reasonably supports an asset-rights proposal but does not separately enumerate diagram bytes or transformed formats. Human rights approval remains required. Native local-image delivery from a custom plugin is not verified for pinned Hermes v0.18.2; fallback presentation is mandatory and native presentation remains an implementation-time compatibility gate.
+
+See [the format proposal](asset-pack-format-proposal.md), [pilot research](amateur-extra-asset-pilot-0.2b.md), [accessibility policy](asset-accessibility-policy.md), and [0.2B handoff](handoffs/amateur-extra-asset-0.2b-design.md).
+
+No official question, figure, pack field, code, test, schema, tool behavior, Hermes behavior, or release was added.
+
+## Next-phase architecture checkpoint
 
 Accepted architecture now separates two future lines:
 
-- **0.2B** is a bounded official Amateur Extra static-asset pilot. E7B is the research-first candidate, with E7D and E9B as fallbacks, but no question/figure has been imported and no format change is accepted.
+- **0.2B** is a designed, unimplemented official Amateur Extra static-asset pilot. E7B10–E7B12 and Figure E7-1 are selected; format 0.3 and its asset policies remain Proposed, and no question/figure has been imported.
 - **0.3A–C** progresses from assessment/curriculum research, to a manually reviewed five-question SAP-C02 slice, to agent-assisted construction with mandatory human gates.
 
 Accepted ADRs 0010–0013 establish whole learning architecture with progressive realization, assessment authenticity and official-question reuse, capability discovery with controlled activation, and evidence-backed authored questions with layered approval. Acceptance establishes architectural direction only and does not authorize implementation.
 
 The target Subject Builder flow distinguishes independent assessment blueprints from learning architectures, keeps architectures complete in coverage/dependencies rather than authored content, guides partial scope through visible prerequisite dispositions, researches assessment grammar automatically, seeks optional capabilities at defined planning/stage triggers, and degrades gracefully when evidence or access is insufficient. External capabilities remain optional to the core and packs.
 
-Exact serialization, pack-format version, JSON schemas, database representation, tool-contract changes, reviewer qualifications, provider behavior, asset media types/limits, similarity algorithms, lifecycle persistence, and concrete modules remain deferred to milestone-specific design reviews.
+For 0.2B, format version, media type/limits, asset/digest model, approval scopes, and no-schema/no-new-operation boundaries are now proposed. ADR acceptance, exact JSON Schema/code modules, reviewer designations, rights determination, and Hermes native presentation remain deferred. Other next-phase serialization, database representation, provider behavior, similarity algorithms, lifecycle persistence, and concrete modules remain deferred to their milestone-specific reviews.
 
 See [Subject Builder architecture](subject-builder-architecture.md), [assessment policy](assessment-research-policy.md), [curriculum planning](curriculum-planning.md), [capability discovery](capability-discovery.md), [asset pilot plan](amateur-extra-asset-pilot-plan.md), and [SAP-C02 plan](aws-sap-c02-pilot-plan.md).
 
@@ -61,4 +73,4 @@ See [Subject Builder architecture](subject-builder-architecture.md), [assessment
 
 ## Deferred
 
-Implementation of asset support, subject building, assessment/curriculum artifacts, capability discovery, AWS content, expansion beyond E1A, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remains deferred. No MCP server, connector, AWS access, diagram content, new pack field/tool, database change, or Hermes workflow change was added by the next-phase design.
+Implementation of format 0.3/asset support, subject building, assessment/curriculum artifacts, capability discovery, AWS content, expansion beyond E1A, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remains deferred. No MCP server, connector, AWS access, diagram content, new implemented pack field/tool, database change, or Hermes workflow change was added by the design tasks.

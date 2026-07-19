@@ -41,12 +41,12 @@ Before significant research or authoring, the agent seeks useful capabilities by
 
 - **0.1.0:** released runtime/architecture proof.
 - **0.2A / 0.2.0-alpha.1:** released sourced-content pilot with independently approved NCVEC E1A questions and real Hermes acceptance.
-- **0.2B proposed:** one official Amateur Extra figure group, static assets, accessibility, terminal fallback, offline install/study, no curriculum/AWS scope.
+- **0.2B designed, not implemented:** E7B10–E7B12 with official Figure E7-1; proposed explicit format 0.3, PNG-only exact bytes, accessibility/fallback, offline install/study, no SQLite or curriculum/AWS scope.
 - **0.3A proposed:** assessment research, blueprint, whole curriculum architecture, realization planning, and capability proposals.
 - **0.3B proposed:** one manually reviewed current SAP-C02 slice with approved claims, original lessons, and five original scenario questions.
 - **0.3C proposed:** agent-assisted construction after manual artifacts and layered approvals are proven.
 
-No 0.2B or 0.3 implementation is currently authorized. ADRs 0010–0013 are Accepted architecture direction; milestone-specific serialization, schema, storage, tool, provider, reviewer, asset, similarity, and module decisions remain deferred.
+No 0.2B or 0.3 implementation is currently authorized. ADRs 0010–0013 are Accepted architecture direction. Asset ADRs 0014–0016 are Proposed and require human review; they define the 0.2B format/media/digest/accessibility direction but do not authorize question/figure import, code, schema, tool, or Hermes changes. Other milestone-specific serialization, schema, storage, provider, reviewer, similarity, and module decisions remain deferred.
 
 ## Open-source and rights objective
 
