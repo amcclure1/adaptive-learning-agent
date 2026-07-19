@@ -1,7 +1,7 @@
 # Product Principles
 
 Status: normative
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 These principles constrain MVP design and implementation. Accepted ADRs may clarify them but must not silently contradict them.
 
@@ -39,7 +39,7 @@ Packs that make sensitive, regulatory, certification, or time-dependent claims M
 
 ## 9. Humans control content activation
 
-Agent-generated content MUST begin as draft content. An authoring agent MUST NOT approve or activate its own work. Release, installation, or publication gates requiring human review MUST require explicit human action.
+Agent-generated content MUST begin as draft content. An authoring agent MUST NOT approve or activate its own claims, questions, curricula, or packs. Release, installation, or publication gates requiring human review MUST require explicit human action. Layered approvals do not imply one another.
 
 ## 10. Infrastructure follows demonstrated need
 
@@ -52,6 +52,42 @@ The standard library and existing dependencies SHOULD be preferred. A new librar
 ## 12. Agent changes are inspectable and reversible
 
 Tool mutations MUST expose what changed, preserve provenance, use transactions or atomic file replacement where appropriate, and provide recovery paths. Hidden state changes, silent conflict resolution, and autonomous publication are prohibited.
+
+## 13. Whole-plan coherence, progressive realization
+
+The complete learning architecture for a stated outcome SHOULD be designed and approved early enough to expose gaps, dependencies, evidence needs, and completion criteria. Content MAY be realized incrementally through smaller versioned plans. A partial realization MUST NOT be represented as the complete outcome.
+
+## 14. Learner control is guided by coherence
+
+Learners SHOULD choose focus, sequence, and scope without manually designing a dependency graph. Planning MUST identify blocking and bridge prerequisites, explain gaps, recommend the smallest coherent realization, and permit nonblocking omissions with visible warnings. Scope SHOULD be refused or revised only when it cannot satisfy the learner's stated outcome.
+
+## 15. Assessment authenticity comes from evidence
+
+Assessment style SHOULD be researched from current permissible evidence rather than invented by the learner or copied from unsafe material. Authenticity means matching structure, cognitive depth, constraints, judgment, terminology, and option plausibility. The project MUST copy assessment grammar, not protected assessment sentences.
+
+## 16. Official-question reuse requires permission and exactness
+
+Official questions MAY be included when a public-domain basis, applicable license, issuing-authority reuse policy, or specific permission is documented. Reuse MUST preserve exact identity, wording, options/order, key, source/version, effective dates, rights, and errata status. Dumps, recalled live questions, leaked keys, unauthorized banks, and unclear derivatives MUST NOT be used.
+
+## 17. The agent seeks capabilities by role
+
+Before significant research or authoring, the agent SHOULD inspect available and trustworthy discoverable capabilities for roles such as authoritative search, verification, asset inspection, execution, and labs. Discovery MUST NOT be treated as compatibility, permission, installation, or evidence authority.
+
+## 18. Capability activation is controlled and least-privileged
+
+Private access, credential setup, external mutation, sensitive execution, and material cost MUST require explicit user approval. Capability proposals MUST disclose provider, purpose, data, side effects, permissions, cost, fallback, and removal. The system MUST NOT silently install capabilities or broaden permission scope.
+
+## 19. External capabilities remain optional to the portable core
+
+MCP servers, connectors, APIs, cloud accounts, and runtime tools MAY enhance research, verification, or labs. They MUST NOT become mandatory dependencies of the runtime-independent learning core, portable packs, deterministic scoring, authoritative learner state, or offline study without a later accepted architectural decision.
+
+## 20. Authored assessment is evidence-backed and reviewable
+
+Material authored questions SHOULD trace from objective through approved factual claims, explicit constraints, answers, keyed and distractor rationales, citations, and human review. No hidden assumption may be required for the keyed answer to win. A qualified human MUST approve answer uniqueness before activation.
+
+## 21. Insufficient evidence degrades gracefully
+
+When assessment evidence or optional capabilities are insufficient, unsafe, declined, or unavailable, the agent MUST explain the gap, offer researched alternatives and a recommendation, narrow the scope when useful, and stop unsupported exam-matching generation. Existing local core and installed-pack operation MUST remain usable.
 
 ## Supporting principles
 

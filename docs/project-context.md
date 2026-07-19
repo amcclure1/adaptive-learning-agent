@@ -1,59 +1,53 @@
 # Project Context
 
 Status: durable project context
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 ## Problem
 
-People can have productive learning conversations with an agent, but conversation alone is a poor system of record. Model output varies, memory can be summarized or lost, and unreviewed generated material can look authoritative. Adaptive Learning Agent aims to combine an agent's conversational strengths with deterministic assessment, durable local state, portable content, and explicit evidence controls.
+Learning conversations can be productive, but conversation alone is a poor system of record. Model output varies, memory can be summarized or lost, and unreviewed material can look authoritative. Adaptive Learning Agent combines conversational guidance with deterministic assessment, durable local state, portable content, explicit evidence controls, and human activation.
 
 ## Agent-native vision
 
-The agent harness is the application rather than a chat feature added to a conventional learning product. A learner asks questions, studies, reviews progress, and creates subjects through conversation. Behind that conversation, narrow Python tools perform operations that need reproducibility or authority.
+The agent harness is the application rather than a chat feature attached to a conventional learning platform. Hermes is the first runtime and supplies the initial conversational surface, provider integration, and tool invocation. The learning core, tool contract, learner data, and pack formats remain runtime-independent.
 
-Hermes is the first supported agent runtime. It provides the initial conversational surface, model-provider integration, and tool invocation. The learning core, data model, tool contract, and subject-pack format must remain independent of Hermes so another runtime can adopt them without rewriting learning behavior.
+Agent conversation can research, explain, draft, and negotiate scope. Python owns deterministic validation, scoring, state transitions, and future structural planning checks. SQLite is authoritative operational learner state. Versioned files are authoritative content and review artifacts. Agent memory is never authority for progress, correct answers, sources, curriculum approval, or activation.
 
-## Why a lightweight custom kernel
+## Lightweight custom kernel
 
-The MVP needs a small set of capabilities: deterministic scoring and scheduling, local SQLite persistence, pack validation, structured authoring, evidence review, and runtime adapters. These capabilities can be built as a focused Python kernel with clear boundaries and few dependencies.
+The project prefers a focused Python kernel, standard-library facilities, local SQLite, and inspectable files over complete learning platforms or distributed infrastructure. Optional tools, connectors, APIs, MCP servers, and labs may improve research or practice, but they do not become mandatory core/pack dependencies and do not justify hidden credential or cloud requirements.
 
-A complete learning platform would bring assumptions about web delivery, hosted users, services, content models, and operations that are outside the MVP. Lumen, OpenTutor, and similar projects may later be studied for reusable patterns or narrowly compatible components, but they are not dependencies and do not define this project's architecture. The project will add infrastructure only after a measured need.
+## Subject packs and human authority
 
-## Deterministic tools
+Portable packs contain reviewed content and provenance, not learner data, credentials, runtime configuration, or executable code. Format 0.1 is the original strict synthetic JSON/Markdown proof. Accepted format 0.2 adds ordered lessons, authoritative sources/citations, official question identity, pool/errata metadata, component rights, and digest-covered human approval.
 
-Python tools will own:
+Official questions may be reused only with documented rights and exact identity/version/errata handling. Otherwise, permissible evidence informs assessment grammar and project authors create original material. Dumps, recalled live questions, leaked answers, unauthorized banks, and suspicious derivatives are excluded.
 
-- answer normalization and scoring;
-- mastery and progress projections;
-- question selection and review scheduling;
-- transactional learner-state changes;
-- pack validation, installation, export, and canonical digests;
-- evidence-policy and review-gate enforcement.
+Agent-authored claims, questions, curricula, and packs remain drafts. Future claim, question, and pack-release approvals remain distinct human decisions.
 
-Agent conversation and memory may personalize wording. They are not authoritative for scores, correct answers, learner state, provenance, or content activation.
+## Whole curriculum, progressive realization
 
-## Subject packs
+Future subject building first designs a complete, versioned learning architecture for the stated outcome, including objectives, dependencies, depth, evidence, assessment mapping, sequence, and completion criteria. A separate realization plan selects the coherent portion built now. Learners can focus on a domain, weak areas, foundations, or a time-boxed path without being required to construct dependency graphs.
 
-Portable subject packs use human-readable YAML, JSON, and Markdown with static assets where needed. A pack can define objectives, questions, deterministic answers, explanations, sources, claims, review attestations, and applicability dates. Packs are versioned, inspectable in Git, safe to validate before installation, and separate from learner data.
+Architecture changes produce impact reports rather than silently rewriting packs or learner progress. The exact serialization and implementation of curriculum artifacts remain proposed.
 
-Users should be able to draft a subject conversationally. Agent-generated content remains a draft until a human performs the required review and explicitly activates or exports it. Evidence-sensitive packs can require authoritative source classes, precise locators, currency metadata, and question challenges.
+## Assessment and capability research
 
-## Pilot use cases
+The future Subject Builder automatically researches current assessment identity, official guides, domains/tasks, format, response rules, cognitive depth, scenarios, exhibits/labs, examples, rights, and uncertainty. It produces a human-reviewable assessment blueprint and uses guided fallback when evidence is weak or unsafe.
 
-### AWS SAP-C02
+Before significant research or authoring, the agent seeks useful capabilities by role. Discovery can be automatic; private access, credentials, mutation, sensitive execution, and cost require explicit least-privileged approval. Capability output remains untrusted until classified and verified.
 
-The AWS Certified Solutions Architect – Professional pilot tests complex scenario questions, a weighted exam blueprint, fast-changing vendor documentation, and strict originality requirements. Generated material must not be described as real or recalled exam content.
+## Pilot sequence
 
-### US Amateur Radio Extra
+- **0.1.0:** released runtime/architecture proof.
+- **0.2A / 0.2.0-alpha.1:** released sourced-content pilot with independently approved NCVEC E1A questions and real Hermes acceptance.
+- **0.2B proposed:** one official Amateur Extra figure group, static assets, accessibility, terminal fallback, offline install/study, no curriculum/AWS scope.
+- **0.3A proposed:** assessment research, blueprint, whole curriculum architecture, realization planning, and capability proposals.
+- **0.3B proposed:** one manually reviewed current SAP-C02 slice with approved claims, original lessons, and five original scenario questions.
+- **0.3C proposed:** agent-assisted construction after manual artifacts and layered approvals are proven.
 
-The Amateur Extra pilot tests regulatory sources, effective dates, an official question-pool context, deterministic technical questions, and jurisdiction-specific evidence. Pack metadata must distinguish FCC rules from explanatory secondary material.
+No 0.2B or 0.3 implementation is currently authorized. Proposed ADRs 0010–0013 require review.
 
-Neither pilot pack currently contains functional learning content.
+## Open-source and rights objective
 
-## Open-source objective
-
-The project is intended to be open source from its first durable repository. Original engine, adapter, schema, and skill code uses Apache License 2.0. Pack maintainers remain responsible for compatible licensing, attribution, trademarks, and source-use constraints for pack content.
-
-## Current implementation status
-
-Version 0.1.0 is a completed runtime and architecture proof: the deterministic runtime-independent core, synthetic fixture, eight-table SQLite schema, ten-operation contract, thin project-local Hermes adapter, and fixture workflow skill are implemented. Hermes v0.18.2 Windows CLI/profile behavior is verified. The fixture is not a real learning pack. Accepted ADR 0009 defines format 0.2, and the Amateur Extra E1A design is implementation-ready, but neither is implemented or authorized for implementation. Pilot packs, subject building, evidence workflows, scheduling, mastery, exam simulation, and other deferred features remain unimplemented and require separate authorization.
+Original engine, adapter, schema, and skill code uses Apache License 2.0. Original pilot prose uses its recorded content license. Pack maintainers remain responsible for compatible licensing, attribution, trademarks, source-use constraints, freshness, and human review. Project policy is not formal legal advice.

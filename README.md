@@ -81,7 +81,7 @@ Conversation and agent memory may shape presentation, but they are never authori
 
 The project aims to make an agent harness the primary experience while keeping deterministic learning behavior in testable Python, operational state in local SQLite, and portable subject content in versioned files. It does not require a web frontend, API server, PostgreSQL, Redis, Celery, a vector database, Docker, cloud deployment, hosted identity, a marketplace, autonomous publishing, or a multi-agent swarm.
 
-The first intended real pilots are AWS Certified Solutions Architect – Professional (SAP-C02) and United States Amateur Radio Extra class. Both are evidence-sensitive. The project will not present generated questions as official, real, or recalled examination questions.
+The first real pilot is the released United States Amateur Radio Extra E1A slice. Proposed next phases separately cover an official static-asset Amateur Extra pilot (0.2B) and assessment/curriculum research followed by a manually reviewed AWS SAP-C02 slice (0.3A–B). Generated questions will be original, evidence-backed, human-reviewed, and never presented as official, real, or recalled examination questions. See [the roadmap](docs/roadmap.md) and [future Subject Builder architecture](docs/subject-builder-architecture.md).
 
 ## Repository organization
 
@@ -96,6 +96,8 @@ The first intended real pilots are AWS Certified Solutions Architect – Profess
 - `user-data/`: ignored local operational state boundary.
 
 Start with [product principles](docs/product-principles.md), [current status](docs/current-status.md), and [project context](docs/project-context.md). The original design package is indexed in [the initial handoff](docs/handoffs/initial-design-package.md).
+
+Next-phase design is indexed by [assessment policy](docs/assessment-research-policy.md), [curriculum planning](docs/curriculum-planning.md), [capability discovery](docs/capability-discovery.md), and the [Subject Builder architecture](docs/subject-builder-architecture.md). These are proposals and do not authorize implementation.
 
 ## Contributing
 

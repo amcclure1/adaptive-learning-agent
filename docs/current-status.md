@@ -34,6 +34,19 @@ The approved pilot is published as the `v0.2.0-alpha.1` annotated tag and GitHub
 - The JSON-compatible contract and Python core import no Hermes, MCP, model-provider, or network clients.
 - Format 0.2 added sourced content without changing SQLite schema 1 or embedding Amateur Extra constants in the core or adapter.
 
+## Next-phase design checkpoint
+
+Documentation now proposes two separate future lines:
+
+- **0.2B** is a bounded official Amateur Extra static-asset pilot. E7B is the research-first candidate, with E7D and E9B as fallbacks, but no question/figure has been imported and no format change is accepted.
+- **0.3A–C** progresses from assessment/curriculum research, to a manually reviewed five-question SAP-C02 slice, to agent-assisted construction with mandatory human gates.
+
+Proposed ADRs 0010–0013 cover whole learning architecture with progressive realization, assessment authenticity and official-question reuse, capability discovery with controlled activation, and evidence-backed authored questions with layered approval. They are **Proposed**, not Accepted. They do not authorize implementation.
+
+The target Subject Builder flow now distinguishes learning architecture from realization plans, guides partial learner scope through dependency categories, researches assessment grammar automatically, seeks optional capabilities by role, and degrades gracefully when evidence or access is insufficient. External capabilities remain optional to the core and packs.
+
+See [Subject Builder architecture](subject-builder-architecture.md), [assessment policy](assessment-research-policy.md), [curriculum planning](curriculum-planning.md), [capability discovery](capability-discovery.md), [asset pilot plan](amateur-extra-asset-pilot-plan.md), and [SAP-C02 plan](aws-sap-c02-pilot-plan.md).
+
 ## Known limitations
 
 - One local learner and at most one active session are supported; multi-user hosting and concurrent-process guarantees are absent.
@@ -46,4 +59,4 @@ The approved pilot is published as the `v0.2.0-alpha.1` annotated tag and GitHub
 
 ## Deferred
 
-Subject building, AWS content, expansion beyond E1A, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remain deferred.
+Implementation of asset support, subject building, assessment/curriculum artifacts, capability discovery, AWS content, expansion beyond E1A, scheduling, mastery, readiness, exam simulation, YAML, archives, export ergonomics, signing, marketplaces, broader Hermes distribution, hosted identity, servers, cloud deployment, and stronger local-process isolation remains deferred. No MCP server, connector, AWS access, diagram content, new pack field/tool, database change, or Hermes workflow change was added by the next-phase design.
