@@ -95,6 +95,17 @@ The following is an abbreviated structural illustration, not a valid or installa
       "retrieved_on": "2026-07-18",
       "snapshot_retained": false,
       "rights_id": "rights-external-references"
+    },
+    {
+      "id": "ncvec-release-page",
+      "type": "official_errata",
+      "title": "2024-2028 Extra Class Question Pool Release",
+      "publisher": "NCVEC Question Pool Committee",
+      "url": "https://ncvec.org/index.php/2024-2028-extra-class-question-pool-release",
+      "retrieved_on": "2026-07-18",
+      "revision": "fourth-errata-2026-02-04",
+      "snapshot_retained": false,
+      "rights_id": "rights-external-references"
     }
   ],
   "objectives": [
@@ -192,7 +203,7 @@ Complete citation records remain available in deterministic tool results. Citati
 
 ## Assessment pool and errata
 
-The assessment-pool record requires `id`, `title`, `publisher`, valid inclusive `effective_from`/`effective_through`, `source_id`, non-empty declared `errata_revision`, `errata_source_id`, and unique `withdrawn_official_question_ids`. It may later include unique `superseded_official_question_ids` using the same validation rule; the E1A pilot does not require that optional field.
+The assessment-pool record requires `id`, `title`, `publisher`, valid inclusive `effective_from`/`effective_through`, `source_id`, non-empty declared `errata_revision`, `errata_source_id`, and unique `withdrawn_official_question_ids`. It supports optional unique `superseded_official_question_ids` using the same validation rule; the E1A pilot omits that field because its selected IDs are active.
 
 Both source references must resolve to appropriate source types. Validation rejects an official question ID declared withdrawn or superseded, duplicate official IDs, missing pool metadata for official-pool questions, invalid date ranges, or missing errata revision. Errata knowledge is data in the pack. The engine does not query the internet or decide whether a declared revision is newest.
 
@@ -216,6 +227,8 @@ A `generated` question forbids `official_question_id`, official-pool source-ques
 ## Rights
 
 Rights validation follows [rights-policy.md](rights-policy.md). The format supports `public_domain`, `licensed`, and `reference_only` statuses. It does not use public domain as a license or let Apache-2.0 stand in for educational-prose rights.
+
+Every rights record requires stable `id`, `scope`, and `status`. `public_domain` additionally requires `basis_source_id` and non-empty `covered_material` and forbids a license expression. `licensed` requires `license_expression` and `copyright_holder`. `reference_only` carries no license expression or public-domain covered-material claim. All basis/component references must resolve and record shapes remain closed.
 
 The E1A pilot requires separate rights records for NCVEC official pool material, CC-BY-4.0 original lessons/explanations, and reference-only external official sources. Missing or unresolved rights, dangling component references, and original prose marked public domain fail validation. Logos, seals, screenshots, branding assets, and unofficial third-party study text are prohibited.
 
@@ -253,15 +266,17 @@ Tool contract version remains `0.1`; no new operation family or request argument
 
 ```json
 {
-  "supported_pack_formats": ["0.1", "0.2"],
-  "sourced_content": true,
-  "multiple_lessons": true,
-  "official_question_identity": true,
-  "post_answer_citations": true
+  "capabilities": {
+    "supported_pack_formats": ["0.1", "0.2"],
+    "sourced_content": true,
+    "multiple_lessons": true,
+    "official_question_identity": true,
+    "post_answer_citations": true
+  }
 }
 ```
 
-Existing required health fields remain. New provenance fields are additive/optional, and format-0.1 responses remain semantically unchanged. `pack.validate`/`pack.install` may add source, pool, rights, approval, language, and origin summaries. `study.start` may add ordered lesson records. `study.next` may add origin and official ID but never keys, explanations, or answer-revealing citations. `study.submit` may add explanation citations and source summaries after deterministic scoring.
+`capabilities` is an additive optional health field; its listed members are required when that object is present. Existing required health fields remain. New provenance fields are additive/optional, and format-0.1 responses remain semantically unchanged. `pack.validate`/`pack.install` may add source, pool, rights, approval, language, and origin summaries. `study.start` may add ordered lesson records. `study.next` may add origin and official ID but never keys, explanations, or answer-revealing citations. `study.submit` may add explanation citations and source summaries after deterministic scoring.
 
 Complete provenance belongs in core tool results. A Hermes skill chooses concise display: always identify an official question by official ID, show a short source label after feedback, offer full source/regulation detail on request, and never describe a project-authored explanation as official NCVEC commentary.
 

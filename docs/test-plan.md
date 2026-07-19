@@ -200,3 +200,29 @@ The MVP release is ready for review only when:
 - both pilot packs pass release validation and end-to-end journeys;
 - the Hermes version matrix and previously unverified install/discovery behavior are documented from actual tests;
 - no package installation, configuration mutation, network publication, or autonomous review occurs during normal tests unless the test explicitly owns an isolated fixture environment.
+
+## 10. Format 0.2 and E1A design gates
+
+These are future implementation requirements from accepted ADR 0009 and [Pack Format 0.2](pack-format-0.2-proposal.md). They do not authorize test or content implementation.
+
+| ID | Required result |
+|---|---|
+| PF02-01 | Missing approval record fails validation. |
+| PF02-02 | Empty approval scope fails validation. |
+| PF02-03 | An included official ID declared withdrawn fails validation. |
+| PF02-04 | A generated question containing an official ID fails validation. |
+| PF02-05 | An official-pool question missing its official ID fails validation. |
+| PF02-06 | An official-pool question missing its pool/source reference fails validation. |
+| PF02-07 | Duplicate official IDs fail validation. |
+| PF02-08 | A citation referencing a missing source fails validation. |
+| PF02-09 | Empty, multiline, control-character, URL-shaped, embedded-content, or otherwise invalid citation locators fail validation. |
+| PF02-10 | Missing component rights metadata fails validation. |
+| PF02-11 | Original lessons or explanations scoped as public domain fail validation. |
+| PF02-12 | Invalid assessment-pool effective dates fail validation. |
+| PF02-13 | Lesson-path traversal fails validation. |
+| PF02-14 | Changing source metadata or a declared source snapshot digest changes the pack digest. |
+| PF02-15 | Changing lesson content changes the pack digest. |
+| PF02-16 | Reordering lessons changes both digest and presentation order. |
+| PF02-17 | Validation, installation, and study succeed with network access disabled and make no external request. |
+| PF02-18 | Format-0.1 fixture bytes, digest, validation, installation, study, and response semantics remain unchanged. |
+| PF02-19 | Hermes always labels official questions by official ID and never calls project-authored explanations official NCVEC commentary. |

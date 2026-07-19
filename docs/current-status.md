@@ -1,6 +1,6 @@
 # Current Status
 
-Status: pre-alpha / version 0.1.0 runtime and architecture proof complete; version 0.2A design proposed
+Status: pre-alpha / version 0.1.0 runtime proof complete; version 0.2A design finalized, implementation unauthorized
 Updated: 2026-07-18
 
 ## Released baseline
@@ -33,11 +33,11 @@ The release details and reproducible commands are in [releases/0.1.0.md](release
 - The project-local Hermes plugin is trusted-checkout development behavior. Discovery requires a process-local gate and launch from the repository root.
 - Pack-directory/database installation is not fully atomic across competing processes, and validation of an unexpected existing database may create expected tables before failing closed.
 
-## Proposed next milestone: 0.2A design
+## Finalized next-milestone design: 0.2A
 
-The version-0.2A proposal selects official question group E1A within Amateur Extra subelement E1 for a small, sourced pilot: 11 official questions, two objectives, two lessons, and no generated questions. It proposes explicit pack format `0.2`, source/citation and rights metadata, current-pool/errata metadata, and multiple lessons. See [amateur-extra-pilot-0.2.md](amateur-extra-pilot-0.2.md) and [pack-format-0.2-proposal.md](pack-format-0.2-proposal.md).
+Accepted ADR 0009 defines explicit strict directory-based JSON/Markdown format `0.2` while leaving format 0.1 unchanged. The finalized 0.2A design selects official question group E1A within Amateur Extra subelement E1: 11 official questions, two objectives, two ordered lessons, and no generated questions. It defines source/citation records, conditional retained-snapshot digests, pool/errata metadata, component rights, one human approval record, and additive capabilities under tool contract `0.1`. See [amateur-extra-pilot-0.2.md](amateur-extra-pilot-0.2.md), [pack-format-0.2-proposal.md](pack-format-0.2-proposal.md), [rights-policy.md](rights-policy.md), and [the final handoff](handoffs/amateur-extra-0.2-final-design.md).
 
-This proposal is not accepted implementation scope. No Amateur Extra question text, lesson, explanation, pack, scoring change, or database change has been added.
+The design is implementation-ready but is not implementation authorization. No Amateur Extra question text, lesson, explanation, pack, parser, tool, Hermes, test-code, scoring, or database change has been added.
 
 ## Deferred
 
@@ -48,14 +48,14 @@ This proposal is not accepted implementation scope. No Amateur Extra question te
 - Global/package Hermes distribution, Desktop/gateway support, MCP, and broader runtime/version/platform compatibility.
 - Multi-user identity, servers, cloud deployment, backup/restore, and stronger local-process isolation.
 
-## Unresolved decisions
+## Remaining project and release inputs
 
-- Review and acceptance of Proposed ADR 0009 and the exact format-0.2 schema.
-- Final component-level licensing notice for original pilot lessons and explanations, and legal review of the NCVEC public-domain statement's intended reuse scope.
-- Whether installation should reject a pack whose pool currency date cannot be checked online; 0.2A currently proposes deterministic offline validation only.
-- How a future authoring/review workflow records human approval without building a general evidence subsystem.
+- Name the human reviewer for an actual E1A pack release and record the required approval scope.
+- Decide which authoritative source snapshots are retained during content work and record real SHA-256 values for those retained snapshots.
+- Recheck current pool, errata, and Part 97 sources immediately before content review; the engine deliberately performs no freshness query.
+- Obtain formal legal review if desired; the accepted rights policy is a project policy decision, not legal advice.
 - Permanent security-reporting contact, final package/project name, and supported Hermes targets beyond the verified baseline.
 
 ## Implementation authorization
 
-Version 0.1 focused fixes may proceed within the accepted ADR and vertical-slice boundaries. Version 0.2A is design-only and awaits review. Subject content, pack-format 0.2 parsing, tool-output changes, and Hermes presentation changes are not authorized by these documents.
+Version 0.1 focused fixes may proceed within accepted boundaries. ADR 0009 and the version-0.2 design are accepted, but implementation still requires a separately invoked, explicitly authorized task. Subject content, pack parsing, tool-output changes, Hermes presentation changes, tests, and database changes are not authorized by this design-finalization task.

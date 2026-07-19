@@ -11,16 +11,17 @@ Proves the deterministic Python/SQLite learning core, strict synthetic format-0.
 
 ## 0.2A — Small sourced-content pilot
 
-Status: design proposed; implementation not authorized
+Status: design finalized; implementation not authorized
 
-Target one real, reviewable slice: Amateur Extra question group E1A within subelement E1. The proposal adds only the format semantics needed for two lessons, authoritative source/citation records, official question identity and origin, pool/errata metadata, language, rights metadata, and optional topic tags. Scoring, attempts, sessions, quarantine, objective counts, and SQLite schema remain unchanged.
+Target one real, reviewable slice: Amateur Extra question group E1A within subelement E1. Accepted format 0.2 adds only the semantics needed for two ordered lessons, authoritative source/citation records, official question identity and origin, pool/errata metadata, language/tags, component rights, conditional retained-snapshot digests, and human approval. Tool contract 0.1 gains only additive capabilities/provenance. Scoring, attempts, sessions, quarantine, objective counts, and SQLite schema remain unchanged.
 
-Exit criteria before implementation:
+Design exit criteria completed:
 
-- Proposed ADR 0009 and the exact format-0.2 schema are reviewed and accepted or revised.
-- Component-level redistribution and licensing language is reviewed.
-- A human content-review procedure and named reviewer role are agreed.
-- Acceptance fixtures cover format 0.1 unchanged and format 0.2 provenance/errata behavior.
+- ADR 0009 and the exact format-0.2 semantics are accepted.
+- Component rights, source snapshot/digest behavior, approval, errata, and capability signaling are defined.
+- The future validation matrix covers format 0.1 unchanged and format 0.2 provenance/errata behavior.
+
+Before implementation begins, a separate task must explicitly authorize the exact parser/tool/Hermes/test scope. Before a real pack is released, content work must name a human reviewer, recheck authoritative sources, record any retained-source digests, and pass the accepted validation matrix.
 
 ## Later candidates
 

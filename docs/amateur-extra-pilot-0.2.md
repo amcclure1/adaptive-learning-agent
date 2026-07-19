@@ -1,6 +1,6 @@
 # Amateur Extra Pilot 0.2A
 
-Status: Design proposal only; no content pack or core change implemented
+Status: Design finalized; implementation not authorized
 Updated: 2026-07-18
 
 ## Verified official baseline
@@ -34,11 +34,11 @@ The consolidated fourth-errata file records these current withdrawals without re
 
 No E1A identifier is listed as changed or withdrawn in those four errata. That is a source finding as of July 18, 2026, not a guarantee against future errata or regulation changes. A content review must compare E1A against the then-current NCVEC file and current FCC rules immediately before publication.
 
-### Redistribution and licensing
+### Rights policy
 
-The NCVEC release page states that the QPC releases the 2024–2028 Element 4 Extra Class question pool into the public domain. This is the best official redistribution statement found. It should be preserved by URL and quoted only briefly in pack metadata.
+The accepted [Subject-Pack Rights Policy](rights-policy.md) is normative. It records official NCVEC pool wording, choices, keys, and identifiers as `public_domain` on the basis of NCVEC's release statement; original project lessons and explanations as CC-BY-4.0 copyright Adaptive Learning Agent contributors; and external official sources as `reference_only`. Project code/schemas remain Apache-2.0 and that license does not cover educational prose.
 
-Unresolved: the statement has not received project legal review, and it should not be stretched to cover separately written lessons/explanations, website presentation, seals, logos, or third-party study material. Original pilot prose needs its own explicit project-approved license and attribution notice. No ARRL or commercial study text should be copied. The pilot should contain only exact NCVEC pool material and newly authored, reviewed explanations grounded directly in FCC sources.
+The policy is a project decision, not legal advice or formal legal review. The pilot contains no logos, seals, screenshots, branding assets, unofficial third-party study text, or substantial redistributed FCC/NCVEC website content. Complete official source snapshots are not required inside the pack.
 
 ## Selected slice
 
@@ -60,7 +60,7 @@ The label “E1A group” is used deliberately. E1 is the subelement; E1A is the
 | Item | Proposal |
 |---|---|
 | Pack ID | `us-amateur-extra-e1a` |
-| Format/version | Proposed format `0.2`, initial pack `0.2.0` |
+| Format/version | Accepted design format `0.2`, initial pack `0.2.0` |
 | Language | `en-US` |
 | Scope | E1A01–E1A11 exactly |
 | Objectives | 2 |
@@ -83,6 +83,9 @@ This mapping is a proposed teaching organization; it does not alter NCVEC identi
 - Clearly label official questions. Do not present generated, recalled, or reconstructed questions as pool questions.
 - Include no generated conceptual questions in 0.2A. The origin field is exercised by validator-negative fixtures, not learner-facing content.
 - Treat agent suggestions and memory as drafts only. Pack files and recorded review evidence are authoritative after human approval.
+- Apply component rights exactly as defined in [rights-policy.md](rights-policy.md); never call original explanations official NCVEC commentary.
+- Include one approval record with `status: "approved"` and all nine E1A review-scope labels before the pack is installable.
+- Record whether each source snapshot was retained. Include `content_sha256` when retained; do not fetch or depend on a remote source during validation or study.
 
 ## Expected learner workflow
 
@@ -96,7 +99,7 @@ This mapping is a proposed teaching organization; it does not alter NCVEC identi
 
 Question selection, attempts, retries, confidence, challenges, progress, and finish behavior remain those of version 0.1.
 
-## Acceptance tests
+## Pilot acceptance tests
 
 | ID | Expected proof |
 |---|---|
@@ -112,14 +115,17 @@ Question selection, attempts, retries, confidence, challenges, progress, and fin
 | AE-10 | The existing format-0.1 `fixture-basics` bytes, digest, validation, install, and full AT-01–AT-12 workflow work unchanged. |
 | AE-11 | Pilot content has zero generated questions and zero diagram/assets; content inventory enforces 2 objectives, 2 lessons, and 11 questions. |
 | AE-12 | A skill-level acceptance run displays official origin/ID and citations accurately, uses tool state after restart, and makes no mastery/readiness claim. |
+| AE-13 | The pack has one approved human record covering official wording, option ordering, keys, IDs, lessons, explanations, citations, rights, and pool/errata metadata. |
+| AE-14 | Component rights match the normative policy and no prohibited logo, seal, screenshot, branding asset, or third-party study text is present. |
+| AE-15 | Source records obey retained-snapshot digest rules and validation/study work with network access disabled. |
 
-Tests using real question material should live only in the later authorized content change. This design task adds no such fixture.
+The complete 19-case format gate is normative in [Pack Format 0.2](pack-format-0.2-proposal.md#required-future-validation-cases) and mirrored in [the test plan](test-plan.md#10-format-02-and-e1a-design-gates). Tests using real question material belong only to a later explicitly authorized content task. This design task adds no fixture.
 
 ## Engine impact classification
 
 - **Pack parsing/validation:** add the explicit version branch, multiple lesson loading/digesting, and strict source/citation/pool/errata/rights/origin/language/tag records.
 - **Storage:** no schema change. Existing installed pack version/digest/path and session pinning are sufficient.
-- **Tool contract:** add sourced-pack summaries, multiple lessons, pre-answer question origin/official ID, and post-answer explanation citations. No new operations or request arguments.
+- **Tool contract:** retain contract `0.1`; add optional capability/provenance fields, multiple lessons, pre-answer origin/official ID, and post-answer citations. No new operations or request arguments.
 - **Hermes skill presentation:** display provenance/currency, ordered lessons, exact official labels, and post-feedback citations; prohibit authority/readiness invention.
 - **No change required:** deterministic scoring, choice types, attempts, confidence, sessions, retry reconstruction, quarantine, objective progress, health, and learner initialization.
 
@@ -131,11 +137,6 @@ Tests using real question material should live only in the later authorized cont
 - No mastery, scheduling, adaptive algorithm, new scoring type, authoring agent, autonomous activation, or general review subsystem.
 - No implementation in this task.
 
-## Review decisions remaining
+## Remaining execution inputs
 
-- Approve or revise Proposed ADR 0009 and the exact closed JSON schema.
-- Obtain licensing review for the NCVEC public-domain statement and select the license/notice for original explanations and lessons.
-- Decide whether source byte digests/snapshots are required in 0.2 or can wait; URLs plus retrieved dates do not guarantee future reproducibility.
-- Decide exact tool capability/version signaling for additive format-0.2 output.
-- Define who may approve the first content and how the approval record is stored without creating a general evidence subsystem.
-- Recheck the pool, errata page, and current Part 97 immediately before any implementation is merged.
+No format-0.2 design question remains open. A future implementation/content task must still name the human reviewer, decide which source snapshots are actually retained and record their real hashes, recheck the pool/errata/current Part 97, author and review the content, and obtain any desired formal legal review. These are release inputs, not reasons for the engine to fetch sources or authenticate reviewers.

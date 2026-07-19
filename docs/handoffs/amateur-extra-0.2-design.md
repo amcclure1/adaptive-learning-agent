@@ -1,7 +1,7 @@
 # Amateur Extra 0.2A Design Handoff
 
 Date: 2026-07-18
-Status: design complete; review required; implementation unauthorized
+Status: Superseded by `amateur-extra-0.2-final-design.md`; implementation unauthorized
 
 ## Outcome
 
@@ -21,24 +21,19 @@ No Amateur Extra wording, choices, keys, explanations, lessons, pack files, or e
 
 Links and source limitations are recorded in [the pilot proposal](../amateur-extra-pilot-0.2.md).
 
-## Proposed format and engine boundary
+## Finalized format and engine boundary
 
-Proposed ADR 0009 introduces explicit JSON/Markdown format `0.2` because strict format 0.1 cannot safely accept new semantics as optional fields. It adds only multiple lessons, language/tags, official/generated origin and official IDs, pool/effective/errata metadata, source/citation records, and scoped rights.
+Accepted ADR 0009 introduces explicit JSON/Markdown format `0.2` because strict format 0.1 cannot safely accept new semantics as optional fields. It adds only multiple lessons, language/tags, official/generated origin and official IDs, pool/effective/errata metadata, source/citation records, scoped rights, and one human approval record.
 
 Required future core work is limited to versioned pack models/parsing/validation/digesting and additive tool results for sourced metadata, multiple lessons, origin/official IDs, and post-answer citations. The Hermes skill would present those fields accurately. SQLite schema, scoring, attempts, confidence, sessions, retry behavior, quarantine, and objective progress require no change.
 
-## Licensing boundary
+## Rights boundary
 
-NCVEC explicitly states that it releases the pool into the public domain. Project legal review remains unresolved. That statement must not be assumed to cover original explanations, lessons, third-party study text, seals, logos, or website presentation. The pilot needs a separate component-level license/notice for original prose and must copy no unofficial material.
+The accepted [rights policy](../rights-policy.md) scopes NCVEC pool material as `public_domain`, original lessons/explanations as CC-BY-4.0, and external official sources as `reference_only`. Project code and schemas remain Apache-2.0. This is project policy, not legal advice or formal legal review.
 
-## Review gate before implementation
+## Final status
 
-1. Review Proposed ADR 0009 and the format schema.
-2. Resolve the component-level rights notice.
-3. Decide source snapshot/digest and tool capability-version questions.
-4. Define a named human content-review approval record.
-5. Recheck current NCVEC errata and current Part 97.
-6. Author content in a separately authorized change with golden source comparisons and all AE-01–AE-12 tests.
+The design questions listed in this handoff are resolved. The authoritative implementation-ready handoff is [amateur-extra-0.2-final-design.md](amateur-extra-0.2-final-design.md). Implementation remains separately gated; no question import, content authoring, parser, contract, database, test-code, or Hermes change is authorized here.
 
 ## Documents produced
 
@@ -46,6 +41,8 @@ NCVEC explicitly states that it releases the pool into the public domain. Projec
 - [0.1.0 release record](../releases/0.1.0.md)
 - [0.2A pilot proposal](../amateur-extra-pilot-0.2.md)
 - [Pack format 0.2 proposal](../pack-format-0.2-proposal.md)
-- [Proposed ADR 0009](../decisions/0009-sourced-pack-format-0.2.md)
+- [Accepted ADR 0009](../decisions/0009-sourced-pack-format-0.2.md)
+- [Subject-Pack Rights Policy](../rights-policy.md)
+- [Final design handoff](amateur-extra-0.2-final-design.md)
 
-Stop here for design review. Do not begin question import, lesson/explanation authoring, loader changes, database changes, tool changes, or skill expansion under this handoff.
+This historical handoff is superseded. Follow the final handoff and its explicit implementation-authorization gate.
