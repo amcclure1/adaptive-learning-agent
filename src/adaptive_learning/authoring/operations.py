@@ -40,7 +40,7 @@ class AuthoringOperations:
         return workspace
 
     def initialize_project(self, request: dict[str, Any]) -> dict[str, Any]:
-        required = {"project_id", "title", "created_at", "pilot_scope", "author"}
+        required = {"project_id", "title", "created_at", "workspace_commit", "pilot_scope", "author"}
         self._closed(request, required)
         return initialize_workspace(self.authoring_root, **request)
 

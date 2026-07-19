@@ -104,19 +104,15 @@ def validate_workspace(
 
     for source in by_type.get("source", []):
         artifact = source["artifact_id"]
-        if source["status"] == "draft":
-            continue
         if source["source_category"] == "prohibited_material" or source["authority_tier"] == "excluded" or source["rights_reuse"] == "prohibited":
             findings.append(_finding("SOURCE_PROHIBITED", artifact, "source_category", "Prohibited or excluded sources cannot support authored content."))
         if source["rights_reuse"] == "unresolved":
             findings.append(_finding("SOURCE_RIGHTS_UNRESOLVED", artifact, "rights_reuse", "Unresolved source rights block compilation."))
-        if current_decision(workspace, target=reference(source), decision_type="source_approval") is None:
+        if source["status"] != "draft" and current_decision(workspace, target=reference(source), decision_type="source_approval") is None:
             findings.append(_finding("SOURCE_APPROVAL_MISSING", artifact, "review_state", "A current source approval over this exact digest is required."))
 
     for claim in by_type.get("claim", []):
         artifact = claim["artifact_id"]
-        if claim["status"] == "draft":
-            continue
         horizon = claim["freshness_horizon"]["valid_through"]
         if claim["status"] == "stale" or claim["invalidation_state"]["status"] != "current" or (horizon is not None and date.fromisoformat(horizon) < cutoff):
             findings.append(_finding("CLAIM_STALE", artifact, "freshness_horizon", "The claim is stale, invalidated, or outside its freshness horizon."))
@@ -124,17 +120,42 @@ def validate_workspace(
             source = index.get(_source_reference_key(source_ref))
             if source is None:
                 findings.append(_finding("REFERENCE_MISSING", artifact, f"source_references[{index_value}]", "The exact source reference is missing or mismatched."))
-            elif current_decision(workspace, target=reference(source), decision_type="source_approval") is None:
+            elif claim["status"] != "draft" and current_decision(workspace, target=reference(source), decision_type="source_approval") is None:
                 findings.append(_finding("SOURCE_APPROVAL_MISSING", artifact, f"source_references[{index_value}]", "The claim depends on an unapproved source."))
         if claim["category"] == "derived_recommendation":
             if not claim["derived_from"]:
                 findings.append(_finding("DERIVED_PREMISE_MISSING", artifact, "derived_from", "A derived recommendation requires approved premise claims."))
             for index_value, premise_ref in enumerate(claim["derived_from"]):
                 premise = resolve(premise_ref, artifact, f"derived_from[{index_value}]")
-                if premise is not None and current_decision(workspace, target=reference(premise), decision_type="claim_approval") is None:
+                if claim["status"] != "draft" and premise is not None and current_decision(workspace, target=reference(premise), decision_type="claim_approval") is None:
                     findings.append(_finding("CLAIM_APPROVAL_MISSING", artifact, f"derived_from[{index_value}]", "A premise claim lacks current approval."))
-        if current_decision(workspace, target=reference(claim), decision_type="claim_approval") is None:
+        if claim["status"] != "draft" and current_decision(workspace, target=reference(claim), decision_type="claim_approval") is None:
             findings.append(_finding("CLAIM_APPROVAL_MISSING", artifact, "human_review_state", "A current claim approval over this exact digest is required."))
+
+    claim_graph = {
+        _key(claim): [
+            (ref["artifact_type"], ref["artifact_id"], ref["revision"], ref["canonical_digest"])
+            for ref in claim["derived_from"]
+        ]
+        for claim in by_type.get("claim", [])
+    }
+    visiting: set[tuple[str, str, int, str]] = set()
+    visited: set[tuple[str, str, int, str]] = set()
+
+    def visit_claim(node: tuple[str, str, int, str]) -> None:
+        if node in visiting:
+            findings.append(_finding("DERIVED_PREMISE_CYCLE", node[1], "derived_from", "Derived claim references must be acyclic."))
+            return
+        if node in visited:
+            return
+        visiting.add(node)
+        for dependency in claim_graph.get(node, []):
+            visit_claim(dependency)
+        visiting.remove(node)
+        visited.add(node)
+
+    for claim_key in claim_graph:
+        visit_claim(claim_key)
 
     lesson_markdown = {record["artifact_id"]: markdown for record, markdown, _ in valid if record["artifact_type"] == "lesson"}
     for lesson in by_type.get("lesson", []):
@@ -196,13 +217,23 @@ def validate_workspace(
         findings.append(_finding("PROJECT_COUNT_INVALID", "workspace", "project.json", "Exactly one project record is required."))
     elif project_records:
         scope = project_records[0]["pilot_scope"]
+        objective_ids = set(scope["objective_ids"])
+        for claim in by_type.get("claim", []):
+            unknown_objectives = sorted(set(claim["scope"]["objective_ids"]) - objective_ids)
+            if unknown_objectives:
+                findings.append(_finding("OBJECTIVE_MAPPING_INVALID", claim["artifact_id"], "scope.objective_ids", "Claim objective mappings must be declared by the project."))
+        if "claim_count_range" in scope and by_type.get("claim"):
+            claim_count = len(by_type["claim"])
+            if not scope["claim_count_range"]["minimum"] <= claim_count <= scope["claim_count_range"]["maximum"]:
+                findings.append(_finding("DECLARED_CLAIM_RANGE_MISMATCH", project_records[0]["artifact_id"], "pilot_scope.claim_count_range", "Stored claim count is outside the declared project range."))
         active_lessons = [item for item in by_type.get("lesson", []) if item["status"] == "active"]
         active_questions = [item for item in by_type.get("question", []) if item["status"] == "active"]
         mix = {
             "single_response": sum(item["question_type"] == "single_response" for item in active_questions),
             "multiple_response": sum(item["question_type"] == "multiple_response" for item in active_questions),
         }
-        if len(active_lessons) != scope["lesson_count"] or len(active_questions) != scope["question_count"] or mix != scope["response_mix"]:
+        authored_delivery_content = bool(by_type.get("lesson") or by_type.get("question"))
+        if authored_delivery_content and (len(active_lessons) != scope["lesson_count"] or len(active_questions) != scope["question_count"] or mix != scope["response_mix"]):
             findings.append(_finding("DECLARED_SCOPE_MISMATCH", project_records[0]["artifact_id"], "pilot_scope", "Active content counts do not match the declared generic project scope."))
 
     result = "failed" if any(item.blocking for item in findings) else "passed"

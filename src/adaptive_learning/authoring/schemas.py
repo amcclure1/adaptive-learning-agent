@@ -18,12 +18,14 @@ COMMON = {
     "schema_version", "artifact_id", "artifact_type", "revision", "status", "created_at",
     "modified_at", "author", "supersedes", "canonical_digest",
 }
+PROJECT_V1_FIELDS = {
+    "project_id", "title", "pilot_scope", "workspace_contract_version",
+    "default_target_pack_format", "allowed_target_pack_formats", "text_only_default",
+    "artifact_indexes", "private_material_policy",
+}
+PROJECT_V2_FIELDS = PROJECT_V1_FIELDS | {"workspace_commit"}
 SCHEMAS: dict[str, tuple[str, set[str]]] = {
-    "project": ("ala.authoring.project.v1", {
-        "project_id", "title", "pilot_scope", "workspace_contract_version",
-        "default_target_pack_format", "allowed_target_pack_formats", "text_only_default",
-        "artifact_indexes", "private_material_policy",
-    }),
+    "project": ("ala.authoring.project.v2", PROJECT_V2_FIELDS),
     "source": ("ala.authoring.source.v1", {
         "source_id", "title", "publisher", "canonical_url", "source_category", "authority_tier",
         "rights_reuse", "intended_uses", "retrieved_on", "published_or_updated_on",
@@ -182,6 +184,8 @@ def validate_reference(value: Any, field: str = "reference", *, expected_type: s
 
 def _validate_common(record: dict[str, Any], artifact_type: str) -> None:
     schema, fields = SCHEMAS[artifact_type]
+    if artifact_type == "project" and record.get("schema_version") == "ala.authoring.project.v1":
+        schema, fields = "ala.authoring.project.v1", PROJECT_V1_FIELDS
     _object(record, artifact_type, COMMON | fields)
     if record["schema_version"] != schema or record["artifact_type"] != artifact_type:
         fail(f"{artifact_type} schema or artifact type does not match.")
@@ -231,10 +235,15 @@ def validate_record(record: dict[str, Any], *, markdown: str | None = None, veri
 
 def _validate_project(record: dict[str, Any], _: str | None) -> None:
     _text(record["title"], "title")
-    _object(record["pilot_scope"], "pilot_scope", {
+    scope_fields = {
         "assessment_blueprint", "learning_architecture", "realization_plan", "objective_ids",
         "lesson_count", "question_count", "response_mix",
-    })
+    }
+    if record["schema_version"] == "ala.authoring.project.v2":
+        scope_fields.add("claim_count_range")
+        if not isinstance(record["workspace_commit"], str) or not re.fullmatch(r"[0-9a-f]{40}", record["workspace_commit"]):
+            fail("workspace_commit must be a full lowercase Git commit.", field="workspace_commit")
+    _object(record["pilot_scope"], "pilot_scope", scope_fields)
     for field in ("assessment_blueprint", "learning_architecture", "realization_plan"):
         _object(record["pilot_scope"][field], f"pilot_scope.{field}", {"version", "path", "canonical_digest"})
         _text(record["pilot_scope"][field]["version"], f"pilot_scope.{field}.version")
@@ -245,6 +254,12 @@ def _validate_project(record: dict[str, Any], _: str | None) -> None:
     for field in ("lesson_count", "question_count"):
         if not isinstance(record["pilot_scope"][field], int) or record["pilot_scope"][field] < 0:
             fail(f"pilot_scope.{field} must be a non-negative integer.")
+    if "claim_count_range" in record["pilot_scope"]:
+        claim_range = _object(record["pilot_scope"]["claim_count_range"], "pilot_scope.claim_count_range", {"minimum", "maximum"})
+        if any(not isinstance(value, int) or isinstance(value, bool) or value < 0 for value in claim_range.values()):
+            fail("pilot_scope.claim_count_range values must be non-negative integers.")
+        if claim_range["minimum"] > claim_range["maximum"]:
+            fail("pilot_scope.claim_count_range minimum cannot exceed maximum.")
     mix = _object(record["pilot_scope"]["response_mix"], "pilot_scope.response_mix", {"single_response", "multiple_response"})
     if any(not isinstance(value, int) or value < 0 for value in mix.values()):
         fail("response_mix values must be non-negative integers.")

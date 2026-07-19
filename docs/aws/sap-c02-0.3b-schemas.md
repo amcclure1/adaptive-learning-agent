@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Authoring Schemas
 
-Status: Accepted contract; generic closed-schema validator implemented; no AWS content records created
+Status: Accepted contract; generic closed-schema validator implemented; project schema v2 adds initialization provenance and claim-envelope fields
 
 Contract version: `ala-authoring-0.3b.1`
 
@@ -107,11 +107,12 @@ The lesson record also declares `markdown_sha256`, calculated over the normalize
 
 ## Project schema
 
-`project.json` uses `ala.authoring.project.v1` and contains the common envelope plus:
+New workspaces use `ala.authoring.project.v2`; the validator continues to accept historical `ala.authoring.project.v1` records. Version 2 contains the common envelope plus:
 
 - `project_id`, equal to `artifact_id`;
 - `title`;
-- `pilot_scope` with architecture, blueprint, realization, objective, lesson-count, question-count, and response-mix references;
+- `workspace_commit`, the full Git commit used as the clean initialization baseline (validation reports bind later exact workspace commits; this field is not a self-referential assertion that the project file is contained in its own digest-named commit);
+- `pilot_scope` with architecture, blueprint, realization, objective, intended claim-count range, future lesson count, future question count, and response-mix references;
 - `workspace_contract_version`;
 - `default_target_pack_format`, exactly `0.2` for this pilot;
 - `allowed_target_pack_formats`, exactly `['0.2', '0.3']` in that order;
@@ -119,7 +120,7 @@ The lesson record also declares `markdown_sha256`, calculated over the normalize
 - `artifact_indexes`, workspace-relative paths to generated indexes;
 - `private_material_policy`, declaring prohibited workspace material.
 
-The project file is an editable administrative draft until an implementation task freezes its first revision. It never carries credentials or approval decisions.
+The project file is an editable administrative draft until a later authorized task freezes its first revision. It never carries credentials or approval decisions. Project v1 lacks `workspace_commit` and `claim_count_range`; no historical v1 bytes are rewritten.
 
 ## Source schema
 

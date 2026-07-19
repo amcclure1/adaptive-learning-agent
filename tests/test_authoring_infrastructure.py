@@ -487,6 +487,45 @@ class AuthoringInfrastructureTests(unittest.TestCase):
             self.assertFalse((fixture["workspace"] / "release/candidates/cand-rollback.json").exists())
             self.assertFalse((fixture["workspace"] / "release/evidence/evidence-rollback.json").exists())
 
+    def test_55_project_v2_binds_workspace_commit_and_claim_range(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            ops, result, _ = self.initialize(Path(temporary))
+            project = result["project"]
+            self.assertEqual(project["schema_version"], "ala.authoring.project.v2")
+            self.assertEqual(project["workspace_commit"], COMMIT)
+            self.assertEqual(project["pilot_scope"]["claim_count_range"], {"minimum": 1, "maximum": 2})
+            validation = ops.validate_project({"project_id": "synthetic-authoring", "as_of": "2030-01-01", "workspace_commit": COMMIT, "validation_id": None, "executed_at": None, "persist": False})
+            self.assertEqual(validation["result"], "passed")
+
+    def test_56_project_v1_remains_valid(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            _, result, _ = self.initialize(Path(temporary))
+            project = copy.deepcopy(result["project"])
+            project["schema_version"] = "ala.authoring.project.v1"
+            project.pop("workspace_commit")
+            project["pilot_scope"].pop("claim_count_range")
+            project = seal_record(project)
+            self.assertEqual(validate_record(project)["schema_version"], "ala.authoring.project.v1")
+
+    def test_57_draft_source_and_claim_references_are_validated_without_approval(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            ops, _, _ = self.initialize(Path(temporary))
+            source = ops.add_or_update_draft({"project_id": "synthetic-authoring", "record": source_record("src-test"), "expected_prior_digest": None, "markdown": None})["artifact"]
+            ops.add_or_update_draft({"project_id": "synthetic-authoring", "record": claim_record(source), "expected_prior_digest": None, "markdown": None})
+            validation = ops.validate_project({"project_id": "synthetic-authoring", "as_of": "2030-01-01", "workspace_commit": COMMIT, "validation_id": None, "executed_at": None, "persist": False})
+            self.assertEqual(validation["result"], "passed")
+            self.assertFalse({"SOURCE_APPROVAL_MISSING", "CLAIM_APPROVAL_MISSING"} & {item["code"] for item in validation["findings"]})
+
+    def test_58_missing_draft_source_reference_is_reported(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            ops, _, _ = self.initialize(Path(temporary))
+            source = seal_record(source_record("src-test"))
+            claim = claim_record(source)
+            claim["source_references"][0]["canonical_digest"] = "f" * 64
+            ops.add_or_update_draft({"project_id": "synthetic-authoring", "record": claim, "expected_prior_digest": None, "markdown": None})
+            validation = ops.validate_project({"project_id": "synthetic-authoring", "as_of": "2030-01-01", "workspace_commit": COMMIT, "validation_id": None, "executed_at": None, "persist": False})
+            self.assertIn("REFERENCE_MISSING", {item["code"] for item in validation["findings"]})
+
 
 if __name__ == "__main__":
     unittest.main()

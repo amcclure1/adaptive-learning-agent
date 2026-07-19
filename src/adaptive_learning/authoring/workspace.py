@@ -96,6 +96,7 @@ def initialize_workspace(
     *,
     title: str,
     created_at: str,
+    workspace_commit: str,
     pilot_scope: dict[str, Any],
     author: dict[str, str],
 ) -> dict[str, Any]:
@@ -110,7 +111,7 @@ def initialize_workspace(
         from .schemas import seal_record
 
         project = seal_record({
-            "schema_version": "ala.authoring.project.v1",
+            "schema_version": "ala.authoring.project.v2",
             "artifact_id": project_id,
             "artifact_type": "project",
             "revision": 1,
@@ -121,6 +122,7 @@ def initialize_workspace(
             "supersedes": None,
             "project_id": project_id,
             "title": title,
+            "workspace_commit": workspace_commit,
             "pilot_scope": pilot_scope,
             "workspace_contract_version": WORKSPACE_CONTRACT_VERSION,
             "default_target_pack_format": "0.2",
