@@ -24,7 +24,7 @@ class ApprovedE1AWorkflowTests(unittest.TestCase):
                 service = ApplicationService(data_path)
                 health = service.system_health()
                 self.assertEqual(health["schema_version"], "1")
-                self.assertEqual(health["pack_format_versions"], ["0.1", "0.2"])
+                self.assertEqual(health["pack_format_versions"], ["0.1", "0.2", "0.3"])
 
                 validation = service.pack_validate(PACK_PATH)
                 self.assertEqual(validation["pack_digest"], APPROVED_DIGEST)
