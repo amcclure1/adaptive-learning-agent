@@ -86,3 +86,7 @@ The accepted contracts intentionally leave only implementation choices: Python m
 ## Completion and next gate
 
 [The design-acceptance record](aws-sap-c02-0.3b-design-acceptance.md) closes this documentation gate. A later explicit task may implement contract machinery without content, and a separate explicit task may author/review pilot content. Compilation, install, activation, and release remain independent authorization gates.
+
+## Implementation follow-up
+
+The later generic-infrastructure task authorized by the user is recorded in [the authoring-infrastructure handoff](aws-sap-c02-0.3b-authoring-infrastructure.md). It implements contract machinery with synthetic tests only. This historical design handoff still grants no AWS content, installation, activation, publication, or release authority.

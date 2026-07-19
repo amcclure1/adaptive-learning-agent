@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Authoring Schemas
 
-Status: Accepted implementation contract; no records or validator implemented
+Status: Accepted contract; generic closed-schema validator implemented; no AWS content records created
 
 Contract version: `ala-authoring-0.3b.1`
 
@@ -460,7 +460,7 @@ Private findings themselves are not stored in Git; a public record may contain o
 - sorted checked artifact references;
 - ordered findings with finding ID, rule ID/version, severity (`error`, `warning`, `information`), `blocking`, field/path, related artifacts, message, and bounded remediation;
 - `result`, `passed` or `failed`;
-- `output_digest`, the canonical report digest duplicated for tool ergonomics and required to equal `canonical_digest` under the report's digest rule.
+- `output_digest`, the canonical report digest duplicated for tool ergonomics and required to equal `canonical_digest`. Both digest fields are excluded while calculating the validation-report digest, avoiding a self-reference.
 
 Reports under `validations/current/` may be regenerated and replaced with expected-prior-digest checking. Once selected for compilation, release evidence binds the exact report ID, workspace commit, and digest used. Replacement never changes historical release evidence and never implies approval.
 

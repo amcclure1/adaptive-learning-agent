@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Authored-Content Model
 
-Status: accepted implementation contract; no content records implemented
+Status: accepted contract; generic lifecycle infrastructure implemented; no AWS content records created
 
 This document defines lifecycle semantics. Exact record fields, controlled vocabularies, identity/revision rules, and canonical digests are normative in [the 0.3B schema contract](sap-c02-0.3b-schemas.md). ADRs 0017–0020 are Accepted; acceptance does not authorize content creation or implementation.
 Design date: 2026-07-18

@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Release-Evidence Contract
 
-Status: accepted implementation contract; no manifest or pack created
+Status: accepted contract; generic candidate/final evidence generation implemented; no AWS manifest or pack created
 
 This document fixes the evidence that connects an authored-content workspace to a compiled learner-facing candidate. It is governed by ADRs 0017–0020, uses the canonicalization rules in [the schema contract](sap-c02-0.3b-schemas.md), and is produced only through [the compiler contract](sap-c02-0.3b-compiler-contract.md).
 

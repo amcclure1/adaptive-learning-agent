@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Deterministic Validation Plan
 
-Status: accepted implementation contract; no validator implemented
+Status: accepted contract; generic deterministic validator implemented; AWS content review remains pending
 Design date: 2026-07-18
 
 ## Principle
@@ -136,3 +136,9 @@ Reports in `validations/current/` may be regenerated and replaced with expected-
 9. pack-release approval eligibility.
 
 Human review occurs after relevant deterministic checks and may return content for revision even when every check passes.
+
+## Implemented validator
+
+`adaptive_learning.authoring.validation.validate_workspace` enforces closed records and digests, exact references, prohibited/unresolved sources, source/claim authority, claim freshness and derivation premises, lesson claim eligibility and content review, question-specification review, question rationales/matrices/counts, originality/content/uniqueness decisions, reviewer conflicts, declared generic scope counts, and validation-report authority boundaries. Dates, execution time, and workspace commit are explicit inputs; the validator performs no retrieval and never grants approval.
+
+The implementation is deliberately subject-neutral. Pilot-specific factual truth, objective semantics, assessment coverage, AWS architecture judgment, originality, distractor quality, and answer uniqueness remain human review duties. The synthetic tests exercise structural rules without embedding AWS facts or learner-ready pilot content.

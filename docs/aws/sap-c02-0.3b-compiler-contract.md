@@ -1,6 +1,6 @@
 # SAP-C02 0.3B Deterministic Compiler Contract
 
-Status: Accepted implementation contract; no compiler or operation implemented
+Status: Accepted contract; generic format-0.2 candidate compiler and bounded operations implemented
 
 Compiler contract: `ala-authoring-compiler-v1`
 
@@ -28,7 +28,7 @@ The compiler declares the exact authoring contract versions and target pack form
 
 ## Compile request
 
-The future compiler accepts one closed request:
+The implemented compiler accepts one closed selection and a confined operation request equivalent to:
 
 ```json
 {
@@ -135,6 +135,8 @@ A separate deterministic `authoring.release.finalize_evidence` operation verifie
 
 This phase does not edit the candidate evidence or approval. It does not install, activate, publish, commit, tag, or release. Any learner-facing input change requires a new candidate and approval.
 
+The current generic implementation completes the external-evidence portion of this phase and deliberately leaves the pending candidate bytes unchanged. Creating a separate installable format-0.2 projection containing the human pack approval remains a later explicitly authorized release-projection task; final evidence alone is not an installable pack and performs no release action.
+
 ## Format-0.2 projection
 
 Format 0.2 is the default and fixed path for the text-only pilot:
@@ -181,9 +183,25 @@ Text-only is mandatory by default for `SAP-ORG-04`. Unchanged format 0.3 is elig
 
 Failure of any condition selects format 0.2 or returns the design for revision. It does not justify format 0.4 automatically.
 
-## Proposed authoring operations
+## Implemented authoring operations
 
-These names and boundaries are accepted for later implementation but are not learner-study operations and are not implemented by this task.
+The initial Python facade is `adaptive_learning.authoring.operations.AuthoringOperations`. It remains separate from the learner CLI and ten learner-study operations. Its closed methods are:
+
+| Python operation | Boundary |
+|---|---|
+| `initialize_project` | Create deterministic starter metadata and only the fixed empty workspace directories |
+| `validate_project` | Return or persist an authority-free deterministic validation report |
+| `add_or_update_draft` | Write a type-directed draft with expected-prior-digest protection |
+| `freeze_draft` | Create the next immutable revision and supersedes reference |
+| `calculate_artifact_digest` | Calculate a domain-separated JSON/Markdown digest without mutation |
+| `create_decision` | Create an immutable approval, review, revocation, or supersession record after target/conflict checks |
+| `analyze_impact` | Report affected decision types and historical decision IDs without mutation |
+| `store_selection` | Store one closed explicit compiler selection; no implicit latest references |
+| `validate_release_candidate` | Recompute and compare candidate pack digest without installation |
+| `compile_approved_project` | Produce a pending format-0.2 candidate and candidate evidence |
+| `generate_release_evidence` | Bind an explicit pack-release approval into a new final evidence record |
+
+The finer-grained accepted names below remain the design mapping for a later conversational Subject Builder adapter; no adapter or MCP registration is part of this implementation.
 
 | Operation | Mutation | Required input | Output / boundary |
 |---|---:|---|---|
@@ -206,7 +224,13 @@ These names and boundaries are accepted for later implementation but are not lea
 | `authoring.release.record_pack_review` | Yes | Human confirmation, candidate/evidence/dependency digests | New pack-release approval |
 | `authoring.release.finalize_evidence` | Yes | Candidate, candidate evidence, current pack approval, explicit timestamp | Final pack projection and final evidence; no install/publish |
 
-All mutations use atomic replacement or append-only creation, expected-prior-digest checks, workspace-relative confined paths, and structured errors. Operations expose no shell, unrestricted filesystem, unrestricted network, package installation, AWS access, Git mutation, publication, or release capability. They remain a future authoring module/tool surface separate from the exact ten learner-study operations and are not registered in the learner Hermes plugin by default.
+All mutations use atomic replacement or append-only creation, expected-prior-digest checks, workspace-relative confined paths, and structured errors. Operations expose no shell, unrestricted filesystem, unrestricted network, package installation, AWS access, Git mutation, publication, or release capability. They remain separate from the exact ten learner-study operations and are not registered in the learner Hermes plugin.
+
+## Implemented selection and candidate behavior
+
+The closed `ala.authoring.selection.v1` record binds the exact project and design documents; ordered source, claim, lesson, question-specification, question, approval/review, and validation references; explicit format-0.2 source/lesson/question projection mappings; pack identity/objectives/rights/notice metadata; compiler timestamp; workspace commit field; and the per-option-teaching escalation flag. It accepts no implicit `latest` reference.
+
+The compiler uses the existing format-0.2 implementation's pre-existing internal `skip_approval` review hook. It does not change public parser behavior: public format-0.2 loading still requires `approval.status: approved`. Candidate output instead contains `approval.status: pending`, is structurally reviewed and digested, and is intentionally not installable. Final evidence can bind a later pack-release approval, but no installation, activation, or publication action is exposed.
 
 ## Compiler results and errors
 

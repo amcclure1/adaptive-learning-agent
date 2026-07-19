@@ -1,12 +1,12 @@
 # SAP-C02 0.3B Authoring Workspace and Compilation Boundary
 
-Status: accepted implementation contract; no workspace or compiler implemented
+Status: accepted contract; generic workspace infrastructure implemented; no AWS workspace or content created
 
 ## Decision
 
 The canonical authoring system is a separate Git-versioned, file-backed workspace. SQLite remains learner-state only. Approved learner-facing content compiles into existing pack format 0.2 by default. Unchanged format 0.3 is eligible only when an independently approved static PNG is materially required. The first pilot does not create format 0.4.
 
-This implements the documentation decisions in [ADR 0017](../decisions/0017-authored-content-workspace-release-projection.md) and [ADR 0020](../decisions/0020-compile-authored-content-to-existing-pack-formats.md). It does not authorize content creation or implementation.
+This implements the documentation decisions in [ADR 0017](../decisions/0017-authored-content-workspace-release-projection.md) and [ADR 0020](../decisions/0020-compile-authored-content-to-existing-pack-formats.md). The generic standard-library infrastructure is implemented; this does not authorize AWS content creation, installation, activation, publication, tagging, or release.
 
 ## Fixed layout
 
@@ -86,3 +86,9 @@ Compilation is a deterministic projection described in [the compiler contract](s
 ## Concurrency and recovery
 
 Every draft mutation supplies the expected prior digest and uses atomic file replacement. Revision, approval, evidence, and candidate creation uses create-if-absent semantics. Conflicts fail closed. Git is the history and recovery layer, but a commit itself grants no validation or approval state.
+
+## Implemented module boundary
+
+`adaptive_learning.authoring.workspace` implements the fixed directories, safe project IDs, confined record locations, create-if-absent immutable records, expected-prior-digest draft writes, same-directory temporary files, `os.replace` atomic replacement, and a fail-closed per-workspace mutation lock. `adaptive_learning.authoring.canonical` and `adaptive_learning.authoring.schemas` implement the accepted canonical bytes, portable paths, record digests, and closed schemas. No new dependency is required.
+
+Initialization creates only `project.json` and the fixed empty directories. It accepts explicit timestamp, author, and generic design references; it performs no retrieval and creates no source, claim, lesson, question, approval, validation, candidate, pack, learner state, or runtime configuration.

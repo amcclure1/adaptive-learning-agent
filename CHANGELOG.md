@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Standard-library `adaptive_learning.authoring` infrastructure for closed authored-content schemas, deterministic JSON/Markdown canonicalization, domain-separated digests, confined file-backed workspaces, immutable revisions and decisions, impact analysis, validation reports, explicit compiler selections, format-0.2 candidate projection, and external release evidence.
+- A bounded Python authoring-operation facade separate from the unchanged ten learner-study operations.
+- Fifty-four synthetic authored-content infrastructure tests covering workspace safety, schemas, digests, approvals, invalidation, compilation, release evidence, concurrency, atomic rollback, and unchanged runtime boundaries.
+
+### Changed
+
+- Recorded generic 0.3B infrastructure as implemented while keeping all AWS content, installation, activation, publication, release, and tag work gated.
+
 ## [0.2.1-alpha.1] - 2026-07-19
 
 ### Added

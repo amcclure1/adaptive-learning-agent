@@ -54,3 +54,5 @@ No unresolved item permits schema weakening, approval inference, author self-app
 ## Next gate
 
 A later task may implement the empty workspace machinery, schemas, validators, and compiler contract without authoring AWS content only if explicitly authorized. A different later task may create pilot content and conduct human reviews. Compilation, installation, activation, and release each remain explicit gates and are not implied by this acceptance.
+
+The generic-infrastructure portion was subsequently authorized and implemented with synthetic fixtures, as recorded in [the infrastructure handoff](aws-sap-c02-0.3b-authoring-infrastructure.md). AWS content and every release-side gate remain pending.
