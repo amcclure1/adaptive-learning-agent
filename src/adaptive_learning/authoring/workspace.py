@@ -23,6 +23,7 @@ DIRECTORIES = (
     "approvals/sources", "approvals/claims", "approvals/lesson-content",
     "approvals/question-content", "approvals/answer-uniqueness", "approvals/pack-release",
     "approvals/revocations", "release/selections", "release/candidates", "release/evidence",
+    "verifications/runs", "verifications/findings", "verifications/resolutions", "verifications/metrics",
 )
 TYPE_DIRS = {
     "source": "sources", "claim": "claims", "lesson": "lessons",
@@ -276,7 +277,7 @@ def find_record(workspace: Path, target: dict[str, Any]) -> tuple[dict[str, Any]
             candidate = draft_path(workspace, artifact_type, artifact_id)
             if candidate.exists():
                 path = candidate
-    elif artifact_type in {"approval", "review", "validation_report", "release_candidate", "release_evidence"}:
+    elif artifact_type in {"approval", "review", "validation_report", "release_candidate", "release_evidence", "ai_verification_run", "verification_finding", "finding_resolution"}:
         matches = [item for item in workspace.rglob(f"{artifact_id}.json") if ".authoring.lock" not in item.parts]
         if len(matches) != 1:
             raise LearningError("REFERENCE_MISMATCH", "The referenced artifact is missing or ambiguous.")
@@ -324,7 +325,7 @@ def all_stored_records(workspace: Path) -> list[tuple[dict[str, Any], str | None
         if relative.startswith("release/selections/") or relative.endswith("/pack.json"):
             continue
         record = read_json(path)
-        if record.get("artifact_type") not in {"project", "source", "claim", "lesson", "question_spec", "question", "review", "approval", "validation_report", "release_candidate", "release_evidence"}:
+        if record.get("artifact_type") not in {"project", "source", "claim", "lesson", "question_spec", "question", "review", "approval", "validation_report", "release_candidate", "release_evidence", "ai_verification_run", "verification_finding", "finding_resolution"}:
             continue
         markdown_path = markdown_path_for_record(path, record)
         markdown = markdown_path.read_text(encoding="utf-8") if markdown_path is not None and markdown_path.exists() else None

@@ -109,7 +109,7 @@ def validate_workspace(
         if source["rights_reuse"] == "unresolved":
             findings.append(_finding("SOURCE_RIGHTS_UNRESOLVED", artifact, "rights_reuse", "Unresolved source rights block compilation."))
         if source["status"] != "draft" and current_decision(workspace, target=reference(source), decision_type="source_approval") is None:
-            findings.append(_finding("SOURCE_APPROVAL_MISSING", artifact, "review_state", "A current source approval over this exact digest is required."))
+            findings.append(_finding("SOURCE_APPROVAL_MISSING", artifact, "review_state", "A current source approval over this exact digest is required for release.", severity="information", blocking=False))
 
     for claim in by_type.get("claim", []):
         artifact = claim["artifact_id"]
@@ -121,16 +121,16 @@ def validate_workspace(
             if source is None:
                 findings.append(_finding("REFERENCE_MISSING", artifact, f"source_references[{index_value}]", "The exact source reference is missing or mismatched."))
             elif claim["status"] != "draft" and current_decision(workspace, target=reference(source), decision_type="source_approval") is None:
-                findings.append(_finding("SOURCE_APPROVAL_MISSING", artifact, f"source_references[{index_value}]", "The claim depends on an unapproved source."))
+                findings.append(_finding("SOURCE_APPROVAL_MISSING", artifact, f"source_references[{index_value}]", "The claim depends on a source that still requires human approval.", severity="information", blocking=False))
         if claim["category"] == "derived_recommendation":
             if not claim["derived_from"]:
                 findings.append(_finding("DERIVED_PREMISE_MISSING", artifact, "derived_from", "A derived recommendation requires approved premise claims."))
             for index_value, premise_ref in enumerate(claim["derived_from"]):
                 premise = resolve(premise_ref, artifact, f"derived_from[{index_value}]")
                 if claim["status"] != "draft" and premise is not None and current_decision(workspace, target=reference(premise), decision_type="claim_approval") is None:
-                    findings.append(_finding("CLAIM_APPROVAL_MISSING", artifact, f"derived_from[{index_value}]", "A premise claim lacks current approval."))
+                    findings.append(_finding("CLAIM_APPROVAL_MISSING", artifact, f"derived_from[{index_value}]", "A premise claim still requires human approval.", severity="information", blocking=False))
         if claim["status"] != "draft" and current_decision(workspace, target=reference(claim), decision_type="claim_approval") is None:
-            findings.append(_finding("CLAIM_APPROVAL_MISSING", artifact, "human_review_state", "A current claim approval over this exact digest is required."))
+            findings.append(_finding("CLAIM_APPROVAL_MISSING", artifact, "human_review_state", "A current claim approval over this exact digest is required for release.", severity="information", blocking=False))
 
     claim_graph = {
         _key(claim): [
@@ -167,9 +167,9 @@ def validate_workspace(
         for index_value, claim_ref in enumerate(lesson["claim_references"]):
             claim = resolve(claim_ref, artifact, f"claim_references[{index_value}]")
             if claim is not None and current_decision(workspace, target=reference(claim), decision_type="claim_approval") is None:
-                findings.append(_finding("LESSON_UNAPPROVED_CLAIM", artifact, f"claim_references[{index_value}]", "The lesson uses an unapproved claim."))
+                findings.append(_finding("LESSON_UNAPPROVED_CLAIM", artifact, f"claim_references[{index_value}]", "The lesson uses a claim that still requires human approval.", severity="information", blocking=False))
         if current_decision(workspace, target=reference(lesson), decision_type="lesson_content_review") is None:
-            findings.append(_finding("LESSON_REVIEW_MISSING", artifact, "content_review_state", "A current lesson-content review is required."))
+            findings.append(_finding("LESSON_REVIEW_MISSING", artifact, "content_review_state", "A current lesson-content review is required for release.", severity="information", blocking=False))
         if lesson_markdown.get(artifact) is None:
             findings.append(_finding("LESSON_MARKDOWN_MISSING", artifact, "markdown_path", "The lesson Markdown is missing."))
 
@@ -179,7 +179,7 @@ def validate_workspace(
         if spec["status"] != "active":
             findings.append(_finding("DRAFT_CONTENT", spec["artifact_id"], "status", "Only active immutable question specifications are eligible."))
         if current_decision(workspace, target=reference(spec), decision_type="question_spec_design_review") is None:
-            findings.append(_finding("QUESTION_SPEC_REVIEW_MISSING", spec["artifact_id"], "design_review_state", "A current design review is required."))
+            findings.append(_finding("QUESTION_SPEC_REVIEW_MISSING", spec["artifact_id"], "design_review_state", "A current design review is required for downstream drafting.", severity="information", blocking=False))
 
     for question in by_type.get("question", []):
         artifact = question["artifact_id"]
@@ -191,7 +191,7 @@ def validate_workspace(
         for index_value, claim_ref in enumerate(question["supporting_claim_references"]):
             claim = resolve(claim_ref, artifact, f"supporting_claim_references[{index_value}]")
             if claim is not None and current_decision(workspace, target=reference(claim), decision_type="claim_approval") is None:
-                findings.append(_finding("CLAIM_APPROVAL_MISSING", artifact, f"supporting_claim_references[{index_value}]", "The question uses an unapproved claim."))
+                findings.append(_finding("CLAIM_APPROVAL_MISSING", artifact, f"supporting_claim_references[{index_value}]", "The question uses a claim that still requires human approval.", severity="information", blocking=False))
         if len(question["option_rationales"]) != len(question["options"]):
             findings.append(_finding("RATIONALE_MISSING", artifact, "option_rationales", "Every option requires one internal rationale."))
         if not question["requirement_option_matrix"]:
@@ -205,7 +205,7 @@ def validate_workspace(
         )
         for decision_type, code, field in required:
             if current_decision(workspace, target=reference(question), decision_type=decision_type) is None:
-                findings.append(_finding(code, artifact, field, f"A current {decision_type} decision is required."))
+                findings.append(_finding(code, artifact, field, f"A current {decision_type} decision is required for release.", severity="information", blocking=False))
 
     for decision in by_type.get("approval", []) + by_type.get("review", []):
         target = resolve(decision["target"], decision["artifact_id"], "target")
@@ -232,7 +232,7 @@ def validate_workspace(
             "single_response": sum(item["question_type"] == "single_response" for item in active_questions),
             "multiple_response": sum(item["question_type"] == "multiple_response" for item in active_questions),
         }
-        authored_delivery_content = bool(by_type.get("lesson") or by_type.get("question"))
+        authored_delivery_content = bool(by_type.get("lesson") and by_type.get("question"))
         if authored_delivery_content and (len(active_lessons) != scope["lesson_count"] or len(active_questions) != scope["question_count"] or mix != scope["response_mix"]):
             findings.append(_finding("DECLARED_SCOPE_MISMATCH", project_records[0]["artifact_id"], "pilot_scope", "Active content counts do not match the declared generic project scope."))
 

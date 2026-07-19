@@ -46,6 +46,9 @@ def create_decision(
         raise LearningError("AUTHORING_APPROVAL_INVALID", "The approval type cannot target this artifact type.")
     if target_record["status"] in {"draft", "stale", "superseded", "invalidated", "rejected"}:
         raise LearningError("AUTHORING_APPROVAL_INVALID", "Approvals and reviews require a current immutable target.")
+    if record_kind == "decision":
+        from .verification import assert_human_review_eligible
+        assert_human_review_eligible(workspace, target=target, decision_type=decision_type, reviewer_identity=reviewer["identity"])
     if reviewer["identity"] == target_record["author"]["identity"]:
         raise LearningError("REVIEWER_CONFLICT", "An artifact author cannot approve or review the same artifact.")
     if decision_type == "answer_uniqueness_approval" and reviewer["identity"] == target_record["author"]["identity"]:

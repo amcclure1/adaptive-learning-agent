@@ -84,6 +84,22 @@ SCHEMAS: dict[str, tuple[str, set[str]]] = {
         "validation_reports", "compiled_pack", "compilation_timestamp", "compiler_input_digest",
         "compiler_output_digest", "candidate_manifest", "release_review_approval", "exclusions",
     }),
+    "ai_verification_run": ("ala.authoring.ai-verification-run.v1", {
+        "verification_id", "protocol_version", "target_project_id", "target_workspace_commit",
+        "verifier", "model", "research_date", "target_artifacts", "architecture_references",
+        "verification_scope", "deterministic_validation_report", "independently_accessed_sources",
+        "finding_references", "artifact_dispositions", "summary_counts", "unresolved_questions",
+        "completion_status", "human_approval_implication",
+    }),
+    "verification_finding": ("ala.authoring.verification-finding.v1", {
+        "finding_id", "verification_id", "target", "disputed_field", "disputed_language",
+        "category", "severity", "supporting_source", "explanation", "required_action",
+        "suggested_revision", "affected_dependencies", "confidence", "blocking", "finding_status",
+    }),
+    "finding_resolution": ("ala.authoring.finding-resolution.v1", {
+        "resolution_id", "finding", "old_artifact", "new_artifact", "author_response",
+        "change_summary", "response_disposition", "supporting_source_changes", "resolved_at",
+    }),
 }
 
 ARTIFACT_TYPES = frozenset(SCHEMAS)
@@ -100,6 +116,16 @@ CLAIM_CATEGORIES = {"documented_fact", "service_limitation", "derived_recommenda
 APPROVAL_TYPES = {"source_approval", "claim_approval", "question_content_approval", "answer_uniqueness_approval", "pack_release_approval"}
 REVIEW_TYPES = {"lesson_content_review", "question_originality_review", "question_spec_design_review", "impact_review", "material_need_review"}
 DECISIONS = {"approved", "changes_requested", "rejected", "revoked"}
+VERIFICATION_CATEGORIES = {
+    "factual_error", "missing_qualification", "overbroad_assertion", "outdated_behavior",
+    "source_mismatch", "weak_locator", "unsupported_recommendation", "insufficient_premises",
+    "internal_contradiction", "taxonomy_or_classification_error", "scope_drift",
+    "freshness_concern", "rights_concern", "unable_to_verify",
+}
+VERIFICATION_SEVERITIES = {"critical", "high", "medium", "low", "informational"}
+VERIFICATION_DISPOSITIONS = {
+    "verified", "verified_with_nonblocking_note", "revision_required", "blocked", "unable_to_verify",
+}
 
 
 def fail(message: str, *, field: str = "$") -> None:
@@ -218,6 +244,8 @@ def validate_record(record: dict[str, Any], *, markdown: str | None = None, veri
         "project": "project_id", "source": "source_id", "claim": "claim_id", "lesson": "lesson_id",
         "question_spec": "specification_id", "question": "question_id", "approval": "approval_id",
         "review": "review_id", "validation_report": "validation_id", "release_candidate": "candidate_id",
+        "ai_verification_run": "verification_id", "verification_finding": "finding_id",
+        "finding_resolution": "resolution_id",
     }.get(artifact_type)
     if identity_field and record[identity_field] != record["artifact_id"]:
         fail(f"{identity_field} must equal artifact_id.", field=identity_field)
@@ -653,6 +681,120 @@ def _validate_release_evidence(record: dict[str, Any], _: str | None) -> None:
         if not isinstance(record[field], str) or not SHA256_RE.fullmatch(record[field]):
             fail(f"{field} must be lowercase SHA-256.")
     _string_list(record["exclusions"], "exclusions")
+
+
+def _validate_ai_verification_run(record: dict[str, Any], _: str | None) -> None:
+    _text(record["protocol_version"], "protocol_version")
+    _id(record["target_project_id"], "target_project_id")
+    if not isinstance(record["target_workspace_commit"], str) or not re.fullmatch(r"[0-9a-f]{40}", record["target_workspace_commit"]):
+        fail("target_workspace_commit must be a full lowercase Git commit.", field="target_workspace_commit")
+    verifier = _object(record["verifier"], "verifier", {"identity", "identity_type", "role", "invocation_id"})
+    _text(verifier["identity"], "verifier.identity")
+    if verifier["identity_type"] not in {"model", "service"}:
+        fail("The independent verifier must be a model or service identity.", field="verifier.identity_type")
+    if verifier["role"] != "independent_ai_verifier":
+        fail("verifier.role must be independent_ai_verifier.", field="verifier.role")
+    _text(verifier["invocation_id"], "verifier.invocation_id")
+    model = _object(record["model"], "model", {"provider", "model_id", "configuration", "reproducibility_notes"})
+    _text(model["provider"], "model.provider", nullable=True)
+    _text(model["model_id"], "model.model_id", nullable=True)
+    if not isinstance(model["configuration"], dict):
+        fail("model.configuration must be an object.", field="model.configuration")
+    _text(model["reproducibility_notes"], "model.reproducibility_notes", nullable=True)
+    _date(record["research_date"], "research_date")
+    if not isinstance(record["target_artifacts"], list) or not record["target_artifacts"]:
+        fail("target_artifacts must be a non-empty array.", field="target_artifacts")
+    for index, item in enumerate(record["target_artifacts"]):
+        validate_reference(item, f"target_artifacts[{index}]")
+    if not isinstance(record["architecture_references"], list) or not record["architecture_references"]:
+        fail("architecture_references must be non-empty.", field="architecture_references")
+    for index, item in enumerate(record["architecture_references"]):
+        ref = _object(item, f"architecture_references[{index}]", {"artifact_id", "version", "path", "canonical_digest"})
+        _text(ref["artifact_id"], f"architecture_references[{index}].artifact_id")
+        _text(ref["version"], f"architecture_references[{index}].version")
+        portable_relative_path(ref["path"])
+        if not isinstance(ref["canonical_digest"], str) or not SHA256_RE.fullmatch(ref["canonical_digest"]):
+            fail("Architecture-reference digest must be lowercase SHA-256.")
+    _string_list(record["verification_scope"], "verification_scope", sorted_unique=True)
+    validate_reference(record["deterministic_validation_report"], "deterministic_validation_report", expected_type="validation_report")
+    if not isinstance(record["independently_accessed_sources"], list):
+        fail("independently_accessed_sources must be an array.")
+    for index, item in enumerate(record["independently_accessed_sources"]):
+        source = _object(item, f"independently_accessed_sources[{index}]", {"source_id", "title", "publisher", "canonical_url", "accessed_on", "locators"})
+        _id(source["source_id"], f"independently_accessed_sources[{index}].source_id")
+        _text(source["title"], f"independently_accessed_sources[{index}].title")
+        _text(source["publisher"], f"independently_accessed_sources[{index}].publisher")
+        parsed = urlsplit(_text(source["canonical_url"], f"independently_accessed_sources[{index}].canonical_url"))
+        if parsed.scheme != "https" or not parsed.netloc:
+            fail("Consulted sources require public HTTPS URLs.")
+        _date(source["accessed_on"], f"independently_accessed_sources[{index}].accessed_on")
+        _string_list(source["locators"], f"independently_accessed_sources[{index}].locators")
+    for index, item in enumerate(record["finding_references"]):
+        validate_reference(item, f"finding_references[{index}]", expected_type="verification_finding")
+    if not isinstance(record["artifact_dispositions"], list):
+        fail("artifact_dispositions must be an array.")
+    for index, item in enumerate(record["artifact_dispositions"]):
+        disposition = _object(item, f"artifact_dispositions[{index}]", {"target", "disposition", "finding_ids", "notes"})
+        validate_reference(disposition["target"], f"artifact_dispositions[{index}].target")
+        if disposition["disposition"] not in VERIFICATION_DISPOSITIONS:
+            fail("Artifact disposition is unsupported.")
+        _string_list(disposition["finding_ids"], f"artifact_dispositions[{index}].finding_ids", sorted_unique=True)
+        _text(disposition["notes"], f"artifact_dispositions[{index}].notes", nullable=True)
+    counts = _object(record["summary_counts"], "summary_counts", {"total_artifacts", "total_findings", "blocking_findings", "by_disposition", "by_severity"})
+    for field in ("total_artifacts", "total_findings", "blocking_findings"):
+        if not isinstance(counts[field], int) or isinstance(counts[field], bool) or counts[field] < 0:
+            fail(f"summary_counts.{field} must be a non-negative integer.")
+    for field, keys in (("by_disposition", VERIFICATION_DISPOSITIONS), ("by_severity", VERIFICATION_SEVERITIES)):
+        values = _object(counts[field], f"summary_counts.{field}", keys)
+        if any(not isinstance(value, int) or isinstance(value, bool) or value < 0 for value in values.values()):
+            fail(f"summary_counts.{field} values must be non-negative integers.")
+    _string_list(record["unresolved_questions"], "unresolved_questions")
+    if record["completion_status"] not in {"in_progress", "completed", "failed"}:
+        fail("completion_status is unsupported.")
+    if record["human_approval_implication"] != "none":
+        fail("AI verification never implies human approval.")
+
+
+def _validate_verification_finding(record: dict[str, Any], _: str | None) -> None:
+    _id(record["verification_id"], "verification_id")
+    validate_reference(record["target"], "target")
+    _text(record["disputed_field"], "disputed_field")
+    _text(record["disputed_language"], "disputed_language", nullable=True)
+    if record["category"] not in VERIFICATION_CATEGORIES or record["severity"] not in VERIFICATION_SEVERITIES:
+        fail("Finding category or severity is unsupported.")
+    source = _object(record["supporting_source"], "supporting_source", {"title", "publisher", "canonical_url", "accessed_on", "locator"})
+    _text(source["title"], "supporting_source.title")
+    _text(source["publisher"], "supporting_source.publisher")
+    parsed = urlsplit(_text(source["canonical_url"], "supporting_source.canonical_url"))
+    if parsed.scheme != "https" or not parsed.netloc:
+        fail("supporting_source.canonical_url must be public HTTPS.")
+    _date(source["accessed_on"], "supporting_source.accessed_on")
+    _text(source["locator"], "supporting_source.locator")
+    _text(record["explanation"], "explanation")
+    _text(record["required_action"], "required_action")
+    _text(record["suggested_revision"], "suggested_revision", nullable=True)
+    for index, item in enumerate(record["affected_dependencies"]):
+        validate_reference(item, f"affected_dependencies[{index}]")
+    if record["confidence"] not in {"high", "medium", "low"}:
+        fail("confidence is unsupported.")
+    if not isinstance(record["blocking"], bool):
+        fail("blocking must be boolean.")
+    if record["finding_status"] not in {"open", "resolved", "disputed", "withdrawn"}:
+        fail("finding_status is unsupported.")
+
+
+def _validate_finding_resolution(record: dict[str, Any], _: str | None) -> None:
+    validate_reference(record["finding"], "finding", expected_type="verification_finding")
+    validate_reference(record["old_artifact"], "old_artifact")
+    validate_reference(record["new_artifact"], "new_artifact")
+    if record["old_artifact"]["artifact_id"] != record["new_artifact"]["artifact_id"] or record["old_artifact"]["artifact_type"] != record["new_artifact"]["artifact_type"]:
+        fail("A finding resolution must preserve stable artifact identity.")
+    _text(record["author_response"], "author_response")
+    _text(record["change_summary"], "change_summary")
+    if record["response_disposition"] not in {"accepted", "modified", "disputed"}:
+        fail("response_disposition is unsupported.")
+    _string_list(record["supporting_source_changes"], "supporting_source_changes")
+    _timestamp(record["resolved_at"], "resolved_at")
 
 
 def seal_record(record: dict[str, Any], *, markdown: str | None = None) -> dict[str, Any]:

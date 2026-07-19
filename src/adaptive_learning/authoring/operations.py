@@ -14,6 +14,16 @@ from .canonical import artifact_digest, canonical_json_file_bytes
 from .compiler import compile_candidate, finalize_release_evidence, load_candidate_pack, validate_selection
 from .schemas import ID_RE, validate_record
 from .validation import validate_release_evidence, validate_workspace
+from .verification import (
+    add_finding,
+    compare_runs,
+    create_resolution,
+    create_verification_run,
+    experiment_metrics,
+    finalize_verification_run,
+    register_consulted_source,
+    verification_eligibility,
+)
 from .workspace import (
     atomic_write,
     draft_path,
@@ -79,6 +89,46 @@ class AuthoringOperations:
     def analyze_impact(self, request: dict[str, Any]) -> dict[str, Any]:
         self._closed(request, {"project_id", "old", "new"})
         return impact_analysis(self._workspace(request["project_id"]), request["old"], request["new"])
+
+    def create_verification_run(self, request: dict[str, Any]) -> dict[str, Any]:
+        fields = {"project_id", "verification_id", "target_workspace_commit", "verifier", "model", "research_date", "target_artifacts", "architecture_references", "verification_scope", "deterministic_validation_report", "created_at"}
+        self._closed(request, fields)
+        payload = dict(request)
+        workspace = self._workspace(payload.pop("project_id"))
+        return {"verification_run": create_verification_run(workspace, **payload), "approval_granted": False}
+
+    def register_verification_source(self, request: dict[str, Any]) -> dict[str, Any]:
+        self._closed(request, {"project_id", "verification_id", "expected_run_digest", "source", "modified_at"})
+        payload = dict(request)
+        workspace = self._workspace(payload.pop("project_id"))
+        return {"verification_run": register_consulted_source(workspace, **payload), "network_accessed": False}
+
+    def add_verification_finding(self, request: dict[str, Any]) -> dict[str, Any]:
+        self._closed(request, {"project_id", "verification_id", "finding"})
+        return {"finding": add_finding(self._workspace(request["project_id"]), verification_id=request["verification_id"], finding=request["finding"]), "approval_granted": False}
+
+    def finalize_verification_run(self, request: dict[str, Any]) -> dict[str, Any]:
+        fields = {"project_id", "verification_id", "expected_run_digest", "finding_references", "artifact_dispositions", "unresolved_questions", "completed_at"}
+        self._closed(request, fields)
+        payload = dict(request)
+        workspace = self._workspace(payload.pop("project_id"))
+        return {"verification_run": finalize_verification_run(workspace, **payload), "approval_granted": False}
+
+    def verification_eligibility(self, request: dict[str, Any]) -> dict[str, Any]:
+        self._closed(request, {"project_id", "target", "require_approved_premises"})
+        return verification_eligibility(self._workspace(request["project_id"]), target=request["target"], require_approved_premises=request["require_approved_premises"])
+
+    def create_finding_resolution(self, request: dict[str, Any]) -> dict[str, Any]:
+        self._closed(request, {"project_id", "record"})
+        return {"resolution": create_resolution(self._workspace(request["project_id"]), request["record"]), "finding_closed": False, "approval_granted": False}
+
+    def compare_verification_runs(self, request: dict[str, Any]) -> dict[str, Any]:
+        self._closed(request, {"project_id", "earlier_run", "later_run"})
+        return compare_runs(self._workspace(request["project_id"]), earlier_run=request["earlier_run"], later_run=request["later_run"])
+
+    def generate_experiment_metrics(self, request: dict[str, Any]) -> dict[str, Any]:
+        self._closed(request, {"project_id", "run_references"})
+        return experiment_metrics(self._workspace(request["project_id"]), run_references=request["run_references"])
 
     def store_selection(self, request: dict[str, Any]) -> dict[str, Any]:
         self._closed(request, {"project_id", "selection"})
