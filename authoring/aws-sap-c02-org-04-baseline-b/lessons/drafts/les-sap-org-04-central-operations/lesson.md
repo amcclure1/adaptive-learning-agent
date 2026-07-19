@@ -1,0 +1,57 @@
+# Centralized operations and shared services
+
+## Learning outcomes
+
+After this lesson, you should be able to:
+
+- choose an organization trail for centrally managed activity evidence while preserving Region qualifications;
+- distinguish read-only configuration aggregation from central security-setting authority;
+- explain the service-specific boundary of delegated administration; and
+- trace RAM resource ownership, consumer permissions, organization-sharing prerequisites, and Region scope.
+
+## Centralize audit evidence deliberately
+
+An organization trail records the configured CloudTrail events for the management and member accounts, subject to the trail's Region design and each account's applicable opt-in Region enablement. When another account joins, CloudTrail adds the applicable trail copy and service-linked role and starts logging under those same Region and opt-in conditions. A member-account user with sufficient permission can view the trail but cannot alter or delete it.
+
+Those properties support a conditional recommendation: when the requirements call for centrally managed activity evidence and automatic coverage of joining accounts, use an organization trail and verify its Region and opt-in design. “Organization trail” is not shorthand for every event in every Region. The configured event selection and applicable Region conditions still matter.
+
+## Separate visibility from configuration authority
+
+An AWS Config aggregator replicates authorized configuration and compliance data into a read-only view. With Organizations as its account source, it does not require per-source-account authorization. It also does not enable AWS Config in source accounts or Regions, deploy rules, or mutate source resources. A design must therefore ensure AWS Config is already enabled where evidence is required.
+
+Security Hub CSPM central configuration solves a different problem. Its delegated administrator can associate a central configuration policy with accounts, OUs, or the organization root. For centrally managed targets, only that delegated administrator changes the governed enablement, standards, controls, and supported parameters in the home and linked Regions. Except for controls involving global resources, a policy applies across the home-and-linked-Region set rather than an arbitrary subset.
+
+When the requirement includes both a configuration-evidence view and centrally governed Security Hub settings, use the two capabilities as complements. Do not describe the Config aggregator as a deployment mechanism or Security Hub central configuration as a general inventory aggregator.
+
+## Delegate by service, not by assumption
+
+Registering a member account as delegated administrator grants authority for the particular integrated AWS service. It does not grant general administration of the organization. This allows service ownership to move away from the management account while keeping the delegation boundary explicit. The tradeoff is operational: each selected service still has its own configuration, Region behavior, and evidence requirements.
+
+## Share eligible resources without changing ownership
+
+For a supported resource type, AWS RAM can share a resource with accounts in a specified OU when organization sharing is enabled through RAM. The sharing account remains the owner. The RAM permission attached to the share is a maximum for a consumer; the consumer also needs an applicable identity policy granting the operation.
+
+Regional resources remain Regional: the consumer accesses the resource only in the Region where it exists in the owner account. A shared design can avoid duplicated resource administration, but it does not transfer ownership, override consumer identity controls, make an unsupported type shareable, or make a Regional resource global.
+
+## Architecture tradeoffs
+
+- **Separation of duties:** service-specific delegation can place operational authority in a member account without granting general organization administration.
+- **Operational overhead:** OU policies, organization trails, central configuration, and eligible RAM shares can reduce repeated per-account setup when their prerequisites fit.
+- **Visibility versus control:** Config aggregation supplies a read-only view; Security Hub central configuration supplies bounded central authority over selected CSPM settings.
+- **Ownership:** a RAM participant consumes the resource within both the share permission and its identity permissions; the owner retains the resource.
+- **Blast radius:** the approved baseline does not establish a general or quantified blast-radius claim for these services. Evaluate that concern only when a later approved claim defines the relevant failure or administrative boundary.
+
+## Learner-safe source summary
+
+This lesson uses official AWS documentation for CloudTrail organization trails, AWS Config aggregation, Security Hub CSPM central configuration, Organizations delegated administration, and AWS RAM. The internal workspace binds exact approved source and claim digests; these learner links identify the public material without exposing internal findings or reviewer data.
+
+## Sources
+
+- [CloudTrail organization trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html)
+- [AWS Config aggregation](https://docs.aws.amazon.com/config/latest/developerguide/aggregate-data.html)
+- [Config aggregator authorization](https://docs.aws.amazon.com/config/latest/developerguide/aggregated-add-authorization.html)
+- [Security Hub CSPM central configuration](https://docs.aws.amazon.com/securityhub/latest/userguide/central-configuration-intro.html)
+- [Enable Security Hub central configuration](https://docs.aws.amazon.com/securityhub/latest/userguide/start-central-configuration.html)
+- [Organizations delegated administrators](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_delegated_admin.html)
+- [AWS RAM overview](https://docs.aws.amazon.com/ram/latest/userguide/what-is.html)
+- [Sharing resources with AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/getting-started-sharing.html)
