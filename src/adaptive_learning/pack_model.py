@@ -38,6 +38,27 @@ class Source:
 
 
 @dataclass(frozen=True, slots=True)
+class Asset:
+    asset_id: str
+    media_type: str
+    path: str
+    title: str
+    caption: str
+    alt_text: str
+    terminal_fallback: str
+    source_id: str
+    rights_id: str
+    accessibility_rights_id: str
+    content_sha256: str
+    width: int
+    height: int
+    official_figure_id: str
+    language: str
+    content: bytes
+    derivation: dict[str, object] | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class Lesson:
     lesson_id: str
     title: str
@@ -46,6 +67,7 @@ class Lesson:
     rights_id: str
     citations: tuple[Citation, ...]
     markdown: str
+    asset_ids: tuple[str, ...] | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -65,6 +87,7 @@ class Question:
     question_rights_id: str | None = None
     explanation_rights_id: str | None = None
     explanation_citations: tuple[Citation, ...] = ()
+    asset_ids: tuple[str, ...] | None = None
 
     def as_record(self) -> dict[str, object]:
         record: dict[str, object] = {
@@ -103,6 +126,8 @@ class Question:
                         },
                     }
                 )
+        if self.asset_ids is not None:
+            record["asset_ids"] = list(self.asset_ids)
         return record
 
 
@@ -126,6 +151,7 @@ class Pack:
     language: str | None = None
     tags: tuple[str, ...] = ()
     notice_markdown: str | None = None
+    assets: tuple[Asset, ...] = ()
 
     def objective(self, objective_id: str) -> Objective:
         return next(item for item in self.objectives if item.objective_id == objective_id)
@@ -137,8 +163,15 @@ class Pack:
     def declared_files(self) -> tuple[str, ...]:
         if self.format_version == "0.1":
             return ("pack.json", self.lesson_name)
-        files = ("pack.json", *(lesson.path for lesson in self.lessons))
+        files = (
+            "pack.json",
+            *(lesson.path for lesson in self.lessons),
+            *(asset.path for asset in self.assets),
+        )
         return (*files, "NOTICE.md") if self.notice_markdown is not None else files
 
     def source(self, source_id: str) -> Source:
         return next(item for item in self.sources if item.source_id == source_id)
+
+    def asset(self, asset_id: str) -> Asset:
+        return next(item for item in self.assets if item.asset_id == asset_id)

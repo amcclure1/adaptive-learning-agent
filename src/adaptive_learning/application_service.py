@@ -11,6 +11,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from .asset_reference import issue_asset_reference, parse_asset_reference
 from .errors import LearningError, require
 from .pack_digest import canonical_json_bytes, digest_pack, digest_question
 from .pack_model import Pack, Question
@@ -43,13 +44,16 @@ class ApplicationService:
             "status": "ok",
             "contract_version": self.contract_version,
             "schema_version": version,
-            "pack_format_versions": ["0.1", "0.2"],
+            "pack_format_versions": ["0.1", "0.2", "0.3"],
             "capabilities": {
-                "supported_pack_formats": ["0.1", "0.2"],
+                "supported_pack_formats": ["0.1", "0.2", "0.3"],
                 "sourced_content": True,
                 "multiple_lessons": True,
                 "official_question_identity": True,
                 "post_answer_citations": True,
+                "static_local_assets": True,
+                "supported_asset_media_types": ["image/png"],
+                "asset_reference_scheme": "ala-pack-asset-v1",
             },
         }
 
@@ -83,8 +87,10 @@ class ApplicationService:
             "question_count": len(pack.questions),
             "diagnostics": [],
         }
-        if pack.format_version == "0.2":
+        if pack.format_version in {"0.2", "0.3"}:
             result.update(self._pack_provenance_summary(pack))
+        if pack.format_version == "0.3":
+            result["asset_summary"] = self._asset_summary(pack)
         return result
 
     def pack_install(self, source_path: str | Path) -> dict[str, Any]:
@@ -93,7 +99,11 @@ class ApplicationService:
         with self.storage.read() as connection:
             existing = self._installed_pack_row(connection, pack.pack_id, pack.version)
         if existing is not None:
-            return self._existing_install_result(existing, pack_digest)
+            result = self._existing_install_result(existing, pack_digest)
+            if pack.format_version == "0.3":
+                result.update(self._pack_provenance_summary(pack))
+                result["asset_summary"] = self._asset_summary(pack)
+            return result
 
         destination_key = hashlib.sha256(
             canonical_json_bytes([pack.pack_id, pack.version])
@@ -153,9 +163,36 @@ class ApplicationService:
             "title": pack.title,
             "installed": True,
         }
-        if pack.format_version == "0.2":
+        if pack.format_version in {"0.2", "0.3"}:
             result.update(self._pack_provenance_summary(pack))
+        if pack.format_version == "0.3":
+            result["asset_summary"] = self._asset_summary(pack)
         return result
+
+    def resolve_asset_reference(self, asset_ref: str) -> Path:
+        """Resolve only a valid core logical reference inside the controlled installed store."""
+
+        claims = parse_asset_reference(asset_ref)
+        with self.storage.read() as connection:
+            row = self._installed_pack_row(connection, claims.pack_id, claims.pack_version)
+            if row is None:
+                raise LearningError("ASSET_REFERENCE_STALE", "The referenced pack version is not installed.")
+            if row["pack_digest"] != claims.pack_digest:
+                raise LearningError("ASSET_REFERENCE_STALE", "The logical asset reference has a stale pack digest.")
+            pack = self._load_installed_pack(row)
+        try:
+            asset = pack.asset(claims.asset_id)
+        except StopIteration as exc:
+            raise LearningError("ASSET_REFERENCE_INVALID", "The logical asset reference names an unknown asset.") from exc
+        path = pack.source_path.joinpath(*asset.path.split("/")).resolve(strict=True)
+        try:
+            path.relative_to(pack.source_path)
+            path.relative_to(self.storage.pack_store_path)
+        except ValueError as exc:
+            raise LearningError("ASSET_REFERENCE_ESCAPE", "The resolved asset is outside the controlled pack store.") from exc
+        if not path.is_file():
+            raise LearningError("ASSET_REFERENCE_INVALID", "The resolved asset is not a regular file.")
+        return path
 
     def study_start(self, learner_id: str, pack_id: str, pack_version: str) -> dict[str, Any]:
         self._require_text(learner_id, "learner_id")
@@ -585,22 +622,27 @@ class ApplicationService:
             "answered_count": answered_count,
             "eligible_count": len(pack.questions) - len(challenged),
         }
-        if pack.format_version == "0.2":
+        if pack.format_version in {"0.2", "0.3"}:
             result["lessons"] = [
-                {
+                self._lesson_result(pack, lesson)
+                for lesson in pack.lessons
+            ]
+            result["sourced_content"] = self._pack_provenance_summary(pack)
+        return result
+
+    def _lesson_result(self, pack: Pack, lesson: Any) -> dict[str, Any]:
+        result = {
                     "lesson_id": lesson.lesson_id,
                     "title": lesson.title,
                     "objective_ids": list(lesson.objective_ids),
                     "markdown": lesson.markdown,
                     "citations": self._resolved_citations(pack, lesson.citations),
                 }
-                for lesson in pack.lessons
-            ]
-            result["sourced_content"] = self._pack_provenance_summary(pack)
+        if pack.format_version == "0.3" and lesson.asset_ids:
+            result["assets"] = [self._asset_descriptor(pack, asset_id) for asset_id in lesson.asset_ids]
         return result
 
-    @staticmethod
-    def _presentation_result(presentation: sqlite3.Row, pack: Pack) -> dict[str, Any]:
+    def _presentation_result(self, presentation: sqlite3.Row, pack: Pack) -> dict[str, Any]:
         question = pack.question(presentation["question_id"])
         objective = pack.objective(question.objective_id)
         result = {
@@ -614,7 +656,7 @@ class ApplicationService:
                 "objective": {"id": objective.objective_id, "title": objective.title},
             },
         }
-        if pack.format_version == "0.2":
+        if pack.format_version in {"0.2", "0.3"}:
             result["question"]["origin"] = question.origin
             if question.official_question_id is not None:
                 result["question"]["official_question_id"] = question.official_question_id
@@ -622,6 +664,10 @@ class ApplicationService:
                     key: pack.assessment_pool[key]
                     for key in ("id", "title", "publisher", "errata_revision")
                 }
+        if pack.format_version == "0.3" and question.asset_ids:
+            result["question"]["assets"] = [
+                self._asset_descriptor(pack, asset_id) for asset_id in question.asset_ids
+            ]
         return result
 
     def _attempt_result(
@@ -661,7 +707,7 @@ class ApplicationService:
                 "correct_count": sum(row["is_correct"] for row in objective_attempts),
             },
         }
-        if pack.format_version == "0.2":
+        if pack.format_version in {"0.2", "0.3"}:
             result["provenance"] = {
                 "origin": question.origin,
                 "official_question_id": question.official_question_id,
@@ -672,7 +718,46 @@ class ApplicationService:
                 "explanation_citations": self._resolved_citations(pack, question.explanation_citations),
                 "explanation_rights_id": question.explanation_rights_id,
             }
+        if pack.format_version == "0.3" and question.asset_ids:
+            result["figure_references"] = [
+                self._asset_descriptor(pack, asset_id) for asset_id in question.asset_ids
+            ]
         return result
+
+    @staticmethod
+    def _asset_descriptor(pack: Pack, asset_id: str) -> dict[str, Any]:
+        asset = pack.asset(asset_id)
+        return {
+            "asset_id": asset.asset_id,
+            "asset_ref": issue_asset_reference(
+                pack.pack_id, pack.version, digest_pack(pack), asset.asset_id
+            ),
+            "media_type": asset.media_type,
+            "title": asset.title,
+            "caption": asset.caption,
+            "alt_text": asset.alt_text,
+            "terminal_fallback": asset.terminal_fallback,
+            "official_figure_id": asset.official_figure_id,
+            "width": asset.width,
+            "height": asset.height,
+            "content_sha256": asset.content_sha256,
+        }
+
+    @staticmethod
+    def _asset_summary(pack: Pack) -> dict[str, Any]:
+        return {
+            "asset_count": len(pack.assets),
+            "media_types": sorted({asset.media_type for asset in pack.assets}),
+            "integrity_status": "validated",
+            "accessibility_status": "structurally_valid_and_lint_clean",
+            "source_rights_status": "resolved",
+            "source_ids": sorted({asset.source_id for asset in pack.assets}),
+            "rights_ids": sorted(
+                {identifier for asset in pack.assets for identifier in (asset.rights_id, asset.accessibility_rights_id)}
+            ),
+            "official_figure_ids": [asset.official_figure_id for asset in pack.assets],
+            "approval_status": pack.approval["status"],
+        }
 
     @staticmethod
     def _resolved_citations(pack: Pack, citations: tuple[Any, ...]) -> list[dict[str, Any]]:

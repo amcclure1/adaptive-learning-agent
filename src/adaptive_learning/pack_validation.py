@@ -2,16 +2,21 @@
 
 from __future__ import annotations
 
+import copy
+import hashlib
 import json
 import re
 import stat
+import unicodedata
+from dataclasses import replace
 from datetime import date, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .errors import LearningError
 from .pack_digest import normalize_lesson, normalize_value
-from .pack_model import Citation, Lesson, Objective, Option, Pack, Question, Source
+from .pack_model import Asset, Citation, Lesson, Objective, Option, Pack, Question, Source
+from .png_validation import validate_png
 
 TOP_FIELDS = {"format_version", "pack_id", "version", "title", "lesson", "objectives", "questions"}
 OBJECTIVE_FIELDS = {"id", "title"}
@@ -214,6 +219,41 @@ REVIEW_SCOPES = {
     "official_wording", "option_ordering", "answer_keys", "official_ids", "lessons",
     "explanations", "citations", "rights_metadata", "pool_and_errata_metadata",
 }
+ASSET_REVIEW_SCOPES = {
+    "asset_identity",
+    "asset_visual_fidelity",
+    "asset_source_mapping",
+    "asset_redistribution_policy",
+    "asset_caption",
+    "asset_alt_text",
+    "asset_terminal_fallback",
+    "asset_question_mappings",
+    "asset_non_leakage",
+}
+V03_REVIEW_SCOPES = REVIEW_SCOPES | ASSET_REVIEW_SCOPES
+V03_TOP_REQUIRED = V02_TOP_REQUIRED | {"assets"}
+V03_LESSON_FIELDS = LESSON_FIELDS | {"asset_ids"}
+V03_OFFICIAL_FIELDS = OFFICIAL_FIELDS | {"asset_ids"}
+V03_GENERATED_FIELDS = GENERATED_FIELDS | {"asset_ids"}
+ASSET_REQUIRED = {
+    "id", "media_type", "path", "title", "caption", "alt_text",
+    "terminal_fallback", "source_id", "rights_id", "accessibility_rights_id",
+    "content_sha256", "width", "height", "official_figure_id", "language",
+}
+ASSET_OPTIONAL = {"derivation"}
+DERIVATION_FIELDS = {
+    "kind", "source_media_type", "source_content_sha256", "process",
+    "fidelity_review_required",
+}
+MAX_ASSET_COUNT = 16
+MAX_ASSET_BYTES = 2 * 1024 * 1024
+MAX_TOTAL_ASSET_BYTES = 8 * 1024 * 1024
+MAX_ASSET_DIMENSION = 4096
+ANSWER_MARKER = re.compile(
+    r"\b(?:correct\s+answer|keyed\s+answer|the\s+answer\s+is|choose\s+option|"
+    r"select\s+option|answer\s*[:=]\s*[A-D]|option\s+[A-D]\s+is\s+correct)\b",
+    re.IGNORECASE,
+)
 
 
 def _strict_record(value: Any, label: str, required: set[str], optional: set[str] = frozenset()) -> dict[str, Any]:
@@ -320,7 +360,13 @@ def _parse_options(record: dict[str, Any], q_index: int, question_id: str) -> tu
     return tuple(options), correct
 
 
-def _load_v02(source: Path, normalized: dict[str, Any]) -> Pack:
+def _load_v02(
+    source: Path,
+    normalized: dict[str, Any],
+    *,
+    skip_inventory: bool = False,
+    skip_approval: bool = False,
+) -> Pack:
     top = _strict_record(normalized, "pack", V02_TOP_REQUIRED, V02_TOP_OPTIONAL)
     pack_id = _identifier(top["pack_id"], "pack_id")
     version = _text(top["version"], "version")
@@ -524,21 +570,22 @@ def _load_v02(source: Path, normalized: dict[str, Any]) -> Pack:
             _fail(f"Citation references unknown source {citation.source_id}.")
 
     approval = _strict_record(top["approval"], "approval", APPROVAL_REQUIRED, APPROVAL_OPTIONAL)
-    if approval["status"] != "approved":
-        _fail("approval.status must be approved before validation or installation.")
-    _text(approval["reviewed_by"], "approval.reviewed_by")
-    reviewed_at = _text(approval["reviewed_at"], "approval.reviewed_at")
-    try:
-        if not reviewed_at.endswith("Z"):
-            raise ValueError
-        datetime.fromisoformat(reviewed_at[:-1] + "+00:00")
-    except ValueError:
-        _fail("approval.reviewed_at must be an RFC 3339 UTC timestamp.")
-    review_scope = _string_list(approval["review_scope"], "approval.review_scope", nonempty=True)
-    if not set(review_scope) <= REVIEW_SCOPES:
-        _fail("approval.review_scope contains an unsupported label.")
-    if "notes" in approval:
-        _text(approval["notes"], "approval.notes")
+    if not skip_approval:
+        if approval["status"] != "approved":
+            _fail("approval.status must be approved before validation or installation.")
+        _text(approval["reviewed_by"], "approval.reviewed_by")
+        reviewed_at = _text(approval["reviewed_at"], "approval.reviewed_at")
+        try:
+            if not reviewed_at.endswith("Z"):
+                raise ValueError
+            datetime.fromisoformat(reviewed_at[:-1] + "+00:00")
+        except ValueError:
+            _fail("approval.reviewed_at must be an RFC 3339 UTC timestamp.")
+        review_scope = _string_list(approval["review_scope"], "approval.review_scope", nonempty=True)
+        if not set(review_scope) <= REVIEW_SCOPES:
+            _fail("approval.review_scope contains an unsupported label.")
+        if "notes" in approval:
+            _text(approval["notes"], "approval.notes")
 
     notice_path = source / "NOTICE.md"
     notice_markdown = None
@@ -550,17 +597,291 @@ def _load_v02(source: Path, normalized: dict[str, Any]) -> Pack:
         except (OSError, UnicodeError) as exc:
             raise LearningError("PACK_VALIDATION_FAILED", "NOTICE.md must be readable UTF-8 Markdown.") from exc
 
-    expected_files = {"pack.json", *lesson_paths}
-    if notice_markdown is not None:
-        expected_files.add("NOTICE.md")
-    actual_files = {item.relative_to(source).as_posix() for item in source.rglob("*") if item.is_file()}
-    if actual_files != expected_files:
-        _fail("A format-0.2 pack may contain only pack.json, declared lessons, and optional NOTICE.md.")
+    if not skip_inventory:
+        expected_files = {"pack.json", *lesson_paths}
+        if notice_markdown is not None:
+            expected_files.add("NOTICE.md")
+        actual_files = {item.relative_to(source).as_posix() for item in source.rglob("*") if item.is_file()}
+        if actual_files != expected_files:
+            _fail("A format-0.2 pack may contain only pack.json, declared lessons, and optional NOTICE.md.")
 
     return Pack(source, "0.2", pack_id, version, title, lessons[0].path, lessons[0].markdown, tuple(objectives), tuple(questions), normalized, tuple(lessons), tuple(sources), pool, tuple(rights), approval, language, tags, notice_markdown)
 
 
-def load_pack(source_path: str | Path) -> Pack:
+def _is_link_or_reparse(path: Path) -> bool:
+    if path.is_symlink():
+        return True
+    info = path.stat(follow_symlinks=False)
+    attributes = getattr(info, "st_file_attributes", 0)
+    return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
+
+
+def _safe_asset_file(source: Path, value: Any, label: str) -> tuple[str, Path]:
+    name = _text(value, label)
+    if name != unicodedata.normalize("NFC", name) or "\\" in name or ":" in name:
+        _fail(f"{label} must be an NFC-normalized POSIX relative path.")
+    relative = PurePosixPath(name)
+    if (
+        relative.is_absolute()
+        or not relative.parts
+        or any(part in {"", ".", ".."} for part in relative.parts)
+        or relative.parts[0] != "assets"
+        or relative.suffix != ".png"
+    ):
+        _fail(f"{label} must be a confined assets/*.png path.")
+    cursor = source
+    for part in relative.parts:
+        cursor /= part
+        if cursor.exists() and _is_link_or_reparse(cursor):
+            _fail(f"{label} must not traverse links or reparse points.")
+    path = source.joinpath(*relative.parts)
+    try:
+        resolved = path.resolve(strict=True)
+        resolved.relative_to(source)
+    except (OSError, RuntimeError, ValueError) as exc:
+        raise LearningError("PACK_VALIDATION_FAILED", f"{label} does not name a readable pack file.") from exc
+    if not resolved.is_file():
+        _fail(f"{label} must reference a regular file.")
+    return relative.as_posix(), resolved
+
+
+def _bounded_text(value: Any, label: str, maximum: int) -> str:
+    text = _text(value, label)
+    if text != text.strip() or len(text) > maximum or any(ord(char) < 32 and char not in "\n\t" for char in text):
+        _fail(f"{label} must be trimmed text no longer than {maximum} characters.")
+    return text
+
+
+def _normalized_leakage_text(value: str) -> str:
+    return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", value).casefold()).strip()
+
+
+def _validate_v03_approval(value: Any, *, require_approval: bool) -> dict[str, object]:
+    approval = _strict_record(value, "approval", APPROVAL_REQUIRED, APPROVAL_OPTIONAL)
+    status = approval.get("status")
+    if status == "pending":
+        if require_approval:
+            _fail("approval.status must be approved before validation or installation.")
+        if approval.get("reviewed_by") is not None or approval.get("reviewed_at") is not None or approval.get("review_scope") != []:
+            _fail("A pending approval must have null reviewer/time and an empty review_scope.")
+    elif status == "approved":
+        _text(approval["reviewed_by"], "approval.reviewed_by")
+        reviewed_at = _text(approval["reviewed_at"], "approval.reviewed_at")
+        try:
+            if not reviewed_at.endswith("Z"):
+                raise ValueError
+            datetime.fromisoformat(reviewed_at[:-1] + "+00:00")
+        except ValueError:
+            _fail("approval.reviewed_at must be an RFC 3339 UTC timestamp.")
+        scopes = _string_list(approval["review_scope"], "approval.review_scope", nonempty=True)
+        if set(scopes) != V03_REVIEW_SCOPES:
+            _fail("Format-0.3 approval must contain every accepted review scope exactly once.")
+    else:
+        _fail("approval.status must be pending or approved.")
+    if "notes" in approval:
+        _text(approval["notes"], "approval.notes")
+    return approval
+
+
+def _assert_v03_inventory(source: Path, expected_files: set[str]) -> None:
+    actual_files: set[str] = set()
+    casefolded: set[str] = set()
+    file_identities: set[tuple[int, int]] = set()
+    allowed_directories = {
+        PurePosixPath(path).parent.as_posix()
+        for path in expected_files
+        if PurePosixPath(path).parent.as_posix() != "."
+    }
+    allowed_directories |= {
+        parent.as_posix()
+        for directory in tuple(allowed_directories)
+        for parent in PurePosixPath(directory).parents
+        if parent.as_posix() != "."
+    }
+    for entry in source.rglob("*"):
+        relative = entry.relative_to(source).as_posix()
+        if relative != unicodedata.normalize("NFC", relative) or relative.casefold() in casefolded:
+            _fail("Pack paths must be NFC-normalized and must not have case collisions.")
+        casefolded.add(relative.casefold())
+        if _is_link_or_reparse(entry):
+            _fail("Format-0.3 packs must not contain links or reparse points.")
+        if entry.is_dir():
+            if relative not in allowed_directories:
+                _fail("Format-0.3 packs contain an undeclared directory.")
+            continue
+        if not entry.is_file():
+            _fail("Format-0.3 packs may contain only regular files.")
+        info = entry.stat(follow_symlinks=False)
+        identity = (info.st_dev, info.st_ino)
+        if info.st_nlink > 1 or identity in file_identities:
+            _fail("Format-0.3 packs must not contain hard-link aliases.")
+        file_identities.add(identity)
+        actual_files.add(relative)
+    if actual_files != expected_files:
+        _fail("A format-0.3 pack may contain only pack.json, declared lessons/assets, and optional NOTICE.md.")
+
+
+def _load_v03(source: Path, normalized: dict[str, Any], *, require_approval: bool) -> Pack:
+    top = _strict_record(normalized, "pack", V03_TOP_REQUIRED, V02_TOP_OPTIONAL)
+    if top["format_version"] != "0.3":
+        _fail("format_version must be exactly 0.3.")
+    approval = _validate_v03_approval(top["approval"], require_approval=require_approval)
+
+    # Reuse the already-proven sourced-content rules after removing only 0.3 additions.
+    base_record = copy.deepcopy(normalized)
+    base_record["format_version"] = "0.2"
+    base_record.pop("assets")
+    for lesson in base_record["lessons"]:
+        if not isinstance(lesson, dict):
+            _fail("lessons entries must be objects.")
+        lesson.pop("asset_ids", None)
+    for question in base_record["questions"]:
+        if not isinstance(question, dict):
+            _fail("questions entries must be objects.")
+        question.pop("asset_ids", None)
+    base = _load_v02(source, base_record, skip_inventory=True, skip_approval=True)
+
+    asset_values = _list(top["assets"], "assets")
+    if not asset_values or len(asset_values) > MAX_ASSET_COUNT:
+        _fail(f"assets must contain between 1 and {MAX_ASSET_COUNT} records.")
+    source_ids = {item.source_id for item in base.sources}
+    rights_by_id = {item["id"]: item for item in base.rights}
+    assets: list[Asset] = []
+    asset_ids: set[str] = set()
+    paths: set[str] = set()
+    folded_paths: set[str] = set()
+    hashes: set[str] = set()
+    raw_contents: set[bytes] = set()
+    total_bytes = 0
+    for index, value in enumerate(asset_values):
+        label = f"assets[{index}]"
+        item = _strict_record(value, label, ASSET_REQUIRED, ASSET_OPTIONAL)
+        asset_id = _identifier(item["id"], f"{label}.id")
+        if asset_id in asset_ids:
+            _fail(f"Duplicate asset ID: {asset_id}.")
+        asset_ids.add(asset_id)
+        if item["media_type"] != "image/png":
+            _fail(f"{label}.media_type must be exactly image/png.")
+        path_name, path = _safe_asset_file(source, item["path"], f"{label}.path")
+        if path_name in paths or path_name.casefold() in folded_paths:
+            _fail("Asset paths must be unique without case collisions.")
+        paths.add(path_name)
+        folded_paths.add(path_name.casefold())
+        size = path.stat().st_size
+        if size > MAX_ASSET_BYTES:
+            _fail("An asset exceeds the 2 MiB format-0.3 limit.")
+        total_bytes += size
+        if total_bytes > MAX_TOTAL_ASSET_BYTES:
+            _fail("Total asset bytes exceed the 8 MiB format-0.3 limit.")
+        try:
+            content = path.read_bytes()
+        except OSError as exc:
+            raise LearningError("PACK_VALIDATION_FAILED", "An asset file could not be read.") from exc
+        digest = item["content_sha256"]
+        if not isinstance(digest, str) or not SHA256.fullmatch(digest):
+            _fail(f"{label}.content_sha256 must be a lowercase SHA-256 digest.")
+        if digest in hashes:
+            _fail("Asset content hashes must be unique.")
+        hashes.add(digest)
+        if content in raw_contents:
+            _fail("Byte-identical assets must use one shared declaration.")
+        raw_contents.add(content)
+        if hashlib.sha256(content).hexdigest() != digest:
+            _fail(f"{label}.content_sha256 does not match the exact asset bytes.")
+        png = validate_png(content, maximum_dimension=MAX_ASSET_DIMENSION)
+        width = item["width"]
+        height = item["height"]
+        if not isinstance(width, int) or isinstance(width, bool) or not isinstance(height, int) or isinstance(height, bool):
+            _fail(f"{label} dimensions must be integers.")
+        if (width, height) != (png.width, png.height):
+            _fail(f"{label} dimensions do not match PNG IHDR.")
+        source_id = _identifier(item["source_id"], f"{label}.source_id")
+        rights_id = _identifier(item["rights_id"], f"{label}.rights_id")
+        accessibility_rights_id = _identifier(item["accessibility_rights_id"], f"{label}.accessibility_rights_id")
+        if source_id not in source_ids:
+            _fail(f"Asset {asset_id} references an unknown source.")
+        if rights_id not in rights_by_id or rights_by_id[rights_id]["status"] != "public_domain":
+            _fail(f"Asset {asset_id} must use public-domain official-asset rights.")
+        if accessibility_rights_id not in rights_by_id or rights_by_id[accessibility_rights_id]["status"] != "licensed":
+            _fail(f"Asset {asset_id} accessibility prose must use licensed rights.")
+        language = _text(item["language"], f"{label}.language")
+        if not LANGUAGE.fullmatch(language):
+            _fail(f"{label}.language must use the conservative BCP 47-shaped grammar.")
+        derivation = None
+        if "derivation" in item:
+            derivation = _strict_record(item["derivation"], f"{label}.derivation", DERIVATION_FIELDS)
+            if derivation["kind"] != "format_conversion" or derivation["source_media_type"] != "image/svg+xml":
+                _fail("Format-0.3 derivation supports only a recorded SVG format conversion.")
+            if not isinstance(derivation["source_content_sha256"], str) or not SHA256.fullmatch(derivation["source_content_sha256"]):
+                _fail("derivation.source_content_sha256 must be a lowercase SHA-256 digest.")
+            _bounded_text(derivation["process"], f"{label}.derivation.process", 4000)
+            if derivation["fidelity_review_required"] is not True:
+                _fail("derivation.fidelity_review_required must be true.")
+        assets.append(
+            Asset(
+                asset_id, "image/png", path_name,
+                _bounded_text(item["title"], f"{label}.title", 500),
+                _bounded_text(item["caption"], f"{label}.caption", 1000),
+                _bounded_text(item["alt_text"], f"{label}.alt_text", 4000),
+                _bounded_text(item["terminal_fallback"], f"{label}.terminal_fallback", 12000),
+                source_id, rights_id, accessibility_rights_id, digest, width, height,
+                _identifier(item["official_figure_id"], f"{label}.official_figure_id"),
+                language, content, derivation,
+            )
+        )
+
+    lessons: list[Lesson] = []
+    questions: list[Question] = []
+    referenced_assets: set[str] = set()
+    for index, (raw_lesson, lesson) in enumerate(zip(top["lessons"], base.lessons, strict=True)):
+        _strict_record(raw_lesson, f"lessons[{index}]", V03_LESSON_FIELDS)
+        linked = _string_list(raw_lesson["asset_ids"], f"lessons[{index}].asset_ids")
+        if not set(linked) <= asset_ids:
+            _fail(f"Lesson {lesson.lesson_id} references an unknown asset.")
+        referenced_assets.update(linked)
+        lessons.append(replace(lesson, asset_ids=linked))
+    asset_by_id = {item.asset_id: item for item in assets}
+    for index, (raw_question, question) in enumerate(zip(top["questions"], base.questions, strict=True)):
+        expected_fields = V03_OFFICIAL_FIELDS if question.origin == "official_pool" else V03_GENERATED_FIELDS
+        _strict_record(raw_question, f"questions[{index}]", expected_fields)
+        linked = _string_list(raw_question["asset_ids"], f"questions[{index}].asset_ids")
+        if not set(linked) <= asset_ids:
+            _fail(f"Question {question.question_id} references an unknown asset.")
+        figure_mentions = re.findall(r"\bFigure\s+([A-Za-z0-9-]+)", question.prompt)
+        linked_figures = {asset_by_id[item].official_figure_id for item in linked}
+        if figure_mentions and not set(figure_mentions) <= linked_figures:
+            _fail(f"Question {question.question_id} does not declare its referenced official figure.")
+        referenced_assets.update(linked)
+        questions.append(replace(question, asset_ids=linked))
+    if referenced_assets != asset_ids:
+        _fail("Every asset must be referenced by at least one lesson or question.")
+
+    for asset in assets:
+        pre_answer_fields = (asset.title, asset.caption, asset.alt_text, asset.terminal_fallback)
+        if any(ANSWER_MARKER.search(field) for field in pre_answer_fields):
+            _fail(f"Asset {asset.asset_id} accessibility text contains an answer marker.")
+        for question in questions:
+            if asset.asset_id not in question.asset_ids:
+                continue
+            for correct_id in question.correct_option_ids:
+                option_text = next(option.text for option in question.options if option.option_id == correct_id)
+                normalized_option = _normalized_leakage_text(option_text)
+                if any(normalized_option in _normalized_leakage_text(field) for field in pre_answer_fields):
+                    _fail(f"Asset {asset.asset_id} accessibility text reproduces a complete keyed option.")
+
+    expected_files = {"pack.json", *(lesson.path for lesson in lessons), *(asset.path for asset in assets)}
+    if base.notice_markdown is not None:
+        expected_files.add("NOTICE.md")
+    _assert_v03_inventory(source, expected_files)
+    return Pack(
+        source, "0.3", base.pack_id, base.version, base.title,
+        lessons[0].path, lessons[0].markdown, base.objectives, tuple(questions), normalized,
+        tuple(lessons), base.sources, base.assessment_pool, base.rights, approval,
+        base.language, base.tags, base.notice_markdown, tuple(assets),
+    )
+
+
+def _load_pack(source_path: str | Path, *, require_approval: bool) -> Pack:
     source = _resolve_source(source_path)
     manifest_path = source / "pack.json"
     if not manifest_path.is_file():
@@ -577,4 +898,18 @@ def load_pack(source_path: str | Path) -> Pack:
         return _load_v01(source)
     if format_version == "0.2":
         return _load_v02(source, normalized)
-    _fail("format_version must be exactly 0.1 or 0.2.")
+    if format_version == "0.3":
+        return _load_v03(source, normalized, require_approval=require_approval)
+    _fail("format_version must be exactly 0.1, 0.2, or 0.3.")
+
+
+def load_pack(source_path: str | Path) -> Pack:
+    """Load an installable pack. Pending format-0.3 content is rejected."""
+
+    return _load_pack(source_path, require_approval=True)
+
+
+def load_pack_for_review(source_path: str | Path) -> Pack:
+    """Load structurally valid pending format-0.3 content for deterministic review evidence."""
+
+    return _load_pack(source_path, require_approval=False)

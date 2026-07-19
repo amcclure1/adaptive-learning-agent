@@ -40,7 +40,7 @@ def digest_pack(pack: Pack) -> str:
     if pack.format_version == "0.1":
         lesson_bytes = normalize_lesson(pack.lesson_markdown).encode("utf-8")
         payload = _frame(record_bytes) + _frame(lesson_bytes)
-    else:
+    elif pack.format_version == "0.2":
         payload = _frame(b"adaptive-learning-pack-format-0.2") + _frame(record_bytes)
         for lesson in pack.lessons:
             payload += _frame(lesson.path.encode("utf-8"))
@@ -48,6 +48,19 @@ def digest_pack(pack: Pack) -> str:
         if pack.notice_markdown is not None:
             payload += _frame(b"NOTICE.md")
             payload += _frame(normalize_lesson(pack.notice_markdown).encode("utf-8"))
+    elif pack.format_version == "0.3":
+        payload = _frame(b"adaptive-learning-pack-format-0.3") + _frame(record_bytes)
+        for lesson in pack.lessons:
+            payload += _frame(lesson.path.encode("utf-8"))
+            payload += _frame(normalize_lesson(lesson.markdown).encode("utf-8"))
+        for asset in pack.assets:
+            payload += _frame(asset.path.encode("utf-8"))
+            payload += _frame(asset.content)
+        if pack.notice_markdown is not None:
+            payload += _frame(b"NOTICE.md")
+            payload += _frame(normalize_lesson(pack.notice_markdown).encode("utf-8"))
+    else:  # pragma: no cover - Pack instances originate in exact version dispatch.
+        raise ValueError(f"Unsupported pack format: {pack.format_version}")
     return hashlib.sha256(payload).hexdigest()
 
 
