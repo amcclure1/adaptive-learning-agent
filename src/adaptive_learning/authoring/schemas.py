@@ -793,6 +793,8 @@ def _validate_finding_resolution(record: dict[str, Any], _: str | None) -> None:
     _text(record["change_summary"], "change_summary")
     if record["response_disposition"] not in {"accepted", "modified", "disputed"}:
         fail("response_disposition is unsupported.")
+    if record["response_disposition"] != "disputed" and record["old_artifact"]["canonical_digest"] == record["new_artifact"]["canonical_digest"]:
+        fail("Accepted or modified resolutions require a changed artifact digest.")
     _string_list(record["supporting_source_changes"], "supporting_source_changes")
     _timestamp(record["resolved_at"], "resolved_at")
 

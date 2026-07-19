@@ -142,8 +142,8 @@ class IndependentVerificationTests(unittest.TestCase):
             "revision": 1, "status": "immutable", "created_at": REVIEW_TIMESTAMP, "modified_at": REVIEW_TIMESTAMP,
             "author": author("source-author", "artifact_author"), "supersedes": None, "resolution_id": "resolution-one",
             "finding": reference(finding), "old_artifact": reference(self.source), "new_artifact": reference(self.source),
-            "author_response": "Accepted for a future revision.", "change_summary": "No silent mutation was made.",
-            "response_disposition": "accepted", "supporting_source_changes": [], "resolved_at": REVIEW_TIMESTAMP, "canonical_digest": "0" * 64,
+            "author_response": "The author disputes this synthetic finding.", "change_summary": "No silent mutation was made.",
+            "response_disposition": "disputed", "supporting_source_changes": [], "resolved_at": REVIEW_TIMESTAMP, "canonical_digest": "0" * 64,
         })
         result = self.ops.create_finding_resolution({"project_id": self.project_id, "record": record})
         self.assertFalse(result["finding_closed"])
