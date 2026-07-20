@@ -232,6 +232,12 @@ class AuthoringInfrastructureTests(unittest.TestCase):
         with self.assertRaisesRegex(LearningError, "selection count"):
             seal_record(spec)
 
+    def test_20a_invalid_question_spec_distractor_category(self) -> None:
+        spec = specification_record()
+        spec["planned_distractor_categories"] = ["partial_solution", "invented_category"]
+        with self.assertRaisesRegex(LearningError, "planned_distractor_categories"):
+            seal_record(spec)
+
     def test_21_missing_distractor_rationale(self) -> None:
         source = {"artifact_id": "src-test", "revision": 1, "canonical_digest": "a" * 64}
         claim = seal_record(claim_record(source))

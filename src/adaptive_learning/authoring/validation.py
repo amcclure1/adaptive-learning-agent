@@ -10,7 +10,7 @@ from typing import Any
 from adaptive_learning.errors import LearningError
 
 from .approvals import current_decision
-from .schemas import seal_record, validate_record
+from .schemas import QUESTION_SPEC_DISTRACTOR_CATEGORIES, seal_record, validate_record
 from .workspace import TYPE_DIRS, all_stored_records, atomic_write, reference, store_immutable
 from .canonical import canonical_json_file_bytes
 from .self_audit import author_self_audit_eligibility
@@ -212,6 +212,8 @@ def validate_workspace(
             continue
         if spec["status"] != "active":
             findings.append(_finding("DRAFT_CONTENT", spec["artifact_id"], "status", "Only active immutable question specifications are eligible."))
+        if not set(spec["planned_distractor_categories"]) <= QUESTION_SPEC_DISTRACTOR_CATEGORIES:
+            findings.append(_finding("QUESTION_SPEC_DISTRACTOR_CATEGORY_INVALID", spec["artifact_id"], "planned_distractor_categories", "Question specifications must use the schema-versioned distractor-category vocabulary."))
         if current_decision(workspace, target=reference(spec), decision_type="question_spec_design_review") is None:
             findings.append(_finding("QUESTION_SPEC_REVIEW_MISSING", spec["artifact_id"], "design_review_state", "A current design review is required for downstream drafting.", severity="information", blocking=False))
 

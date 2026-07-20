@@ -14,6 +14,11 @@ from .canonical import SHA256_RE, artifact_digest, markdown_digest, portable_rel
 
 ID_RE = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$")
 UTC_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+QUESTION_SPEC_DISTRACTOR_CATEGORIES = {
+    "partial_solution", "wrong_scope", "wrong_control_plane", "requirement_violation",
+    "operational_tradeoff_mismatch", "over_engineered", "under_scoped",
+    "plausible_but_nonprioritized",
+}
 COMMON = {
     "schema_version", "artifact_id", "artifact_type", "revision", "status", "created_at",
     "modified_at", "author", "supersedes", "canonical_digest",
@@ -463,6 +468,11 @@ def _validate_question_spec(record: dict[str, Any], _: str | None) -> None:
             _text(item["description"], f"{field}[{index}].description")
     for field in ("compared_services_or_patterns", "expected_keyed_answer_properties", "planned_distractor_categories", "evidence_requirements", "ambiguity_risks", "originality_notes"):
         _string_list(record[field], field, sorted_unique=field == "compared_services_or_patterns")
+    # Historical immutable revisions predate enforcement of this documented
+    # vocabulary. Reject invalid editable inputs; workspace validation applies
+    # the same rule to the projected current revision.
+    if record["status"] == "draft" and not set(record["planned_distractor_categories"]) <= QUESTION_SPEC_DISTRACTOR_CATEGORIES:
+        fail("planned_distractor_categories contains an unsupported value.", field="planned_distractor_categories")
     if record["intended_difficulty"] not in {"medium", "medium_high", "high"}:
         fail("intended_difficulty is unsupported.")
     _state(record["validation_state"], "validation_state", "report")
