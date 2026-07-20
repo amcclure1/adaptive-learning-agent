@@ -1,7 +1,7 @@
 # Current Status
 
-Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / SAP-C02 0.3B current sources and claims human-approved
-Updated: 2026-07-19
+Status: pre-alpha / 0.2.0-alpha.1 and 0.2.1-alpha.1 published / SAP-C02 0.3B lesson and question human review pending
+Updated: 2026-07-20
 
 ## Released baseline
 
@@ -80,13 +80,23 @@ Accepted ADR 0021 now requires an immutable exact-digest author self-audit befor
 
 The SAP-ORG-04 repeat experiment preserved baseline A and independently created baseline B without exposing baseline-A defects to the new author. Baseline A had 7 advisory findings; baseline B's first pass had 9 blocking findings, so first-pass quality did not improve. Three revision cycles produced 17 verified sources and 30 verified claims with zero residual recorded finding. The audit reconciles 21 logical findings with 30 stored records: nine immutable copies corrected workspace-commit binding and are not new defects. This demonstrates recorded-defect containment, not statistical significance, exhaustive correctness, or human approval. See the [experiment audit](experiments/sap-org-04-experiment-audit.md) and [closure](handoffs/sap-org-04-experiment-closure.md).
 
-The generic validator projects the latest current authored revision, requires exact-digest author self-audits, and preserves immutable history. All 151 tests pass locally on CPython 3.12.13, 3.13.14, and 3.14.6. SQLite schema 1, the ten learner operations, scoring, pack formats, Hermes, and MCP configuration remain unchanged.
+The generic validator projects the latest current authored revision, requires exact-digest author self-audits, enforces the closed question-spec distractor vocabulary for new drafts and current projections, and preserves immutable history. All 153 tests pass locally on CPython 3.12.13, 3.13.14, and 3.14.6. SQLite schema 1, the ten learner operations, scoring, pack formats, Hermes, and MCP configuration remain unchanged.
 
 The separately authorized current-digest continuation is now complete. The author audit reopened all 17 official AWS sources and checked all 30 current claims, finding two material service-linked-role qualification gaps and one dependent-premise rebinding requirement. One author revision cycle created `clm-b-scp-ceiling` r2, `clm-b-scp-parent-chain` r3, and `clm-b-rec-pair-access-guardrail` r3. Exact target commit `bd84b01f3a6253ee0412823f3f30d7318652b09b` then passed deterministic validation. Two separate fresh full verification contexts each reopened all 17 URLs and reviewed all 47 current artifacts; both returned 47 verified, zero findings, and zero unresolved questions. The final closure run digest is `59d66aa533fc436a696c707c285a972a003cc91188e8e3afb6ae32b0a00959ec`.
 
 The declared-scope matrix records 20 concepts covered, two partially covered, and GuardDuty organization administration intentionally omitted. Anthony McClure then approved all 17 exact sources and 30 exact claims at `2026-07-19T19:14:33Z` as project owner and technical reviewer, with recorded AWS architecture/source-evidence experience and no conflict preventing independent review. Source decisions bind identity, authority, rights, freshness, locator, and citation scope. Claim decisions bind full evidence, normativity, applicability, sensitivity, consistency, and objective scope; derived decisions additionally bind exact premise approvals and criteria. Post-approval deterministic validation checks 164 records with zero finding. This completes the source/claim human gate but is not separate authorization to author lessons or questions. See the [pre-human closure](handoffs/aws-sap-c02-0.3b-source-and-claim-prehuman-closure.md), [completed human-review handoff](handoffs/aws-sap-c02-0.3b-qualified-human-review-ready.md), and [concept matrix](aws/sap-c02-org-04-concept-coverage.md).
 
 No lesson, question specification, learner-ready question, candidate pack, installation, activation, publication, release, or tag was created. Core behavior, SQLite schema 1, the ten learner operations, scoring, pack formats, Hermes, MCP configuration, AWS credentials, and AWS resources remain unchanged.
+
+## SAP-ORG-04 lesson and question authoring checkpoint
+
+The explicitly authorized content task produced exactly two text-only cited lessons and five original scenario questions: three single-response and two select-two. Separate specifications, stable options, keys, learner explanations, internal per-option rationales, complete requirement matrices, exact approved claim references, citations, and originality material are preserved in the Baseline-B workspace.
+
+The author self-audit and independent-review process identified and revised complementary-key matrix semantics, overbroad lesson language, missing prerequisites, citation locators, matrix truth values, an alternate select-two pair, concrete-premise gaps, rationale/presentation issues, five specification-vocabulary defects, and three final strict-sufficiency/matrix-linkage defects. Immutable history and exact-digest response records remain preserved. The final deterministic report checked 318 artifacts and passed with only the expected 22 informational notices for human gates that remain pending.
+
+Fresh full lesson verification completed with two low, nonblocking citation-presentation notes and no unresolved material finding. Final fresh full question verification returned all ten current specifications/questions verified, zero findings, and zero unresolved questions. The separate final adversarial uniqueness pass returned nine verified and one verified with a low, nonblocking internal possessive-encoding note; every key and select-two pair remains unique. The three prepared human packages remain distinct, and AI review grants no approval.
+
+No candidate pack has been compiled. SQLite schema 1, ten learner operations, scoring, pack formats, Hermes, MCP configuration, credentials, and AWS resources are unchanged. Nothing was installed, activated, published, released, or tagged.
 
 ## Known limitations
 
@@ -101,4 +111,4 @@ No lesson, question specification, learner-ready question, candidate pack, insta
 
 ## Deferred
 
-0.3B lessons, questions, their separate reviews/approvals, and pack realization; the conversational Subject Builder adapter; capability configuration; expansion beyond E1A/E7B; scheduling; mastery; readiness; exam simulation; YAML; archives; export ergonomics; signing; marketplaces; broader Hermes distribution; hosted identity; servers; cloud deployment; and stronger local-process isolation remain deferred. The exact source/claim set is human-approved, but it is not an installed pack or authorization to compile, activate, or release. No MCP server, connector, AWS access, or database change was added.
+0.3B lesson-content, question-content, answer-uniqueness, and eventual pack-release human approvals and pack realization; the conversational Subject Builder adapter; capability configuration; expansion beyond E1A/E7B; scheduling; mastery; readiness; exam simulation; YAML; archives; export ergonomics; signing; marketplaces; broader Hermes distribution; hosted identity; servers; cloud deployment; and stronger local-process isolation remain deferred. The exact source/claim set is human-approved, but the authored lessons/questions are not an installed pack or authorization to compile, activate, or release. No MCP server, connector, AWS access, or database change was added.

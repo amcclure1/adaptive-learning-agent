@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Authored exactly two cited SAP-ORG-04 lessons and five original learner-ready questions with the accepted three-single/two-select-two mix, separate specifications, internal option rationales, complete requirement matrices, learner explanations, exact approved evidence bindings, and immutable revision history.
+- Added exact-digest content self-audits, deterministic validation, multiple fresh independent lesson/question review cycles, separate adversarial uniqueness verification, an updated taught/assessed/deferred coverage matrix, and three separate pending human-review packages.
+
 - Recorded Anthony McClure's 17 immutable source approvals and 30 immutable claim approvals for the exact current SAP-ORG-04 Baseline-B set, including reviewer role, qualification, conflict declaration, reviewed scopes, exact dependencies, and prerequisite decisions.
 - Completed the current-digest SAP-ORG-04 Baseline-B author self-audit, deterministic validation, separate full independent verification, and fresh full closure verification over 17 sources and 30 claims; both new AI runs closed 47 verified with zero finding and no approval implication.
 - Added an exact qualified-human review package, pre-human closure and review-ready handoffs, and a 23-row concept-coverage matrix recording 20 covered, two partial, and one intentionally omitted concept.
@@ -23,6 +26,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Fifty-four synthetic authored-content infrastructure tests covering workspace safety, schemas, digests, approvals, invalidation, compilation, release evidence, concurrency, atomic rollback, and unchanged runtime boundaries.
 
 ### Changed
+
+- Resolved lesson and question review findings covering SCP and Identity Center qualifications, CloudTrail delivery boundaries, Security Hub opt-in Regions and setup prerequisites, RAM integration prerequisites, exact learner citations, requirement-matrix truth values, concrete scenario premises, answer-pair ambiguity, specification vocabulary, and rationale wording without changing scoring or learner runtime behavior.
+- Enforced the closed question-spec distractor-category vocabulary for new drafts and current workspace projections while preserving immutable historical revisions; the standard-library suite now contains 153 tests.
+- Advanced SAP-C02 0.3B through authored-content machine review only; qualified-human lesson, question, uniqueness, and pack-release decisions remain pending, and no pack was compiled or activated.
 
 - Narrowed two current SCP claims to principals subject to SCPs, explicitly recorded the service-linked-role exception, and rebound the dependent workforce-access recommendation to the corrected exact premise digest while preserving all prior revisions.
 - Deterministic authored-content validation now projects the latest current artifact revision and excludes explicitly superseded artifact IDs from current counts while preserving immutable history.

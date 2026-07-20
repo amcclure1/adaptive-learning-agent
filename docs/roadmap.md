@@ -33,7 +33,7 @@ The 2026-07-18 exercise verified AWS Certified Solutions Architect - Professiona
 
 ## 0.3B — Manually reviewed SAP-C02 pilot
 
-Status: current sources and claims human-approved; lessons, questions, and release remain separately gated
+Status: lessons and questions authored and machine-reviewed; qualified-human content/uniqueness decisions and release remain gated
 
 The accepted realization is Domain 1 task 1.4, design a multi-account AWS environment: two future original lessons, approximately 24-30 approved claims, and exactly five future original scenario questions (three single-response, two multiple-response), with internal option rationales, authoritative AWS citations, answer-uniqueness review, and separate source/claim/question-content/uniqueness/pack-release approvals. ADRs 0017-0020 and the file-backed schemas, canonicalization, immutable approval/invalidation, compiler, and external release-evidence contracts are accepted. The generic standard-library infrastructure is implemented.
 
@@ -41,7 +41,7 @@ Accepted ADR 0021 requires persisted author self-audit before deterministic vali
 
 The current-digest continuation is complete. A full author audit found and corrected two SCP service-linked-role qualification gaps and rebound one derived premise in one new revision cycle. The resulting exact set has 17 sources and 30 claims at content commit `bd84b01f3a6253ee0412823f3f30d7318652b09b`. Deterministic validation passed, and two separate fresh full verification contexts each returned 47 verified, zero finding, and zero unresolved question. Coverage is explicit: 20 concepts covered, two partial, and one intentionally omitted.
 
-Anthony McClure approved every exact source and claim at `2026-07-19T19:14:33Z`. The 47 immutable records include his role, qualification summary, conflict declaration, reviewed scopes, exact dependencies, and prerequisite decisions. The five derived recommendations were approved only after their exact premises. Post-approval validation checks 164 records with zero finding. Lessons and questions remain blocked pending separate authorization and their accepted review sequence. Projection remains format 0.2; no lesson, question, candidate pack, installation, activation, publication, release, or tag exists. See the [pre-human closure](handoffs/aws-sap-c02-0.3b-source-and-claim-prehuman-closure.md) and [completed human-review handoff](handoffs/aws-sap-c02-0.3b-qualified-human-review-ready.md).
+Anthony McClure approved every exact source and claim at `2026-07-19T19:14:33Z`. The later authorized content task created exactly two lessons and five questions with the three-single/two-select-two mix. Multiple exact-digest author and independent-review cycles resolved material prerequisite, caveat, matrix, citation, rationale, alternate-pair, concrete-premise, specification-vocabulary, and strict-sufficiency issues while preserving immutable history. The final deterministic report checks 318 records and passes; final fresh question and adversarial-uniqueness evidence is recorded separately. Qualified-human lesson-content, question-content/originality, answer-uniqueness, and later pack-release decisions remain pending. Projection remains format 0.2, and no candidate pack, installation, activation, publication, release, or tag exists. See the [content review handoff](handoffs/aws-sap-c02-0.3b-content-review-pending.md).
 
 ## 0.3C — Agent-assisted construction
 

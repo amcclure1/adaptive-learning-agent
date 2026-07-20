@@ -1,10 +1,10 @@
 # SAP-ORG-04 Concept Coverage
 
-Status: current Baseline-B coverage record; source and claim human approvals complete
+Status: current authored-content coverage record; human lesson/question decisions pending
 
 Date: 2026-07-19
 
-Target content commit: `bd84b01f3a6253ee0412823f3f30d7318652b09b`
+Target content commit: `cc0c86fadc50336de1442f9a71659be07377bdb7`
 
 This matrix makes the bounded pilot's coverage visible. It is not itself a claim approval, a completeness guarantee, or an instruction to add a separate claim for every row. Anthony McClure separately approved all exact current source and claim records at `2026-07-19T19:14:33Z`. The controlled statuses are `covered`, `partially covered`, `intentionally omitted`, `accidentally omitted`, `blocked by source or verification issue`, and `outside pilot scope`.
 
@@ -33,6 +33,25 @@ This matrix makes the bounded pilot's coverage visible. It is not itself a claim
 | Preventive versus detective controls | partially covered | SCP, Config, CloudTrail, and Security Hub claim clusters; `clm-b-rec-complement-config-securityhub` | The distinct mechanisms are represented without conflation, but the pilot does not claim an exhaustive control taxonomy. |
 | Identity permissions versus governance guardrails | covered | `clm-b-identity-temp-creds`, permission-set claims, SCP claims, `clm-b-rec-pair-access-guardrail` | The recommendation requires both workforce access and the organization-level maximum-permission boundary. |
 | Derived architectural tradeoffs | covered | All five `clm-b-rec-*` claims and their exact premise graphs | Recommendations are conditional and criterion-bound; they are not universal AWS service behavior. |
+
+## Current lesson and assessment realization
+
+| Major distinction | Lesson coverage | Question coverage | Disposition |
+|---|---|---|---|
+| Account, management-account, and control-aligned OU boundaries | `les-sap-org-04-foundations-governance` | `q-sap-org-04-account-boundaries` | Taught and assessed. |
+| Policy inheritance and SCP maximum-permission/non-grant behavior | `les-sap-org-04-foundations-governance` | `q-sap-org-04-workforce-guardrails` | Taught; the access-versus-guardrail judgment is assessed, while detailed chain evaluation is taught but not directly assessed. |
+| Central workforce assignments, permission sets, roles, and temporary credentials | `les-sap-org-04-foundations-governance` | `q-sap-org-04-workforce-guardrails` | Taught and assessed as a coordinated select-two design. |
+| Organization trails, joining-account coverage, member protection, and Region conditions | `les-sap-org-04-central-operations` | `q-sap-org-04-audit-evidence` | Taught and assessed; delivery prerequisites are explicitly a scenario precondition or deferred lesson boundary. |
+| Config read-only aggregation versus Security Hub central authority | `les-sap-org-04-central-operations` | `q-sap-org-04-central-visibility` | Taught and assessed as complementary capabilities. |
+| Service-specific delegated administration | `les-sap-org-04-central-operations` | `q-sap-org-04-central-visibility` | Taught and assessed without implying general organization authority. |
+| RAM eligibility, OU principals, ownership, layered permissions, and Region scope | `les-sap-org-04-central-operations` | `q-sap-org-04-resource-sharing` | Taught and assessed. |
+| Guidance versus service behavior and conditional recommendations | both lessons | all five questions | Taught throughout and assessed through explicit scenario requirements and prioritizers. |
+
+Concepts taught but not independently assessed include the complete root-to-account SCP evaluation chain, Config authorization detail, the Security Hub global-resource-control exception, and the RAM trusted-access/service-linked-role setup distinction. They remain learner-relevant caveats rather than separate trivia items.
+
+Intentionally deferred concepts are event-notification strategy, the AWS Control Tower/AWS Organizations relationship, GuardDuty organization administration, external identity-provider federation mechanics, and an exhaustive preventive/detective control taxonomy. These deferrals are visible and do not create an accidental gap inside the five selected architectural judgments.
+
+The remaining gap is qualified-human review: lesson content, question content/originality, and answer uniqueness have not been approved. This matrix does not claim complete SAP-ORG-04, Domain 1, or SAP-C02 coverage.
 
 ## Derived-recommendation premise graph
 

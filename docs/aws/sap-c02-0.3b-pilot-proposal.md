@@ -1,6 +1,6 @@
 # Accepted Scope and Final Design Specifications for the SAP-C02 0.3B Pilot
 
-Status: pilot scope accepted; source and claim drafts complete; independent human review pending
+Status: pilot scope accepted; sources and claims approved; authored lessons/questions pending separate qualified-human review
 
 Pilot ID: `aws-sap-c02-org-04-pilot`
 
@@ -188,4 +188,6 @@ These are editorial horizons, not implemented timers.
 
 The repository user accepted task 1.4 / `SAP-ORG-04`, the two-lesson/approximately 24–30-claim envelope, the 3-single/2-multiple mix, public-source-only research, and deferral of MCP/AWS-account access on 2026-07-18. See [the 0.3A acceptance](../handoffs/aws-sap-c02-0.3a-acceptance.md).
 
-The explicitly authorized source-and-claim task initialized the accepted workspace and produced 14 official-AWS source drafts and 30 claim drafts through the accepted [workspace](sap-c02-0.3b-authoring-workspace.md), [schemas](sap-c02-0.3b-schemas.md), [approval](sap-c02-0.3b-approval-model.md), and [validation](sap-c02-0.3b-validation-plan.md) contracts. All source and claim decisions remain pending in the [human-review package](../reviews/aws-sap-c02-org-04-source-and-claim-review.md). Final lessons, stems, options, keys, explanations, approvals, pack compilation, installation, activation, publication, and release remain pending and unauthorized.
+The source-and-claim baseline is human-approved. The later explicitly authorized content task produced exactly two original cited lessons and five original questions with the accepted three-single/two-select-two mix, separate specifications, internal rationales, complete matrices, self-audits, deterministic validation, and independent AI review evidence. The [concept matrix](sap-c02-org-04-concept-coverage.md) distinguishes taught, assessed, and intentionally deferred concepts.
+
+Qualified-human lesson-content, question-content/originality, answer-uniqueness, and later pack-release approvals remain pending in the [content-review handoff](../handoffs/aws-sap-c02-0.3b-content-review-pending.md). No pack was compiled, installed, activated, published, released, or tagged.
